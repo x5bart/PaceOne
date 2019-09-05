@@ -25,3 +25,4 @@ class MainActivity : AppCompatActivity() {
         btnToPace.setOnClickListener { Log.d(TAG, "btnToPace clicked") }
     }
 }
+ 
