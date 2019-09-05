@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name" translatable="false">Pace One</string>
+    <string name="km_h" translatable="false">km/h</string>
+    <string name="min_km" translatable="false">min/km</string>
+    <string name="pace" translatable="false">PACE</string>
+    <string name="speed" translatable="false">SPEED</string>
+    <string name="btnToSpeed" translatable="false"><![CDATA[>]]></string>
+    <string name="btnToPace" translatable="false"><![CDATA[<]]></string>
+</resources>

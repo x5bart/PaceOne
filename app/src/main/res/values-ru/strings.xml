@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pace One</string>
+    <string name="km_h" translatable="false">км/ч</string>
+    <string name="min_km" translatable="false">мин/км</string>
+    <string name="pace" translatable="false">шаг</string>
+    <string name="speed" translatable="false">скорость</string>
+</resources>
