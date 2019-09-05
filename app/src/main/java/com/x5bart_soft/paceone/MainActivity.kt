@@ -26,7 +26,25 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "num1 = $num1, num2 = $num2 res = $res ms = $minutes")
             etSpeed.setText(res.toString())
         }
-        btnToPace.setOnClickListener { Log.d(TAG, "btnToPace clicked") }
+        btnToPace.setOnClickListener {
+            Log.d(TAG, "btnToPace clicked")
+            num1= Integer.parseInt(etSpeed.text.toString())
+
+            res = num1 / 3.6
+            val min = (1000 / res / 60).toInt()
+            val sec = (((1000 / res / 60) - min)*100).toInt()
+            Log.d(TAG, "res = $res, min = $min sec = $sec")
+
+            etPaceM.setText(min.toString())
+            etPaceS.setText(sec.toString())
+
+
+        }
+        btnTest.setOnClickListener {
+            if (etPaceM == null) Log.d(TAG, "etPaceM = null")
+            else Log.d(TAG, "etPaceM not null")
+        }
+
     }
 
     fun conv() {
