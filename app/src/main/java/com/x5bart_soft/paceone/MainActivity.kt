@@ -24,40 +24,37 @@ class MainActivity : AppCompatActivity() {
     var num1 = 0
     var num2 = 0
     var num3 = 0.0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        actionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#D5FF5722")))
-
-
         btnToSpeed.setOnClickListener {
-            if (
-                etPaceM.text.toString().length == 0 && etPaceS.text.toString().length == 0
-                || etPaceM.text.toString().toInt() == 0 && etPaceS.text.toString().toInt() == 0
-            ) {
-                showDialog()
-            } else {
-                if (etPaceM.text.toString().length == 0)
-                    num1 = 0
-                else
-                    num1 = etPaceM.text.toString().toInt()
-                if (etPaceS.text.toString().length == 0)
-                    num2 = 0
-                else
-                    num2 = etPaceS.text.toString().toInt()
+            if (etPaceM.text.toString().isEmpty()) {
+                num1 = 0
+                etPaceM.setText("0")
+            } else
+                num1 = etPaceM.text.toString().toInt()
 
+            if (etPaceS.text.toString().isEmpty()) {
+                num2 = 0
+                etPaceS.setText("00")
+            } else
+                num2 = etPaceS.text.toString().toInt()
+
+            if (num1 == 0 && num2 == 0) showMyDialog()
+            else {
                 val minutes = ((num1 * h1) + num2).toDouble()
                 res = (km / minutes) * coef
-
                 etSpeed.setText(res.toString())
             }
         }
-
         btnToPace.setOnClickListener {
-            if (etSpeed.text.toString().length == 0 || etSpeed.text.toString().toDouble() == 0.0)
-                showDialog()
-            else {
+            if (etSpeed.text.toString().isEmpty() || etSpeed.text.toString().toDouble() == 0.0) {
+                showMyDialog()
+                etSpeed.setText("0.0")
+            } else {
                 num3 = etSpeed.text.toString().toDouble()
                 res = num3 / coef
                 val min = (km / res / h1).toInt()
@@ -67,9 +64,10 @@ class MainActivity : AppCompatActivity() {
                 etPaceS.setText(sec.toString())
             }
         }
+
     }
 
-    fun showDialog() {
+    fun showMyDialog() {
         val dialog: AlertDialog
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error")
