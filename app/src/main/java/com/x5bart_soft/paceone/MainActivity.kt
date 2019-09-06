@@ -7,48 +7,36 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     val TAG = "btnlog"
-    val tmp = 60
+    val h1 = 60 //60 min
     var res = 0.0
-    var num1 = 0
-    var num2 = 0
+    val km = 1000 //1000 m
+    val coef = 3.6 // 3600sec/hours
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         btnToSpeed.setOnClickListener {
 
-            num1 = Integer.parseInt(etPaceM.text.toString())
-            num2 = Integer.parseInt(etPaceS.text.toString())
+            val num1 = etPaceM.text.toString().toInt()
+            val num2 = etPaceS.text.toString().toInt()
+            val minutes = ((num1 * h1) + num2).toDouble()
+            res = (km / minutes) * coef
 
-            val minutes = ((num1 * 60) + num2).toDouble()
-            res = (1000 / minutes) * 3.6
-
-            Log.d(TAG, "num1 = $num1, num2 = $num2 res = $res ms = $minutes")
             etSpeed.setText(res.toString())
         }
-        btnToPace.setOnClickListener {
-            Log.d(TAG, "btnToPace clicked")
-            num1= Integer.parseInt(etSpeed.text.toString())
 
-            res = num1 / 3.6
-            val min = (1000 / res / 60).toInt()
-            val sec = (((1000 / res / 60) - min)*100).toInt()
+        btnToPace.setOnClickListener {
+
+            val num1 = etSpeed.text.toString().toDouble()
+            res = num1 / coef
+            val min = (km / res / h1).toInt()
+            val sec = (((km / res / h1) - min) * 100).toInt()
             Log.d(TAG, "res = $res, min = $min sec = $sec")
 
             etPaceM.setText(min.toString())
             etPaceS.setText(sec.toString())
-
-
         }
-        btnTest.setOnClickListener {
-            if (etPaceM == null) Log.d(TAG, "etPaceM = null")
-            else Log.d(TAG, "etPaceM not null")
-        }
-
-    }
-
-    fun conv() {
-
     }
 }
  
