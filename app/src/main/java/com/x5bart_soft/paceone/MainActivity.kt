@@ -21,6 +21,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btnToSpeed.setOnClickListener {
+            if (
+                etPaceM.text.toString().length == 0 && etPaceS.text.toString().length == 0
+                || etPaceM.text.toString().toInt() == 0 && etPaceS.text.toString().toInt() == 0
+            ) {
+                Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG).show()
+                etPaceM.setText("6")
+            }
+//            if (etPaceM.text.toString().length == 0 && etPaceS.text.toString().toInt() == 0
+//                || etPaceM.text.toString().toInt() == 0 && etPaceS.text.toString().length == 0
+//            ) {
+//                Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG).show()
+//                etPaceM.setText("6")
+//            }
+
 
             if (etPaceM.text.toString().length == 0)
                 num1 = 0
