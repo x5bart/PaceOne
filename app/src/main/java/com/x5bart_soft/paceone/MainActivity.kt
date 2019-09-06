@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnToPace.setOnClickListener {
-            if (etSpeed.text.toString().length == 0)
+            if (etSpeed.text.toString().length == 0 || etSpeed.text.toString().toDouble() == 0.0)
                 showDialog()
             else {
                 num3 = etSpeed.text.toString().toDouble()
