@@ -1,5 +1,9 @@
 package com.x5bart_soft.paceone
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.ColorSpace
 import android.graphics.drawable.ColorDrawable
@@ -32,43 +36,46 @@ class MainActivity : AppCompatActivity() {
                 etPaceM.text.toString().length == 0 && etPaceS.text.toString().length == 0
                 || etPaceM.text.toString().toInt() == 0 && etPaceS.text.toString().toInt() == 0
             ) {
-                Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG).show()
-                etPaceM.setText("6")
+                showDialog()
+            } else {
+                if (etPaceM.text.toString().length == 0)
+                    num1 = 0
+                else
+                    num1 = etPaceM.text.toString().toInt()
+                if (etPaceS.text.toString().length == 0)
+                    num2 = 0
+                else
+                    num2 = etPaceS.text.toString().toInt()
+
+                val minutes = ((num1 * h1) + num2).toDouble()
+                res = (km / minutes) * coef
+
+                etSpeed.setText(res.toString())
             }
-//            if (etPaceM.text.toString().length == 0 && etPaceS.text.toString().toInt() == 0
-//                || etPaceM.text.toString().toInt() == 0 && etPaceS.text.toString().length == 0
-//            ) {
-//                Toast.makeText(applicationContext, "Error", Toast.LENGTH_LONG).show()
-//                etPaceM.setText("6")
-//            }
-
-
-            if (etPaceM.text.toString().length == 0)
-                num1 = 0
-            else
-                num1 = etPaceM.text.toString().toInt()
-            if (etPaceS.text.toString().length == 0)
-                num2 = 0
-            else
-                num2 = etPaceS.text.toString().toInt()
-
-            val minutes = ((num1 * h1) + num2).toDouble()
-            res = (km / minutes) * coef
-
-            etSpeed.setText(res.toString())
         }
 
         btnToPace.setOnClickListener {
             if (etSpeed.text.toString().length == 0)
-                num3 = 0.0
-            else
+                showDialog()
+            else {
                 num3 = etSpeed.text.toString().toDouble()
-            res = num3 / coef
-            val min = (km / res / h1).toInt()
-            val sec = (((km / res) - (min * h1)) * 100).toInt()
+                res = num3 / coef
+                val min = (km / res / h1).toInt()
+                val sec = (((km / res) - (min * h1)) * 100).toInt()
 
-            etPaceM.setText(min.toString())
-            etPaceS.setText(sec.toString())
+                etPaceM.setText(min.toString())
+                etPaceS.setText(sec.toString())
+            }
         }
     }
+
+    fun showDialog() {
+        val dialog: AlertDialog
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Error")
+        builder.setMessage("Please enter values for conversion.")
+        dialog = builder.create()
+        dialog.show()
+    }
 }
+
