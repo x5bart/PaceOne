@@ -1,10 +1,14 @@
 package com.x5bart_soft.paceone
 
+import android.graphics.Color
+import android.graphics.ColorSpace
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +23,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//        actionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#D5FF5722")))
+
 
         btnToSpeed.setOnClickListener {
             if (
