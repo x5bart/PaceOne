@@ -13,7 +13,6 @@
         android:layout_height="46dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:maxLength="5"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/etPaceM"
         app:layout_constraintEnd_toEndOf="parent"

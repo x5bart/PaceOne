@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
     val h1 = 60 //60 min
     var res = 0.0
     val km = 1000 //1000 m
-    val coef = 3.6 // 3600sec/hours
+    val coef = 3.600 // 3600sec/hours
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
 
             val num1 = etSpeed.text.toString().toDouble()
             res = num1 / coef
-            val min = (km / res / h1).toInt()
-            val sec = (((km / res / h1) - min) * 100).toInt()
+            val min = (km / res/h1).toInt()
+            val sec = (((km / res) - (min * h1)) * 100).toInt()
             Log.d(TAG, "res = $res, min = $min sec = $sec")
 
             etPaceM.setText(min.toString())
