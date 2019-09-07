@@ -3,10 +3,8 @@ package com.x5bart_soft.paceone
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<EditText>(R.id.etPaceS).setOnEditorActionListener { v, actionId, event ->
+        findViewById<EditText>(R.id.etPaceS).setOnEditorActionListener { _, actionId, _ ->
             return@setOnEditorActionListener when (actionId) {
                 EditorInfo.IME_ACTION_GO -> {
                     mKmToKmH()
@@ -34,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<EditText>(R.id.etSpeed).setOnEditorActionListener { v, actionId, event ->
+        findViewById<EditText>(R.id.etSpeed).setOnEditorActionListener { _, actionId, _ ->
             return@setOnEditorActionListener when (actionId) {
                 EditorInfo.IME_ACTION_GO -> {
                     kmHToMKm()
@@ -54,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun showMyDialog() {
+    private fun showMyDialog() {
         val dialog: AlertDialog
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error")
@@ -63,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    fun mKmToKmH() {
+    private fun mKmToKmH() {
         if (etPaceM.text.toString().isEmpty()) {
             num1 = 0
             etPaceM.setText("0")
@@ -84,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun kmHToMKm(){
+    private fun kmHToMKm() {
         if (etSpeed.text.toString().isEmpty() || etSpeed.text.toString().toDouble() == 0.0) {
             showMyDialog()
             etSpeed.setText("0.0")

@@ -6,4 +6,6 @@
     <string name="speed" translatable="false">SPEED</string>
     <string name="btnToSpeed" translatable="false"><![CDATA[>]]></string>
     <string name="btnToPace" translatable="false"><![CDATA[<]]></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>
