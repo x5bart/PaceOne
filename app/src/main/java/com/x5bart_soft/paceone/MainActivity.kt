@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<EditText>(R.id.etPaceS).setOnEditorActionListener { _, actionId, _ ->
+        etPaceS.setOnEditorActionListener { _, actionId, _ ->
             return@setOnEditorActionListener when (actionId) {
                 EditorInfo.IME_ACTION_GO -> {
                     mKmToKmH()
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        findViewById<EditText>(R.id.etSpeed).setOnEditorActionListener { _, actionId, _ ->
+        etSpeed.setOnEditorActionListener { _, actionId, _ ->
             return@setOnEditorActionListener when (actionId) {
                 EditorInfo.IME_ACTION_GO -> {
                     kmHToMKm()
