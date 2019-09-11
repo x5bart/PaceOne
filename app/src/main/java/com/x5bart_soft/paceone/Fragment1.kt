@@ -1,23 +1,24 @@
 package com.x5bart_soft.paceone
 
 
-
+import android.icu.math.BigDecimal
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment1.*
 
 class Fragment1 : Fragment() {
     private val hour = 60 //60 min
     private val km = 1000 //1000 m
     private val sec = 3.600 // 3600sec/hours
-    var res = 0.0
-    var etMin = 0
-    var etSec = 0
-    var etKm = 0.0
+    private var res = 0.0
+    private var etMin = 0
+    private var etSec = 0
+    private var etKm = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +29,7 @@ class Fragment1 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        calc1.isVisible = false
         etPaceS.setOnEditorActionListener { _, actionId, _ ->
             return@setOnEditorActionListener when (actionId) {
                 EditorInfo.IME_ACTION_GO -> {
@@ -53,6 +55,9 @@ class Fragment1 : Fragment() {
         }
         btnToPace.setOnClickListener {
             kmHToMKm()
+        }
+        btnCalc.setOnClickListener {
+            dist()
         }
     }
 
@@ -93,5 +98,14 @@ class Fragment1 : Fragment() {
             else etPaceS.setText(sec.toString())
         }
     }
+
+    fun dist() {
+        val paseSec = (etPaceM.text.toString().toInt() * hour) + etPaceS.text.toString().toInt()
+        val distSec =
+            (etCalcDistH.text.toString().toInt() * hour) * hour + (etCalcDistM.text.toString().toInt() * hour) + etCalcDistS.text.toString().toInt()
+        val res = distSec / paseSec.toDouble()
+        tvCalcRes1.text = res.toString()
+    }
+
 }
 
