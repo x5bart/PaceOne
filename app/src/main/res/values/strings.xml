@@ -6,9 +6,10 @@
     <string name="speed" translatable="false">SPEED</string>
     <string name="btnToSpeed" translatable="false"><![CDATA[>]]></string>
     <string name="btnToPace" translatable="false"><![CDATA[<]]></string>
+    <string name="calcDist" translatable="false">Сalculate distance</string>
+    <string name="calcTime" translatable="false">Calculate time</string>
+    <string name="calcSpeed" translatable="false">Calculate speed</string>
+    <string name="btnCalc" translatable="false">Calculate</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
 </resources>

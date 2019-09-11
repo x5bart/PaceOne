@@ -5,4 +5,8 @@
     <string name="min_km" translatable="false">мин/км</string>
     <string name="pace" translatable="false">ТЕМП</string>
     <string name="speed" translatable="false">СКОРОСТЬ</string>
+    <string name="calcDist" translatable="false">Рассчитать дистанцию</string>
+    <string name="calcTime" translatable="false">Рассчитать время</string>
+    <string name="calcSpeed" translatable="false">Расчитать скорость</string>
+    <string name="btnCalc" translatable="false">Рассчитать</string>
 </resources>

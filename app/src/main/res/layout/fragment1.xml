@@ -8,6 +8,63 @@
     tools:context=".MainActivity">
 
     <EditText
+        android:id="@+id/etCalcDistM"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="2"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+    <EditText
+        android:id="@+id/etCalcDistS"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:gravity="center"
+        android:imeOptions="actionGo"
+        android:inputType="number"
+        android:maxLength="2"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etCalcDistH"
+        app:layout_constraintStart_toEndOf="@+id/etCalcDistH" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etCalcDistH"
+        app:layout_constraintStart_toEndOf="@+id/etCalcDistM" />
+
+    <EditText
+        android:id="@+id/etCalcDistH"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="3"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/etPaceM"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+    <EditText
         android:id="@+id/etSpeed"
         android:imeOptions="actionGo"
         android:layout_width="87dp"
@@ -87,6 +144,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
 
+    <Button
+        android:id="@+id/btnCalc"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btnCalc"
+        app:layout_constraintBottom_toBottomOf="@+id/etCalcDistS"
+        app:layout_constraintEnd_toEndOf="@+id/btnToPace" />
+
     <EditText
         android:id="@+id/etPaceM"
         android:layout_width="60dp"
@@ -123,7 +188,56 @@
         app:layout_constraintEnd_toStartOf="@+id/etPaceM"
         app:layout_constraintStart_toEndOf="@+id/etPaceS" />
 
-<!--    <requestFocus-->
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/btnToSpeed"
+        app:layout_constraintTop_toBottomOf="@+id/btnToSpeed"
+        tools:visibility="visible">
+
+        <RadioButton
+            android:id="@+id/calcDist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/calcDist"
+            tools:visibility="visible" />
+
+        <RadioButton
+            android:id="@+id/calcTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/calcTime" />
+
+        <RadioButton
+            android:id="@+id/calcSpeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/calcSpeed" />
+
+        <Button
+            android:id="@+id/btnToPace2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btnToPace" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="150dp"
+        android:layout_height="56dp"
+        android:gravity="center"
+        android:text="42.195 km"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCalc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup2"
+        app:layout_constraintTop_toBottomOf="@+id/btnToPace"
+        app:layout_constraintVertical_bias="0.491" />
+
+    <!--    <requestFocus-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content" />-->
 
