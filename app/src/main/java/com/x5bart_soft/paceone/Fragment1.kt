@@ -2,14 +2,18 @@ package com.x5bart_soft.paceone
 
 
 import android.app.Dialog
+import android.icu.math.BigDecimal
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.core.graphics.scaleMatrix
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment1.*
+import java.math.RoundingMode
+import kotlin.math.round
 
 class Fragment1 : Fragment() {
     private val hour = 60 //60 min
@@ -86,7 +90,7 @@ class Fragment1 : Fragment() {
         if (etMin == 0 && etSec == 0) etSpeed.setText("0.00")
         else {
             val second = ((etMin * hour) + etSec).toDouble()
-            res = (km / second) * sec
+            res = ((km / second) * sec).toBigDecimal().setScale(2,RoundingMode.HALF_UP).toDouble()
             etSpeed.setText(res.toString())
         }
 
@@ -126,9 +130,9 @@ class Fragment1 : Fragment() {
         if (paceSec == kmh) time = paceSec
         if (time != 0) {
             val distSec =
-                (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec.toDouble()
-            val res = (distSec / time).toDouble()
-            tvCalcRes1.text = res.toString()
+                (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
+            val res  = (distSec / time).toBigDecimal().setScale(3,RoundingMode.HALF_UP)
+            tvCalcRes1.text = "$res"
         } else tvCalcRes1.text = "0.00"
     }
 
