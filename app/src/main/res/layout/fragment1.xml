@@ -92,9 +92,10 @@
         android:id="@+id/btnCalc"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="@string/btnCalc"
-        app:layout_constraintBottom_toBottomOf="@+id/calc1"
-        app:layout_constraintEnd_toEndOf="@+id/btnToPace" />
+        app:layout_constraintEnd_toEndOf="@+id/btnToPace"
+        app:layout_constraintTop_toBottomOf="@+id/tvCalcRes" />
 
     <EditText
         android:id="@+id/etPaceM"
@@ -146,6 +147,7 @@
             android:id="@+id/calcDist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:checked="false"
             android:text="@string/calcDist"
             tools:visibility="visible" />
 
@@ -164,17 +166,15 @@
     </RadioGroup>
 
     <TextView
-        android:id="@+id/tvCalcRes1"
+        android:id="@+id/tvCalcRes"
         android:layout_width="160dp"
         android:layout_height="56dp"
+        android:layout_marginTop="36dp"
         android:gravity="center"
-        android:text="942.195 km"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCalc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rgCalc"
-        app:layout_constraintTop_toBottomOf="@+id/btnToPace"
-        app:layout_constraintVertical_bias="0.491" />
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/btnToPace" />
 
     <LinearLayout
         android:id="@+id/calc1"
@@ -185,7 +185,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rgCalc"
-        tools:visibility="visible">
+        tools:visibility="invisible">
 
         <EditText
             android:id="@+id/etCalcDistH"
@@ -239,9 +239,7 @@
             tools:layout_editor_absoluteX="91dp" />
     </LinearLayout>
 
-    <!--    <requestFocus-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content" />-->
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
