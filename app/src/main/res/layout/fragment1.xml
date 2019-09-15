@@ -239,7 +239,22 @@
             tools:layout_editor_absoluteX="91dp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/calc2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calc1">
 
+        <EditText
+            android:id="@+id/etCalcTime"
+            android:layout_width="87dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
