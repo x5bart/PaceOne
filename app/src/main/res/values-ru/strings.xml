@@ -9,4 +9,5 @@
     <string name="calcTime" translatable="false">Рассчитать время</string>
     <string name="calcSpeed" translatable="false">Расчитать скорость</string>
     <string name="btnCalc" translatable="false">Рассчитать</string>
+    <string name="alertTitle">Значения скорости не совпадают</string>
 </resources>

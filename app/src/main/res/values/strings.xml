@@ -10,6 +10,7 @@
     <string name="calcTime" translatable="false">Calculate time</string>
     <string name="calcSpeed" translatable="false">Calculate speed</string>
     <string name="btnCalc" translatable="false">Calculate</string>
+    <string name="alertTitle">Speed values do not match</string>
 
 
 </resources>
