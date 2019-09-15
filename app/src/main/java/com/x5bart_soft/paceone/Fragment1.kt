@@ -59,20 +59,7 @@ class Fragment1 : Fragment() {
                 else -> false
             }
         }
-        when (rgCalc.checkedRadioButtonId) {
-            R.id.calcDist -> {
-                btnCalc.setOnClickListener {
-                    dist()
-                }
-            }
-            R.id.calcTime -> {
-                btnCalc.setOnClickListener {
-                    time()
-                }
-            }
-            R.id.calcSpeed -> {
-            }
-        }
+
         calcDist.setOnClickListener {
             calc1.isVisible = true
             calc2.isVisible = false
@@ -99,7 +86,9 @@ class Fragment1 : Fragment() {
             kmHToMKm()
         }
         btnCalc.setOnClickListener {
-            time()
+            if (calcDist.isChecked) dist()
+            if (calcTime.isChecked) time()
+
         }
     }
 
@@ -217,20 +206,14 @@ class Fragment1 : Fragment() {
         if (paceSec == kmSec) time = paceSec
         if (time != 0) {
 
-            val kmm = etCalcTime.text.toString().toDouble() *km
+            val kmm = etCalcTime.text.toString().toDouble()
             etKm = etSpeed.text.toString().toDouble()
-            res = kmm / (etKm *3600)
-            val sumSec = (kmm / res)
-//                .toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
-            val hour2 = ((sumSec / sec)*hour)*hour
-            val min = (sumSec / hour) - hour2
-            val sec = sumSec - (min * hour)
-            Log.d(TAG, " res = $res sumSec = $sumSec h = $hour2 , m = $min s = $sec")
-//            val distSec =
-//                (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec.toDouble()
-////            val res = (distSec / time).toBigDecimal().setScale(3, RoundingMode.HALF_UP).toDouble()
-//            tvCalcRes.text = "$res km"
-//        } else tvCalcRes.text = "0.00"
+            val sumSec = kmm / etKm * 3600
+            val hour2 = (kmm / etKm).toInt()
+            val min = ((sumSec - (hour2 * 3600)) / hour).toInt()
+            val sec = (sumSec - (hour2 * 3600) - (min * 60)).toInt()
+            tvCalcRes.text = ("$hour2:$min:$sec")
+
 
         }
     }
