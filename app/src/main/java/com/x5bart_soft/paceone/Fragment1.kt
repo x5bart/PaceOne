@@ -2,7 +2,6 @@ package com.x5bart_soft.paceone
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -73,8 +72,8 @@ class Fragment1 : Fragment() {
             tvCalcRes.isVisible = true
         }
         calcSpeed.setOnClickListener {
-            calc1.isVisible = false
-            calc2.isVisible = false
+            calc1.isVisible = true
+            calc2.isVisible = true
             btnCalc.isVisible = true
             tvCalcRes.isVisible = true
         }
@@ -167,55 +166,58 @@ class Fragment1 : Fragment() {
 
     }
 
-    fun time() {
+    private fun time() {
         notNull()
         val paceSec = (etMin * hour) + etSec
         var kmSec = 0
-        var time = 0
+        val kmm = etCalcTime.text.toString().toDouble()
 
-        if (etKm.toInt() != 0) kmSec = (km / (etKm / sec)).toInt()
-
+//        if (etKm.toInt() != 0) kmSec = (km / (etKm / sec)).toInt()
 
         if (paceSec == 0 && kmSec != 0) {
-            time = kmSec
             kmHToMKm()
-        }
-
-        if (kmSec == 0 && paceSec != 0) {
-            time = paceSec
-            mKmToKmH()
-        }
-
-        if (paceSec != kmSec) {
-            val builder = AlertDialog.Builder(activity!!)
-            val message = "Calculate value by min/km ($etMin:$etSec) or km/h ($etKm)"
-            builder.setTitle(R.string.alertTitle)
-            builder.setMessage(message)
-            builder.setPositiveButton("$etMin:$etSec") { _, _ ->
-                mKmToKmH()
-                dist()
-            }
-            builder.setNegativeButton("$etKm") { _, _ ->
-                kmHToMKm()
-                dist()
-            }
-            val dialog: AlertDialog = builder.create()
-            dialog.show()
-        }
-
-        if (paceSec == kmSec) time = paceSec
-        if (time != 0) {
-
-            val kmm = etCalcTime.text.toString().toDouble()
             etKm = etSpeed.text.toString().toDouble()
             val sumSec = kmm / etKm * 3600
             val hour2 = (kmm / etKm).toInt()
             val min = ((sumSec - (hour2 * 3600)) / hour).toInt()
-            val sec = (sumSec - (hour2 * 3600) - (min * 60)).toInt()
+            val sec = (sumSec - (hour2 * 3600) - (min * hour)).toInt()
             tvCalcRes.text = ("$hour2:$min:$sec")
-
-
         }
+        if (kmSec == 0 && paceSec != 0) {
+            mKmToKmH()
+            etKm = etSpeed.text.toString().toDouble()
+            val sumSec = kmm / etKm * 3600
+            val hour2 = (kmm / etKm).toInt()
+            val min = ((sumSec - (hour2 * 3600)) / hour).toInt()
+            val sec = (sumSec - (hour2 * 3600) - (min * hour)).toInt()
+            tvCalcRes.text = ("$hour2:$min:$sec")
+        }
+        if (paceSec != kmSec) alert()
+
+        etKm = etSpeed.text.toString().toDouble()
+        val sumSec = kmm / etKm * 3600
+        val hour2 = (kmm / etKm).toInt()
+        val min = ((sumSec - (hour2 * 3600)) / hour).toInt()
+        val sec = (sumSec - (hour2 * 3600) - (min * hour)).toInt()
+        tvCalcRes.text = ("$hour2:$min:$sec")
+
+
+    }
+
+
+    fun alert() {
+        val builder = AlertDialog.Builder(activity!!)
+        val message = "Calculate value by min/km ($etMin:$etSec) or km/h ($etKm)"
+        builder.setTitle(R.string.alertTitle)
+        builder.setMessage(message)
+        builder.setPositiveButton("$etMin:$etSec") { _, _ ->
+            mKmToKmH()
+        }
+        builder.setNegativeButton("$etKm") { _, _ ->
+            kmHToMKm()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     fun notNull() {
