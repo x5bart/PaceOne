@@ -2,6 +2,7 @@ package com.x5bart_soft.paceone
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -70,6 +71,7 @@ class Fragment1 : Fragment() {
         btnCalc.setOnClickListener {
             if (calcDist.isChecked) dist()
             if (calcTime.isChecked) time()
+            if (calcSpeed.isChecked) speed()
         }
         calcDist.setOnClickListener {
             calc1.isVisible = true
@@ -190,6 +192,28 @@ class Fragment1 : Fragment() {
         tvCalcRes.text = ("$hour2:$min:$sec")
     }
 
+    private fun speed() {
+        notNullCalc()
+        val timeCalc = (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
+        val distCalc = etCalcKm
+
+        if (timeCalc==0 || distCalc==0.0) {
+            etSpeed.setText("0.00")
+            kmHToMKm()
+        }else speed()
+
+    }
+
+    private fun speedCalc() {
+        val distSec =
+            (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec.toDouble()
+        val distM = etCalcKm * km
+        val mSec = distM / distSec
+        res = ((mSec * 3600) / km).toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+        etSpeed.setText("$res")
+        kmHToMKm()
+    }
+
     private fun alert() {
         val builder = AlertDialog.Builder(activity!!)
         val message = "Calculate value by min/km ($etMin:$etSec) or km/h ($etKm)"
@@ -239,7 +263,23 @@ class Fragment1 : Fragment() {
         if (calcTime.isChecked) {
             etCalcKm =
                 if (etCalcTime.text.toString().isEmpty()) 0.0 else etCalcTime.text.toString().toDouble()
-
+            if (etCalcKm == 0.0) etCalcTime.setText("0.00")
+        }
+        if (calcSpeed.isChecked) {
+            etCalcDistHour =
+                if (etCalcDistH.text.toString().isEmpty()) 0 else etCalcDistH.text.toString().toInt()
+            etCalcDistMin =
+                if (etCalcDistM.text.toString().isEmpty()) 0 else etCalcDistM.text.toString().toInt()
+            etCalcDistSec =
+                if (etCalcDistS.text.toString().isEmpty()) 0 else etCalcDistS.text.toString().toInt()
+            if (etCalcDistHour == 0) etCalcDistH.setText("0")
+            if (etCalcDistMin == 0) etCalcDistM.setText("0")
+            if (etCalcDistSec == 0) etCalcDistS.setText("0")
+            if (etCalcDistHour < 10) etCalcDistH.setText("0$etCalcDistHour")
+            if (etCalcDistMin < 10) etCalcDistM.setText("0$etCalcDistMin")
+            if (etCalcDistSec < 10) etCalcDistS.setText("0$etCalcDistSec")
+            etCalcKm =
+                if (etCalcTime.text.toString().isEmpty()) 0.0 else etCalcTime.text.toString().toDouble()
             if (etCalcKm == 0.0) etCalcTime.setText("0.00")
         }
     }

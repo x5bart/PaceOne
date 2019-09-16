@@ -249,6 +249,7 @@
         app:layout_constraintTop_toBottomOf="@+id/calc1">
 
         <EditText
+            android:maxLength="7"
             android:id="@+id/etCalcTime"
             android:layout_width="87dp"
             android:layout_height="wrap_content"
