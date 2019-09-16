@@ -2,7 +2,6 @@ package com.x5bart_soft.paceone
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -59,6 +58,19 @@ class Fragment1 : Fragment() {
                     true
                 }
                 else -> false
+            }
+        }
+
+        etCalcDistS.setOnEditorActionListener { _, actionId, _ ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_NEXT -> {
+                    if (calcDist.isChecked)
+                        dist()
+                    true
+
+                }
+                else -> false
+
             }
         }
 
@@ -154,6 +166,7 @@ class Fragment1 : Fragment() {
         val mSec = etKm / 3600
         val res = (distSec * mSec).toBigDecimal().setScale(3, RoundingMode.HALF_UP).toDouble()
         tvCalcRes.text = "$res km"
+        etCalcKmh.setText("$res")
     }
 
     private fun time() {
@@ -190,6 +203,9 @@ class Fragment1 : Fragment() {
         val min = ((sumSec - (hour2 * 3600)) / hour).toInt()
         val sec = (sumSec - (hour2 * 3600) - (min * hour)).toInt()
         tvCalcRes.text = ("$hour2:$min:$sec")
+        etCalcDistH.setText("$hour2")
+        etCalcDistM.setText("$min")
+        etCalcDistS.setText("$sec")
     }
 
     private fun speed() {
@@ -197,10 +213,10 @@ class Fragment1 : Fragment() {
         val timeCalc = (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
         val distCalc = etCalcKm
 
-        if (timeCalc==0 || distCalc==0.0) {
+        if (timeCalc == 0 || distCalc == 0.0) {
             etSpeed.setText("0.00")
             kmHToMKm()
-        }else speed()
+        } else speedCalc()
 
     }
 
@@ -262,8 +278,8 @@ class Fragment1 : Fragment() {
         }
         if (calcTime.isChecked) {
             etCalcKm =
-                if (etCalcTime.text.toString().isEmpty()) 0.0 else etCalcTime.text.toString().toDouble()
-            if (etCalcKm == 0.0) etCalcTime.setText("0.00")
+                if (etCalcKmh.text.toString().isEmpty()) 0.0 else etCalcKmh.text.toString().toDouble()
+            if (etCalcKm == 0.0) etCalcKmh.setText("0.00")
         }
         if (calcSpeed.isChecked) {
             etCalcDistHour =
@@ -279,8 +295,8 @@ class Fragment1 : Fragment() {
             if (etCalcDistMin < 10) etCalcDistM.setText("0$etCalcDistMin")
             if (etCalcDistSec < 10) etCalcDistS.setText("0$etCalcDistSec")
             etCalcKm =
-                if (etCalcTime.text.toString().isEmpty()) 0.0 else etCalcTime.text.toString().toDouble()
-            if (etCalcKm == 0.0) etCalcTime.setText("0.00")
+                if (etCalcKmh.text.toString().isEmpty()) 0.0 else etCalcKmh.text.toString().toDouble()
+            if (etCalcKm == 0.0) etCalcKmh.setText("0.00")
         }
     }
 }

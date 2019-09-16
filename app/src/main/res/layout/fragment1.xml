@@ -232,7 +232,7 @@
             android:layout_height="50dp"
             android:ems="10"
             android:gravity="center"
-            android:imeOptions="actionGo"
+            android:imeOptions="actionNext"
             android:inputType="number"
             android:maxLength="2"
             android:textSize="24sp"
@@ -249,12 +249,12 @@
         app:layout_constraintTop_toBottomOf="@+id/calc1">
 
         <EditText
-            android:maxLength="7"
-            android:id="@+id/etCalcTime"
+            android:id="@+id/etCalcKmh"
             android:layout_width="87dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:maxLength="7" />
     </LinearLayout>
 
 
