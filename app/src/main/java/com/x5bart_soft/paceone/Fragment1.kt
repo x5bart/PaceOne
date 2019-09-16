@@ -101,7 +101,7 @@ class Fragment1 : Fragment() {
             calc1.isVisible = true
             calc2.isVisible = true
             btnCalc.isVisible = true
-            tvCalcRes.isVisible = true
+            tvCalcRes.isVisible = false
         }
     }
 
@@ -235,12 +235,12 @@ class Fragment1 : Fragment() {
         val message = "Calculate value by min/km ($etMin:$etSec) or km/h ($etKm)"
         builder.setTitle(R.string.alertTitle)
         builder.setMessage(message)
-        builder.setPositiveButton("$etMin:$etSec") { _, _ ->
+        builder.setNegativeButton("$etMin:$etSec") { _, _ ->
             mKmToKmH()
             if (calcDist.isChecked) dist()
             if (calcTime.isChecked) time()
         }
-        builder.setNegativeButton("$etKm") { _, _ ->
+        builder.setPositiveButton("$etKm") { _, _ ->
             kmHToMKm()
             if (calcDist.isChecked) dist()
             if (calcTime.isChecked) time()

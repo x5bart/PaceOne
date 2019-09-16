@@ -97,11 +97,10 @@
         android:id="@+id/btnCalc"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:backgroundTintMode="screen"
         android:text="@string/btnCalc"
         app:layout_constraintEnd_toEndOf="@+id/btnToPace"
-        app:layout_constraintTop_toBottomOf="@+id/tvCalcRes" />
+        app:layout_constraintTop_toBottomOf="@+id/rgCalc" />
 
     <EditText
         android:id="@+id/etPaceM"
@@ -113,7 +112,6 @@
         android:imeOptions="actionNext"
         android:inputType="number"
         android:maxLength="2"
-        android:text="00"
         android:textColor="#FFFFFF"
         android:textSize="35sp"
         app:layout_constraintStart_toStartOf="@id/btnToSpeed"
@@ -181,7 +179,7 @@
     <TextView
         android:id="@+id/tvCalcRes"
         android:layout_width="160dp"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:fontFamily="@font/audiowide"
         android:gravity="center"
@@ -225,7 +223,7 @@
 
         <EditText
             android:id="@+id/etCalcDistM"
-            android:layout_width="40dp"
+            android:layout_width="60dp"
             android:layout_height="50dp"
             android:ems="10"
             android:fontFamily="@font/audiowide"
@@ -247,7 +245,7 @@
 
         <EditText
             android:id="@+id/etCalcDistS"
-            android:layout_width="40dp"
+            android:layout_width="60dp"
             android:layout_height="50dp"
             android:ems="10"
             android:fontFamily="@font/audiowide"
@@ -271,13 +269,15 @@
 
         <EditText
             android:id="@+id/etCalcKmh"
-            android:layout_width="87dp"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="@font/audiowide"
+            android:gravity="center"
             android:inputType="numberDecimal"
             android:maxLength="7"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
     </LinearLayout>
 
 
