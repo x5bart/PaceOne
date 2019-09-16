@@ -2,6 +2,8 @@ package com.x5bart_soft.paceone
 
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import kotlinx.android.synthetic.main.fragment1.*
 import java.math.RoundingMode
 
@@ -40,6 +43,39 @@ class Fragment1 : Fragment() {
         calc2.isVisible = false
         btnCalc.isVisible = false
         tvCalcRes.isVisible = false
+
+        etPaceM.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                mKmToKmH()
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+        etPaceS.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                if ( etPaceM != null)mKmToKmH()
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+//        etSpeed.addTextChangedListener(object : TextWatcher {
+//            override fun afterTextChanged(p0: Editable?) {
+//                kmHToMKm()
+//            }
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//            }
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//            }
+//        })
+
+
+
 
         etPaceS.setOnEditorActionListener { _, actionId, _ ->
             return@setOnEditorActionListener when (actionId) {
