@@ -13,6 +13,7 @@
         android:layout_width="130dp"
         android:layout_height="70dp"
         android:ems="10"
+        android:focusable="true"
         android:fontFamily="@font/audiowide"
         android:gravity="center"
         android:imeOptions="actionGo"
