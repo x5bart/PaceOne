@@ -21,8 +21,10 @@ class Fragment1 : Fragment() {
     private var etCalcDistHour = 0
     private var etCalcDistMin = 0
     private var etCalcDistSec = 0
+    val time = etCalcDistHour + etCalcDistMin + etCalcDistSec
     var etCalcKm = 0.0
     var etID = 0
+    var flag = 0
     val TAG = "myLogs"
 
 
@@ -38,40 +40,44 @@ class Fragment1 : Fragment() {
 
         etPaceM.setOnFocusChangeListener { view, hasFocus ->
             etID = 1
+
         }
         etPaceS.setOnFocusChangeListener { view, hasFocus ->
             etID = 2
+
         }
         etSpeed.setOnFocusChangeListener { view, hasFocus ->
             etID = 3
+
         }
         etCalcDistH.setOnFocusChangeListener { view, hasFocus ->
             etID = 4
-            swTimeDist.isChecked = true
         }
         etCalcDistM.setOnFocusChangeListener { view, hasFocus ->
             etID = 5
-            swTimeDist.isChecked = true
         }
         etCalcDistS.setOnFocusChangeListener { view, hasFocus ->
             etID = 6
-            swTimeDist.isChecked = true
         }
         etCalcKmh.setOnFocusChangeListener { view, hasFocus ->
             etID = 7
-            swTimeDist.isChecked = false
         }
 
         etPaceM.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
 
-                if (!swTimeDist.isChecked && etID == 1) {
+                if (etID == 1) {
                     mKmToKmH()
-                    time()
-                }
-                if (swTimeDist.isChecked && etID == 1) {
-                    mKmToKmH()
-                    dist()
+                    if (flag == 2) time()
+                    if (flag == 3) dist()
+                    if (time == 0 && etCalcKm != 0.0) {
+                        time()
+                        flag = 2
+                    }
+                    if (time != 0 && etCalcKm == 0.0) {
+                        dist()
+                        flag = 3
+                    }
                 }
             }
 
@@ -83,13 +89,18 @@ class Fragment1 : Fragment() {
         })
         etPaceS.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (!swTimeDist.isChecked && etID == 2) {
+                if (etID == 2) {
                     mKmToKmH()
-                    time()
-                }
-                if (swTimeDist.isChecked && etID == 2) {
-                    mKmToKmH()
-                    dist()
+                    if (flag == 2) time()
+                    if (flag == 3) dist()
+                    if (time == 0 && etCalcKm != 0.0) {
+                        time()
+                        flag = 2
+                    }
+                    if (time != 0 && etCalcKm == 0.0) {
+                        dist()
+                        flag = 3
+                    }
                 }
             }
 
@@ -101,13 +112,18 @@ class Fragment1 : Fragment() {
         })
         etSpeed.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (!swTimeDist.isChecked && etID == 3) {
+                if (etID == 3) {
                     kmHToMKm()
-                    time()
-                }
-                if (swTimeDist.isChecked && etID == 3) {
-                    kmHToMKm()
-                    dist()
+                    if (flag == 2) time()
+                    if (flag == 3) dist()
+                    if (time == 0 && etCalcKm != 0.0) {
+                        time()
+                        flag = 2
+                    }
+                    if (time != 0 && etCalcKm == 0.0) {
+                        dist()
+                        flag = 3
+                    }
                 }
             }
 
@@ -119,12 +135,17 @@ class Fragment1 : Fragment() {
         })
         etCalcDistH.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (swSpeedDist.isChecked && etID == 4) {
-                    speed()
-                }
-
-                if (!swSpeedDist.isChecked && etID == 4) {
-                    dist()
+                if (etID == 4) {
+                    if (flag == 1) speed()
+                    if (flag == 3) dist()
+                    if (etKm == 0.0 && etCalcKm != 0.0) {
+                        speed()
+                        flag = 1
+                    }
+                    if (etKm != 0.0 && etCalcKm == 0.0) {
+                        dist()
+                        flag = 3
+                    }
                 }
             }
 
@@ -136,12 +157,17 @@ class Fragment1 : Fragment() {
         })
         etCalcDistM.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (swSpeedDist.isChecked && etID == 5) {
-                    speed()
-                }
-
-                if (!swSpeedDist.isChecked && etID == 5) {
-                    dist()
+                if (etID == 5) {
+                    if (flag == 1) speed()
+                    if (flag == 3) dist()
+                    if (etKm == 0.0 && etCalcKm != 0.0) {
+                        speed()
+                        flag = 1
+                    }
+                    if (etKm != 0.0 && etCalcKm == 0.0) {
+                        dist()
+                        flag = 3
+                    }
                 }
             }
 
@@ -153,12 +179,17 @@ class Fragment1 : Fragment() {
         })
         etCalcDistS.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (swSpeedDist.isChecked && etID == 6) {
-                    speed()
-                }
-
-                if (!swSpeedDist.isChecked && etID == 6) {
-                    dist()
+                if (etID == 6) {
+                    if (flag == 1) speed()
+                    if (flag == 3) dist()
+                    if (etKm == 0.0 && etCalcKm != 0.0) {
+                        speed()
+                        flag = 1
+                    }
+                    if (etKm != 0.0 && etCalcKm == 0.0) {
+                        dist()
+                        flag = 3
+                    }
                 }
             }
 
@@ -170,12 +201,17 @@ class Fragment1 : Fragment() {
         })
         etCalcKmh.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (swSpeedTime.isChecked && etID == 7) {
-                    speed()
-                }
-
-                if (!swSpeedTime.isChecked && etID == 7) {
-                    time()
+                if (etID == 7) {
+                    if (flag == 1) speed()
+                    if (flag == 2) dist()
+                    if (etKm == 0.0 && time != 0) {
+                        speed()
+                        flag = 1
+                    }
+                    if (etKm != 0.0 && time == 0) {
+                        dist()
+                        flag = 2
+                    }
                 }
             }
 
@@ -190,6 +226,7 @@ class Fragment1 : Fragment() {
             clear()
         }
     }
+
 
     private fun mKmToKmH() {
         notNull()
@@ -286,6 +323,7 @@ class Fragment1 : Fragment() {
             if (etCalcKmh.text.toString().isEmpty() || etCalcKmh.text.toString() == ".") 0.0
             else etCalcKmh.text.toString().toDouble()
 
+
     }
 
     private fun clear() {
@@ -298,5 +336,6 @@ class Fragment1 : Fragment() {
         etCalcDistS.setText("")
         etCalcKmh.setText("")
     }
+
 
 }

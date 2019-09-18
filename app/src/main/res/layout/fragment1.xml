@@ -9,106 +9,6 @@
 
 
     <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:text="@string/time"
-        android:theme="@style/SwitchFont"
-        app:layout_constraintBottom_toBottomOf="@+id/swSpeedTime"
-        app:layout_constraintEnd_toStartOf="@+id/swSpeedTime"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="@string/speed"
-        android:theme="@style/SwitchFont"
-        app:layout_constraintBottom_toBottomOf="@+id/swSpeedDist"
-        app:layout_constraintStart_toEndOf="@+id/swSpeedTime"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:text="@string/distance"
-        android:theme="@style/SwitchFont"
-        app:layout_constraintBottom_toBottomOf="@+id/swSpeedDist"
-        app:layout_constraintEnd_toStartOf="@+id/swSpeedDist"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        android:text="@string/speed"
-        android:theme="@style/SwitchFont"
-        app:layout_constraintStart_toEndOf="@+id/swSpeedDist"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-    <Switch
-        android:id="@+id/swSpeedDist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:showText="false"
-        android:splitTrack="true"
-        android:textIsSelectable="false"
-        android:textOff="@string/time"
-        android:textOn="@string/distance"
-        android:theme="@style/mySwitch"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
-        tools:checked="false" />
-
-    <Switch
-        android:id="@+id/swSpeedTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:showText="false"
-        android:splitTrack="true"
-        android:textIsSelectable="false"
-        android:textOff="@string/time"
-        android:textOn="@string/distance"
-        android:theme="@style/mySwitch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
-        tools:checked="false" />
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="@string/distance"
-        android:theme="@style/SwitchFont"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
-        app:layout_constraintStart_toEndOf="@+id/swTimeDist"
-        app:layout_constraintTop_toTopOf="@+id/swTimeDist" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:text="@string/time"
-        android:theme="@style/SwitchFont"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
-        app:layout_constraintEnd_toStartOf="@+id/swTimeDist"
-        app:layout_constraintTop_toTopOf="@+id/swTimeDist"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -292,6 +192,7 @@
             android:textSize="24sp"
             android:theme="@style/EditTextFont"
             tools:layout_editor_absoluteX="91dp" />
+
     </LinearLayout>
 
     <EditText
@@ -333,22 +234,6 @@
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
-    <Switch
-        android:id="@+id/swTimeDist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:showText="false"
-        android:splitTrack="true"
-        android:textIsSelectable="false"
-        android:textOff="@string/time"
-        android:textOn="@string/distance"
-        android:theme="@style/mySwitch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        tools:checked="false" />
-
     <Button
         android:id="@+id/btClear"
         style="@android:style/Widget.Material.Button.Inset"
@@ -360,6 +245,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <RadioButton
+        android:id="@+id/rbSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <RadioButton
+        android:id="@+id/rbTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/divider2"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <RadioButton
+        android:id="@+id/rbDist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RadioButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
