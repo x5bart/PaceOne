@@ -9,5 +9,5 @@
     <string name="distance" translatable="false">ДИСТАНЦИЯ</string>
     <string name="hh_mm_ss" translatable="false">чч:мм:сс</string>
     <string name="km" translatable="false">км</string>
-    <string name="fix_date" translatable="false">Зафиксировать данные</string>
+    <string name="clear" translatable="false">Очистить</string>
 </resources>
