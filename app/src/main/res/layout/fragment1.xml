@@ -382,9 +382,11 @@
 
     <Button
         android:id="@+id/btClear"
+        style="@android:style/Widget.Material.Button.Inset"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:background="#FFFFFF"
         android:text="@string/clear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
