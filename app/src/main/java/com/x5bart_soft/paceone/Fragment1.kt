@@ -35,16 +35,14 @@ class Fragment1 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+
         etPaceM.setOnFocusChangeListener { view, hasFocus ->
-            etPaceM.selectAll()
             etID = 1
         }
         etPaceS.setOnFocusChangeListener { view, hasFocus ->
-            etPaceS.selectAll()
             etID = 2
         }
         etSpeed.setOnFocusChangeListener { view, hasFocus ->
-            etSpeed.selectAll()
             etID = 3
         }
         etCalcDistH.setOnFocusChangeListener { view, hasFocus ->
