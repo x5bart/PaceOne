@@ -80,8 +80,8 @@ class Fragment1 : Fragment() {
 
                 if (!cbFixDist.isChecked && flagListener == 1) {
                     mKmToKmH()
-                    dist()
-                    time()
+//                    dist()
+//                    time()
                 }
                 if (cbFixDist.isChecked && flagListener == 1) mKmToKmH()
             }
@@ -96,8 +96,8 @@ class Fragment1 : Fragment() {
             override fun afterTextChanged(p0: Editable?) {
                 if (!cbFixDist.isChecked && flagListener == 2) {
                     mKmToKmH()
-                    dist()
-                    time()
+//                    dist()
+//                    time()
                 }
                 if (cbFixDist.isChecked && flagListener == 2) mKmToKmH()
             }
@@ -111,9 +111,9 @@ class Fragment1 : Fragment() {
         etSpeed.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (!cbFixDist.isChecked && flagListener == 3) {
-                    mKmToKmH()
-                    dist()
-                    time()
+                    kmHToMKm()
+//                    dist()
+//                    time()
                 }
                 if (cbFixDist.isChecked && flagListener == 3) mKmToKmH()
             }
@@ -176,8 +176,7 @@ class Fragment1 : Fragment() {
 
     private fun mKmToKmH() {
         notNull()
-        if (etMin == 0 && etSec == 0) etSpeed.setText("0.00")
-        else {
+        if (etMin != 0 && etSec == 0 || etMin == 0 && etSec != 0 || etMin != 0 && etSec != 0) {
             val second = ((etMin * hour) + etSec).toDouble()
             val mSec = (km / second)
             res = mSec * this.second
@@ -188,16 +187,16 @@ class Fragment1 : Fragment() {
     private fun kmHToMKm() {
         notNull()
         if (etKm != 0.00) {
-            res = (etKm / second)
-            val sumSec = (km / res).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
-            val min = (sumSec / hour)
-            val sec = sumSec - (min * hour)
+            val res = (etKm / 3.6)
+            val sumSec = (1000 / res).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
+            etMin = (sumSec / 60)
+            etSec = sumSec - (etMin * 60)
 
-            etPaceM.setText(min.toString())
-            if (min == 0) etPaceM.setText("00")
+            if (etMin == 0) etPaceM.setText("00") else etPaceM.setText(etMin.toString())
+
             if (etKm < 1) etSpeed.setText("1.00")
-            if (sec < 10) etPaceS.setText("0$sec")
-            else etPaceS.setText(sec.toString())
+
+            if (etSec < 10) etPaceS.setText("0$etSec") else etPaceS.setText(etSec.toString())
         }
     }
 
@@ -302,7 +301,9 @@ class Fragment1 : Fragment() {
     private fun notNull() {
         etMin = if (etPaceM.text.toString().isEmpty()) 0 else etPaceM.text.toString().toInt()
         etSec = if (etPaceS.text.toString().isEmpty()) 0 else etPaceS.text.toString().toInt()
-        etKm = if (etSpeed.text.toString().isEmpty()) 0.0 else etSpeed.text.toString().toDouble()
+        etKm =
+            if (etSpeed.text.toString().isEmpty() || etSpeed.text.toString() == ".") 0.0
+            else etSpeed.text.toString().toDouble()
     }
 
     private fun notNullCalc() {
