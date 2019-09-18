@@ -39,49 +39,37 @@ class Fragment1 : Fragment() {
 
         etPaceM.setOnFocusChangeListener { view, hasFocus ->
             flagListener = 1
-            Log.d(TAG, "flag  = $flagListener")
-            etPaceM.selectAll()
         }
         etPaceS.setOnFocusChangeListener { view, hasFocus ->
             flagListener = 2
-            Log.d(TAG, "flag  = $flagListener")
-            etPaceS.selectAll()
         }
         etSpeed.setOnFocusChangeListener { view, hasFocus ->
             flagListener = 3
-            Log.d(TAG, "flag  = $flagListener")
-            etSpeed.selectAll()
         }
         etCalcDistH.setOnFocusChangeListener { view, hasFocus ->
             flagListener = 4
-            Log.d(TAG, "flag  = $flagListener")
-            etSpeed.selectAll()
         }
         etCalcDistM.setOnFocusChangeListener { view, hasFocus ->
             flagListener = 5
-            Log.d(TAG, "flag  = $flagListener")
-            etSpeed.selectAll()
         }
         etCalcDistS.setOnFocusChangeListener { view, hasFocus ->
             flagListener = 6
-            Log.d(TAG, "flag  = $flagListener")
-            etSpeed.selectAll()
         }
         etCalcKmh.setOnFocusChangeListener { view, hasFocus ->
             flagListener = 7
-            Log.d(TAG, "flag  = $flagListener")
-            etSpeed.selectAll()
         }
 
         etPaceM.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
 
-                if (!cbFixDist.isChecked && flagListener == 1) {
+                if (distTime == null && flagListener == 1) {
                     mKmToKmH()
-//                    dist()
-//                    time()
+                    time()
                 }
-                if (cbFixDist.isChecked && flagListener == 1) mKmToKmH()
+                if (distTime != null && flagListener == 1) {
+                    mKmToKmH()
+                    dist()
+                }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -92,12 +80,14 @@ class Fragment1 : Fragment() {
         })
         etPaceS.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (!cbFixDist.isChecked && flagListener == 2) {
+                if (distTime == null && flagListener == 2) {
                     mKmToKmH()
-//                    dist()
-//                    time()
+                    time()
                 }
-                if (cbFixDist.isChecked && flagListener == 2) mKmToKmH()
+                if (distTime != null && flagListener == 2) {
+                    mKmToKmH()
+                    dist()
+                }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -108,12 +98,14 @@ class Fragment1 : Fragment() {
         })
         etSpeed.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (!cbFixDist.isChecked && flagListener == 3) {
+                if (distTime == null && flagListener == 3) {
                     kmHToMKm()
-//                    dist()
-//                    time()
+                    time()
                 }
-                if (cbFixDist.isChecked && flagListener == 3) mKmToKmH()
+                if (distTime != null && flagListener == 3) {
+                    kmHToMKm()
+                    dist()
+                }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -201,38 +193,15 @@ class Fragment1 : Fragment() {
     private fun dist() {
         notNull()
         notNullCalc()
-        var paceSec = (etMin * hour) + etSec
-        var kmSec = 0
 
-        if (etKm.toInt() != 0) kmSec = (km / (etKm / second)).toInt()
-
-        if (paceSec == 0 && kmSec != 0) {
-            kmHToMKm()
-            distCalc()
-
-            etMin = etPaceM.text.toString().toInt()
-            etSec = etPaceS.text.toString().toInt()
-            paceSec = (etMin * hour) + etSec
+        if (etKm != 0.0) {
+            etKm = etSpeed.text.toString().toDouble()
+            val distSec =
+                (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec.toDouble()
+            val mSec = etKm / 3600
+            val res = (distSec * mSec).toBigDecimal().setScale(3, RoundingMode.HALF_UP).toDouble()
+            etCalcKmh.setText("$res")
         }
-
-        if (kmSec == 0 && paceSec != 0) {
-            mKmToKmH()
-            distCalc()
-
-            kmSec = (km / (etKm / second)).toInt()
-        }
-
-        if (paceSec != kmSec) {
-        } else distCalc()
-    }
-
-    private fun distCalc() {
-        etKm = etSpeed.text.toString().toDouble()
-        val distSec =
-            (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec.toDouble()
-        val mSec = etKm / 3600
-        val res = (distSec * mSec).toBigDecimal().setScale(3, RoundingMode.HALF_UP).toDouble()
-        etCalcKmh.setText("$res")
     }
 
     private fun time() {
