@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
-import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment1.*
 import java.math.RoundingMode
 
@@ -177,9 +175,9 @@ class Fragment1 : Fragment() {
     private fun mKmToKmH() {
         notNull()
         if (etMin != 0 && etSec == 0 || etMin == 0 && etSec != 0 || etMin != 0 && etSec != 0) {
-            val second = ((etMin * hour) + etSec).toDouble()
-            val mSec = (km / second)
-            res = mSec * this.second
+            val allSecond = ((etMin * hour) + etSec).toDouble()
+            val mSec = (km / allSecond)
+            val res = (mSec * second).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
             etSpeed.setText("$res")
         }
     }
@@ -187,10 +185,10 @@ class Fragment1 : Fragment() {
     private fun kmHToMKm() {
         notNull()
         if (etKm != 0.00) {
-            val res = (etKm / 3.6)
-            val sumSec = (1000 / res).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
-            etMin = (sumSec / 60)
-            etSec = sumSec - (etMin * 60)
+            val res = (etKm / second)
+            val sumSec = (km / res).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
+            etMin = (sumSec / hour)
+            etSec = sumSec - (etMin * hour)
 
             if (etMin == 0) etPaceM.setText("00") else etPaceM.setText(etMin.toString())
 
