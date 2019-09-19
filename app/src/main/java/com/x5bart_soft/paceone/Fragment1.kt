@@ -25,10 +25,14 @@ class Fragment1 : Fragment() {
     private var etCalcDistSec = 0
     var time = etCalcDistHour + etCalcDistMin + etCalcDistSec
     var etCalcKm = 0.0
-    var etID = 0
-    var flag = 0
     var alertId = 0
     val TAG = "myLogs"
+    val dialog = Dialog()
+
+    public companion object {
+        var etID = 0
+        var flag = 0
+    }
 
 
     override fun onCreateView(
@@ -45,7 +49,7 @@ class Fragment1 : Fragment() {
             etID = 1
             if (time != 0 && etCalcKm != 0.0) {
                 if (alertId != 1) {
-                    alert()
+                    dialog.show(fragmentManager!!,"dialog")
                 }
             }
             alertId = 1
@@ -55,7 +59,7 @@ class Fragment1 : Fragment() {
             etID = 2
             if (time != 0 && etCalcKm != 0.0) {
                 if (alertId != 1) {
-                    alert()
+                    dialog.show(fragmentManager!!,"dialog")
                 }
             }
             alertId = 1
@@ -65,7 +69,7 @@ class Fragment1 : Fragment() {
             etID = 3
             if (time != 0 && etCalcKm != 0.0) {
                 if (alertId != 1) {
-                    alert()
+                    dialog.show(fragmentManager!!,"dialog")
                 }
             }
             alertId = 1
@@ -75,6 +79,7 @@ class Fragment1 : Fragment() {
             etID = 4
             if (etKm != 0.0 && etCalcKm != 0.0) {
                 if (alertId != 2) {
+//                    dialog.show(fragmentManager!!,"dialog")
                     alert()
                 }
             }
@@ -85,6 +90,7 @@ class Fragment1 : Fragment() {
             etID = 5
             if (etKm != 0.0 && etCalcKm != 0.0) {
                 if (alertId != 2) {
+                    dialog.show(fragmentManager!!,"dialog")
                     alert()
                 }
             }
@@ -95,6 +101,7 @@ class Fragment1 : Fragment() {
             etID = 6
             if (etKm != 0.0 && etCalcKm != 0.0) {
                 if (alertId != 2) {
+                    dialog.show(fragmentManager!!,"dialog")
                     alert()
                 }
             }
@@ -105,9 +112,9 @@ class Fragment1 : Fragment() {
             etID = 7
             if (etKm != 0.0 && time != 0) {
                 if (alertId != 3) {
-                    alert()
+                    dialog.show(fragmentManager!!,"dialog")
                 }
-                    alertId = 3
+                alertId = 3
             }
             Log.d(TAG, "id = $etID")
         }
@@ -396,7 +403,7 @@ class Fragment1 : Fragment() {
         etCalcKm =
             if (etCalcKmh.text.toString().isEmpty() || etCalcKmh.text.toString() == ".") 0.0
             else etCalcKmh.text.toString().toDouble()
-        if (etCalcKm== 0.0 && !etCalcKmh.isFocused) etCalcKmh.setText("0.00")
+        if (etCalcKm == 0.0 && !etCalcKmh.isFocused) etCalcKmh.setText("0.00")
 
         time = etCalcDistHour + etCalcDistMin + etCalcDistSec
     }
@@ -441,7 +448,7 @@ class Fragment1 : Fragment() {
         val builder = AlertDialog.Builder(activity!!)
         val message = "Что рассчитать?"
         builder.setMessage(message)
-        
+
         builder.setNegativeButton("$btn1") { _, _ ->
             flag = btn1Flag
         }
@@ -451,7 +458,6 @@ class Fragment1 : Fragment() {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
-
 
 
 }
