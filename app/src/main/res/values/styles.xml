@@ -7,20 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
-    <style name="mySwitch" parent="Theme.AppCompat.Light">
-        <item name="colorControlActivated">@android:color/white</item>
-        <item name="colorSwitchThumbNormal">@android:color/darker_gray</item>
-        <item name="android:colorForeground">@android:color/white</item>
-    </style>
-
-    <style name="SwitchFont" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize">10sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">#FF292929</item>
-        <item name="android:editTextColor">#FFFFFF</item>
-    </style>
-
+        
     <style name="EditTextFont" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/audiowide</item>
         <item name="android:textSize">35sp</item>
