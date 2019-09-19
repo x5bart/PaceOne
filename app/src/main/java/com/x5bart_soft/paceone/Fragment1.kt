@@ -90,7 +90,7 @@ class Fragment1 : Fragment() {
             etID = 5
             if (etKm != 0.0 && etCalcKm != 0.0) {
                 if (alertId != 2) {
-                    dialog.show(fragmentManager!!,"dialog")
+//                    dialog.show(fragmentManager!!,"dialog")
                     alert()
                 }
             }
@@ -101,7 +101,7 @@ class Fragment1 : Fragment() {
             etID = 6
             if (etKm != 0.0 && etCalcKm != 0.0) {
                 if (alertId != 2) {
-                    dialog.show(fragmentManager!!,"dialog")
+//                    dialog.show(fragmentManager!!,"dialog")
                     alert()
                 }
             }
