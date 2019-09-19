@@ -49,7 +49,7 @@ class Fragment1 : Fragment() {
             etID = 1
             if (time != 0 && etCalcKm != 0.0) {
                 if (alertId != 1) {
-                    dialog.show(fragmentManager!!,"dialog")
+                    dialog.show(fragmentManager!!, "dialog")
                 }
             }
             alertId = 1
@@ -59,7 +59,7 @@ class Fragment1 : Fragment() {
             etID = 2
             if (time != 0 && etCalcKm != 0.0) {
                 if (alertId != 1) {
-                    dialog.show(fragmentManager!!,"dialog")
+                    dialog.show(fragmentManager!!, "dialog")
                 }
             }
             alertId = 1
@@ -69,7 +69,7 @@ class Fragment1 : Fragment() {
             etID = 3
             if (time != 0 && etCalcKm != 0.0) {
                 if (alertId != 1) {
-                    dialog.show(fragmentManager!!,"dialog")
+                    dialog.show(fragmentManager!!, "dialog")
                 }
             }
             alertId = 1
@@ -112,10 +112,10 @@ class Fragment1 : Fragment() {
             etID = 7
             if (etKm != 0.0 && time != 0) {
                 if (alertId != 3) {
-                    dialog.show(fragmentManager!!,"dialog")
+                    dialog.show(fragmentManager!!, "dialog")
                 }
-                alertId = 3
             }
+            alertId = 3
             Log.d(TAG, "id = $etID")
         }
 
@@ -276,7 +276,7 @@ class Fragment1 : Fragment() {
                         flag = 1
                     }
                     if (etKm != 0.0 && time == 0) {
-                        dist()
+                        time()
                         flag = 2
                     }
                 }
@@ -289,6 +289,15 @@ class Fragment1 : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
+
+        etPaceM.setOnClickListener { etPaceM.selectAll() }
+        etPaceS.setOnClickListener { etPaceS.selectAll() }
+        etSpeed.setOnClickListener { etSpeed.selectAll() }
+        etCalcDistH.setOnClickListener { etCalcDistH.selectAll() }
+        etCalcDistM.setOnClickListener { etCalcDistM.selectAll() }
+        etCalcDistS.setOnClickListener { etCalcDistS.selectAll() }
+        etCalcKmh.setOnClickListener { etCalcKmh.selectAll() }
+
 
         btClear.setOnClickListener {
             clear()

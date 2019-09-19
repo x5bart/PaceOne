@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog.*
+import kotlinx.android.synthetic.main.dialog.btnDialog1
 
 class Dialog : DialogFragment() {
 
@@ -45,8 +46,8 @@ class Dialog : DialogFragment() {
             btn2 = "Speed"
             btn2Flag = 1
         }
-        btnDialog1.setText("$btn1")
-        btnDialog2.setText("$btn2")
+        btnDialog1.text = "$btn1"
+        btnDialog2.text = "$btn2"
 
         btnDialog1.setOnClickListener {
             Fragment1.flag = btn1Flag
