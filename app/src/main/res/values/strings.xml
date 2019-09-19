@@ -9,7 +9,8 @@
     <string name="hh_mm_ss" translatable="false">hh:mm:ss</string>
     <string name="km" translatable="false">km</string>
     <string name="clear" translatable="false">Clear</string>
-    <string name="dialog" translatable="false">Calculate what?</string>
+    <string name="dialog" translatable="false">Calculate</string>
+    <string name="distance2" translatable="false">DISTANCE</string>
 
 
 </resources>

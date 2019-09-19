@@ -11,4 +11,5 @@
     <string name="km" translatable="false">км</string>
     <string name="clear" translatable="false">Очистить</string>
     <string name="dialog" translatable="false">Что рассчитать?</string>
+    <string name="distance2" translatable="false">ДИСТАНЦИЮ</string>
 </resources>

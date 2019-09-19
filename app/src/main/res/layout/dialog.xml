@@ -2,13 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FF7B46"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/btnDialog2"
+        style="@android:style/Widget.Material.Light.Button.Small"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="#9FFFFFFF"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -20,14 +24,18 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/dialog"
+        android:textSize="22dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnDialog1"
+        style="@android:style/Widget.Material.Light.Button.Small"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="#9FFFFFFF"
         android:text="Button"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"

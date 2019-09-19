@@ -1,6 +1,7 @@
 package com.x5bart_soft.paceone
 
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.os.Bundle
 import android.view.View
@@ -28,22 +29,24 @@ class Dialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val etID = Fragment1.etID
+        val ctx:Context
+
         if (etID in 1..3) {
-            btn1 = "Time"
+            btn1 = getString(R.string.time)
             btn1Flag = 2
-            btn2 = "Dist"
+            btn2 = getString(R.string.distance2)
             btn2Flag = 3
         }
         if (etID in 4..6) {
-            btn1 = "Speed"
+            btn1 = getString(R.string.speed)
             btn1Flag = 1
-            btn2 = "Dist"
+            btn2 = getString(R.string.distance2)
             btn2Flag = 3
         }
         if (etID == 7) {
-            btn1 = "Time"
+            btn1 = getString(R.string.time)
             btn1Flag = 2
-            btn2 = "Speed"
+            btn2 = getString(R.string.speed)
             btn2Flag = 1
         }
         btnDialog1.text = "$btn1"

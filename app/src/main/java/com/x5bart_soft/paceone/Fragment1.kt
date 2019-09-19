@@ -79,8 +79,7 @@ class Fragment1 : Fragment() {
             etID = 4
             if (etKm != 0.0 && etCalcKm != 0.0) {
                 if (alertId != 2) {
-//                    dialog.show(fragmentManager!!,"dialog")
-                    alert()
+                    dialog.show(fragmentManager!!,"dialog")
                 }
             }
             alertId = 2
@@ -90,8 +89,7 @@ class Fragment1 : Fragment() {
             etID = 5
             if (etKm != 0.0 && etCalcKm != 0.0) {
                 if (alertId != 2) {
-//                    dialog.show(fragmentManager!!,"dialog")
-                    alert()
+                    dialog.show(fragmentManager!!,"dialog")
                 }
             }
             alertId = 2
@@ -101,8 +99,7 @@ class Fragment1 : Fragment() {
             etID = 6
             if (etKm != 0.0 && etCalcKm != 0.0) {
                 if (alertId != 2) {
-//                    dialog.show(fragmentManager!!,"dialog")
-                    alert()
+                    dialog.show(fragmentManager!!,"dialog")
                 }
             }
             alertId = 2
@@ -427,45 +424,7 @@ class Fragment1 : Fragment() {
         etCalcDistS.setText("")
         etCalcKmh.setText("")
         flag = 0
-    }
-
-    private fun alert() {
-        var btn1 = ""
-        var btn2 = ""
-        var btn1Flag = 0
-        var btn2Flag = 0
-
-        if (etID in 1..3) {
-            btn1 = "Time"
-            btn1Flag = 2
-            btn2 = "Dist"
-            btn2Flag = 3
-        }
-        if (etID in 4..6) {
-            btn1 = "Speed"
-            btn1Flag = 1
-            btn2 = "Dist"
-            btn2Flag = 3
-        }
-        if (etID == 7) {
-            btn1 = "Time"
-            btn1Flag = 2
-            btn2 = "Speed"
-            btn2Flag = 1
-        }
-
-        val builder = AlertDialog.Builder(activity!!)
-        val message = "Что рассчитать?"
-        builder.setMessage(message)
-
-        builder.setNegativeButton("$btn1") { _, _ ->
-            flag = btn1Flag
-        }
-        builder.setPositiveButton("$btn2") { _, _ ->
-            flag = btn2Flag
-        }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
+        alertId = 0
     }
 
 
