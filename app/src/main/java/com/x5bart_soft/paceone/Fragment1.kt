@@ -415,7 +415,7 @@ class Fragment1 : Fragment() {
     }
 
     private fun clear() {
-        etID = 0
+//        etID = 0
         etPaceM.setText("")
         etPaceS.setText("")
         etSpeed.setText("")
