@@ -1,17 +1,22 @@
 package com.x5bart_soft.paceone
 
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment1.*
 import java.math.RoundingMode
+
 
 class Fragment1 : Fragment() {
     private val hour = 60 //60 min
@@ -26,12 +31,13 @@ class Fragment1 : Fragment() {
     var time = etCalcDistHour + etCalcDistMin + etCalcDistSec
     var etCalcKm = 0.0
     var alertId = 0
-    val TAG = "myLogs"
+
     val dialog = Dialog()
 
-    public companion object {
+    companion object {
         var etID = 0
         var flag = 0
+        val TAG = "myLogs"
     }
 
 
@@ -79,7 +85,7 @@ class Fragment1 : Fragment() {
             etID = 4
             if (etKm != 0.0 && etCalcKm != 0.0) {
                 if (alertId != 2) {
-                    dialog.show(fragmentManager!!,"dialog")
+                    dialog.show(fragmentManager!!, "dialog")
                 }
             }
             alertId = 2
@@ -89,7 +95,7 @@ class Fragment1 : Fragment() {
             etID = 5
             if (etKm != 0.0 && etCalcKm != 0.0) {
                 if (alertId != 2) {
-                    dialog.show(fragmentManager!!,"dialog")
+                    dialog.show(fragmentManager!!, "dialog")
                 }
             }
             alertId = 2
@@ -99,7 +105,7 @@ class Fragment1 : Fragment() {
             etID = 6
             if (etKm != 0.0 && etCalcKm != 0.0) {
                 if (alertId != 2) {
-                    dialog.show(fragmentManager!!,"dialog")
+                    dialog.show(fragmentManager!!, "dialog")
                 }
             }
             alertId = 2
@@ -426,6 +432,4 @@ class Fragment1 : Fragment() {
         flag = 0
         alertId = 0
     }
-
-
 }

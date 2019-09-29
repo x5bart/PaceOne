@@ -17,7 +17,7 @@
 
     <style name="EditTextFont" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/audiowide</item>
-        <item name="android:textSize">35sp</item>
+        <item name="android:textSize">35dp</item>
         <item name="android:editTextColor">#FFFFFF</item>
         <item name="android:ems">10</item>
         <item name="android:gravity">center</item>
@@ -26,10 +26,10 @@
     </style>
 
     <style name="MyButton" parent="Widget.AppCompat.Button">
-        <item name="android:textSize">20sp</item>
-        <item name="android:background">@drawable/btm_rounded_cotner</item>
-        <item name="android:colorButtonNormal">#1a237e</item>
-        <item name="android:colorControlHighlight">#673ab7</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">@drawable/btm_rounded_corner</item>
+<!--        <item name="android:colorButtonNormal">#1a237e</item>-->
+<!--        <item name="android:colorControlHighlight">#673ab7</item>-->
     </style>
 
 
