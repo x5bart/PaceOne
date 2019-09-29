@@ -9,9 +9,9 @@
         <item>
             <shape
                 android:shape="rectangle"
-                android:tint="#fff">
+                android:tint="@color/white">
                 <corners android:radius="30dp" />
-                <solid android:color="#1a237e" />
+                <solid android:color="@color/pressed_white" />
                 <padding android:bottom="4dp" />
             </shape>
         </item>
