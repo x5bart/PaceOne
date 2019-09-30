@@ -10,7 +10,7 @@
     <string name="hh_mm_ss" translatable="false">чч:мм:сс</string>
     <string name="km" translatable="false">км</string>
     <string name="clear" translatable="false">Очистить</string>
-    <string name="dialog" translatable="false">Для дальнейший вычислений, необходимо указать параметр для рассчета.</string>
+    <string name="dialog" translatable="false">Что рассчитать?</string>
     <string name="distance2" translatable="false">ДИСТАНЦИЮ</string>
     <string name="speedBtn" translatable="false">скорость</string>
     <string name="timeBtn" translatable="false">время</string>

@@ -26,10 +26,18 @@
     </style>
 
     <style name="MyButton" parent="Widget.AppCompat.Button">
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">16dp</item>
         <item name="android:background">@drawable/btm_rounded_corner</item>
 <!--        <item name="android:colorButtonNormal">#1a237e</item>-->
 <!--        <item name="android:colorControlHighlight">#673ab7</item>-->
+    </style>
+
+    <style name="ItemList" parent="Widget.AppCompat.TextView">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">25dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/audiowide</item>
     </style>
 
 

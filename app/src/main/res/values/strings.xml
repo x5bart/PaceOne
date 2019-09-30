@@ -15,7 +15,6 @@
     <string name="timeBtn" translatable="false">TIME</string>
     <string name="distanceBtn" translatable="false">DISTANCE</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
