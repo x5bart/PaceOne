@@ -1,7 +1,6 @@
 package com.x5bart_soft.paceone
 
 
-import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,10 +8,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment1.*
 import java.math.RoundingMode
@@ -32,12 +27,12 @@ class Fragment1 : Fragment() {
     var etCalcKm = 0.0
     var alertId = 0
 
-    val dialog = Dialog()
+    private val dialog = Dialog()
 
     companion object {
         var etID = 0
         var flag = 0
-        val TAG = "myLogs"
+        const val TAG = "myLogs"
     }
 
 
@@ -51,7 +46,7 @@ class Fragment1 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
-        etPaceM.setOnFocusChangeListener { view, hasFocus ->
+        etPaceM.setOnFocusChangeListener { _, _ ->
             etID = 1
             if (time != 0 && etCalcKm != 0.0) {
                 if (alertId != 1) {
@@ -421,7 +416,13 @@ class Fragment1 : Fragment() {
     }
 
     private fun clear() {
-//        etID = 0
+        etID = 0
+        flag = 0
+        alertId = 0
+        time = 0
+        etKm = 0.0
+        etCalcKm = 0.0
+
         etPaceM.setText("")
         etPaceS.setText("")
         etSpeed.setText("")
@@ -429,7 +430,6 @@ class Fragment1 : Fragment() {
         etCalcDistM.setText("")
         etCalcDistS.setText("")
         etCalcKmh.setText("")
-        flag = 0
-        alertId = 0
+
     }
 }
