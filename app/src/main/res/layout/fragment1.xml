@@ -23,7 +23,7 @@
 
     <EditText
         android:id="@+id/etSpeed"
-        android:layout_width="140dp"
+        android:layout_width="160dp"
         android:layout_height="70dp"
         android:gravity="center"
         android:imeOptions="actionNext"
@@ -204,7 +204,7 @@
 
     <EditText
         android:id="@+id/etCalcKmh"
-        android:layout_width="140dp"
+        android:layout_width="160dp"
         android:layout_height="70dp"
         android:gravity="center"
         android:inputType="numberDecimal"

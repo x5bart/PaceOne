@@ -1,8 +1,6 @@
 package com.x5bart_soft.paceone
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 
 
