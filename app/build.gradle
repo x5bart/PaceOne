@@ -5,16 +5,24 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+        realese {
+            storeFile file('D:\\Android project\\key\\key1.jks')
+            storePassword 'Ik9kpppP'
+            keyAlias = 'x5bart'
+            keyPassword 'Ik9kpppP'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion '29.0.0'
     defaultConfig {
         applicationId "com.x5bart_soft.paceone"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
+        versionCode 2
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.debug
+        signingConfig signingConfigs.realese
     }
     buildTypes {
         release {
