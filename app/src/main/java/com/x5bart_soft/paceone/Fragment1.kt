@@ -278,7 +278,7 @@ class Fragment1 : Fragment() {
             etMin = (sumSec / hour)
             etSec = sumSec - (etMin * hour)
 
-            if (etMin == 0) etPaceM.setText("00") else etPaceM.setText(etMin.toString())
+            if (etMin == 0) etPaceM.setText(" 00") else etPaceM.setText(etMin.toString())
 
             if (etKm < 1) etSpeed.setText("1.00")
 

@@ -15,4 +15,7 @@
     <string name="speedBtn" translatable="false">скорость</string>
     <string name="timeBtn" translatable="false">время</string>
     <string name="distanceBtn" translatable="false">дистанцию</string>
+    <string name="about" translatable="false">О приложении</string>
+    <string name="settings">Settings</string>
+    <string name="exit">Exit</string>
 </resources>

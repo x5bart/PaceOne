@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     app:contentInsetStart="0dp"
     app:logo="@mipmap/ic_launcher1"
-    app:subtitle="@string/app_name"
     app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Large">
 
 </androidx.appcompat.widget.Toolbar>
