@@ -4,7 +4,6 @@ package com.x5bart_soft.paceone
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,73 +47,38 @@ class Fragment1 : Fragment() {
 
         etPaceM.setOnFocusChangeListener { _, _ ->
             etID = 1
-            if (time != 0 && etCalcKm != 0.0) {
-                if (alertId != 1) {
-                    dialog.show(fragmentManager!!, "dialog")
-                }
-            }
+            if (time != 0 && etCalcKm != 0.0 && alertId != 1) dialog.show(fragmentManager!!, "d")
             alertId = 1
-            Log.d(TAG, "id = $etID")
         }
-        etPaceS.setOnFocusChangeListener { view, hasFocus ->
+        etPaceS.setOnFocusChangeListener { _, _ ->
             etID = 2
-            if (time != 0 && etCalcKm != 0.0) {
-                if (alertId != 1) {
-                    dialog.show(fragmentManager!!, "dialog")
-                }
-            }
+            if (time != 0 && etCalcKm != 0.0 && alertId != 1) dialog.show(fragmentManager!!, "d")
             alertId = 1
-            Log.d(TAG, "id = $etID")
         }
-        etSpeed.setOnFocusChangeListener { view, hasFocus ->
+        etSpeed.setOnFocusChangeListener { _, _ ->
             etID = 3
-            if (time != 0 && etCalcKm != 0.0) {
-                if (alertId != 1) {
-                    dialog.show(fragmentManager!!, "dialog")
-                }
-            }
+            if (time != 0 && etCalcKm != 0.0 && alertId != 1) dialog.show(fragmentManager!!, "d")
             alertId = 1
-            Log.d(TAG, "id = $etID")
         }
-        etCalcDistH.setOnFocusChangeListener { view, hasFocus ->
+        etCalcDistH.setOnFocusChangeListener { _, _ ->
             etID = 4
-            if (etKm != 0.0 && etCalcKm != 0.0) {
-                if (alertId != 2) {
-                    dialog.show(fragmentManager!!, "dialog")
-                }
-            }
+            if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) dialog.show(fragmentManager!!, "d")
             alertId = 2
-            Log.d(TAG, "id = $etID")
         }
-        etCalcDistM.setOnFocusChangeListener { view, hasFocus ->
+        etCalcDistM.setOnFocusChangeListener { _, _ ->
             etID = 5
-            if (etKm != 0.0 && etCalcKm != 0.0) {
-                if (alertId != 2) {
-                    dialog.show(fragmentManager!!, "dialog")
-                }
-            }
+            if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) dialog.show(fragmentManager!!, "d")
             alertId = 2
-            Log.d(TAG, "id = $etID")
         }
-        etCalcDistS.setOnFocusChangeListener { view, hasFocus ->
+        etCalcDistS.setOnFocusChangeListener { _, _ ->
             etID = 6
-            if (etKm != 0.0 && etCalcKm != 0.0) {
-                if (alertId != 2) {
-                    dialog.show(fragmentManager!!, "dialog")
-                }
-            }
+            if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) dialog.show(fragmentManager!!, "d")
             alertId = 2
-            Log.d(TAG, "id = $etID")
         }
-        etCalcKmh.setOnFocusChangeListener { view, hasFocus ->
+        etCalcKmh.setOnFocusChangeListener { _, _ ->
             etID = 7
-            if (etKm != 0.0 && time != 0) {
-                if (alertId != 3) {
-                    dialog.show(fragmentManager!!, "dialog")
-                }
-            }
+            if (etKm != 0.0 && time != 0 && alertId != 3) dialog.show(fragmentManager!!, "d")
             alertId = 3
-            Log.d(TAG, "id = $etID")
         }
 
         etPaceM.addTextChangedListener(object : TextWatcher {
@@ -133,7 +97,6 @@ class Fragment1 : Fragment() {
                         flag = 3
                     }
                 }
-                Log.d(TAG, "flag = $flag")
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -157,7 +120,6 @@ class Fragment1 : Fragment() {
                         flag = 3
                     }
                 }
-                Log.d(TAG, "flag = $flag")
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -181,7 +143,6 @@ class Fragment1 : Fragment() {
                         flag = 3
                     }
                 }
-                Log.d(TAG, "flag = $flag")
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -205,8 +166,6 @@ class Fragment1 : Fragment() {
                         flag = 3
                     }
                 }
-                Log.d(TAG, "flag = $flag")
-                Log.d(TAG, "etKM = $etKm etCalcKM = $etCalcKm")
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -230,7 +189,6 @@ class Fragment1 : Fragment() {
                         flag = 3
                     }
                 }
-                Log.d(TAG, "flag = $flag")
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -254,7 +212,6 @@ class Fragment1 : Fragment() {
                         flag = 3
                     }
                 }
-                Log.d(TAG, "flag = $flag")
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -278,7 +235,6 @@ class Fragment1 : Fragment() {
                         flag = 2
                     }
                 }
-                Log.d(TAG, "flag = $flag")
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
