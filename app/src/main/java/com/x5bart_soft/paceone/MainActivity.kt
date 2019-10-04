@@ -31,11 +31,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.about ->{
-                val frg = AboutFragment()
-                val ft = supportFragmentManager.beginTransaction()
-                ft.addToBackStack(null)
-                ft.replace(R.id.frgCont, frg)
-                ft.commit()
+             val dialog = AboutDialog()
+                dialog.show(supportFragmentManager,"About")
             }
             R.id.exit -> finish()
 

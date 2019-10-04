@@ -11,14 +11,10 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.dialog.*
-import kotlinx.android.synthetic.main.fragment1.*
-import androidx.core.content.ContextCompat.getSystemService
+import kotlinx.android.synthetic.main.dialog_alert.*
 
 
-
-
-class Dialog : DialogFragment() {
+class AlertDialog : DialogFragment() {
 
     var btn1 = ""
     var btn2 = ""
@@ -31,8 +27,8 @@ class Dialog : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        getDialog()!!.getWindow()!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
-        return inflater.inflate(R.layout.dialog, null)
+        dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        return inflater.inflate(R.layout.dialog_alert, null)
 
     }
 

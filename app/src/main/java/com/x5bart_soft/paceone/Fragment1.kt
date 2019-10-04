@@ -26,12 +26,10 @@ class Fragment1 : Fragment() {
     var etCalcKm = 0.0
     var alertId = 0
 
-    private val dialog = Dialog()
 
     companion object {
         var etID = 0
         var flag = 0
-        const val TAG = "myLogs"
     }
 
 
@@ -47,37 +45,37 @@ class Fragment1 : Fragment() {
 
         etPaceM.setOnFocusChangeListener { _, _ ->
             etID = 1
-            if (time != 0 && etCalcKm != 0.0 && alertId != 1) dialog.show(fragmentManager!!, "d")
+            if (time != 0 && etCalcKm != 0.0 && alertId != 1) alertDialog()
             alertId = 1
         }
         etPaceS.setOnFocusChangeListener { _, _ ->
             etID = 2
-            if (time != 0 && etCalcKm != 0.0 && alertId != 1) dialog.show(fragmentManager!!, "d")
+            if (time != 0 && etCalcKm != 0.0 && alertId != 1) alertDialog()
             alertId = 1
         }
         etSpeed.setOnFocusChangeListener { _, _ ->
             etID = 3
-            if (time != 0 && etCalcKm != 0.0 && alertId != 1) dialog.show(fragmentManager!!, "d")
+            if (time != 0 && etCalcKm != 0.0 && alertId != 1) alertDialog()
             alertId = 1
         }
         etCalcDistH.setOnFocusChangeListener { _, _ ->
             etID = 4
-            if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) dialog.show(fragmentManager!!, "d")
+            if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) alertDialog()
             alertId = 2
         }
         etCalcDistM.setOnFocusChangeListener { _, _ ->
             etID = 5
-            if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) dialog.show(fragmentManager!!, "d")
+            if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) alertDialog()
             alertId = 2
         }
         etCalcDistS.setOnFocusChangeListener { _, _ ->
             etID = 6
-            if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) dialog.show(fragmentManager!!, "d")
+            if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) alertDialog()
             alertId = 2
         }
         etCalcKmh.setOnFocusChangeListener { _, _ ->
             etID = 7
-            if (etKm != 0.0 && time != 0 && alertId != 3) dialog.show(fragmentManager!!, "d")
+            if (etKm != 0.0 && time != 0 && alertId != 3) alertDialog()
             alertId = 3
         }
 
@@ -387,5 +385,10 @@ class Fragment1 : Fragment() {
         etCalcDistS.setText("")
         etCalcKmh.setText("")
 
+    }
+
+    private fun alertDialog(){
+        val dialog = AlertDialog()
+        dialog.show(fragmentManager!!, "AlertDialog")
     }
 }
