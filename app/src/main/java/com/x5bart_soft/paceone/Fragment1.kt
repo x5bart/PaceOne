@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.x5bart_soft.paceone.segment.Fragment2
 import kotlinx.android.synthetic.main.fragment1.*
 import java.math.RoundingMode
 
@@ -254,6 +255,20 @@ class Fragment1 : Fragment() {
         btClear.setOnClickListener {
             clear()
         }
+        btnSegment.setOnClickListener {
+            notNull()
+            val bundle = Bundle()
+            val dist = etCalcKm
+            val time = time
+            bundle.putDouble("dist", dist)
+            bundle.putInt("time",time)
+            val frg = Fragment2()
+            frg.arguments = bundle
+            val ft = fragmentManager!!.beginTransaction()
+            ft.addToBackStack("frag")
+            ft.replace(R.id.frgCont, frg)
+            ft.commit()
+        }
     }
 
 
@@ -321,20 +336,22 @@ class Fragment1 : Fragment() {
 
     private fun speed() {
         notNull()
-        val timeCalc = (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
-        val distCalc = etCalcKm
+        if (etCalcDistHour != 0 && etCalcDistMin != 0 && etCalcDistSec != 0) {
+            val timeCalc = (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
+            val distCalc = etCalcKm
 
-        if (timeCalc != 0 || distCalc != 0.0) {
-            val distSec =
-                (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec.toDouble()
-            val distM = etCalcKm * km
-            val mSec = distM / distSec
-            val res =
-                ((mSec * 3600) / km).toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
-            etSpeed.setText("$res")
-            kmHToMKm()
+            if (timeCalc != 0 || distCalc != 0.0) {
+                val distSec =
+                    (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec.toDouble()
+                val distM = etCalcKm * km
+                val mSec = distM / distSec
+                val res =
+                    ((mSec * 3600) / km).toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+                etSpeed.setText("$res")
+                kmHToMKm()
+            }
+            notNull()
         }
-        notNull()
     }
 
     private fun notNull() {
@@ -367,6 +384,7 @@ class Fragment1 : Fragment() {
         if (etCalcKm == 0.0 && !etCalcKmh.isFocused) etCalcKmh.setText("0.00")
 
         time = etCalcDistHour + etCalcDistMin + etCalcDistSec
+
     }
 
     private fun clear() {
@@ -387,7 +405,7 @@ class Fragment1 : Fragment() {
 
     }
 
-    private fun alertDialog(){
+    private fun alertDialog() {
         val dialog = AlertDialog()
         dialog.show(fragmentManager!!, "AlertDialog")
     }

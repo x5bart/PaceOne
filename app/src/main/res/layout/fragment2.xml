@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".Fragment2">
+    tools:context=".segment.Fragment2">
 
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/etSegment"
         style="@style/EditTextFont"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/etSegment"
         tools:layout_editor_absoluteX="155dp" />
 
     <TextView
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:text="Line segment (km)"
         android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editText"
-        app:layout_constraintStart_toEndOf="@+id/editText"
-        app:layout_constraintTop_toTopOf="@+id/editText" />
+        app:layout_constraintBottom_toBottomOf="@+id/etSegment"
+        app:layout_constraintStart_toEndOf="@+id/etSegment"
+        app:layout_constraintTop_toTopOf="@+id/etSegment" />
 </androidx.constraintlayout.widget.ConstraintLayout>
