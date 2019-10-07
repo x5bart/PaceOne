@@ -2,6 +2,7 @@ package com.x5bart_soft.paceone.segment
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,15 +34,31 @@ class Fragment2 : Fragment() {
         val seg = etSegment.text.toString().toDouble()
         val bundle = this.arguments
         val dist = bundle!!.getDouble("dist")
-        val time =  bundle.getDouble("time")
+        val time = bundle.getInt("time")
+        var h = 0
+        var m = 0
+        var s = 0
+
 
         val count =
-            (dist / seg).toInt()
-//                .toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
-        val timeSeg = (time /count).toInt()
+            (dist / seg)
+                .toBigDecimal()
+                .setScale(0, RoundingMode.HALF_UP)
+                .toInt()
 
-                for (i in 0..count)
-            segments.add(Segment(i+1 , (i+1) * seg, (timeSeg + (timeSeg*count)).toString()))
+        val timeSeg = time / count
+//        var e = 0
+//        while (e != count) {
+//            e++
+//            segments.add(Segment(e, seg * e, "${timeSeg * e}"))
+//            dist - (seg * e)
+//        }
+
+
+        for (i in 1..count) {
+            Log.d("mylogs", "i = $i")
+            segments.add(Segment(i , i  * seg, "${timeSeg * i }"))
+        }
 
         val adapter = SegmentAdapter(segments)
         recyclerView.adapter = adapter

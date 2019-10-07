@@ -22,9 +22,10 @@ class SegmentAdapter(val segmentsList: List<Segment>) : RecyclerView.Adapter<Seg
         val segment = segmentsList[position]
     holder.apply {
         number.text = segment.number.toString()
-        distance.text = ("${segment.distance} km")
+        distance.text = segment.distance.toString()
         time.text = segment.time
 
     }
+
     }
 }
