@@ -24,6 +24,7 @@ class Fragment1 : Fragment() {
     private var etCalcDistMin = 0
     private var etCalcDistSec = 0
     var time = etCalcDistHour + etCalcDistMin + etCalcDistSec
+    var timeSec = 0
     var etCalcKm = 0.0
     var alertId = 0
 
@@ -31,6 +32,7 @@ class Fragment1 : Fragment() {
     companion object {
         var etID = 0
         var flag = 0
+        val hour = 60 //60 min
     }
 
 
@@ -259,9 +261,11 @@ class Fragment1 : Fragment() {
             notNull()
             val bundle = Bundle()
             val dist = etCalcKm
-            val time = time
+            val time = timeSec
+            bundle.putInt("h", etCalcDistHour)
+            bundle.putInt("m", etCalcDistMin)
+            bundle.putInt("s", etCalcDistSec)
             bundle.putDouble("dist", dist)
-            bundle.putInt("time",time)
             val frg = Fragment2()
             frg.arguments = bundle
             val ft = fragmentManager!!.beginTransaction()
@@ -384,6 +388,7 @@ class Fragment1 : Fragment() {
         if (etCalcKm == 0.0 && !etCalcKmh.isFocused) etCalcKmh.setText("0.00")
 
         time = etCalcDistHour + etCalcDistMin + etCalcDistSec
+//        timeSec = (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
 
     }
 
@@ -394,6 +399,7 @@ class Fragment1 : Fragment() {
         time = 0
         etKm = 0.0
         etCalcKm = 0.0
+        timeSec = 0
 
         etPaceM.setText("")
         etPaceS.setText("")

@@ -24,6 +24,15 @@
         <item name="android:selectAllOnFocus">true</item>
         <item name="android:backgroundTint">#FFFFFF</item>
     </style>
+    <style name="EditTextFr2" parent="Widget.AppCompat.EditText">
+        <item name="android:fontFamily">@font/audiowide</item>
+        <item name="android:textSize">25dp</item>
+        <item name="android:editTextColor">#FFFFFF</item>
+        <item name="android:ems">10</item>
+        <item name="android:gravity">center</item>
+        <item name="android:selectAllOnFocus">true</item>
+        <item name="android:backgroundTint">#FFFFFF</item>
+    </style>
 
     <style name="MyButton" parent="Widget.AppCompat.Button">
         <item name="android:textSize">16dp</item>
