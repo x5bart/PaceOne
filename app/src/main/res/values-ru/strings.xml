@@ -16,7 +16,13 @@
     <string name="timeBtn" translatable="false">время</string>
     <string name="distanceBtn" translatable="false">дистанцию</string>
     <string name="about" translatable="false">О приложении</string>
-    <string name="settings">Settings</string>
-    <string name="exit">Exit</string>
-    <string name="recalculate">RECALCULATE</string>
+    <string name="settings" translatable="false">Настройки</string>
+    <string name="exit" translatable="false">Закрыть</string>
+    <string name="segment" translatable="false">ОТРЕЗОК</string>
+    <string name="recalculate" translatable="false">пересчитать</string>
+    <string name="SPLIT">Разбить на отрезки</string>
+    <string name="h" translatable="false">ч</string>
+    <string name="m" translatable="false">м</string>
+    <string name="s" translatable="false">с</string>
+
 </resources>

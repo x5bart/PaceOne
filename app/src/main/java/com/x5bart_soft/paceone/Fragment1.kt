@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.x5bart_soft.paceone.segment.Fragment2
 import kotlinx.android.synthetic.main.fragment1.*
@@ -45,6 +46,7 @@ class Fragment1 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        btnSegment.isVisible = false
 
         etPaceM.setOnFocusChangeListener { _, _ ->
             etID = 1
@@ -295,7 +297,7 @@ class Fragment1 : Fragment() {
             etMin = (sumSec / hour)
             etSec = sumSec - (etMin * hour)
 
-            if (etMin == 0) etPaceM.setText(" 00") else etPaceM.setText(etMin.toString())
+            if (etMin == 0) etPaceM.setText("00") else etPaceM.setText(etMin.toString())
 
             if (etKm < 1) etSpeed.setText("1.00")
 
@@ -340,7 +342,7 @@ class Fragment1 : Fragment() {
 
     private fun speed() {
         notNull()
-        if (etCalcDistHour != 0 && etCalcDistMin != 0 && etCalcDistSec != 0) {
+        if (etCalcDistHour != 0 || etCalcDistMin != 0 || etCalcDistSec != 0) {
             val timeCalc = (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
             val distCalc = etCalcKm
 
@@ -388,8 +390,11 @@ class Fragment1 : Fragment() {
         if (etCalcKm == 0.0 && !etCalcKmh.isFocused) etCalcKmh.setText("0.00")
 
         time = etCalcDistHour + etCalcDistMin + etCalcDistSec
-//        timeSec = (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
+        visible()
+    }
 
+    fun visible() {
+        if (etKm != 0.0 && time != 0 && etCalcKm != 0.0) btnSegment.isVisible = true
     }
 
     private fun clear() {
@@ -408,6 +413,7 @@ class Fragment1 : Fragment() {
         etCalcDistM.setText("")
         etCalcDistS.setText("")
         etCalcKmh.setText("")
+        btnSegment.isVisible = false
 
     }
 

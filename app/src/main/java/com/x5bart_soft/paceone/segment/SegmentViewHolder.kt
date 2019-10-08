@@ -9,6 +9,7 @@ class SegmentViewHolder(
     itemView: View
 ) : RecyclerView.ViewHolder(itemView) {
 
+
     val number = itemView.findViewById<TextView>(R.id.number)
     val distance = itemView.findViewById<TextView>(R.id.distance)
     val time = itemView.findViewById<TextView>(R.id.time)
