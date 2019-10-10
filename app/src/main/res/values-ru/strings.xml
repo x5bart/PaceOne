@@ -24,5 +24,6 @@
     <string name="h" translatable="false">ч</string>
     <string name="m" translatable="false">м</string>
     <string name="s" translatable="false">с</string>
+    <string name="back">Назад</string>
 
 </resources>

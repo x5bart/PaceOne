@@ -11,20 +11,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog_about.*
 
-/**
- * A simple [Fragment] subclass.
- */
 class AboutDialog : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return inflater.inflate(R.layout.dialog_about, null)
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,8 +26,5 @@ class AboutDialog : DialogFragment() {
         btnBack.setOnClickListener {
             dismiss()
         }
-
     }
-
-
 }

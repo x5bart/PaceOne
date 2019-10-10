@@ -11,7 +11,6 @@
     <style name="Toolbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-        <!-- <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item> -->
         <item name="android:background">@color/white</item>
     </style>
 
@@ -24,6 +23,7 @@
         <item name="android:selectAllOnFocus">true</item>
         <item name="android:backgroundTint">#FFFFFF</item>
     </style>
+
     <style name="EditTextFr2" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/audiowide</item>
         <item name="android:textSize">25dp</item>
@@ -37,8 +37,6 @@
     <style name="MyButton" parent="Widget.AppCompat.Button">
         <item name="android:textSize">16dp</item>
         <item name="android:background">@drawable/btm_rounded_corner</item>
-<!--        <item name="android:colorButtonNormal">#1a237e</item>-->
-<!--        <item name="android:colorControlHighlight">#673ab7</item>-->
     </style>
 
     <style name="ItemList" parent="Widget.AppCompat.TextView">
@@ -60,8 +58,5 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
     </style>
-
-
-
 
 </resources>

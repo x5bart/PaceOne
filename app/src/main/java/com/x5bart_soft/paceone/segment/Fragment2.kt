@@ -13,11 +13,8 @@ import com.x5bart_soft.paceone.R
 import kotlinx.android.synthetic.main.fragment2.*
 import java.math.RoundingMode
 
-/**
- * A simple [Fragment] subclass.
- */
 class Fragment2 : Fragment() {
-    val segments = arrayListOf<Segment>()
+    private val segments = arrayListOf<Segment>()
     var seg = 1.0
     //    val seg = etSegment.text.toString().toDouble()
     var dist = 0.0
@@ -58,24 +55,23 @@ class Fragment2 : Fragment() {
             read()
             rv()
         }
-etSegment.setOnEditorActionListener{ _,actionId ,_ ->
-    if (actionId == EditorInfo.IME_ACTION_GO){
-        (recyclerView.adapter as SegmentAdapter).segmentsList.clear()
-        read()
-        rv()
-        true
-    } else{
-        false
+        etSegment.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_GO) {
+                (recyclerView.adapter as SegmentAdapter).segmentsList.clear()
+                read()
+                rv()
+                true
+            } else {
+                false
+            }
+        }
     }
-}
 
-    }
-
-    fun timeSec() {
+    private fun timeSec() {
         time = (((h * Fragment1.hour) + m) * Fragment1.hour) + s
     }
 
-    fun rv() {
+    private fun rv() {
         val count = (dist / seg).toBigDecimal().setScale(0, RoundingMode.UP).toInt()
         var i = 0
         while (i != count) {
@@ -92,13 +88,12 @@ etSegment.setOnEditorActionListener{ _,actionId ,_ ->
             if (s < 10) sPrint = "0$s"
 
             segments.add(Segment(i, sg, "$h:$mPrint:$sPrint"))
-
         }
         val adapter = SegmentAdapter(segments)
         recyclerView.adapter = adapter
     }
 
-    fun read() {
+    private fun read() {
         seg = etSegment.text.toString().toDouble()
         dist = etKm.text.toString().toDouble()
         h = etH.text.toString().toInt()
@@ -106,5 +101,4 @@ etSegment.setOnEditorActionListener{ _,actionId ,_ ->
         s = etM.text.toString().toInt()
         timeSec()
     }
-
 }
