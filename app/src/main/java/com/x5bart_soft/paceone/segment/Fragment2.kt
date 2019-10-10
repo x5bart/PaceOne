@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.x5bart_soft.paceone.Fragment1
 import com.x5bart_soft.paceone.R
-import kotlinx.android.synthetic.main.fragment1.*
 import kotlinx.android.synthetic.main.fragment2.*
 import java.math.RoundingMode
 
@@ -58,7 +58,16 @@ class Fragment2 : Fragment() {
             read()
             rv()
         }
-
+etSegment.setOnEditorActionListener{ _,actionId ,_ ->
+    if (actionId == EditorInfo.IME_ACTION_GO){
+        (recyclerView.adapter as SegmentAdapter).segmentsList.clear()
+        read()
+        rv()
+        true
+    } else{
+        false
+    }
+}
 
     }
 
@@ -77,8 +86,12 @@ class Fragment2 : Fragment() {
             val h = (timeSeg / 3600)
             val m = ((timeSeg - (h * 3600)) / 60)
             val s = (((timeSeg - (h * 3600) - (m * 60))))
+            var mPrint = m.toString()
+            var sPrint = s.toString()
+            if (m < 10) mPrint = "0$m"
+            if (s < 10) sPrint = "0$s"
 
-            segments.add(Segment(i, sg, "$h h $m m $s s"))
+            segments.add(Segment(i, sg, "$h:$mPrint:$sPrint"))
 
         }
         val adapter = SegmentAdapter(segments)

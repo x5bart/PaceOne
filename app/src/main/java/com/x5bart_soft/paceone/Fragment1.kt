@@ -33,7 +33,7 @@ class Fragment1 : Fragment() {
     companion object {
         var etID = 0
         var flag = 0
-        val hour = 60 //60 min
+        const val hour = 60 //60 min
     }
 
 
@@ -398,9 +398,7 @@ class Fragment1 : Fragment() {
     }
 
     private fun clear() {
-        etID = 0
         flag = 0
-        alertId = 0
         time = 0
         etKm = 0.0
         etCalcKm = 0.0
@@ -414,11 +412,47 @@ class Fragment1 : Fragment() {
         etCalcDistS.setText("")
         etCalcKmh.setText("")
         btnSegment.isVisible = false
-
+        when (etID) {
+            1 -> {
+                etPaceM.requestFocus()
+                etID = 1
+                alertId = 1
+            }
+            2 -> {
+                etPaceS.requestFocus()
+                etID = 2
+                alertId = 1
+            }
+            3-> {
+                etSpeed.requestFocus()
+                etID = 3
+                alertId = 1
+            }
+            4-> {
+                etCalcDistH.requestFocus()
+                etID = 4
+                alertId = 2
+            }
+            5-> {
+                etCalcDistM.requestFocus()
+                etID = 5
+                alertId = 2
+            }
+            6-> {
+                etCalcDistS.requestFocus()
+                etID = 6
+                alertId = 2
+            }
+            7-> {
+                etCalcKmh.requestFocus()
+                etID = 7
+                alertId = 3
+            }
+        }
+        notNull()
     }
-
-    private fun alertDialog() {
-        val dialog = AlertDialog()
-        dialog.show(fragmentManager!!, "AlertDialog")
+        private fun alertDialog() {
+            val dialog = AlertDialog()
+            dialog.show(fragmentManager!!, "AlertDialog")
+        }
     }
-}

@@ -20,19 +20,13 @@ open class SegmentAdapter(val segmentsList: ArrayList<Segment>) :
         return segmentsList.size
     }
 
-
     override fun onBindViewHolder(holder: SegmentViewHolder, position: Int) {
         val segment = segmentsList[position]
         holder.apply {
             number.text = segment.number.toString()
-            distance.text = ("${segment.distance} km")
+            distance.text = ("${segment.distance}")
             time.text = segment.time
 
         }
     }
-
-    fun clear() {
-        segmentsList.clear()
-    }
-
 }

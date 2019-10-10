@@ -152,7 +152,7 @@
         android:inputType="numberDecimal"
         android:text="1.00"
         android:textColor="@color/white"
-        android:imeOptions="actionNext"
+        android:imeOptions="actionGo"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
