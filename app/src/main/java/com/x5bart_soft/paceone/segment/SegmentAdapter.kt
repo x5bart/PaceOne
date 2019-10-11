@@ -5,27 +5,28 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.x5bart_soft.paceone.R
 
-class SegmentAdapter(val segmentsList: List<Segment>) : RecyclerView.Adapter<SegmentViewHolder>() {
+open class SegmentAdapter(val segmentsList: ArrayList<Segment>) :
+    RecyclerView.Adapter<SegmentViewHolder>() {
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SegmentViewHolder {
-    val v = LayoutInflater
-        .from(parent.context)
-        .inflate(R.layout.item_list,parent,false)
+        val v = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.item_list, parent, false)
         return SegmentViewHolder(v)
     }
 
     override fun getItemCount(): Int {
-    return segmentsList.size
+        return segmentsList.size
     }
-
 
     override fun onBindViewHolder(holder: SegmentViewHolder, position: Int) {
         val segment = segmentsList[position]
-    holder.apply {
-        number.text = segment.number.toString()
-        distance.text = segment.distance.toString()
-        time.text = segment.time
+        holder.apply {
+            number.text = segment.number.toString()
+            distance.text = ("${segment.distance}")
+            time.text = segment.time
 
-    }
-
+        }
     }
 }

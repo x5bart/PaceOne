@@ -16,10 +16,10 @@ import kotlinx.android.synthetic.main.dialog_alert.*
 
 class AlertDialog : DialogFragment() {
 
-    var btn1 = ""
-    var btn2 = ""
-    var btn1Flag = 0
-    var btn2Flag = 0
+    private var btn1 = ""
+    private var btn2 = ""
+    private var btn1Flag = 0
+    private var btn2Flag = 0
 
 
     override fun onCreateView(
@@ -29,7 +29,6 @@ class AlertDialog : DialogFragment() {
     ): View? {
         dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return inflater.inflate(R.layout.dialog_alert, null)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,7 +61,6 @@ class AlertDialog : DialogFragment() {
             Fragment1.flag = btn1Flag
             dismiss()
             showKey()
-
         }
         btnDialog2.setOnClickListener {
             Fragment1.flag = btn2Flag
@@ -70,9 +68,6 @@ class AlertDialog : DialogFragment() {
             showKey()
         }
     }
-
-
-
 
     private fun showKey() {
         val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?

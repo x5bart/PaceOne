@@ -20,26 +20,21 @@ class MainActivity : AppCompatActivity() {
         val ft = supportFragmentManager.beginTransaction()
         ft.add(R.id.frgCont, frag1)
         ft.commit()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu,menu)
+        menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
-            R.id.about ->{
-             val dialog = AboutDialog()
-                dialog.show(supportFragmentManager,"About")
+        when (item.itemId) {
+            R.id.about -> {
+                val dialog = AboutDialog()
+                dialog.show(supportFragmentManager, "About")
             }
             R.id.exit -> finish()
-
         }
         return super.onOptionsItemSelected(item)
     }
-
-
-
 }

@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.x5bart_soft.paceone.segment.Fragment2
 import kotlinx.android.synthetic.main.fragment1.*
@@ -24,16 +25,15 @@ class Fragment1 : Fragment() {
     private var etCalcDistMin = 0
     private var etCalcDistSec = 0
     var time = etCalcDistHour + etCalcDistMin + etCalcDistSec
+    var timeSec = 0
     var etCalcKm = 0.0
     var alertId = 0
-    var timeSec = 0
-
 
     companion object {
         var etID = 0
         var flag = 0
+        const val hour = 60 //60 min
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +44,7 @@ class Fragment1 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        btnSegment.isVisible = false
 
         etPaceM.setOnFocusChangeListener { _, _ ->
             etID = 1
@@ -83,7 +84,6 @@ class Fragment1 : Fragment() {
 
         etPaceM.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-
                 if (etID == 1) {
                     mKmToKmH()
                     if (flag == 2) time()
@@ -252,16 +252,17 @@ class Fragment1 : Fragment() {
         etCalcDistS.setOnClickListener { etCalcDistS.selectAll() }
         etCalcKmh.setOnClickListener { etCalcKmh.selectAll() }
 
-
         btClear.setOnClickListener {
             clear()
         }
+
         btnSegment.setOnClickListener {
             notNull()
             val bundle = Bundle()
             val dist = etCalcKm
-            val time = timeSec
-            bundle.putInt("time",time)
+            bundle.putInt("h", etCalcDistHour)
+            bundle.putInt("m", etCalcDistMin)
+            bundle.putInt("s", etCalcDistSec)
             bundle.putDouble("dist", dist)
             val frg = Fragment2()
             frg.arguments = bundle
@@ -271,7 +272,6 @@ class Fragment1 : Fragment() {
             ft.commit()
         }
     }
-
 
     private fun mKmToKmH() {
         notNull()
@@ -292,7 +292,7 @@ class Fragment1 : Fragment() {
             etMin = (sumSec / hour)
             etSec = sumSec - (etMin * hour)
 
-            if (etMin == 0) etPaceM.setText(" 00") else etPaceM.setText(etMin.toString())
+            if (etMin == 0) etPaceM.setText("00") else etPaceM.setText(etMin.toString())
 
             if (etKm < 1) etSpeed.setText("1.00")
 
@@ -306,7 +306,6 @@ class Fragment1 : Fragment() {
 
     private fun dist() {
         notNull()
-
         if (etKm != 0.0) {
             etKm = etSpeed.text.toString().toDouble()
             val distSec =
@@ -320,7 +319,6 @@ class Fragment1 : Fragment() {
 
     private fun time() {
         notNull()
-
         if (etKm != 0.0) {
             etKm = etSpeed.text.toString().toDouble()
             val sumSec = etCalcKm / etKm * 3600
@@ -337,7 +335,7 @@ class Fragment1 : Fragment() {
 
     private fun speed() {
         notNull()
-        if (etCalcDistHour != 0 && etCalcDistMin != 0 && etCalcDistSec != 0) {
+        if (etCalcDistHour != 0 || etCalcDistMin != 0 || etCalcDistSec != 0) {
             val timeCalc = (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
             val distCalc = etCalcKm
 
@@ -385,17 +383,19 @@ class Fragment1 : Fragment() {
         if (etCalcKm == 0.0 && !etCalcKmh.isFocused) etCalcKmh.setText("0.00")
 
         time = etCalcDistHour + etCalcDistMin + etCalcDistSec
-        timeSec = (((etCalcDistHour*hour)+etCalcDistMin)*hour)+etCalcDistSec
+        visible()
+    }
 
+    private fun visible() {
+        if (etKm != 0.0 && time != 0 && etCalcKm != 0.0) btnSegment.isVisible = true
     }
 
     private fun clear() {
-        etID = 0
         flag = 0
-        alertId = 0
         time = 0
         etKm = 0.0
         etCalcKm = 0.0
+        timeSec = 0
 
         etPaceM.setText("")
         etPaceS.setText("")
@@ -404,7 +404,45 @@ class Fragment1 : Fragment() {
         etCalcDistM.setText("")
         etCalcDistS.setText("")
         etCalcKmh.setText("")
-
+        btnSegment.isVisible = false
+        when (etID) {
+            1 -> {
+                etPaceM.requestFocus()
+                etID = 1
+                alertId = 1
+            }
+            2 -> {
+                etPaceS.requestFocus()
+                etID = 2
+                alertId = 1
+            }
+            3 -> {
+                etSpeed.requestFocus()
+                etID = 3
+                alertId = 1
+            }
+            4 -> {
+                etCalcDistH.requestFocus()
+                etID = 4
+                alertId = 2
+            }
+            5 -> {
+                etCalcDistM.requestFocus()
+                etID = 5
+                alertId = 2
+            }
+            6 -> {
+                etCalcDistS.requestFocus()
+                etID = 6
+                alertId = 2
+            }
+            7 -> {
+                etCalcKmh.requestFocus()
+                etID = 7
+                alertId = 3
+            }
+        }
+        notNull()
     }
 
     private fun alertDialog() {
