@@ -1,13 +1,16 @@
 package com.x5bart_soft.paceone.segment
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.x5bart_soft.paceone.AlertDialog
 import com.x5bart_soft.paceone.Fragment1
 import com.x5bart_soft.paceone.R
 import kotlinx.android.synthetic.main.fragment2.*
@@ -36,6 +39,9 @@ class Fragment2 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = LinearLayoutManager(activity)
+
+        showKey()
+
 
 
         val bundle = this.arguments
@@ -100,5 +106,9 @@ class Fragment2 : Fragment() {
         m = etM.text.toString().toInt()
         s = etM.text.toString().toInt()
         timeSec()
+    }
+    fun showKey() {
+        val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        imm!!.toggleSoftInput(InputMethodManager.HIDE_NOT_ALWAYS, 0)
     }
 }

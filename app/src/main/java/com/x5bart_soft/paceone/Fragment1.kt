@@ -381,7 +381,7 @@ class Fragment1 : Fragment() {
             if (etCalcKmh.text.toString().isEmpty() || etCalcKmh.text.toString() == ".") 0.0
             else etCalcKmh.text.toString().toDouble()
         if (etCalcKm == 0.0 && !etCalcKmh.isFocused) etCalcKmh.setText("0.00")
-        if (!etPaceM.isFocused && !etPaceS.isFocused && !etSpeed.isFocused && !etCalcDistH.isFocused && !etCalcDistM.isFocused && !etCalcDistS.isFocused && !etCalcKmh.isFocused) etCalcKmh.requestFocus()
+
 
         time = etCalcDistHour + etCalcDistMin + etCalcDistSec
         visible()
@@ -392,6 +392,7 @@ class Fragment1 : Fragment() {
     }
 
     private fun clear() {
+        if (!etPaceM.isFocused && !etPaceS.isFocused && !etSpeed.isFocused && !etCalcDistH.isFocused && !etCalcDistM.isFocused && !etCalcDistS.isFocused && !etCalcKmh.isFocused) etCalcKmh.requestFocus()
         flag = 0
         time = 0
         etKm = 0.0

@@ -69,7 +69,7 @@ class AlertDialog : DialogFragment() {
         }
     }
 
-    private fun showKey() {
+    fun showKey() {
         val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
         imm!!.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
     }
