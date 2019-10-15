@@ -19,7 +19,7 @@ android {
         applicationId "com.x5bart_soft.paceone"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 3
+        versionCode 4
         versionName "1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.realese
@@ -34,7 +34,7 @@ android {
 
 dependencies {
     implementation 'com.yandex.android:mobileads:2.101'
-    implementation 'com.yandex.android:mobmetricalib:3.6.4'
+    implementation 'com.yandex.android:mobmetricalib:3.8.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
