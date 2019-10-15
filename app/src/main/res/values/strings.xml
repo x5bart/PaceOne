@@ -24,7 +24,7 @@
     <string name="recalculate">RECALCULATE</string>
     <string name="SPLIT">split</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="version" translatable="false">Pace One v1.1</string>
+    <string name="version" translatable="false">Pace One v1.2</string>
     <string name="copyright" translatable="false">Copyright © 2019 x5Bart</string>
     <string name="back">Back</string>
 
