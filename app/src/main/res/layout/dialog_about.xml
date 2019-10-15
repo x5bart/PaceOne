@@ -7,14 +7,16 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/dialog_frame"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:padding="30dp"
             android:layout_height="match_parent"
             android:layout_margin="1dp"
             android:background="@drawable/fragment_rounded"
@@ -26,10 +28,12 @@
                 style="@android:style/Widget.Material.Light.Button.Small"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/btm_rounded_corner"
                 android:text="@string/back"
                 android:theme="@style/MyButton"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />

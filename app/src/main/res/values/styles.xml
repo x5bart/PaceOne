@@ -14,12 +14,17 @@
         <item name="android:background">@color/white</item>
     </style>
 
-    <style name="EditTextFont" parent="Widget.AppCompat.EditText">
+    <style name="EditTextFontBig" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/audiowide</item>
         <item name="android:textSize">35dp</item>
         <item name="android:editTextColor">#FFFFFF</item>
-        <item name="android:ems">10</item>
-        <item name="android:gravity">center</item>
+        <item name="android:selectAllOnFocus">true</item>
+        <item name="android:backgroundTint">#FFFFFF</item>
+    </style>
+    <style name="EditTextFontSmall" parent="Widget.AppCompat.EditText">
+        <item name="android:fontFamily">@font/audiowide</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:editTextColor">#FFFFFF</item>
         <item name="android:selectAllOnFocus">true</item>
         <item name="android:backgroundTint">#FFFFFF</item>
     </style>
@@ -37,6 +42,9 @@
     <style name="MyButton" parent="Widget.AppCompat.Button">
         <item name="android:textSize">16dp</item>
         <item name="android:background">@drawable/btm_rounded_corner</item>
+        <item name="android:height">0dp</item>
+        <item name="android:width">200dp</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="ItemList" parent="Widget.AppCompat.TextView">
@@ -47,7 +55,7 @@
         <item name="android:fontFamily">@font/audiowide</item>
     </style>
 
-    <style name="TransaparantDialog">
+    <style name="TransaparentDialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowTitleStyle">@null</item>
@@ -57,6 +65,18 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+    <style name="FontTitle" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize" >15dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="FontSmall" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize" >14dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
 </resources>
