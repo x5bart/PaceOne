@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.x5bart_soft.paceone.segment.Fragment2
+import com.yandex.mobile.ads.AdRequest
+import com.yandex.mobile.ads.AdSize
 import kotlinx.android.synthetic.main.fragment1.*
 import java.math.RoundingMode
 
@@ -45,6 +47,12 @@ class Fragment1 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         btnSegment.isVisible = false
+
+        val BLOCK_ID = "adf-326819/1042468"
+        banner_view.blockId = BLOCK_ID
+        banner_view.adSize = AdSize.BANNER_320x50
+        val adRequest = AdRequest.builder().build()
+        banner_view.loadAd(adRequest)
 
         etPaceM.setOnFocusChangeListener { _, _ ->
             etID = 1

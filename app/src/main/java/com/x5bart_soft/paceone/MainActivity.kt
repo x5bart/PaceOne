@@ -5,13 +5,10 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.yandex.mobile.ads.AdRequest
-import com.yandex.mobile.ads.AdSize
-import com.yandex.mobile.ads.AdView
 
 
 class MainActivity : AppCompatActivity() {
-    private val BLOCK_ID = "adf-326819/1042468"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,12 +22,7 @@ class MainActivity : AppCompatActivity() {
         ft.add(R.id.frgCont, frg)
         ft.commit()
 
-        val mAdView = findViewById<AdView>(R.id.banner_view)
-        mAdView.blockId = BLOCK_ID
-        mAdView.adSize = AdSize.BANNER_320x50
 
-        val adRequest = AdRequest.builder().build()
-        mAdView.loadAd(adRequest)
     }
 
 

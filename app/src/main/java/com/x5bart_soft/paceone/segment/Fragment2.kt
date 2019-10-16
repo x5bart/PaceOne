@@ -1,25 +1,24 @@
 package com.x5bart_soft.paceone.segment
 
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.x5bart_soft.paceone.AlertDialog
 import com.x5bart_soft.paceone.Fragment1
 import com.x5bart_soft.paceone.R
+import com.yandex.mobile.ads.AdRequest
+import com.yandex.mobile.ads.AdSize
 import kotlinx.android.synthetic.main.fragment2.*
 import java.math.RoundingMode
 
 class Fragment2 : Fragment() {
     private val segments = arrayListOf<Segment>()
     var seg = 1.0
-    //    val seg = etSegment.text.toString().toDouble()
     var dist = 0.0
     var time = 0
     var h = 0
@@ -40,9 +39,14 @@ class Fragment2 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
-        showKey()
+        WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 
-
+//        val BLOCK_ID = "adf-326819/1043357"
+        val BLOCK_ID = "adf-326819/1042468"
+        banner_view_split.blockId = BLOCK_ID
+        banner_view_split.adSize = AdSize.BANNER_320x50
+        val adRequest = AdRequest.builder().build()
+        banner_view_split.loadAd(adRequest)
 
         val bundle = this.arguments
         dist = bundle!!.getDouble("dist")
@@ -106,9 +110,5 @@ class Fragment2 : Fragment() {
         m = etM.text.toString().toInt()
         s = etM.text.toString().toInt()
         timeSec()
-    }
-    fun showKey() {
-        val imm = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-        imm!!.toggleSoftInput(InputMethodManager.HIDE_NOT_ALWAYS, 0)
     }
 }
