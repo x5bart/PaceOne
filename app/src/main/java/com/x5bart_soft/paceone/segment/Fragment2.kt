@@ -2,6 +2,8 @@ package com.x5bart_soft.paceone.segment
 
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import com.x5bart_soft.paceone.Fragment1
 import com.x5bart_soft.paceone.R
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
+import kotlinx.android.synthetic.main.fragment1.*
 import kotlinx.android.synthetic.main.fragment2.*
 import java.math.RoundingMode
 
@@ -24,6 +27,7 @@ class Fragment2 : Fragment() {
     var h = 0
     var m = 0
     var s = 0
+    var etSegId=0
 
 
     override fun onCreateView(
@@ -60,6 +64,88 @@ class Fragment2 : Fragment() {
         timeSec()
         rv()
 
+        etH.setOnFocusChangeListener { _, _ ->
+            etSegId = 1
+        }
+        etM.setOnFocusChangeListener { _, _ ->
+            etSegId = 1
+        }
+        etS.setOnFocusChangeListener { _, _ ->
+            etSegId = 1
+        }
+        etKm.setOnFocusChangeListener { _, _ ->
+            etSegId = 2
+        }
+        etSegment.setOnFocusChangeListener { _, _ ->
+            etSegId = 3
+        }
+
+        etH.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                if (etH.text.toString().isNotEmpty() && etSegId == 1) autoRv()
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+        etM.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                if (etM.text.toString().isNotEmpty() && etSegId == 1) autoRv()
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+        etS.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                if (etS.text.toString().isNotEmpty() && etSegId == 1) autoRv()
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+        etKm.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                if (etKm.text.toString().isNotEmpty() && etSegId == 2) autoRv()
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+        etSegment.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                if (etSegment.text.toString().isNotEmpty() && etSegId == 3) autoRv()
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+        etH.setOnClickListener { etH.selectAll() }
+        etM.setOnClickListener { etM.selectAll() }
+        etS.setOnClickListener { etS.selectAll() }
+        etKm.setOnClickListener { etKm.selectAll() }
+        etSegment.setOnClickListener { etSegment.selectAll() }
+
+
+
+
+
+
         btrecalculate.setOnClickListener {
             (recyclerView.adapter as SegmentAdapter).segmentsList.clear()
             read()
@@ -77,11 +163,21 @@ class Fragment2 : Fragment() {
         }
     }
 
+    fun notNull(){
+        if (etH.text.toString().isEmpty()) etH.setText("0")
+        if (etM.text.toString().isEmpty()) etM.setText("00")
+        if (etS.text.toString().isEmpty()) etS.setText("00")
+        if (etKm.text.toString().isEmpty()) etH.setText("0.0")
+        if (etSegment.text.toString().isEmpty()) etH.setText("0.0")
+    }
+
     private fun timeSec() {
         time = (((h * Fragment1.hour) + m) * Fragment1.hour) + s
     }
 
     private fun rv() {
+        notNull()
+        read()
         val count = (dist / seg).toBigDecimal().setScale(0, RoundingMode.UP).toInt()
         var i = 0
         while (i != count) {
@@ -110,5 +206,12 @@ class Fragment2 : Fragment() {
         m = etM.text.toString().toInt()
         s = etS.text.toString().toInt()
         timeSec()
+    }
+    fun clearRv(){
+        (recyclerView.adapter as SegmentAdapter).segmentsList.clear()
+    }
+    fun autoRv(){
+        clearRv()
+        rv()
     }
 }
