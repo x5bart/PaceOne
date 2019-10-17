@@ -15,7 +15,6 @@ import com.x5bart_soft.paceone.Fragment1
 import com.x5bart_soft.paceone.R
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
-import kotlinx.android.synthetic.main.fragment1.*
 import kotlinx.android.synthetic.main.fragment2.*
 import java.math.RoundingMode
 
@@ -27,7 +26,7 @@ class Fragment2 : Fragment() {
     var h = 0
     var m = 0
     var s = 0
-    var etSegId=0
+    var etSegId = 0
 
 
     override fun onCreateView(
@@ -45,8 +44,8 @@ class Fragment2 : Fragment() {
 
         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 
-        val BLOCK_ID = "adf-326819/1043357"
-//        val BLOCK_ID = "adf-326819/1042468"
+//        val BLOCK_ID = "adf-326819/1043357"
+        val BLOCK_ID = "adf-326819/1042468"
         banner_view_split.blockId = BLOCK_ID
         banner_view_split.adSize = AdSize.BANNER_320x50
         val adRequest = AdRequest.builder().build()
@@ -61,28 +60,27 @@ class Fragment2 : Fragment() {
         etH.setText("$h")
         etM.setText("$m")
         etS.setText("$s")
-        timeSec()
         rv()
 
         etH.setOnFocusChangeListener { _, _ ->
             etSegId = 1
         }
         etM.setOnFocusChangeListener { _, _ ->
-            etSegId = 1
-        }
-        etS.setOnFocusChangeListener { _, _ ->
-            etSegId = 1
-        }
-        etKm.setOnFocusChangeListener { _, _ ->
             etSegId = 2
         }
-        etSegment.setOnFocusChangeListener { _, _ ->
+        etS.setOnFocusChangeListener { _, _ ->
             etSegId = 3
+        }
+        etKm.setOnFocusChangeListener { _, _ ->
+            etSegId = 4
+        }
+        etSegment.setOnFocusChangeListener { _, _ ->
+            etSegId = 5
         }
 
         etH.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (etH.text.toString().isNotEmpty() && etSegId == 1) autoRv()
+                if (etSegId == 1) autoRv()
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -93,7 +91,7 @@ class Fragment2 : Fragment() {
         })
         etM.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (etM.text.toString().isNotEmpty() && etSegId == 1) autoRv()
+                if (etSegId == 2) autoRv()
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -104,7 +102,7 @@ class Fragment2 : Fragment() {
         })
         etS.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (etS.text.toString().isNotEmpty() && etSegId == 1) autoRv()
+                if (etSegId == 3) autoRv()
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -115,7 +113,7 @@ class Fragment2 : Fragment() {
         })
         etKm.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (etKm.text.toString().isNotEmpty() && etSegId == 2) autoRv()
+                if (etSegId == 4) autoRv()
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -126,7 +124,7 @@ class Fragment2 : Fragment() {
         })
         etSegment.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (etSegment.text.toString().isNotEmpty() && etSegId == 3) autoRv()
+                if (etSegId == 5) autoRv()
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -141,20 +139,9 @@ class Fragment2 : Fragment() {
         etKm.setOnClickListener { etKm.selectAll() }
         etSegment.setOnClickListener { etSegment.selectAll() }
 
-
-
-
-
-
-        btrecalculate.setOnClickListener {
-            (recyclerView.adapter as SegmentAdapter).segmentsList.clear()
-            read()
-            rv()
-        }
         etSegment.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_GO) {
                 (recyclerView.adapter as SegmentAdapter).segmentsList.clear()
-                read()
                 rv()
                 true
             } else {
@@ -163,54 +150,63 @@ class Fragment2 : Fragment() {
         }
     }
 
-    fun notNull(){
-        if (etH.text.toString().isEmpty()) etH.setText("0")
-        if (etM.text.toString().isEmpty()) etM.setText("00")
-        if (etS.text.toString().isEmpty()) etS.setText("00")
-        if (etKm.text.toString().isEmpty()) etH.setText("0.0")
-        if (etSegment.text.toString().isEmpty()) etH.setText("0.0")
-    }
+    fun notNull() {
 
-    private fun timeSec() {
+        h = if (etH.text.toString().isEmpty()) 0 else etH.text.toString().toInt()
+        if (h == 0 && !etH.isFocused) etH.setText("0")
+
+        m = if (etM.text.toString().isEmpty()) 0 else etM.text.toString().toInt()
+        if (m == 0 && !etM.isFocused) etM.setText("00")
+
+        s = if (etS.text.toString().isEmpty()) 0 else etS.text.toString().toInt()
+        if (s == 0 && !etS.isFocused) etS.setText("00")
+
+        dist =
+            if (etKm.text.toString().isEmpty() || etKm.text.toString() == ".") 0.0 else etKm.text.toString().toDouble()
+        if (dist == 0.0 && !etKm.isFocused) etKm.setText("0.0")
+
+        seg =
+            if (etSegment.text.toString().isEmpty() || etSegment.text.toString() == ".") 0.0 else etSegment.text.toString().toDouble()
+        if (seg == 0.0 && !etSegment.isFocused) etSegment.setText("0.0")
+
         time = (((h * Fragment1.hour) + m) * Fragment1.hour) + s
+
+        if (etSegId != 2 && m < 10) etM.setText("0$m")
+        if (etSegId != 3 && s < 10) etS.setText("0$s")
+
     }
 
     private fun rv() {
         notNull()
-        read()
-        val count = (dist / seg).toBigDecimal().setScale(0, RoundingMode.UP).toInt()
-        var i = 0
-        while (i != count) {
-            i++
-            var sg = (seg * i).toBigDecimal().setScale(2, RoundingMode.HALF_EVEN).toDouble()
-            if (sg > dist) sg = dist
-            val timeSeg = ((sg * 1000) / ((dist * 1000) / time)).toInt()
-            val h = (timeSeg / 3600)
-            val m = ((timeSeg - (h * 3600)) / 60)
-            val s = (((timeSeg - (h * 3600) - (m * 60))))
-            var mPrint = m.toString()
-            var sPrint = s.toString()
-            if (m < 10) mPrint = "0$m"
-            if (s < 10) sPrint = "0$s"
+        if (time != 0 && dist != 0.0 && seg != 0.0) {
+            val count = (dist / seg).toBigDecimal().setScale(0, RoundingMode.UP).toInt()
+            var i = 0
+            while (i != count) {
+                i++
+                var sg = (seg * i).toBigDecimal().setScale(2, RoundingMode.HALF_EVEN).toDouble()
+                if (sg > dist) sg = dist
+                val timeSeg = ((sg * 1000) / ((dist * 1000) / time)).toInt()
+                val h = (timeSeg / 3600)
+                val m = ((timeSeg - (h * 3600)) / 60)
+                val s = (((timeSeg - (h * 3600) - (m * 60))))
+                var mPrint = m.toString()
+                var sPrint = s.toString()
+                if (m < 10) mPrint = "0$m"
+                if (s < 10) sPrint = "0$s"
 
-            segments.add(Segment(i, sg, "$h:$mPrint:$sPrint"))
+                segments.add(Segment(i, sg, "$h:$mPrint:$sPrint"))
+            }
+            val adapter = SegmentAdapter(segments)
+            recyclerView.adapter = adapter
         }
-        val adapter = SegmentAdapter(segments)
-        recyclerView.adapter = adapter
     }
 
-    private fun read() {
-        seg = etSegment.text.toString().toDouble()
-        dist = etKm.text.toString().toDouble()
-        h = etH.text.toString().toInt()
-        m = etM.text.toString().toInt()
-        s = etS.text.toString().toInt()
-        timeSec()
-    }
-    fun clearRv(){
+
+    fun clearRv() {
         (recyclerView.adapter as SegmentAdapter).segmentsList.clear()
     }
-    fun autoRv(){
+
+    fun autoRv() {
         clearRv()
         rv()
     }
