@@ -315,11 +315,9 @@ class Fragment1 : Fragment() {
     private fun dist() {
         notNull()
         if (etKm != 0.0) {
-            etKm = etSpeed.text.toString().toDouble()
-            val distSec =
-                (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec.toDouble()
-            val mSec = etKm / 3600
-            val res = (distSec * mSec).toBigDecimal().setScale(3, RoundingMode.HALF_UP).toDouble()
+            val pace = ((etMin*hour)+etSec).toDouble()
+            val distSec =(((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
+            val res = distSec/pace
             etCalcKmh.setText("$res")
         }
         notNull()
@@ -329,14 +327,14 @@ class Fragment1 : Fragment() {
         notNull()
         if (etKm != 0.0) {
             etKm = etSpeed.text.toString().toDouble()
-            val sumSec = etCalcKm / etKm * 3600
+            val sumSec = (etCalcKm / etKm * 3600).toBigDecimal().setScale(0,RoundingMode.UP).toInt()
             val hour2 = (etCalcKm / etKm).toInt()
-            val min = ((sumSec - (hour2 * 3600)) / hour).toInt()
-            val sec = (sumSec - (hour2 * 3600) - (min * hour)).toInt()
+            val min = ((sumSec - (hour2 * 3600)) / hour)
+            val sec = (sumSec - (hour2 * 3600) - (min * hour))
             etCalcDistH.setText("$hour2")
             etCalcDistM.setText("$min")
             etCalcDistS.setText("$sec")
-            if (sumSec == 0.0 && !etCalcKmh.isFocused) etCalcKmh.setText("0.00")
+            if (sumSec == 0 && !etCalcKmh.isFocused) etCalcKmh.setText("0.00")
         }
         notNull()
     }

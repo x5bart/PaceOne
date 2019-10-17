@@ -41,8 +41,8 @@ class Fragment2 : Fragment() {
 
         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 
-//        val BLOCK_ID = "adf-326819/1043357"
-        val BLOCK_ID = "adf-326819/1042468"
+        val BLOCK_ID = "adf-326819/1043357"
+//        val BLOCK_ID = "adf-326819/1042468"
         banner_view_split.blockId = BLOCK_ID
         banner_view_split.adSize = AdSize.BANNER_320x50
         val adRequest = AdRequest.builder().build()
@@ -53,7 +53,7 @@ class Fragment2 : Fragment() {
         etKm.setText("$dist")
         h = bundle.getInt("h")
         m = bundle.getInt("m")
-        s = bundle.getInt("t")
+        s = bundle.getInt("s")
         etH.setText("$h")
         etM.setText("$m")
         etS.setText("$s")
@@ -108,7 +108,7 @@ class Fragment2 : Fragment() {
         dist = etKm.text.toString().toDouble()
         h = etH.text.toString().toInt()
         m = etM.text.toString().toInt()
-        s = etM.text.toString().toInt()
+        s = etS.text.toString().toInt()
         timeSec()
     }
 }
