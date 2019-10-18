@@ -138,16 +138,6 @@ class Fragment2 : Fragment() {
         etS.setOnClickListener { etS.selectAll() }
         etKm.setOnClickListener { etKm.selectAll() }
         etSegment.setOnClickListener { etSegment.selectAll() }
-
-        etSegment.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_GO) {
-                (recyclerView.adapter as SegmentAdapter).segmentsList.clear()
-                rv()
-                true
-            } else {
-                false
-            }
-        }
     }
 
     fun notNull() {
@@ -200,7 +190,6 @@ class Fragment2 : Fragment() {
             recyclerView.adapter = adapter
         }
     }
-
 
     fun clearRv() {
         (recyclerView.adapter as SegmentAdapter).segmentsList.clear()

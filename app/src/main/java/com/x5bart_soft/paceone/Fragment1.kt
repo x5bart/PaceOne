@@ -1,6 +1,8 @@
 package com.x5bart_soft.paceone
 
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -30,6 +32,7 @@ class Fragment1 : Fragment() {
     var timeSec = 0
     var etCalcKm = 0.0
     var alertId = 0
+    val REQUEST_WEIGHT = 2
 
     companion object {
         var etID = 0
@@ -44,9 +47,11 @@ class Fragment1 : Fragment() {
         return inflater.inflate(R.layout.fragment1, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        etID = 0
         btnSegment.isVisible = false
+        visible()
 
         val BLOCK_ID = "adf-326819/1042468"
         banner_view.blockId = BLOCK_ID
@@ -56,53 +61,35 @@ class Fragment1 : Fragment() {
 
         etPaceM.setOnFocusChangeListener { _, _ ->
             etID = 1
-            if (time != 0 && etCalcKm != 0.0 && alertId != 1) alertDialog()
-            alertId = 1
         }
         etPaceS.setOnFocusChangeListener { _, _ ->
             etID = 2
-            if (time != 0 && etCalcKm != 0.0 && alertId != 1) alertDialog()
-            alertId = 1
         }
         etSpeed.setOnFocusChangeListener { _, _ ->
             etID = 3
-            if (time != 0 && etCalcKm != 0.0 && alertId != 1) alertDialog()
-            alertId = 1
         }
         etCalcDistH.setOnFocusChangeListener { _, _ ->
             etID = 4
-            if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) alertDialog()
-            alertId = 2
         }
         etCalcDistM.setOnFocusChangeListener { _, _ ->
             etID = 5
-            if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) alertDialog()
-            alertId = 2
         }
         etCalcDistS.setOnFocusChangeListener { _, _ ->
             etID = 6
-            if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) alertDialog()
-            alertId = 2
         }
         etCalcKmh.setOnFocusChangeListener { _, _ ->
             etID = 7
-            if (etKm != 0.0 && time != 0 && alertId != 3) alertDialog()
-            alertId = 3
         }
 
         etPaceM.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (etID == 1) {
-                    mKmToKmH()
-                    if (flag == 2) time()
-                    if (flag == 3) dist()
-                    if (time == 0 && etCalcKm != 0.0) {
-                        time()
-                        flag = 2
-                    }
-                    if (time != 0 && etCalcKm == 0.0) {
-                        dist()
-                        flag = 3
+                    if (time != 0 && etCalcKm != 0.0 && alertId != 1) {
+                        alertId = 1
+                        alertDialog()
+                    } else {
+                        etPaceM()
+                        alertId = 1
                     }
                 }
             }
@@ -115,19 +102,14 @@ class Fragment1 : Fragment() {
         })
         etPaceS.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (etID == 2) {
-                    mKmToKmH()
-                    if (flag == 2) time()
-                    if (flag == 3) dist()
-                    if (time == 0 && etCalcKm != 0.0) {
-                        time()
-                        flag = 2
+                if (etID == 2)
+                    if (time != 0 && etCalcKm != 0.0 && alertId != 1) {
+                        alertId = 1
+                        alertDialog()
+                    } else {
+                        etPaceS()
+                        alertId = 1
                     }
-                    if (time != 0 && etCalcKm == 0.0) {
-                        dist()
-                        flag = 3
-                    }
-                }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -139,16 +121,12 @@ class Fragment1 : Fragment() {
         etSpeed.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (etID == 3) {
-                    kmHToMKm()
-                    if (flag == 2) time()
-                    if (flag == 3) dist()
-                    if (time == 0 && etCalcKm != 0.0) {
-                        time()
-                        flag = 2
-                    }
-                    if (time != 0 && etCalcKm == 0.0) {
-                        dist()
-                        flag = 3
+                    if (time != 0 && etCalcKm != 0.0 && alertId != 1) {
+                        alertId = 1
+                        alertDialog()
+                    } else {
+                        etKmh()
+                        alertId = 1
                     }
                 }
             }
@@ -162,16 +140,12 @@ class Fragment1 : Fragment() {
         etCalcDistH.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (etID == 4) {
-                    notNull()
-                    if (flag == 1) speed()
-                    if (flag == 3) dist()
-                    if (etKm == 0.0 && etCalcKm != 0.0) {
-                        speed()
-                        flag = 1
-                    }
-                    if (etKm != 0.0 && etCalcKm == 0.0) {
-                        dist()
-                        flag = 3
+                    if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) {
+                        alertId = 2
+                        alertDialog()
+                    } else {
+                        etTimeH()
+                        alertId = 2
                     }
                 }
             }
@@ -185,16 +159,12 @@ class Fragment1 : Fragment() {
         etCalcDistM.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (etID == 5) {
-                    notNull()
-                    if (flag == 1) speed()
-                    if (flag == 3) dist()
-                    if (etKm == 0.0 && etCalcKm != 0.0) {
-                        speed()
-                        flag = 1
-                    }
-                    if (etKm != 0.0 && etCalcKm == 0.0) {
-                        dist()
-                        flag = 3
+                    if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) {
+                        alertId = 2
+                        alertDialog()
+                    } else {
+                        etTimeM()
+                        alertId = 2
                     }
                 }
             }
@@ -208,16 +178,12 @@ class Fragment1 : Fragment() {
         etCalcDistS.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (etID == 6) {
-                    notNull()
-                    if (flag == 1) speed()
-                    if (flag == 3) dist()
-                    if (etKm == 0.0 && etCalcKm != 0.0) {
-                        speed()
-                        flag = 1
-                    }
-                    if (etKm != 0.0 && etCalcKm == 0.0) {
-                        dist()
-                        flag = 3
+                    if (etKm != 0.0 && etCalcKm != 0.0 && alertId != 2) {
+                        alertId = 2
+                        alertDialog()
+                    } else {
+                        etTimeS()
+                        alertId = 2
                     }
                 }
             }
@@ -231,16 +197,12 @@ class Fragment1 : Fragment() {
         etCalcKmh.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (etID == 7) {
-                    notNull()
-                    if (flag == 1) speed()
-                    if (flag == 2) time()
-                    if (etKm == 0.0 && time != 0) {
-                        speed()
-                        flag = 1
-                    }
-                    if (etKm != 0.0 && time == 0) {
-                        time()
-                        flag = 2
+                    if (etKm != 0.0 && time != 0 && alertId != 3) {
+                        alertId = 3
+                        alertDialog()
+                    } else {
+                        etDist()
+                        alertId = 3
                     }
                 }
             }
@@ -281,7 +243,106 @@ class Fragment1 : Fragment() {
         }
     }
 
-    private fun mKmToKmH() {
+    fun etPaceM() {
+        mKmToKmH()
+        if (flag == 2) time()
+        if (flag == 3) dist()
+        if (time == 0 && etCalcKm != 0.0) {
+            time()
+            flag = 2
+        }
+        if (time != 0 && etCalcKm == 0.0) {
+            dist()
+            flag = 3
+        }
+    }
+
+    fun etPaceS() {
+        mKmToKmH()
+        if (flag == 2) time()
+        if (flag == 3) dist()
+        if (time == 0 && etCalcKm != 0.0) {
+            time()
+            flag = 2
+        }
+        if (time != 0 && etCalcKm == 0.0) {
+            dist()
+            flag = 3
+        }
+    }
+
+    fun etKmh() {
+        kmHToMKm()
+        if (flag == 2) time()
+        if (flag == 3) dist()
+        if (time == 0 && etCalcKm != 0.0) {
+            time()
+            flag = 2
+        }
+        if (time != 0 && etCalcKm == 0.0) {
+            dist()
+            flag = 3
+        }
+    }
+
+    fun etTimeH() {
+        notNull()
+        if (flag == 1) speed()
+        if (flag == 3) dist()
+        if (etKm == 0.0 && etCalcKm != 0.0) {
+            speed()
+            flag = 1
+        }
+        if (etKm != 0.0 && etCalcKm == 0.0) {
+            dist()
+            flag = 3
+        }
+    }
+
+    fun etTimeM() {
+        notNull()
+        if (flag == 1) speed()
+        if (flag == 3) dist()
+        if (etKm == 0.0 && etCalcKm != 0.0) {
+            speed()
+            flag = 1
+        }
+        if (etKm != 0.0 && etCalcKm == 0.0) {
+            dist()
+            flag = 3
+        }
+    }
+
+    fun etTimeS() {
+        notNull()
+        if (flag == 1) speed()
+        if (flag == 3) dist()
+        if (etKm == 0.0 && etCalcKm != 0.0) {
+            speed()
+            flag = 1
+        }
+        if (etKm != 0.0 && etCalcKm == 0.0) {
+            dist()
+            flag = 3
+        }
+    }
+
+    fun etDist() {
+        notNull()
+        if (flag == 1) speed()
+        if (flag == 2) time()
+        if (etKm == 0.0 && time != 0) {
+            speed()
+            flag = 1
+        }
+        if (etKm != 0.0 && time == 0) {
+            time()
+            flag = 2
+        }
+
+    }
+
+    fun mKmToKmH() {
         notNull()
         if (etMin != 0 && etSec == 0 || etMin == 0 && etSec != 0 || etMin != 0 && etSec != 0) {
             val allSecond = ((etMin * hour) + etSec).toDouble()
@@ -292,7 +353,7 @@ class Fragment1 : Fragment() {
         notNull()
     }
 
-    private fun kmHToMKm() {
+    fun kmHToMKm() {
         notNull()
         if (etKm != 0.00) {
             val res = (etKm / second)
@@ -312,22 +373,23 @@ class Fragment1 : Fragment() {
         notNull()
     }
 
-    private fun dist() {
+    fun dist() {
         notNull()
         if (etKm != 0.0) {
-            val pace = ((etMin*hour)+etSec).toDouble()
-            val distSec =(((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
-            val res = distSec/pace
+            val pace = ((etMin * hour) + etSec).toDouble()
+            val distSec = (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
+            val res = distSec / pace
             etCalcKmh.setText("$res")
         }
         notNull()
     }
 
-    private fun time() {
+    fun time() {
         notNull()
         if (etKm != 0.0) {
             etKm = etSpeed.text.toString().toDouble()
-            val sumSec = (etCalcKm / etKm * 3600).toBigDecimal().setScale(0,RoundingMode.UP).toInt()
+            val sumSec =
+                (etCalcKm / etKm * 3600).toBigDecimal().setScale(0, RoundingMode.UP).toInt()
             val hour2 = (etCalcKm / etKm).toInt()
             val min = ((sumSec - (hour2 * 3600)) / hour)
             val sec = (sumSec - (hour2 * 3600) - (min * hour))
@@ -339,7 +401,7 @@ class Fragment1 : Fragment() {
         notNull()
     }
 
-    private fun speed() {
+    fun speed() {
         notNull()
         if (etCalcDistHour != 0 || etCalcDistMin != 0 || etCalcDistSec != 0) {
             val timeCalc = (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
@@ -351,7 +413,8 @@ class Fragment1 : Fragment() {
                 val distM = etCalcKm * km
                 val mSec = distM / distSec
                 val res =
-                    ((mSec * 3600) / km).toBigDecimal().setScale(2, RoundingMode.HALF_UP).toDouble()
+                    ((mSec * 3600) / km).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
+                        .toDouble()
                 etSpeed.setText("$res")
                 kmHToMKm()
             }
@@ -455,6 +518,22 @@ class Fragment1 : Fragment() {
 
     private fun alertDialog() {
         val dialog = AlertDialog()
+        dialog.setTargetFragment(this, REQUEST_WEIGHT)
         dialog.show(fragmentManager!!, "AlertDialog")
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                1 -> etPaceM()
+                2 -> etPaceS()
+                3 -> etKmh()
+                4 -> etTimeH()
+                5 -> etPaceM()
+                6 -> etTimeS()
+                7 -> etDist()
+            }
+        }
     }
 }

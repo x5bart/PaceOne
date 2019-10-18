@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
             android:padding="10dp"
-            android:background="@drawable/fragment_rounded"
+            android:background="@drawable/dialod_rounded"
             android:orientation="vertical">
 
             <TextView
