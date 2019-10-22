@@ -24,8 +24,10 @@ open class SegmentAdapter(val segmentsList: ArrayList<Segment>) :
         val segment = segmentsList[position]
         holder.apply {
             number.text = segment.number.toString()
-            distance.text = ("${segment.distance}")
+            distance.text = segment.distance.toString()
             time.text = segment.time
+            pace.text = segment.pace
+            average.text =segment.average
 
         }
     }

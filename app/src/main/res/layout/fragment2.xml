@@ -185,7 +185,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:text="№" />
 
         <TextView
@@ -195,18 +195,39 @@
             android:layout_height="match_parent"
             android:layout_marginTop="1dp"
             android:layout_marginBottom="1dp"
-            android:layout_weight="2"
-            android:text="@string/distance"
-            android:textSize="20dp" />
+            android:layout_weight="3"
+            android:text="@string/km"/>
 
         <TextView
             android:id="@+id/textView12"
             style="@style/ItemList"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="5"
+            android:text="@string/time" />
+
+        <TextView
+            android:id="@+id/textView13"
+            style="@style/ItemList"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="4"
+            android:text="@string/pace" />
+
+        <TextView
+            android:id="@+id/textView14"
+            style="@style/ItemList"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
-            android:layout_weight="3"
-            android:text="@string/time" />
+            android:layout_weight="4"
+            android:text="AVG"/>
     </LinearLayout>
 
     <!--recycleView-->
@@ -259,6 +280,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <SeekBar
+        android:id="@+id/sbNegSeg"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:max="5"
+        android:min="-5"
+        android:progress="0"
+        app:layout_constraintBottom_toBottomOf="@+id/etSegment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+
+    <TextView
+        android:id="@+id/tvNegSeg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        style="@style/EditTextFontSmall"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/sbNegSeg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/EditTextFontSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="%"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/sbNegSeg"
+        app:layout_constraintStart_toEndOf="@+id/tvNegSeg" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

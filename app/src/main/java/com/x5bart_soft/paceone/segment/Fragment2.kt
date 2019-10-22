@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.view.inputmethod.EditorInfo
+import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.x5bart_soft.paceone.Fragment1
@@ -18,7 +18,7 @@ import com.yandex.mobile.ads.AdSize
 import kotlinx.android.synthetic.main.fragment2.*
 import java.math.RoundingMode
 
-class Fragment2 : Fragment() {
+class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
     private val segments = arrayListOf<Segment>()
     var seg = 1.0
     var dist = 0.0
@@ -27,6 +27,7 @@ class Fragment2 : Fragment() {
     var m = 0
     var s = 0
     var etSegId = 0
+    var negSeg = 0.0
 
 
     override fun onCreateView(
@@ -41,6 +42,10 @@ class Fragment2 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.layoutManager = LinearLayoutManager(activity)
+
+        sbNegSeg.setOnSeekBarChangeListener(this)
+
+
 
         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 
@@ -76,6 +81,9 @@ class Fragment2 : Fragment() {
         }
         etSegment.setOnFocusChangeListener { _, _ ->
             etSegId = 5
+        }
+        sbNegSeg.setOnFocusChangeListener { view, b ->
+            etSegId = 6
         }
 
         etH.addTextChangedListener(object : TextWatcher {
@@ -133,11 +141,40 @@ class Fragment2 : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
+        tvNegSeg.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                if (etSegId == 6) autoRv()
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
+
         etH.setOnClickListener { etH.selectAll() }
         etM.setOnClickListener { etM.selectAll() }
         etS.setOnClickListener { etS.selectAll() }
         etKm.setOnClickListener { etKm.selectAll() }
         etSegment.setOnClickListener { etSegment.selectAll() }
+
+
+    }
+
+    override fun onProgressChanged(
+        seekBar: SeekBar,
+        progress: Int,
+        fromUser: Boolean
+    ) {
+        tvNegSeg!!.text = progress.toString()
+
+    }
+
+    override fun onStartTrackingTouch(seekBar: SeekBar) {
+    }
+
+    override fun onStopTrackingTouch(seekBar: SeekBar) {
     }
 
     fun notNull() {
@@ -170,21 +207,58 @@ class Fragment2 : Fragment() {
         notNull()
         if (time != 0 && dist != 0.0 && seg != 0.0) {
             val count = (dist / seg).toBigDecimal().setScale(0, RoundingMode.UP).toInt()
+            var h: Int
+            var m: Int
+            var s: Int
+            var pM: Int
+            var pS: Int
+            val pace = time / dist // секунд на км средняя
+            val negativ = (tvNegSeg.text.toString().toDouble() / 100)
+            val negDelta = ((1 - negativ) - (1 + negativ))
+            var timeNext = 0
+
             var i = 0
             while (i != count) {
                 i++
                 var sg = (seg * i).toBigDecimal().setScale(2, RoundingMode.HALF_EVEN).toDouble()
                 if (sg > dist) sg = dist
-                val timeSeg = ((sg * 1000) / ((dist * 1000) / time)).toInt()
-                val h = (timeSeg / 3600)
-                val m = ((timeSeg - (h * 3600)) / 60)
-                val s = (((timeSeg - (h * 3600) - (m * 60))))
+
+                val percentNext = sg / dist
+                val percentPrev = (seg * (i - 1)) / dist
+
+                val coefNext = negDelta * percentNext
+                val coefPrev = negDelta * percentPrev
+                val coefAvg = ((coefPrev) + (coefNext)) / 2
+
+                val timeSegPrev = ((pace * seg) * (1 - (negativ + coefAvg))).toBigDecimal()
+                    .setScale(0, RoundingMode.HALF_EVEN).toInt()
+
+                val timeSum = (timeSegPrev + timeNext).toInt()
+                timeNext = timeSum
+
+                h = (timeSum / 3600)
+                m = ((timeSum - (h * 3600)) / 60)
+                s = (((timeSum - (h * 3600) - (m * 60))))
                 var mPrint = m.toString()
                 var sPrint = s.toString()
                 if (m < 10) mPrint = "0$m"
                 if (s < 10) sPrint = "0$s"
 
-                segments.add(Segment(i, sg, "$h:$mPrint:$sPrint"))
+                pM = (timeSegPrev / 60)
+                pS = (timeSegPrev - (pM * 60))
+
+
+
+
+                segments.add(
+                    Segment(
+                        i,
+                        sg,
+                        "$h:$mPrint:$sPrint",
+                        "$pM:$pS",
+                        "$mPrint:$sPrint"
+                    )
+                )
             }
             val adapter = SegmentAdapter(segments)
             recyclerView.adapter = adapter
