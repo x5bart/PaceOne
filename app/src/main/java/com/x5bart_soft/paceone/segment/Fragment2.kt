@@ -30,6 +30,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
     var negSeg = 0.0
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -81,9 +82,6 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
         }
         etSegment.setOnFocusChangeListener { _, _ ->
             etSegId = 5
-        }
-        sbNegSeg.setOnFocusChangeListener { view, b ->
-            etSegId = 6
         }
 
         etH.addTextChangedListener(object : TextWatcher {
@@ -141,25 +139,16 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        tvNegSeg.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-                if (etSegId == 6) autoRv()
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-        })
 
         etH.setOnClickListener { etH.selectAll() }
         etM.setOnClickListener { etM.selectAll() }
         etS.setOnClickListener { etS.selectAll() }
         etKm.setOnClickListener { etKm.selectAll() }
         etSegment.setOnClickListener { etSegment.selectAll() }
-
-
+        ivNegativeSplit.setOnClickListener {
+            val dialog = NegativSplitDialog()
+            dialog.show(fragmentManager!!, "info")
+        }
     }
 
     override fun onProgressChanged(
@@ -167,7 +156,10 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
         progress: Int,
         fromUser: Boolean
     ) {
-        tvNegSeg!!.text = progress.toString()
+        val pro = progress / 2.toDouble()
+        tvNegSeg!!.text = "$pro%"
+        negSeg = pro
+        autoRv()
 
     }
 
@@ -207,21 +199,19 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
         notNull()
         if (time != 0 && dist != 0.0 && seg != 0.0) {
             val count = (dist / seg).toBigDecimal().setScale(0, RoundingMode.UP).toInt()
-            var h: Int
-            var m: Int
-            var s: Int
-            var pM: Int
-            var pS: Int
             val pace = time / dist // секунд на км средняя
-            val negativ = (tvNegSeg.text.toString().toDouble() / 100)
+            val negativ = (negSeg / 100)
             val negDelta = ((1 - negativ) - (1 + negativ))
-            var timeNext = 0
+            var timeNext = 0.0
 
             var i = 0
             while (i != count) {
                 i++
                 var sg = (seg * i).toBigDecimal().setScale(2, RoundingMode.HALF_EVEN).toDouble()
-                if (sg > dist) sg = dist
+                if (sg > dist) {
+                    seg = dist - (sg - seg)
+                    sg = dist
+                }
 
                 val percentNext = sg / dist
                 val percentPrev = (seg * (i - 1)) / dist
@@ -229,25 +219,31 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
                 val coefNext = negDelta * percentNext
                 val coefPrev = negDelta * percentPrev
                 val coefAvg = ((coefPrev) + (coefNext)) / 2
+                val timeSegPrev = ((pace * seg) * (1 - (negativ + coefAvg)))
 
-                val timeSegPrev = ((pace * seg) * (1 - (negativ + coefAvg))).toBigDecimal()
-                    .setScale(0, RoundingMode.HALF_EVEN).toInt()
-
-                val timeSum = (timeSegPrev + timeNext).toInt()
+                val timeSum = (timeSegPrev + timeNext)
                 timeNext = timeSum
+                val timeSumPrint = timeSum.toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
+                val timeSegPrint = timeSegPrev.toInt()
 
-                h = (timeSum / 3600)
-                m = ((timeSum - (h * 3600)) / 60)
-                s = (((timeSum - (h * 3600) - (m * 60))))
+                val h = (timeSumPrint / 3600).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
+                val m = ((timeSumPrint - (h * 3600)) / 60)
+                val s = (((timeSumPrint - (h * 3600) - (m * 60))))
                 var mPrint = m.toString()
                 var sPrint = s.toString()
                 if (m < 10) mPrint = "0$m"
                 if (s < 10) sPrint = "0$s"
 
-                pM = (timeSegPrev / 60)
-                pS = (timeSegPrev - (pM * 60))
+                val pM = (timeSegPrint / 60)
+                val pS = (timeSegPrint - (pM * 60))
+                var pSPrint = pS.toString()
+                if (pS < 10) pSPrint = "0$pS"
 
-
+                val avgPace = (timeSum / sg).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
+                val aM = (avgPace / 60)
+                val aS = (avgPace - (aM * 60))
+                var aSPrint = aS.toString()
+                if (aS<10)aSPrint = "0$aS"
 
 
                 segments.add(
@@ -255,8 +251,8 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
                         i,
                         sg,
                         "$h:$mPrint:$sPrint",
-                        "$pM:$pS",
-                        "$mPrint:$sPrint"
+                        "$pM:$pSPrint",
+                        "$aM:$aSPrint"
                     )
                 )
             }

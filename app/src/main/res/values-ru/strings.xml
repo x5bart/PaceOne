@@ -19,11 +19,16 @@
     <string name="settings" translatable="false">Настройки</string>
     <string name="exit" translatable="false">Закрыть</string>
     <string name="segment" translatable="false">ОТРЕЗОК</string>
-    <string name="recalculate" translatable="false">пересчитать</string>
     <string name="SPLIT">Разбить на отрезки</string>
-    <string name="h" translatable="false">ч</string>
-    <string name="m" translatable="false">м</string>
-    <string name="s" translatable="false">с</string>
     <string name="back">Назад</string>
+    <string name="splitFactor">СТРАТЕГИЯ</string>
+    <string name="splitFactory" translatable="false">
+        <b>Негативный сплит</b> - это гоночная стратегия, которая включает в себя завершение второй половины гонки быстрее, чем первой половины. Она определяется намеренным установлением более медленного начального темпа, за которым следует постепенное или внезапное увеличение скорости к концу гонки.\n
+
+        <b>Позитивный сплит</b>, наоборот, завершение первой половины гонки быстрее, чем второй половины./n
+        Стратегия негативного сплита была задокументирована в конкурентном беге с начала 20-го века. Бегуны, такие как Стив Префонтейн, Уилсон Кипсанг и Гален Рупп, использовали их в гонках.
+    </string>
+    <string name="negative_and_positive_splits">Негативные и позитивные сплиты</string>
+    <string name="avg">СРЕДНИЙ</string>
 
 </resources>
