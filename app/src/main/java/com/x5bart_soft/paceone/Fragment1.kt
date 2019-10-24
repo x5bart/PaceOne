@@ -440,10 +440,12 @@ class Fragment1 : Fragment() {
 
         etCalcDistMin =
             if (etCalcDistM.text.toString().isEmpty()) 0 else etCalcDistM.text.toString().toInt()
+        if (etCalcDistMin < 10 && !etCalcDistM.isFocused) etCalcDistM.setText("0$etCalcDistMin")
         if (etCalcDistMin == 0 && !etCalcDistM.isFocused) etCalcDistM.setText("00")
 
         etCalcDistSec =
             if (etCalcDistS.text.toString().isEmpty()) 0 else etCalcDistS.text.toString().toInt()
+        if (etCalcDistSec < 10 && !etCalcDistS.isFocused) etCalcDistS.setText("0$etCalcDistSec")
         if (etCalcDistSec == 0 && !etCalcDistS.isFocused) etCalcDistS.setText("00")
 
         etCalcKm =
