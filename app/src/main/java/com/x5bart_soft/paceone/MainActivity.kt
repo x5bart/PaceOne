@@ -8,7 +8,13 @@ import androidx.appcompat.widget.Toolbar
 
 
 class MainActivity : AppCompatActivity() {
-
+    companion object {
+        val KM_3 = 1
+        val KM_5 = 2
+        val KM_10 = 3
+        val KM_21 = 4
+        val KM_42 = 5
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -19,9 +19,9 @@ import java.math.RoundingMode
 
 
 class Fragment1 : Fragment() {
-    private val hour = 60 //60 min
-    private val km = 1000 //1000 m
-    private val second = 3.600 // 3600sec/hours
+    val HOUR = 60 //60 min
+    val KM = 1000 //1000 m
+    val SECOND = 3.600 // 3600sec/hours
     private var etMin = 0
     private var etSec = 0
     private var etKm = 0.0
@@ -33,6 +33,7 @@ class Fragment1 : Fragment() {
     var etCalcKm = 0.0
     var alertId = 0
     val REQUEST_WEIGHT = 2
+
 
     companion object {
         var etID = 0
@@ -52,6 +53,8 @@ class Fragment1 : Fragment() {
         etID = 0
         btnSegment.isVisible = false
         visible()
+
+        registerForContextMenu(ivInfoKm)
 
         val BLOCK_ID = "adf-326819/1042468"
         banner_view.blockId = BLOCK_ID
@@ -345,9 +348,9 @@ class Fragment1 : Fragment() {
     fun mKmToKmH() {
         notNull()
         if (etMin != 0 && etSec == 0 || etMin == 0 && etSec != 0 || etMin != 0 && etSec != 0) {
-            val allSecond = ((etMin * hour) + etSec).toDouble()
-            val mSec = (km / allSecond)
-            val res = (mSec * second).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
+            val allSecond = ((etMin * HOUR) + etSec).toDouble()
+            val mSec = (KM / allSecond)
+            val res = (mSec * SECOND).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
             etSpeed.setText("$res")
         }
         notNull()
@@ -356,10 +359,10 @@ class Fragment1 : Fragment() {
     fun kmHToMKm() {
         notNull()
         if (etKm != 0.00) {
-            val res = (etKm / second)
-            val sumSec = (km / res).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
-            etMin = (sumSec / hour)
-            etSec = sumSec - (etMin * hour)
+            val res = (etKm / SECOND)
+            val sumSec = (KM / res).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
+            etMin = (sumSec / HOUR)
+            etSec = sumSec - (etMin * HOUR)
 
             if (etMin == 0) etPaceM.setText("00") else etPaceM.setText(etMin.toString())
 
@@ -376,8 +379,8 @@ class Fragment1 : Fragment() {
     fun dist() {
         notNull()
         if (etKm != 0.0) {
-            val pace = ((etMin * hour) + etSec).toDouble()
-            val distSec = (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
+            val pace = ((etMin * HOUR) + etSec).toDouble()
+            val distSec = (((etCalcDistHour * HOUR) + etCalcDistMin) * HOUR) + etCalcDistSec
             val res = distSec / pace
             etCalcKmh.setText("$res")
         }
@@ -391,8 +394,8 @@ class Fragment1 : Fragment() {
             val sumSec =
                 (etCalcKm / etKm * 3600).toBigDecimal().setScale(0, RoundingMode.UP).toInt()
             val hour2 = (etCalcKm / etKm).toInt()
-            val min = ((sumSec - (hour2 * 3600)) / hour)
-            val sec = (sumSec - (hour2 * 3600) - (min * hour))
+            val min = ((sumSec - (hour2 * 3600)) / HOUR)
+            val sec = (sumSec - (hour2 * 3600) - (min * HOUR))
             etCalcDistH.setText("$hour2")
             etCalcDistM.setText("$min")
             etCalcDistS.setText("$sec")
@@ -404,16 +407,16 @@ class Fragment1 : Fragment() {
     fun speed() {
         notNull()
         if (etCalcDistHour != 0 || etCalcDistMin != 0 || etCalcDistSec != 0) {
-            val timeCalc = (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec
+            val timeCalc = (((etCalcDistHour * HOUR) + etCalcDistMin) * HOUR) + etCalcDistSec
             val distCalc = etCalcKm
 
             if (timeCalc != 0 || distCalc != 0.0) {
                 val distSec =
-                    (((etCalcDistHour * hour) + etCalcDistMin) * hour) + etCalcDistSec.toDouble()
-                val distM = etCalcKm * km
+                    (((etCalcDistHour * HOUR) + etCalcDistMin) * HOUR) + etCalcDistSec.toDouble()
+                val distM = etCalcKm * KM
                 val mSec = distM / distSec
                 val res =
-                    ((mSec * 3600) / km).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
+                    ((mSec * 3600) / KM).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
                         .toDouble()
                 etSpeed.setText("$res")
                 kmHToMKm()

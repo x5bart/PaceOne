@@ -8,6 +8,17 @@
     tools:context=".MainActivity">
 
 
+    <ImageView
+        android:id="@+id/ivInfoKm"
+        android:layout_width="15dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="5dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_dialog_info"
+        app:layout_constraintBottom_toTopOf="@+id/etCalcKmh"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/textView7" />
+
     <TextView
         android:id="@+id/textView6"
         style="@style/FontTitle"
