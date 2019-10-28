@@ -6,9 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.x5bart_soft.paceone.segment.Fragment2
@@ -53,8 +55,6 @@ class Fragment1 : Fragment() {
         etID = 0
         btnSegment.isVisible = false
         visible()
-
-        registerForContextMenu(ivInfoKm)
 
         val BLOCK_ID = "adf-326819/1042468"
         banner_view.blockId = BLOCK_ID
@@ -244,6 +244,27 @@ class Fragment1 : Fragment() {
             ft.replace(R.id.frgCont, frg)
             ft.commit()
         }
+
+        ivInfoKm.setOnClickListener { showPopupKm(ivInfoKm) }
+    }
+
+   private fun showPopupKm(v: View) {
+        val popupMenu = PopupMenu(activity, v, Gravity.NO_GRAVITY)
+        popupMenu.inflate(R.menu.popup_menu_km)
+
+        popupMenu.setOnMenuItemClickListener { item ->
+            etID = 7
+            etCalcKmh.requestFocus()
+            when (item.itemId) {
+                R.id.km_3 -> etCalcKmh.setText("3.00")
+                R.id.km_5 -> etCalcKmh.setText("5.00")
+                R.id.km_10 -> etCalcKmh.setText("10.00")
+                R.id.km_21 -> etCalcKmh.setText("21.097")
+                R.id.km_42 -> etCalcKmh.setText("42.195")
+            }
+            true
+        }
+        popupMenu.show()
     }
 
     fun etPaceM() {
@@ -530,7 +551,10 @@ class Fragment1 : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            when (requestCode) {
+            val FLAG = data!!.getIntExtra("2", 0)
+            flag = FLAG
+            val etID = data.getIntExtra("1",0)
+            when (etID) {
                 1 -> etPaceM()
                 2 -> etPaceS()
                 3 -> etKmh()
@@ -539,6 +563,7 @@ class Fragment1 : Fragment() {
                 6 -> etTimeS()
                 7 -> etDist()
             }
+
         }
     }
 }

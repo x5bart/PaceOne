@@ -33,4 +33,9 @@ The strategy of negative splitting has been documented in competitive running si
     <string name="copyright" translatable="false">Copyright © 2019 x5Bart</string>
     <string name="negative_and_positive_splits">Negative and positive splits</string>
     <string name="avg">AVG</string>
+    <string name="_3_km">3 km</string>
+    <string name="_5_km">5 km</string>
+    <string name="_10_km">10 km</string>
+    <string name="halfmarathon">halfmarathon</string>
+    <string name="marathon">marathon</string>
 </resources>

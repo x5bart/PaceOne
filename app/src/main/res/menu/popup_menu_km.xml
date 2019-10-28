@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <item
+            android:id="@+id/km_3"
+            android:title="@string/_3_km" />
+        <item
+            android:id="@+id/km_5"
+            android:title="@string/_5_km" />
+        <item
+            android:id="@+id/km_10"
+            android:title="@string/_10_km"/>
+        <item
+            android:id="@+id/km_21"
+            android:title="@string/halfmarathon" />
+        <item
+            android:id="@+id/km_42"
+            android:title="@string/marathon" />
+</menu>

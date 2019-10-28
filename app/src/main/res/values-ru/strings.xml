@@ -30,5 +30,10 @@
     </string>
     <string name="negative_and_positive_splits">Негативные и позитивные сплиты</string>
     <string name="avg">СРЕДНИЙ</string>
+    <string name="_3_km">3 км</string>
+    <string name="_5_km">5 км</string>
+    <string name="_10_km">10 км</string>
+    <string name="halfmarathon">полумарафон</string>
+    <string name="marathon">марафон</string>
 
 </resources>

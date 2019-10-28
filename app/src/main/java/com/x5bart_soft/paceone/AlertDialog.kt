@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog_alert.*
 
@@ -24,6 +23,7 @@ class AlertDialog : DialogFragment() {
     private var btn1Flag = 0
     private var btn2Flag = 0
     var REQUEST_CODE = 0
+    var FLAG = 0
 
 
     override fun onCreateView(
@@ -66,30 +66,22 @@ class AlertDialog : DialogFragment() {
         btnDialog2.text = "$btn2"
 
         btnDialog1.setOnClickListener {
-            Fragment1.flag = btn1Flag
+            FLAG = btn1Flag
             val intent = Intent()
             intent.putExtra("1", REQUEST_CODE)
+            intent.putExtra("2", FLAG)
             targetFragment!!.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
             dismiss()
             showKey()
-//            Toast.makeText(
-//                activity,
-//                "при дальнейших изменениях будет расчитываться $btn1",
-//                Toast.LENGTH_LONG
-//            ).show()
         }
         btnDialog2.setOnClickListener {
-            Fragment1.flag = btn2Flag
+            FLAG = btn2Flag
             val intent = Intent()
             intent.putExtra("1", REQUEST_CODE)
+            intent.putExtra("2", FLAG)
             targetFragment!!.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
             dismiss()
             showKey()
-//            Toast.makeText(
-//                activity,
-//                "при дальнейших изменениях будет расчитываться $btn2",
-//                Toast.LENGTH_LONG
-//            ).show()
         }
     }
 

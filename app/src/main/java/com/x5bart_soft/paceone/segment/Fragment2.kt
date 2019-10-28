@@ -4,10 +4,8 @@ package com.x5bart_soft.paceone.segment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
+import android.widget.PopupMenu
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,7 +26,6 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
     var s = 0
     var etSegId = 0
     var negSeg = 0.0
-
 
 
     override fun onCreateView(
@@ -149,6 +146,27 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
             val dialog = NegativSplitDialog()
             dialog.show(fragmentManager!!, "info")
         }
+        ivInfoKm.setOnClickListener { showPopupKm(ivInfoKm) }
+
+    }
+
+
+    fun showPopupKm(v: View) {
+        val popupMenu = PopupMenu(activity, v, Gravity.NO_GRAVITY)
+        popupMenu.inflate(R.menu.popup_menu_km)
+
+        popupMenu.setOnMenuItemClickListener { item ->
+            etKm.requestFocus()
+            when (item.itemId) {
+                R.id.km_3 -> etKm.setText("3.00")
+                R.id.km_5 -> etKm.setText("5.00")
+                R.id.km_10 -> etKm.setText("10.00")
+                R.id.km_21 -> etKm.setText("21.097")
+                R.id.km_42 -> etKm.setText("42.195")
+            }
+            true
+        }
+        popupMenu.show()
     }
 
     override fun onProgressChanged(
@@ -226,7 +244,8 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
                 val timeSumPrint = timeSum.toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
                 val timeSegPrint = timeSegPrev.toInt()
 
-                val h = (timeSumPrint / 3600).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
+                val h =
+                    (timeSumPrint / 3600).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
                 val m = ((timeSumPrint - (h * 3600)) / 60)
                 val s = (((timeSumPrint - (h * 3600) - (m * 60))))
                 var mPrint = m.toString()
@@ -239,11 +258,12 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
                 var pSPrint = pS.toString()
                 if (pS < 10) pSPrint = "0$pS"
 
-                val avgPace = (timeSum / sg).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
+                val avgPace =
+                    (timeSum / sg).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
                 val aM = (avgPace / 60)
                 val aS = (avgPace - (aM * 60))
                 var aSPrint = aS.toString()
-                if (aS<10)aSPrint = "0$aS"
+                if (aS < 10) aSPrint = "0$aS"
 
 
                 segments.add(
