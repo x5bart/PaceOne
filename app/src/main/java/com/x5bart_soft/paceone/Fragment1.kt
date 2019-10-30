@@ -559,7 +559,7 @@ class Fragment1 : Fragment() {
                 2 -> etPaceS()
                 3 -> etKmh()
                 4 -> etTimeH()
-                5 -> etPaceM()
+                5 -> etTimeM()
                 6 -> etTimeS()
                 7 -> etDist()
             }
