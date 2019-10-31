@@ -9,7 +9,7 @@ import android.widget.PopupMenu
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.x5bart_soft.paceone.Fragment1
+import com.x5bart_soft.paceone.MainActivity
 import com.x5bart_soft.paceone.R
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
@@ -206,7 +206,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
             if (etSegment.text.toString().isEmpty() || etSegment.text.toString() == ".") 0.0 else etSegment.text.toString().toDouble()
         if (seg == 0.0 && !etSegment.isFocused) etSegment.setText("0.0")
 
-        time = (((h * Fragment1.hour) + m) * Fragment1.hour) + s
+        time = (((h * MainActivity.MINUTE) + m) * MainActivity.MINUTE) + s
 
         if (etSegId != 2 && m < 10) etM.setText("0$m")
         if (etSegId != 3 && s < 10) etS.setText("0$s")
@@ -237,31 +237,32 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
                 val coefNext = negDelta * percentNext
                 val coefPrev = negDelta * percentPrev
                 val coefAvg = ((coefPrev) + (coefNext)) / 2
-                val timeSegPrev = ((pace * seg) * (1 - (negativ + coefAvg)))
+                val timeSeg = ((pace * seg) * (1 - (negativ + coefAvg)))
 
-                val timeSum = (timeSegPrev + timeNext)
+                val timeSum = (timeSeg + timeNext)
                 timeNext = timeSum
                 val timeSumPrint = timeSum.toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
-                val timeSegPrint = timeSegPrev.toInt()
+                val timeSegPrint = timeSeg.toInt()
 
                 val h =
-                    (timeSumPrint / 3600).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
-                val m = ((timeSumPrint - (h * 3600)) / 60)
-                val s = (((timeSumPrint - (h * 3600) - (m * 60))))
+                    (timeSumPrint / MainActivity.HOUR).toBigDecimal()
+                        .setScale(0, RoundingMode.HALF_UP).toInt()
+                val m = ((timeSumPrint - (h * MainActivity.HOUR)) / MainActivity.MINUTE)
+                val s = (((timeSumPrint - (h * MainActivity.HOUR) - (m * MainActivity.MINUTE))))
                 var mPrint = m.toString()
                 var sPrint = s.toString()
                 if (m < 10) mPrint = "0$m"
                 if (s < 10) sPrint = "0$s"
 
-                val pM = (timeSegPrint / 60)
-                val pS = (timeSegPrint - (pM * 60))
+                val pM = (timeSegPrint / MainActivity.MINUTE)
+                val pS = (timeSegPrint - (pM * MainActivity.MINUTE))
                 var pSPrint = pS.toString()
                 if (pS < 10) pSPrint = "0$pS"
 
                 val avgPace =
                     (timeSum / sg).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
-                val aM = (avgPace / 60)
-                val aS = (avgPace - (aM * 60))
+                val aM = (avgPace / MainActivity.MINUTE)
+                val aS = (avgPace - (aM * MainActivity.MINUTE))
                 var aSPrint = aS.toString()
                 if (aS < 10) aSPrint = "0$aS"
 

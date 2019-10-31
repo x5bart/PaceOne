@@ -9,6 +9,18 @@ import androidx.appcompat.widget.Toolbar
 
 class MainActivity : AppCompatActivity() {
 
+
+    companion object {
+        var flagMileKm = 1
+        const val MINUTE = 60 //60 sec
+        const val HOUR = 3600 // 3600 sec
+        const val KM = 1000 //1000 m
+        const val MILE = 1609.34 // 1609.34 m
+        var unit = KM
+        var MSEC = HOUR / unit// 3600sec/km
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

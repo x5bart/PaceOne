@@ -21,9 +21,6 @@ import java.math.RoundingMode
 
 
 class Fragment1 : Fragment() {
-    val HOUR = 60 //60 min
-    val KM = 1000 //1000 m
-    val SECOND = 3.600 // 3600sec/hours
     private var etMin = 0
     private var etSec = 0
     private var etKm = 0.0
@@ -34,13 +31,14 @@ class Fragment1 : Fragment() {
     var timeSec = 0
     var etCalcKm = 0.0
     var alertId = 0
+    var UNIT = (MainActivity.KM).toDouble()
+    var MSEC = MainActivity.HOUR / UNIT
     val REQUEST_WEIGHT = 2
 
 
     companion object {
         var etID = 0
         var flag = 0
-        const val hour = 60 //60 min
     }
 
     override fun onCreateView(
@@ -246,9 +244,21 @@ class Fragment1 : Fragment() {
         }
 
         ivInfoKm.setOnClickListener { showPopupKm(ivInfoKm) }
+
+        swKmToMile.setOnCheckedChangeListener { compoundButton, b ->
+            when (b) {
+                false -> MainActivity.flagMileKm = 1
+                true -> MainActivity.flagMileKm = 2
+            }
+        }
+        swKmToMile.setOnClickListener {
+            kmToMileSw()
+            notNull()
+            kmHToMKm()
+        }
     }
 
-   private fun showPopupKm(v: View) {
+    private fun showPopupKm(v: View) {
         val popupMenu = PopupMenu(activity, v, Gravity.NO_GRAVITY)
         popupMenu.inflate(R.menu.popup_menu_km)
 
@@ -366,12 +376,38 @@ class Fragment1 : Fragment() {
 
     }
 
+
+
+    fun kmToMile() {
+        val res = etKm / (MainActivity.MILE / MainActivity.KM)
+        etSpeed.setText("$res")
+
+    }
+
+    fun mileToKm() {
+        val res = etKm * (MainActivity.MILE / MainActivity.KM)
+        etSpeed.setText("$res")
+    }
+    fun kmToMileSw() {
+        when (MainActivity.flagMileKm) {
+            1 -> {
+                UNIT = MainActivity.KM.toDouble()
+                mileToKm()
+            }
+            2 -> {
+                UNIT = MainActivity.MILE
+                kmToMile()
+            }
+        }
+    }
     fun mKmToKmH() {
         notNull()
         if (etMin != 0 && etSec == 0 || etMin == 0 && etSec != 0 || etMin != 0 && etSec != 0) {
-            val allSecond = ((etMin * HOUR) + etSec).toDouble()
-            val mSec = (KM / allSecond)
-            val res = (mSec * SECOND).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
+            val allSecond = ((etMin * MainActivity.MINUTE) + etSec).toDouble()
+            val mSec = (UNIT / allSecond)
+            val res = (mSec * MSEC)
+                .toBigDecimal()
+                .setScale(2, RoundingMode.HALF_UP)
             etSpeed.setText("$res")
         }
         notNull()
@@ -380,10 +416,14 @@ class Fragment1 : Fragment() {
     fun kmHToMKm() {
         notNull()
         if (etKm != 0.00) {
-            val res = (etKm / SECOND)
-            val sumSec = (KM / res).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
-            etMin = (sumSec / HOUR)
-            etSec = sumSec - (etMin * HOUR)
+            val res = (etKm / MainActivity.MSEC)
+            val sumSec =
+                (MainActivity.KM / res)
+                    .toBigDecimal()
+                    .setScale(0, RoundingMode.HALF_UP)
+                    .toInt()
+            etMin = (sumSec / MainActivity.MINUTE)
+            etSec = sumSec - (etMin * MainActivity.MINUTE)
 
             if (etMin == 0) etPaceM.setText("00") else etPaceM.setText(etMin.toString())
 
@@ -400,8 +440,9 @@ class Fragment1 : Fragment() {
     fun dist() {
         notNull()
         if (etKm != 0.0) {
-            val pace = ((etMin * HOUR) + etSec).toDouble()
-            val distSec = (((etCalcDistHour * HOUR) + etCalcDistMin) * HOUR) + etCalcDistSec
+            val pace = ((etMin * MainActivity.MINUTE) + etSec).toDouble()
+            val distSec =
+                (((etCalcDistHour * MainActivity.MINUTE) + etCalcDistMin) * MainActivity.MINUTE) + etCalcDistSec
             val res = distSec / pace
             etCalcKmh.setText("$res")
         }
@@ -413,11 +454,12 @@ class Fragment1 : Fragment() {
         if (etKm != 0.0) {
             etKm = etSpeed.text.toString().toDouble()
             val sumSec =
-                (etCalcKm / etKm * 3600).toBigDecimal().setScale(0, RoundingMode.UP).toInt()
-            val hour2 = (etCalcKm / etKm).toInt()
-            val min = ((sumSec - (hour2 * 3600)) / HOUR)
-            val sec = (sumSec - (hour2 * 3600) - (min * HOUR))
-            etCalcDistH.setText("$hour2")
+                (etCalcKm / etKm * MainActivity.HOUR).toBigDecimal().setScale(0, RoundingMode.UP)
+                    .toInt()
+            val hour = (etCalcKm / etKm).toInt()
+            val min = ((sumSec - (hour * MainActivity.HOUR)) / MainActivity.MINUTE)
+            val sec = (sumSec - (hour * MainActivity.HOUR) - (min * MainActivity.MINUTE))
+            etCalcDistH.setText("$hour")
             etCalcDistM.setText("$min")
             etCalcDistS.setText("$sec")
             if (sumSec == 0 && !etCalcKmh.isFocused) etCalcKmh.setText("0.00")
@@ -428,16 +470,18 @@ class Fragment1 : Fragment() {
     fun speed() {
         notNull()
         if (etCalcDistHour != 0 || etCalcDistMin != 0 || etCalcDistSec != 0) {
-            val timeCalc = (((etCalcDistHour * HOUR) + etCalcDistMin) * HOUR) + etCalcDistSec
+            val timeCalc =
+                (((etCalcDistHour * MainActivity.MINUTE) + etCalcDistMin) * MainActivity.MINUTE) + etCalcDistSec
             val distCalc = etCalcKm
 
             if (timeCalc != 0 || distCalc != 0.0) {
                 val distSec =
-                    (((etCalcDistHour * HOUR) + etCalcDistMin) * HOUR) + etCalcDistSec.toDouble()
-                val distM = etCalcKm * KM
+                    (((etCalcDistHour * MainActivity.MINUTE) + etCalcDistMin) * MainActivity.MINUTE) + etCalcDistSec.toDouble()
+                val distM = etCalcKm * MainActivity.KM
                 val mSec = distM / distSec
                 val res =
-                    ((mSec * 3600) / KM).toBigDecimal().setScale(2, RoundingMode.HALF_UP)
+                    ((mSec * MainActivity.HOUR) / MainActivity.KM).toBigDecimal()
+                        .setScale(2, RoundingMode.HALF_UP)
                         .toDouble()
                 etSpeed.setText("$res")
                 kmHToMKm()
@@ -553,7 +597,7 @@ class Fragment1 : Fragment() {
         if (resultCode == Activity.RESULT_OK) {
             val FLAG = data!!.getIntExtra("2", 0)
             flag = FLAG
-            val etID = data.getIntExtra("1",0)
+            val etID = data.getIntExtra("1", 0)
             when (etID) {
                 1 -> etPaceM()
                 2 -> etPaceS()
