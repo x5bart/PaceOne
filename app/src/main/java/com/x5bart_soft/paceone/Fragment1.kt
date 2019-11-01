@@ -52,6 +52,7 @@ class Fragment1 : Fragment() {
         btnSegment.isVisible = false
         visible()
 
+
         val BLOCK_ID = "adf-326819/1042468"
         banner_view.blockId = BLOCK_ID
         banner_view.adSize = AdSize.BANNER_320x50
@@ -247,11 +248,15 @@ class Fragment1 : Fragment() {
             when (b) {
                 false -> {
                     MainActivity.flagMileKm = 1
-
+                    textView2.text = resources.getString(R.string.min_km)
+                    textView.text = resources.getString(R.string.km_h)
+                    textView11.text = resources.getString(R.string.km)
                 }
                 true -> {
                     MainActivity.flagMileKm = 2
-
+                    textView2.text = resources.getString(R.string.min_mile)
+                    textView.text = resources.getString(R.string.km_mile)
+                    textView11.text = resources.getString(R.string.mile)
                 }
             }
         }
@@ -259,6 +264,7 @@ class Fragment1 : Fragment() {
             kmToMileSw()
             notNull()
             kmHToMKm()
+            dist()
         }
     }
 
@@ -384,13 +390,17 @@ class Fragment1 : Fragment() {
 
 
     fun kmToMile() {
-        val res = etKm / (MainActivity.MILEKM / MainActivity.KM)
+        val res = (etKm / (MainActivity.MILEKM / MainActivity.KM))
+            .toBigDecimal()
+            .setScale(2, RoundingMode.HALF_UP)
         etSpeed.setText("$res")
 
     }
 
     fun mileToKm() {
-        val res = etKm * (MainActivity.MILEKM / MainActivity.KM)
+        val res = (etKm * (MainActivity.MILEKM / MainActivity.KM))
+            .toBigDecimal()
+            .setScale(2, RoundingMode.HALF_UP)
         etSpeed.setText("$res")
     }
 
@@ -409,7 +419,7 @@ class Fragment1 : Fragment() {
         notNull()
         if (etMin != 0 && etSec == 0 || etMin == 0 && etSec != 0 || etMin != 0 && etSec != 0) {
             val allSecond = ((etMin * MainActivity.MINUTE) + etSec).toDouble()
-            val mSec = (MainActivity.unit/ allSecond)
+            val mSec = (MainActivity.unit / allSecond)
             val res = (mSec * MainActivity.MSEC)
                 .toBigDecimal()
                 .setScale(2, RoundingMode.HALF_UP)
@@ -448,7 +458,8 @@ class Fragment1 : Fragment() {
             val pace = ((etMin * MainActivity.MINUTE) + etSec).toDouble()
             val distSec =
                 (((etCalcDistHour * MainActivity.MINUTE) + etCalcDistMin) * MainActivity.MINUTE) + etCalcDistSec
-            val res = distSec / pace
+            val res = (distSec / pace).toBigDecimal()
+                .setScale(2, RoundingMode.HALF_UP)
             etCalcKmh.setText("$res")
         }
         notNull()
@@ -462,8 +473,8 @@ class Fragment1 : Fragment() {
                 (etCalcKm / etKm * MainActivity.HOUR).toBigDecimal().setScale(0, RoundingMode.UP)
                     .toInt()
             val hour = (etCalcKm / etKm).toInt()
-            val min = ((sumSec - (hour * MainActivity.HOUR)) / MainActivity.MINUTE)
-            val sec = (sumSec - (hour * MainActivity.HOUR) - (min * MainActivity.MINUTE))
+            val min = ((sumSec - (hour * MainActivity.HOUR)) / MainActivity.MINUTE).toInt()
+            val sec = (sumSec - (hour * MainActivity.HOUR) - (min * MainActivity.MINUTE)).toInt()
             etCalcDistH.setText("$hour")
             etCalcDistM.setText("$min")
             etCalcDistS.setText("$sec")

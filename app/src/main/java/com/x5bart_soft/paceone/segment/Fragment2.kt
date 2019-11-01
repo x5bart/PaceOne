@@ -14,6 +14,8 @@ import com.x5bart_soft.paceone.R
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
 import kotlinx.android.synthetic.main.fragment2.*
+import kotlinx.android.synthetic.main.fragment2.ivInfoKm
+import kotlinx.android.synthetic.main.fragment2.textView77
 import java.math.RoundingMode
 
 class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
@@ -42,10 +44,18 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
         sbNegSeg.setOnSeekBarChangeListener(this)
-
-
-
         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+
+        when(MainActivity.flagMileKm){
+            1->{
+                textView77.text = resources.getString(R.string.km)
+                textView555.text = resources.getString(R.string.km)
+            }
+            2->{
+                textView77.text = resources.getString(R.string.mile)
+                textView555.text = resources.getString(R.string.mile)
+            }
+        }
 
 //        val BLOCK_ID = "adf-326819/1043357"
         val BLOCK_ID = "adf-326819/1042468"
@@ -247,8 +257,8 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
                 val h =
                     (timeSumPrint / MainActivity.HOUR).toBigDecimal()
                         .setScale(0, RoundingMode.HALF_UP).toInt()
-                val m = ((timeSumPrint - (h * MainActivity.HOUR)) / MainActivity.MINUTE)
-                val s = (((timeSumPrint - (h * MainActivity.HOUR) - (m * MainActivity.MINUTE))))
+                val m = ((timeSumPrint - (h * MainActivity.MINUTE)) / MainActivity.MINUTE)
+                val s = (((timeSumPrint - (h * MainActivity.MINUTE) - (m * MainActivity.MINUTE))))
                 var mPrint = m.toString()
                 var sPrint = s.toString()
                 if (m < 10) mPrint = "0$m"
