@@ -13,11 +13,12 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var flagMileKm = 1
         const val MINUTE = 60 //60 sec
-        const val HOUR = 3600 // 3600 sec
+        const val HOUR = 3600.00 // 3600 sec
         const val KM = 1000 //1000 m
-        const val MILE = 1609.34 // 1609.34 m
-        var unit = KM
-        var MSEC = HOUR / unit// 3600sec/km
+        const val MILEKM = 1609.344 // 1609.344 m
+        const val MILEF =1760// 1760 fut
+        var unit = if (flagMileKm==1)KM else MILEF
+        var MSEC = (HOUR / unit)// 3600sec/km
 
     }
 
