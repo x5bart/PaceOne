@@ -162,6 +162,11 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
     fun showPopupKm(v: View) {
         val popupMenu = PopupMenu(activity, v, Gravity.NO_GRAVITY)
         popupMenu.inflate(R.menu.popup_menu_km)
+        if (MainActivity.flagMileKm == 2) {
+            popupMenu.menu.findItem(R.id.km_3).setTitle(R.string._3_km_mile)
+            popupMenu.menu.findItem(R.id.km_5).setTitle(R.string._5_km_mile)
+            popupMenu.menu.findItem(R.id.km_10).setTitle(R.string._10_km_mile)
+        }
 
         popupMenu.setOnMenuItemClickListener { item ->
             etKm.requestFocus()
@@ -256,10 +261,11 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
                 val timeSegPrint = timeSeg.toInt()
 
                 val h =
-                    (timeSumPrint / 360).toBigDecimal()
+                    (timeSumPrint / MainActivity.HOUR.toInt()).toBigDecimal()
                         .setScale(0, RoundingMode.HALF_UP).toInt()
-                val m = ((timeSumPrint - (h * MainActivity.MINUTE)) / MainActivity.MINUTE)
-                val s = (((timeSumPrint - (h * MainActivity.MINUTE) - (m * MainActivity.MINUTE))))
+                val m = ((timeSumPrint - (h * MainActivity.HOUR)) / MainActivity.MINUTE).toInt()
+                val s =
+                    (((timeSumPrint - (h * MainActivity.HOUR) - (m * MainActivity.MINUTE)))).toInt()
                 var mPrint = m.toString()
                 var sPrint = s.toString()
                 if (m < 10) mPrint = "0$m"

@@ -17,26 +17,26 @@
     <style name="EditTextFontBig" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/audiowide</item>
         <item name="android:textSize">30dp</item>
-        <item name="android:editTextColor">#FFFFFF</item>
+        <item name="android:editTextColor">@color/white</item>
         <item name="android:selectAllOnFocus">true</item>
-        <item name="android:backgroundTint">#FFFFFF</item>
+        <item name="android:backgroundTint">@color/white</item>
     </style>
     <style name="EditTextFontSmall" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/audiowide</item>
         <item name="android:textSize">20dp</item>
-        <item name="android:editTextColor">#FFFFFF</item>
+        <item name="android:editTextColor">@color/white</item>
         <item name="android:selectAllOnFocus">true</item>
-        <item name="android:backgroundTint">#FFFFFF</item>
+        <item name="android:backgroundTint">@color/white</item>
     </style>
 
     <style name="EditTextFr2" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/audiowide</item>
         <item name="android:textSize">25dp</item>
-        <item name="android:editTextColor">#FFFFFF</item>
+        <item name="android:editTextColor">@color/white</item>
         <item name="android:ems">10</item>
         <item name="android:gravity">center</item>
         <item name="android:selectAllOnFocus">true</item>
-        <item name="android:backgroundTint">#FFFFFF</item>
+        <item name="android:backgroundTint">@color/white</item>
     </style>
 
     <style name="MyButton" parent="Widget.AppCompat.Button">
@@ -76,6 +76,18 @@
         <item name="android:textSize" >14dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MySwitch" parent="Theme.AppCompat.Light">
+        <!-- активное состояние (30% прозрачности для фона) -->
+        <item name="colorControlActivated">@android:color/white</item>
+
+        <!-- неактивное состояние ползунка -->
+        <item name="colorSwitchThumbNormal">@android:color/white</item>
+
+        <!-- цвет дорожки для неактивного состояния (30% прозрачности) -->
+        <item name="android:colorForeground">@android:color/white</item>
+<item name="android:thumbTint">@color/white</item>
     </style>
 
 

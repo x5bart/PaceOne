@@ -59,6 +59,17 @@ class Fragment1 : Fragment() {
         val adRequest = AdRequest.builder().build()
         banner_view.loadAd(adRequest)
 
+        when (MainActivity.flagMileKm) {
+            1 -> {
+                textView5.setTextColor(resources.getColor(R.color.textActive))
+                textView5_1.setTextColor(resources.getColor(R.color.textNotActive))
+            }
+            2 -> {
+                textView5.setTextColor(resources.getColor(R.color.textNotActive))
+                textView5_1.setTextColor(resources.getColor(R.color.textActive))
+            }
+        }
+
         etPaceM.setOnFocusChangeListener { _, _ ->
             etID = 1
         }
@@ -251,12 +262,16 @@ class Fragment1 : Fragment() {
                     textView2.text = resources.getString(R.string.min_km)
                     textView.text = resources.getString(R.string.km_h)
                     textView11.text = resources.getString(R.string.km)
+                    textView5.setTextColor(resources.getColor(R.color.textActive))
+                    textView5_1.setTextColor(resources.getColor(R.color.textNotActive))
                 }
                 true -> {
                     MainActivity.flagMileKm = 2
                     textView2.text = resources.getString(R.string.min_mile)
                     textView.text = resources.getString(R.string.km_mile)
                     textView11.text = resources.getString(R.string.mile)
+                    textView5.setTextColor(resources.getColor(R.color.textNotActive))
+                    textView5_1.setTextColor(resources.getColor(R.color.textActive))
                 }
             }
         }
@@ -271,6 +286,11 @@ class Fragment1 : Fragment() {
     private fun showPopupKm(v: View) {
         val popupMenu = PopupMenu(activity, v, Gravity.NO_GRAVITY)
         popupMenu.inflate(R.menu.popup_menu_km)
+        if (MainActivity.flagMileKm == 2) {
+            popupMenu.menu.findItem(R.id.km_3).setTitle(R.string._3_km_mile)
+            popupMenu.menu.findItem(R.id.km_5).setTitle(R.string._5_km_mile)
+            popupMenu.menu.findItem(R.id.km_10).setTitle(R.string._10_km_mile)
+        }
 
         popupMenu.setOnMenuItemClickListener { item ->
             etID = 7
