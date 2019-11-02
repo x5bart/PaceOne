@@ -275,13 +275,17 @@ class Fragment1 : Fragment() {
         popupMenu.setOnMenuItemClickListener { item ->
             etID = 7
             etCalcKmh.requestFocus()
+            var tmp = 0.0
             when (item.itemId) {
-                R.id.km_3 -> etCalcKmh.setText("3.00")
-                R.id.km_5 -> etCalcKmh.setText("5.00")
-                R.id.km_10 -> etCalcKmh.setText("10.00")
-                R.id.km_21 -> etCalcKmh.setText("21.097")
-                R.id.km_42 -> etCalcKmh.setText("42.195")
+                R.id.km_3 -> tmp = 3.0
+                R.id.km_5 -> tmp = 5.0
+                R.id.km_10 -> tmp = 10.0
+                R.id.km_21 -> tmp = 21.097
+                R.id.km_42 -> tmp = 42.195
             }
+            if (MainActivity.flagMileKm == 2) tmp /= (MainActivity.MILEKM / MainActivity.KM)
+
+            etCalcKmh.setText("$tmp")
             true
         }
         popupMenu.show()
@@ -394,6 +398,10 @@ class Fragment1 : Fragment() {
             .toBigDecimal()
             .setScale(2, RoundingMode.HALF_UP)
         etSpeed.setText("$res")
+        val res2 = (etCalcKm / (MainActivity.MILEKM / MainActivity.KM))
+            .toBigDecimal()
+            .setScale(2, RoundingMode.HALF_UP)
+        etCalcKmh.setText("$res2")
 
     }
 
@@ -402,6 +410,10 @@ class Fragment1 : Fragment() {
             .toBigDecimal()
             .setScale(2, RoundingMode.HALF_UP)
         etSpeed.setText("$res")
+        val res2 = (etCalcKm * (MainActivity.MILEKM / MainActivity.KM))
+            .toBigDecimal()
+            .setScale(2, RoundingMode.HALF_UP)
+        etCalcKmh.setText("$res2")
     }
 
     fun kmToMileSw() {

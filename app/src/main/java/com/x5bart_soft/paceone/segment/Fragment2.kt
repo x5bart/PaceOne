@@ -14,8 +14,6 @@ import com.x5bart_soft.paceone.R
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
 import kotlinx.android.synthetic.main.fragment2.*
-import kotlinx.android.synthetic.main.fragment2.ivInfoKm
-import kotlinx.android.synthetic.main.fragment2.textView77
 import java.math.RoundingMode
 
 class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
@@ -46,12 +44,12 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
         sbNegSeg.setOnSeekBarChangeListener(this)
         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 
-        when(MainActivity.flagMileKm){
-            1->{
+        when (MainActivity.flagMileKm) {
+            1 -> {
                 textView77.text = resources.getString(R.string.km)
                 textView555.text = resources.getString(R.string.km)
             }
-            2->{
+            2 -> {
                 textView77.text = resources.getString(R.string.mile)
                 textView555.text = resources.getString(R.string.mile)
             }
@@ -167,13 +165,16 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
 
         popupMenu.setOnMenuItemClickListener { item ->
             etKm.requestFocus()
+            var tmp = 0.0
             when (item.itemId) {
-                R.id.km_3 -> etKm.setText("3.00")
-                R.id.km_5 -> etKm.setText("5.00")
-                R.id.km_10 -> etKm.setText("10.00")
-                R.id.km_21 -> etKm.setText("21.097")
-                R.id.km_42 -> etKm.setText("42.195")
+                R.id.km_3 -> tmp = 3.0
+                R.id.km_5 -> tmp = 5.0
+                R.id.km_10 -> tmp = 10.0
+                R.id.km_21 -> tmp = 21.097
+                R.id.km_42 -> tmp = 42.195
             }
+            if (MainActivity.flagMileKm == 2) tmp /= (MainActivity.MILEKM / MainActivity.KM)
+            etKm.setText("$tmp")
             true
         }
         popupMenu.show()
@@ -255,7 +256,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
                 val timeSegPrint = timeSeg.toInt()
 
                 val h =
-                    (timeSumPrint / MainActivity.HOUR).toBigDecimal()
+                    (timeSumPrint / 360).toBigDecimal()
                         .setScale(0, RoundingMode.HALF_UP).toInt()
                 val m = ((timeSumPrint - (h * MainActivity.MINUTE)) / MainActivity.MINUTE)
                 val s = (((timeSumPrint - (h * MainActivity.MINUTE) - (m * MainActivity.MINUTE))))
