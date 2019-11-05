@@ -465,6 +465,10 @@ class Fragment1 : Fragment() {
     fun kmHToMKm() {
         notNull()
         if (etKm != 0.00) {
+            if (etKm < 1) {
+                etSpeed.setText("1.00")
+                etKm = 1.0
+            }
             val res = (etKm / MainActivity.MSEC)
             val sumSec =
                 (MainActivity.unit / res)
@@ -473,11 +477,7 @@ class Fragment1 : Fragment() {
                     .toInt()
             etMin = (sumSec / MainActivity.MINUTE)
             etSec = sumSec - (etMin * MainActivity.MINUTE)
-
             if (etMin == 0) etPaceM.setText("00") else etPaceM.setText(etMin.toString())
-
-            if (etKm < 1) etSpeed.setText("1.00")
-
             if (etSec < 10) etPaceS.setText("0$etSec") else etPaceS.setText(etSec.toString())
         } else {
             etPaceM.setText("0")
