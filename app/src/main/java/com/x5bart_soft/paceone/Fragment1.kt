@@ -276,10 +276,12 @@ class Fragment1 : Fragment() {
             }
         }
         swKmToMile.setOnClickListener {
+            val tmp = etID
+            etID = 0
             kmToMileSw()
             notNull()
             kmHToMKm()
-            dist()
+            etID = tmp
         }
     }
 
@@ -297,9 +299,9 @@ class Fragment1 : Fragment() {
             etCalcKmh.requestFocus()
             var tmp = 0.0
             when (item.itemId) {
-                R.id.km_3 -> tmp = 3.0
-                R.id.km_5 -> tmp = 5.0
-                R.id.km_10 -> tmp = 10.0
+                R.id.km_3 -> tmp = 3.00
+                R.id.km_5 -> tmp = 5.00
+                R.id.km_10 -> tmp = 10.00
                 R.id.km_21 -> tmp = 21.097
                 R.id.km_42 -> tmp = 42.195
             }
@@ -416,11 +418,11 @@ class Fragment1 : Fragment() {
     fun kmToMile() {
         val res = (etKm / (MainActivity.MILEKM / MainActivity.KM))
             .toBigDecimal()
-            .setScale(2, RoundingMode.HALF_UP)
+            .setScale(3, RoundingMode.HALF_UP)
         etSpeed.setText("$res")
         val res2 = (etCalcKm / (MainActivity.MILEKM / MainActivity.KM))
             .toBigDecimal()
-            .setScale(2, RoundingMode.HALF_UP)
+            .setScale(3, RoundingMode.HALF_UP).toDouble()
         etCalcKmh.setText("$res2")
 
     }
@@ -428,11 +430,11 @@ class Fragment1 : Fragment() {
     fun mileToKm() {
         val res = (etKm * (MainActivity.MILEKM / MainActivity.KM))
             .toBigDecimal()
-            .setScale(2, RoundingMode.HALF_UP)
+            .setScale(3, RoundingMode.HALF_UP)
         etSpeed.setText("$res")
         val res2 = (etCalcKm * (MainActivity.MILEKM / MainActivity.KM))
             .toBigDecimal()
-            .setScale(2, RoundingMode.HALF_UP)
+            .setScale(3, RoundingMode.HALF_UP).toDouble()
         etCalcKmh.setText("$res2")
     }
 
@@ -491,7 +493,7 @@ class Fragment1 : Fragment() {
             val distSec =
                 (((etCalcDistHour * MainActivity.MINUTE) + etCalcDistMin) * MainActivity.MINUTE) + etCalcDistSec
             val res = (distSec / pace).toBigDecimal()
-                .setScale(2, RoundingMode.HALF_UP)
+                .setScale(3, RoundingMode.HALF_UP)
             etCalcKmh.setText("$res")
         }
         notNull()
