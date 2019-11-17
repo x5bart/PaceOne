@@ -2,10 +2,13 @@ package com.x5bart_soft.paceone
 
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +21,7 @@ import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
 import kotlinx.android.synthetic.main.fragment1.*
 import java.math.RoundingMode
+import java.util.*
 
 
 class Fragment1 : Fragment() {
@@ -32,22 +36,56 @@ class Fragment1 : Fragment() {
     var etCalcKm = 0.0
     var alertId = 0
     val REQUEST_WEIGHT = 2
+    var tmp = 0
 
 
     companion object {
         var etID = 0
         var flag = 0
+        var resume = 0
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val locale = Locale.getDefault()
+        val configuration = Configuration()
+        configuration.locale = locale
+        activity!!.baseContext.resources.updateConfiguration(configuration, null)
+
+
+
         return inflater.inflate(R.layout.fragment1, container, false)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        tmp = MainActivity.FLAG_MILE_TO_KM
+        super.onActivityCreated(savedInstanceState)
+    }
+
+    override fun onStart() {
+        MainActivity.FLAG_MILE_TO_KM = tmp
+        when (MainActivity.FLAG_MILE_TO_KM) {
+            1 -> {
+                swKmToMile.isChecked = false
+            }
+            2 -> {
+                swKmToMile.isChecked = true
+            }
+        }
+        if (resume in 1..2) {
+            kmToMileSw()
+            kmHToMKm()
+            resume = 0
+        }
+        super.onStart()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+
         etID = 0
         btnSegment.isVisible = false
         visible()
@@ -59,7 +97,7 @@ class Fragment1 : Fragment() {
         val adRequest = AdRequest.builder().build()
         banner_view.loadAd(adRequest)
 
-        when (MainActivity.flagMileKm) {
+        when (MainActivity.FLAG_MILE_TO_KM) {
             1 -> {
                 textView5.setTextColor(resources.getColor(R.color.textActive))
                 textView5_1.setTextColor(resources.getColor(R.color.textNotActive))
@@ -258,20 +296,22 @@ class Fragment1 : Fragment() {
         swKmToMile.setOnCheckedChangeListener { compoundButton, b ->
             when (b) {
                 false -> {
-                    MainActivity.flagMileKm = 1
+                    MainActivity.FLAG_MILE_TO_KM = 1
                     textView2.text = resources.getString(R.string.min_km)
                     textView.text = resources.getString(R.string.km_h)
                     textView11.text = resources.getString(R.string.km)
                     textView5.setTextColor(resources.getColor(R.color.textActive))
                     textView5_1.setTextColor(resources.getColor(R.color.textNotActive))
+                    saveSw()
                 }
                 true -> {
-                    MainActivity.flagMileKm = 2
+                    MainActivity.FLAG_MILE_TO_KM = 2
                     textView2.text = resources.getString(R.string.min_mile)
                     textView.text = resources.getString(R.string.km_mile)
                     textView11.text = resources.getString(R.string.mile)
                     textView5.setTextColor(resources.getColor(R.color.textNotActive))
                     textView5_1.setTextColor(resources.getColor(R.color.textActive))
+                    saveSw()
                 }
             }
         }
@@ -285,10 +325,17 @@ class Fragment1 : Fragment() {
         }
     }
 
+    fun saveSw() {
+        val sPref = activity!!.getPreferences(Context.MODE_PRIVATE)
+        val ed = sPref.edit()
+        ed.putInt(MainActivity.APP_MILE_TO_KM, MainActivity.FLAG_MILE_TO_KM)
+        ed.apply()
+    }
+
     private fun showPopupKm(v: View) {
         val popupMenu = PopupMenu(activity, v, Gravity.NO_GRAVITY)
         popupMenu.inflate(R.menu.popup_menu_km)
-        if (MainActivity.flagMileKm == 2) {
+        if (MainActivity.FLAG_MILE_TO_KM == 2) {
             popupMenu.menu.findItem(R.id.km_3).setTitle(R.string._3_km_mile)
             popupMenu.menu.findItem(R.id.km_5).setTitle(R.string._5_km_mile)
             popupMenu.menu.findItem(R.id.km_10).setTitle(R.string._10_km_mile)
@@ -305,7 +352,7 @@ class Fragment1 : Fragment() {
                 R.id.km_21 -> tmp = 21.097
                 R.id.km_42 -> tmp = 42.195
             }
-            if (MainActivity.flagMileKm == 2) tmp /= (MainActivity.MILEKM / MainActivity.KM)
+            if (MainActivity.FLAG_MILE_TO_KM == 2) tmp /= (MainActivity.MILEKM / MainActivity.KM)
 
             etCalcKmh.setText("$tmp")
             true
@@ -439,7 +486,7 @@ class Fragment1 : Fragment() {
     }
 
     fun kmToMileSw() {
-        when (MainActivity.flagMileKm) {
+        when (MainActivity.FLAG_MILE_TO_KM) {
             1 -> {
                 mileToKm()
             }
@@ -660,4 +707,6 @@ class Fragment1 : Fragment() {
 
         }
     }
+
+
 }
