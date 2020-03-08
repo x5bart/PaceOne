@@ -8,11 +8,18 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.yandex.mobile.ads.AdRequest
+import com.yandex.mobile.ads.InterstitialAd
+import com.yandex.mobile.ads.InterstitialEventListener
 import java.util.*
+
+const val BLOCK_ID = "adf-326819/1077574"
 
 
 class MainActivity : AppCompatActivity() {
     val LOG = "MLOG"
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     companion object {
 
@@ -36,6 +43,13 @@ class MainActivity : AppCompatActivity() {
         loaded()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "id")
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "name")
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
 
 
         val locale = Locale.getDefault()
@@ -61,6 +75,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.helpToDev -> onInterstitialLoaded()
             R.id.setting -> {
                 val frg = Settings()
                 val ft = supportFragmentManager.beginTransaction()
@@ -72,7 +87,9 @@ class MainActivity : AppCompatActivity() {
                 val dialog = AboutDialog()
                 dialog.show(supportFragmentManager, "About")
             }
-            R.id.exit -> finish()
+            R.id.exit -> {
+                finish()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -91,5 +108,19 @@ class MainActivity : AppCompatActivity() {
         FLAG_MILE_TO_KM = sPref.getInt(APP_MILE_TO_KM, 0)
     }
 
+    private fun onInterstitialLoaded() {
+
+        val mInterstitialAd = InterstitialAd(this)
+        mInterstitialAd.blockId = BLOCK_ID
+        val adRequest = AdRequest.Builder().build()
+        mInterstitialAd.interstitialEventListener =
+            object : InterstitialEventListener.SimpleInterstitialEventListener() {
+                override fun onInterstitialLoaded() {
+                    mInterstitialAd.show()
+                    super.onInterstitialLoaded()
+                }
+            }
+        mInterstitialAd.loadAd(adRequest);
+    }
 
 }

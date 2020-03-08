@@ -65,6 +65,7 @@ class Settings : Fragment() {
         ivDistanse.setOnClickListener{
             showPopupDist(tvDistance2)
         }
+
     }
 
 
@@ -152,4 +153,6 @@ class Settings : Fragment() {
         translate()
         super.onConfigurationChanged(newConfig)
     }
+
+
 }

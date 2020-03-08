@@ -48,5 +48,6 @@
     <string name="language">Язык</string>
     <string name="distanceSetting">Расстояние</string>
     <string name="def">Язык телефона</string>
+    <string name="help_to_developer">Помощь разработчику</string>
 
 </resources>

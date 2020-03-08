@@ -87,7 +87,7 @@ class Fragment1 : Fragment() {
 
 
         etID = 0
-        btnSegment.isVisible = false
+        btnSegment.visibility = View.GONE
         visible()
 
 
@@ -624,7 +624,7 @@ class Fragment1 : Fragment() {
     }
 
     private fun visible() {
-        if (etKm != 0.0 && time != 0 && etCalcKm != 0.0) btnSegment.isVisible = true
+        if (etKm != 0.0 && time != 0 && etCalcKm != 0.0) btnSegment.visibility = View.VISIBLE
     }
 
     private fun clear() {
@@ -642,7 +642,7 @@ class Fragment1 : Fragment() {
         etCalcDistM.setText("")
         etCalcDistS.setText("")
         etCalcKmh.setText("")
-        btnSegment.isVisible = false
+        btnSegment.visibility = View.GONE
         when (etID) {
             1 -> {
                 etPaceM.requestFocus()
