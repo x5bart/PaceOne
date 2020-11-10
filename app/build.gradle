@@ -1,9 +1,9 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.google.gms.google-services'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'com.google.gms.google-services'
+}
 
 android {
     signingConfigs {
@@ -30,6 +30,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-defaults.txt'), 'proguard-rules.pro'
         }
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 
