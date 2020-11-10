@@ -21,6 +21,7 @@
         <item name="android:selectAllOnFocus">true</item>
         <item name="android:backgroundTint">@color/white</item>
     </style>
+
     <style name="EditTextFontSmall" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/audiowide</item>
         <item name="android:textSize">20dp</item>
@@ -65,15 +66,16 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
     </style>
+
     <style name="FontTitle" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize" >15dp</item>
+        <item name="android:textSize">15dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="FontSmall" parent="Widget.AppCompat.TextView">
-        <item name="android:textSize" >14dp</item>
+        <item name="android:textSize">14dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
@@ -87,9 +89,12 @@
 
         <!-- цвет дорожки для неактивного состояния (30% прозрачности) -->
         <item name="android:colorForeground">@android:color/white</item>
-<item name="android:thumbTint">@color/white</item>
+        <item name="android:thumbTint">@color/white</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
 
 
 </resources>
