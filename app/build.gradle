@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         realese {
-            storeFile file('D:\\Android project\\key\\key1.jks')
+            storeFile file('/home/pavel/data/Android project/key/key1.jks')
             storePassword 'Ik9kpppP'
             keyAlias = 'x5bart'
             keyPassword 'Ik9kpppP'
