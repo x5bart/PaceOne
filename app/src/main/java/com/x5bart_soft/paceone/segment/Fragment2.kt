@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.x5bart_soft.paceone.Fragment1
 import com.x5bart_soft.paceone.MainActivity
 import com.x5bart_soft.paceone.R
+import com.x5bart_soft.paceone.databinding.Fragment2Binding
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
-import kotlinx.android.synthetic.main.fragment2.*
 import java.math.RoundingMode
 import java.util.*
 
@@ -31,6 +31,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
     var etSegId = 0
     var negSeg = 0.0
     var tmp = 0
+    lateinit var binding: Fragment2Binding
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         tmp = MainActivity.FLAG_MILE_TO_KM
@@ -64,69 +65,73 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
         val configuration = Configuration()
         configuration.locale = locale
         activity!!.baseContext.resources.updateConfiguration(configuration, null)
-        return inflater.inflate(R.layout.fragment2, container, false)
+
+        binding = Fragment2Binding.inflate(layoutInflater)
+
+        return binding.root
+//        inflater.inflate(R.layout.fragment2, container, false)
 
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
 
-        sbNegSeg.setOnSeekBarChangeListener(this)
+        binding.sbNegSeg.setOnSeekBarChangeListener(this)
         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 
         val sPref = activity!!.getPreferences(Context.MODE_PRIVATE)
         MainActivity.FLAG_MILE_TO_KM = sPref.getInt(MainActivity.APP_MILE_TO_KM, 0)
         when (MainActivity.FLAG_MILE_TO_KM) {
             1 -> {
-                textView77.text = resources.getString(R.string.km)
-                textView555.text = resources.getString(R.string.km)
-                textView11.text = resources.getString(R.string.km_2)
+                binding.textView77.text = resources.getString(R.string.km)
+                binding.textView555.text = resources.getString(R.string.km)
+                binding.textView11.text = resources.getString(R.string.km_2)
             }
             2 -> {
-                textView77.text = resources.getString(R.string.mile)
-                textView555.text = resources.getString(R.string.mile)
-                textView11.text = resources.getString(R.string.mile_3)
+                binding.textView77.text = resources.getString(R.string.mile)
+                binding.textView555.text = resources.getString(R.string.mile)
+                binding.textView11.text = resources.getString(R.string.mile_3)
             }
         }
 
 
 //        val BLOCK_ID = "adf-326819/1043357"
         val BLOCK_ID = "adf-326819/1042468"
-        banner_view_split.blockId = BLOCK_ID
-        banner_view_split.adSize = AdSize.BANNER_320x50
+        binding.bannerViewSplit.blockId = BLOCK_ID
+        binding.bannerViewSplit.adSize = AdSize.BANNER_320x50
         val adRequest = AdRequest.builder().build()
-        banner_view_split.loadAd(adRequest)
+        binding.bannerViewSplit.loadAd(adRequest)
 
         val bundle = this.arguments
         dist = bundle!!.getDouble("dist")
-        etKm.setText("$dist")
+        binding.etKm.setText("$dist")
         h = bundle.getInt("h")
         m = bundle.getInt("m")
         s = bundle.getInt("s")
-        etH.setText("$h")
-        etM.setText("$m")
-        etS.setText("$s")
+        binding.etH.setText("$h")
+        binding.etM.setText("$m")
+        binding.etS.setText("$s")
         rv()
 
-        etH.setOnFocusChangeListener { _, _ ->
+        binding.etH.setOnFocusChangeListener { _, _ ->
             etSegId = 1
         }
-        etM.setOnFocusChangeListener { _, _ ->
+        binding.etM.setOnFocusChangeListener { _, _ ->
             etSegId = 2
         }
-        etS.setOnFocusChangeListener { _, _ ->
+        binding.etS.setOnFocusChangeListener { _, _ ->
             etSegId = 3
         }
-        etKm.setOnFocusChangeListener { _, _ ->
+        binding.etKm.setOnFocusChangeListener { _, _ ->
             etSegId = 4
         }
-        etSegment.setOnFocusChangeListener { _, _ ->
+        binding.etSegment.setOnFocusChangeListener { _, _ ->
             etSegId = 5
         }
 
-        etH.addTextChangedListener(object : TextWatcher {
+        binding.etH.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (etSegId == 1) autoRv()
             }
@@ -137,7 +142,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        etM.addTextChangedListener(object : TextWatcher {
+        binding.etM.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (etSegId == 2) autoRv()
             }
@@ -148,7 +153,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        etS.addTextChangedListener(object : TextWatcher {
+        binding.etS.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (etSegId == 3) autoRv()
             }
@@ -159,7 +164,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        etKm.addTextChangedListener(object : TextWatcher {
+        binding.etKm.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (etSegId == 4) autoRv()
             }
@@ -170,7 +175,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        etSegment.addTextChangedListener(object : TextWatcher {
+        binding.etSegment.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (etSegId == 5) autoRv()
             }
@@ -182,16 +187,16 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
             }
         })
 
-        etH.setOnClickListener { etH.selectAll() }
-        etM.setOnClickListener { etM.selectAll() }
-        etS.setOnClickListener { etS.selectAll() }
-        etKm.setOnClickListener { etKm.selectAll() }
-        etSegment.setOnClickListener { etSegment.selectAll() }
-        ivNegativeSplit.setOnClickListener {
+        binding.etH.setOnClickListener { binding.etH.selectAll() }
+        binding.etM.setOnClickListener { binding.etM.selectAll() }
+        binding.etS.setOnClickListener { binding.etS.selectAll() }
+        binding.etKm.setOnClickListener { binding.etKm.selectAll() }
+        binding.etSegment.setOnClickListener { binding.etSegment.selectAll() }
+        binding.ivNegativeSplit.setOnClickListener {
             val dialog = NegativSplitDialog()
             dialog.show(fragmentManager!!, "info")
         }
-        ivInfoKm.setOnClickListener { showPopupKm(ivInfoKm) }
+        binding.ivInfoKm.setOnClickListener { showPopupKm(binding.ivInfoKm) }
 
     }
 
@@ -206,7 +211,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
         }
 
         popupMenu.setOnMenuItemClickListener { item ->
-            etKm.requestFocus()
+            binding.etKm.requestFocus()
             var tmp = 0.0
             when (item.itemId) {
                 R.id.km_3 -> tmp = 3.0
@@ -216,7 +221,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
                 R.id.km_42 -> tmp = 42.195
             }
             if (MainActivity.FLAG_MILE_TO_KM == 2) tmp /= (MainActivity.MILEKM / MainActivity.KM)
-            etKm.setText("$tmp")
+            binding.etKm.setText("$tmp")
             true
         }
         popupMenu.show()
@@ -228,7 +233,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
         fromUser: Boolean
     ) {
         val pro = progress / 2.toDouble()
-        tvNegSeg!!.text = "$pro%"
+        binding.tvNegSeg!!.text = "$pro%"
         negSeg = pro
         autoRv()
 
@@ -242,27 +247,31 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
 
     fun notNull() {
 
-        h = if (etH.text.toString().isEmpty()) 0 else etH.text.toString().toInt()
-        if (h == 0 && !etH.isFocused) etH.setText("0")
+        h = if (binding.etH.text.toString().isEmpty()) 0 else binding.etH.text.toString().toInt()
+        if (h == 0 && !binding.etH.isFocused) binding.etH.setText("0")
 
-        m = if (etM.text.toString().isEmpty()) 0 else etM.text.toString().toInt()
-        if (m == 0 && !etM.isFocused) etM.setText("00")
+        m = if (binding.etM.text.toString().isEmpty()) 0 else binding.etM.text.toString().toInt()
+        if (m == 0 && !binding.etM.isFocused) binding.etM.setText("00")
 
-        s = if (etS.text.toString().isEmpty()) 0 else etS.text.toString().toInt()
-        if (s == 0 && !etS.isFocused) etS.setText("00")
+        s = if (binding.etS.text.toString().isEmpty()) 0 else binding.etS.text.toString().toInt()
+        if (s == 0 && !binding.etS.isFocused) binding.etS.setText("00")
 
         dist =
-            if (etKm.text.toString().isEmpty() || etKm.text.toString() == ".") 0.0 else etKm.text.toString().toDouble()
-        if (dist == 0.0 && !etKm.isFocused) etKm.setText("0.0")
+            if (binding.etKm.text.toString()
+                    .isEmpty() || binding.etKm.text.toString() == "."
+            ) 0.0 else binding.etKm.text.toString().toDouble()
+        if (dist == 0.0 && !binding.etKm.isFocused) binding.etKm.setText("0.0")
 
         seg =
-            if (etSegment.text.toString().isEmpty() || etSegment.text.toString() == ".") 0.0 else etSegment.text.toString().toDouble()
-        if (seg == 0.0 && !etSegment.isFocused) etSegment.setText("0.0")
+            if (binding.etSegment.text.toString()
+                    .isEmpty() || binding.etSegment.text.toString() == "."
+            ) 0.0 else binding.etSegment.text.toString().toDouble()
+        if (seg == 0.0 && !binding.etSegment.isFocused) binding.etSegment.setText("0.0")
 
         time = (((h * MainActivity.MINUTE) + m) * MainActivity.MINUTE) + s
 
-        if (etSegId != 2 && m < 10) etM.setText("0$m")
-        if (etSegId != 3 && s < 10) etS.setText("0$s")
+        if (etSegId != 2 && m < 10) binding.etM.setText("0$m")
+        if (etSegId != 3 && s < 10) binding.etS.setText("0$s")
 
     }
 
@@ -333,12 +342,12 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
                 )
             }
             val adapter = SegmentAdapter(segments)
-            recyclerView.adapter = adapter
+            binding.recyclerView.adapter = adapter
         }
     }
 
     fun clearRv() {
-        (recyclerView.adapter as SegmentAdapter).segmentsList.clear()
+        (binding.recyclerView.adapter as SegmentAdapter).segmentsList.clear()
     }
 
     fun autoRv() {
@@ -351,7 +360,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
             .toBigDecimal()
             .setScale(3, RoundingMode.HALF_UP)
         etSegId = 4
-        etKm.setText("$res")
+        binding.etKm.setText("$res")
     }
 
     fun mileToKm() {
@@ -359,6 +368,6 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
             .toBigDecimal()
             .setScale(3, RoundingMode.HALF_UP)
         etSegId = 4
-        etKm.setText("$res")
+        binding.etKm.setText("$res")
     }
 }

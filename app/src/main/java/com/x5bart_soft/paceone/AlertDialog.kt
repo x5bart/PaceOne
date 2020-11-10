@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.dialog_alert.*
+import com.x5bart_soft.paceone.databinding.DialogAlertBinding
 
 
 class AlertDialog : DialogFragment() {
@@ -24,6 +24,7 @@ class AlertDialog : DialogFragment() {
     private var btn2Flag = 0
     var REQUEST_CODE = 0
     var FLAG = 0
+    lateinit var binding: DialogAlertBinding
 
 
     override fun onCreateView(
@@ -33,7 +34,9 @@ class AlertDialog : DialogFragment() {
     ): View? {
         dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog!!.setCanceledOnTouchOutside(false)
-        return inflater.inflate(R.layout.dialog_alert, null)
+        binding = DialogAlertBinding.inflate(layoutInflater)
+        return binding.root
+//        inflater.inflate(R.layout.dialog_alert, null)
 
     }
 
@@ -62,10 +65,10 @@ class AlertDialog : DialogFragment() {
             btn2 = getString(R.string.speedBtn)
             btn2Flag = 1
         }
-        btnDialog1.text = "$btn1"
-        btnDialog2.text = "$btn2"
+        binding.btnDialog1.text = "$btn1"
+        binding.btnDialog2.text = "$btn2"
 
-        btnDialog1.setOnClickListener {
+        binding.btnDialog1.setOnClickListener {
             FLAG = btn1Flag
             val intent = Intent()
             intent.putExtra("1", REQUEST_CODE)
@@ -74,7 +77,7 @@ class AlertDialog : DialogFragment() {
             dismiss()
             showKey()
         }
-        btnDialog2.setOnClickListener {
+        binding.btnDialog2.setOnClickListener {
             FLAG = btn2Flag
             val intent = Intent()
             intent.putExtra("1", REQUEST_CODE)

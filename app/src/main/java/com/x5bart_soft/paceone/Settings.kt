@@ -1,25 +1,22 @@
 package com.x5bart_soft.paceone
 
-import android.app.Activity
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat.invalidateOptionsMenu
-import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_settings.*
+import com.x5bart_soft.paceone.databinding.FragmentSettingsBinding
 import java.util.*
 
 
 class Settings : Fragment() {
+
+    lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +27,10 @@ class Settings : Fragment() {
         val configuration = Configuration()
         configuration.locale = locale
         activity!!.baseContext.resources.updateConfiguration(configuration, null)
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+
+        binding = FragmentSettingsBinding.inflate(layoutInflater)
+        return binding.root
+//        inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
     override fun onViewCreated(
@@ -43,27 +43,27 @@ class Settings : Fragment() {
 
         val lang = Locale.getDefault().toString()
         when (lang) {
-            "en" -> tvLanguage2.setText(R.string.english)
-            "ru" -> tvLanguage2.setText(R.string.russian)
+            "en" -> binding.tvLanguage2.setText(R.string.english)
+            "ru" -> binding.tvLanguage2.setText(R.string.russian)
         }
         when (MainActivity.FLAG_MILE_TO_KM) {
-            1 -> tvDistance2.setText(R.string.km)
-            2 -> tvDistance2.setText(R.string.mile_2)
+            1 -> binding.tvDistance2.setText(R.string.km)
+            2 -> binding.tvDistance2.setText(R.string.mile_2)
         }
 
 
-        tvLanguage2.setOnClickListener {
-            showPopupLang(tvLanguage2)
+        binding.tvLanguage2.setOnClickListener {
+            showPopupLang(binding.tvLanguage2)
         }
-        ivLanguage.setOnClickListener {
-            showPopupLang(ivLanguage)
+        binding.ivLanguage.setOnClickListener {
+            showPopupLang(binding.ivLanguage)
         }
         translate()
-        tvDistance2.setOnClickListener{
-            showPopupDist(tvDistance2)
+        binding.tvDistance2.setOnClickListener{
+            showPopupDist(binding.tvDistance2)
         }
-        ivDistanse.setOnClickListener{
-            showPopupDist(tvDistance2)
+        binding.ivDistanse.setOnClickListener{
+            showPopupDist(binding.tvDistance2)
         }
 
     }
@@ -97,12 +97,12 @@ class Settings : Fragment() {
             when (item.itemId) {
                 R.id.km -> {
                     MainActivity.FLAG_MILE_TO_KM = 1
-                    tvDistance2.setText(R.string.km)
+                    binding.tvDistance2.setText(R.string.km)
                     saveSw()
                 }
                 R.id.mile -> {
                     MainActivity.FLAG_MILE_TO_KM = 2
-                    tvDistance2.setText(R.string.mile_2)
+                    binding.tvDistance2.setText(R.string.mile_2)
                     saveSw()
                 }
             }
@@ -120,8 +120,8 @@ class Settings : Fragment() {
     }
     fun setApplicationLanguage(language: String) {
         when (language) {
-            "en" -> tvLanguage2.setText(R.string.english)
-            "ru" -> tvLanguage2.setText(R.string.russian)
+            "en" -> binding.tvLanguage2.setText(R.string.english)
+            "ru" -> binding.tvLanguage2.setText(R.string.russian)
         }
         val locale = Locale(language)
         Locale.setDefault(locale)
@@ -138,12 +138,12 @@ class Settings : Fragment() {
     }
 
     fun translate() {
-        interfaceTitle.setText(R.string.system)
-        tvLanguage.setText(R.string.language)
-        tvDistance.setText(R.string.distanceSetting)
+        binding.interfaceTitle.setText(R.string.system)
+        binding.tvLanguage.setText(R.string.language)
+        binding.tvDistance.setText(R.string.distanceSetting)
         when (MainActivity.FLAG_MILE_TO_KM) {
-            1 -> tvDistance2.setText(R.string.km)
-            2 -> tvDistance2.setText(R.string.mile_2)
+            1 -> binding.tvDistance2.setText(R.string.km)
+            2 -> binding.tvDistance2.setText(R.string.mile_2)
         }
 
     }
