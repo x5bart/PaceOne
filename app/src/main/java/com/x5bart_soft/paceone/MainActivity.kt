@@ -54,8 +54,7 @@ class MainActivity : AppCompatActivity() {
         baseContext.resources.updateConfiguration(configuration, null)
 
 
-        val toolbar = findViewById<Toolbar>(R.id.include)
-        setSupportActionBar(toolbar)
+
 
         val frg = Fragment1()
         val ft = supportFragmentManager.beginTransaction()
@@ -64,31 +63,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.helpToDev -> onInterstitialLoaded()
-            R.id.setting -> {
-                val frg = Settings()
-                val ft = supportFragmentManager.beginTransaction()
-                ft.addToBackStack("frag")
-                ft.replace(R.id.frgCont, frg, "frg")
-                ft.commit()
-            }
-            R.id.about -> {
-                val dialog = AboutDialog()
-                dialog.show(supportFragmentManager, "About")
-            }
-            R.id.exit -> {
-                finish()
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
+
 
     fun loaded() {
         val sPref = getPreferences(Context.MODE_PRIVATE)
