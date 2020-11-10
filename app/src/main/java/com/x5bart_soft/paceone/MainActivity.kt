@@ -45,11 +45,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
-        val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "id")
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "name")
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image")
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+
 
 
         val locale = Locale.getDefault()
