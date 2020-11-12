@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Pace One</string>
     <string name="km_h" translatable="false">км/ч</string>
-    <string name="km_mile" translatable="false">миль/час</string>
+    <string name="mile_hour" translatable="false">миль/час</string>
     <string name="min_km" translatable="false">мин/км</string>
     <string name="min_mile" translatable="false">мин/милю</string>
     <string name="pace" translatable="false">ТЕМП</string>

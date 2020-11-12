@@ -15,6 +15,7 @@ import java.util.*
 
 
 class Settings : Fragment() {
+    private lateinit var preference: MyPreference
 
     lateinit var binding: FragmentSettingsBinding
 
@@ -39,16 +40,18 @@ class Settings : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        Fragment1.resume = 3
+        preference = MyPreference(activity!!.applicationContext)
+
+
 
         val lang = Locale.getDefault().toString()
         when (lang) {
             "en" -> binding.tvLanguage2.setText(R.string.english)
             "ru" -> binding.tvLanguage2.setText(R.string.russian)
         }
-        when (MainActivity.FLAG_MILE_TO_KM) {
-            1 -> binding.tvDistance2.setText(R.string.km)
-            2 -> binding.tvDistance2.setText(R.string.mile_2)
+        when (Config.FLAG_MILE_TO_KM) {
+            false -> binding.tvDistance2.setText(R.string.km)
+            true -> binding.tvDistance2.setText(R.string.mile_2)
         }
 
 
@@ -96,12 +99,12 @@ class Settings : Fragment() {
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.km -> {
-                    MainActivity.FLAG_MILE_TO_KM = 1
+                    Config.FLAG_MILE_TO_KM = false
                     binding.tvDistance2.setText(R.string.km)
                     saveSw()
                 }
                 R.id.mile -> {
-                    MainActivity.FLAG_MILE_TO_KM = 2
+                    Config.FLAG_MILE_TO_KM = true
                     binding.tvDistance2.setText(R.string.mile_2)
                     saveSw()
                 }
@@ -112,11 +115,7 @@ class Settings : Fragment() {
     }
 
     fun saveSw() {
-        val sPref = activity!!.getPreferences(MODE_PRIVATE)
-        val ed = sPref.edit()
-        ed.putInt(MainActivity.APP_MILE_TO_KM, MainActivity.FLAG_MILE_TO_KM)
-        ed.apply()
-        Fragment1.resume = 1
+        preference.setUnitSw(Config.FLAG_MILE_TO_KM)
     }
     fun setApplicationLanguage(language: String) {
         when (language) {
@@ -141,9 +140,9 @@ class Settings : Fragment() {
         binding.interfaceTitle.setText(R.string.system)
         binding.tvLanguage.setText(R.string.language)
         binding.tvDistance.setText(R.string.distanceSetting)
-        when (MainActivity.FLAG_MILE_TO_KM) {
-            1 -> binding.tvDistance2.setText(R.string.km)
-            2 -> binding.tvDistance2.setText(R.string.mile_2)
+        when (Config.FLAG_MILE_TO_KM) {
+            false -> binding.tvDistance2.setText(R.string.km)
+            true -> binding.tvDistance2.setText(R.string.mile_2)
         }
 
     }

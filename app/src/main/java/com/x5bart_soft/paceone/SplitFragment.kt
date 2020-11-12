@@ -1,4 +1,4 @@
-package com.x5bart_soft.paceone.segment
+package com.x5bart_soft.paceone
 
 
 import android.content.Context
@@ -11,17 +11,20 @@ import android.widget.PopupMenu
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.x5bart_soft.paceone.Fragment1
-import com.x5bart_soft.paceone.MainActivity
-import com.x5bart_soft.paceone.R
 import com.x5bart_soft.paceone.databinding.Fragment2Binding
+import com.x5bart_soft.paceone.segment.NegativSplitDialog
+import com.x5bart_soft.paceone.segment.Segment
+import com.x5bart_soft.paceone.segment.SegmentAdapter
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
 import java.math.RoundingMode
 import java.util.*
 
-class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
+class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
+    private lateinit var preference:MyPreference
+
     private val segments = arrayListOf<Segment>()
+
     var seg = 1.0
     var dist = 0.0
     var time = 0
@@ -33,27 +36,17 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
     var tmp = 0
     lateinit var binding: Fragment2Binding
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        tmp = MainActivity.FLAG_MILE_TO_KM
-        super.onActivityCreated(savedInstanceState)
-    }
+
 
     override fun onStart() {
-        MainActivity.FLAG_MILE_TO_KM = tmp
-        when (Fragment1.resume) {
-            1 -> {
                 clearRv()
-                when (MainActivity.FLAG_MILE_TO_KM) {
-                    1 -> mileToKm()
-                    2 -> kmToMile()
-                }
-                Fragment1.resume = 2
-            }
-            3 -> {
-                clearRv()
+//                when (Config.FLAG_MILE_TO_KM) {
+//                    true -> mileToKm()
+//                    false -> kmToMile()
+//                }
                 rv()
-            }
-        }
+
+
         super.onStart()
     }
 
@@ -81,15 +74,15 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
         binding.sbNegSeg.setOnSeekBarChangeListener(this)
         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 
-        val sPref = activity!!.getPreferences(Context.MODE_PRIVATE)
-        MainActivity.FLAG_MILE_TO_KM = sPref.getInt(MainActivity.APP_MILE_TO_KM, 0)
-        when (MainActivity.FLAG_MILE_TO_KM) {
-            1 -> {
+        preference = MyPreference(activity!!.applicationContext)
+
+        when (Config.FLAG_MILE_TO_KM) {
+            false -> {
                 binding.textView77.text = resources.getString(R.string.km)
                 binding.textView555.text = resources.getString(R.string.km)
                 binding.textView11.text = resources.getString(R.string.km_2)
             }
-            2 -> {
+            true -> {
                 binding.textView77.text = resources.getString(R.string.mile)
                 binding.textView555.text = resources.getString(R.string.mile)
                 binding.textView11.text = resources.getString(R.string.mile_3)
@@ -204,7 +197,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
     fun showPopupKm(v: View) {
         val popupMenu = PopupMenu(activity, v, Gravity.NO_GRAVITY)
         popupMenu.inflate(R.menu.popup_menu_km)
-        if (MainActivity.FLAG_MILE_TO_KM == 2) {
+        if (Config.FLAG_MILE_TO_KM) {
             popupMenu.menu.findItem(R.id.km_3).setTitle(R.string._3_km_mile)
             popupMenu.menu.findItem(R.id.km_5).setTitle(R.string._5_km_mile)
             popupMenu.menu.findItem(R.id.km_10).setTitle(R.string._10_km_mile)
@@ -220,7 +213,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
                 R.id.km_21 -> tmp = 21.097
                 R.id.km_42 -> tmp = 42.195
             }
-            if (MainActivity.FLAG_MILE_TO_KM == 2) tmp /= (MainActivity.MILEKM / MainActivity.KM)
+//            if (Config.FLAG_MILE_TO_KM) tmp /= (Pace.MILEKM / Pace.KM)
             binding.etKm.setText("$tmp")
             true
         }
@@ -268,7 +261,7 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
             ) 0.0 else binding.etSegment.text.toString().toDouble()
         if (seg == 0.0 && !binding.etSegment.isFocused) binding.etSegment.setText("0.0")
 
-        time = (((h * MainActivity.MINUTE) + m) * MainActivity.MINUTE) + s
+        time = (((h * Pace.MINUTE) + m) * Pace.MINUTE) + s
 
         if (etSegId != 2 && m < 10) binding.etM.setText("0$m")
         if (etSegId != 3 && s < 10) binding.etS.setText("0$s")
@@ -308,25 +301,25 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
                 val timeSegPrint = timeSeg.toInt()
 
                 val h =
-                    (timeSumPrint / MainActivity.HOUR.toInt()).toBigDecimal()
+                    (timeSumPrint / Pace.HOUR.toInt()).toBigDecimal()
                         .setScale(0, RoundingMode.HALF_UP).toInt()
-                val m = ((timeSumPrint - (h * MainActivity.HOUR)) / MainActivity.MINUTE).toInt()
+                val m = ((timeSumPrint - (h * Pace.HOUR)) / Pace.MINUTE).toInt()
                 val s =
-                    (((timeSumPrint - (h * MainActivity.HOUR) - (m * MainActivity.MINUTE)))).toInt()
+                    (((timeSumPrint - (h * Pace.HOUR) - (m * Pace.MINUTE)))).toInt()
                 var mPrint = m.toString()
                 var sPrint = s.toString()
                 if (m < 10) mPrint = "0$m"
                 if (s < 10) sPrint = "0$s"
 
-                val pM = (timeSegPrint / MainActivity.MINUTE)
-                val pS = (timeSegPrint - (pM * MainActivity.MINUTE))
+                val pM = (timeSegPrint / Pace.MINUTE)
+                val pS = (timeSegPrint - (pM * Pace.MINUTE))
                 var pSPrint = pS.toString()
                 if (pS < 10) pSPrint = "0$pS"
 
                 val avgPace =
                     (timeSum / sg).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
-                val aM = (avgPace / MainActivity.MINUTE)
-                val aS = (avgPace - (aM * MainActivity.MINUTE))
+                val aM = (avgPace / Pace.MINUTE)
+                val aS = (avgPace - (aM * Pace.MINUTE))
                 var aSPrint = aS.toString()
                 if (aS < 10) aSPrint = "0$aS"
 
@@ -355,19 +348,19 @@ class Fragment2 : Fragment(), SeekBar.OnSeekBarChangeListener {
         rv()
     }
 
-    fun kmToMile() {
-        val res = (dist / (MainActivity.MILEKM / MainActivity.KM))
-            .toBigDecimal()
-            .setScale(3, RoundingMode.HALF_UP)
-        etSegId = 4
-        binding.etKm.setText("$res")
-    }
-
-    fun mileToKm() {
-        val res = (dist * (MainActivity.MILEKM / MainActivity.KM))
-            .toBigDecimal()
-            .setScale(3, RoundingMode.HALF_UP)
-        etSegId = 4
-        binding.etKm.setText("$res")
-    }
+//    fun kmToMile() {
+//        val res = (dist / (Pace.MILEKM / Pace.KM))
+//            .toBigDecimal()
+//            .setScale(3, RoundingMode.HALF_UP)
+//        etSegId = 4
+//        binding.etKm.setText("$res")
+//    }
+//
+//    fun mileToKm() {
+//        val res = (dist * (Pace.MILEKM / Pace.KM))
+//            .toBigDecimal()
+//            .setScale(3, RoundingMode.HALF_UP)
+//        etSegId = 4
+//        binding.etKm.setText("$res")
+//    }
 }

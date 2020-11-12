@@ -4,7 +4,7 @@
     <string name="negative_and_positive_splits">Negative and positive splits</string>
     <string name="app_name" translatable="false">Pace One</string>
     <string name="km_h" translatable="false">km/h</string>
-    <string name="km_mile" translatable="false">km/mile</string>
+    <string name="mile_hour" translatable="false">mile/hour</string>
     <string name="min_km" translatable="false">min/km</string>
     <string name="min_mile" translatable="false">min/mile</string>
     <string name="pace" translatable="false">PACE</string>

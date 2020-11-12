@@ -15,7 +15,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="5dp"
         android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/etCalcKmh"
+        app:layout_constraintBottom_toTopOf="@+id/etDistance"
         app:layout_constraintStart_toEndOf="@+id/textView77"
         app:layout_constraintTop_toTopOf="@+id/textView77"
         app:srcCompat="@android:drawable/arrow_down_float" />
@@ -64,10 +64,10 @@
         android:id="@+id/textView11"
         style="@style/FontSmall"
         android:text="@string/km"
-        app:layout_constraintEnd_toEndOf="@+id/etCalcKmh"
+        app:layout_constraintEnd_toEndOf="@+id/etDistance"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/etCalcKmh"
-        app:layout_constraintTop_toBottomOf="@+id/etCalcKmh" />
+        app:layout_constraintStart_toStartOf="@+id/etDistance"
+        app:layout_constraintTop_toBottomOf="@+id/etDistance" />
 
     <TextView
         android:id="@+id/textView2"
@@ -144,13 +144,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/etCalcKmh"
+        app:layout_constraintBottom_toBottomOf="@+id/etDistance"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         tools:visibility="invisible">
 
         <EditText
-            android:id="@+id/etCalcDistH"
+            android:id="@+id/etTimeH"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -168,7 +168,7 @@
             tools:layout_editor_absoluteX="40dp" />
 
         <EditText
-            android:id="@+id/etCalcDistM"
+            android:id="@+id/etTimeM"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -187,7 +187,7 @@
             tools:layout_editor_absoluteX="85dp" />
 
         <EditText
-            android:id="@+id/etCalcDistS"
+            android:id="@+id/etTimeS"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -200,7 +200,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/etCalcKmh"
+        android:id="@+id/etDistance"
         android:layout_width="150dp"
         android:layout_height="70dp"
         android:gravity="center"
