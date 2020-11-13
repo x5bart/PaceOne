@@ -1,7 +1,11 @@
 package com.x5bart_soft.paceone
 
+import android.content.Context
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.util.Log
 import android.widget.EditText
+import android.widget.TextView
 import androidx.core.text.isDigitsOnly
 import java.math.RoundingMode
 
@@ -100,14 +104,21 @@ class PaceFunction {
         val temp = pace.tempAll.toDouble()
         val result = time / temp
         val distance = (time / temp)
-//            .toBigDecimal()
-//            .setScale(3, RoundingMode.HALF_UP)
-//            .toDouble()
+            .toBigDecimal()
+            .setScale(3, RoundingMode.HALF_UP)
+            .toDouble()
         pace.distance = distance
         Log.d(
             TAG,
             "distance()  : distance = ${pace.distance} time  = $time temp = $temp result = $result "
         )
+    }
+
+    fun showVersion(view: TextView, context: Context) {
+        val manager: PackageManager = context.packageManager
+        val info: PackageInfo = manager.getPackageInfo(context.packageName, 0)
+        val currentVersion = "Pace One v${info.versionName}"
+        view.text = currentVersion
     }
 
 //    fun convertorKmToMile() {

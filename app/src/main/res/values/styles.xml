@@ -42,7 +42,7 @@
 
     <style name="MyButton" parent="Widget.AppCompat.Button">
         <item name="android:textSize">16dp</item>
-        <item name="android:background">@drawable/btm_rounded_corner</item>
+        <item name="android:background">@drawable/btn_rounded_corner</item>
         <item name="android:height">0dp</item>
         <item name="android:gravity">center</item>
     </style>

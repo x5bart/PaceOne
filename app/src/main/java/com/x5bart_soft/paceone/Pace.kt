@@ -17,6 +17,7 @@ object Pace {
     var activeFunction = ""
     var calculateDialog = ""
     var isInvalidInput = false
+    var activeGroup = ""
 
 
     val MINUTE = 60 //60 sec
