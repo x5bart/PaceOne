@@ -1,4 +1,4 @@
-package com.x5bart_soft.paceone.segment
+package com.x5bart_soft.paceone.split
 
 
 import android.graphics.Color

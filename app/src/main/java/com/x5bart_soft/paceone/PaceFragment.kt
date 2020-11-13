@@ -286,7 +286,6 @@ class PaceFragment : Fragment() {
     }
 
     private fun writeEt() {
-        paceObject.lod()
         when (Pace.etID) {
             "paceM" -> {
                 writePaceS()

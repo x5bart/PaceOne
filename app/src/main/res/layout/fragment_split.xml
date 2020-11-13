@@ -29,7 +29,7 @@
         tools:visibility="invisible">
 
         <EditText
-            android:id="@+id/etH"
+            android:id="@+id/et_time_h"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -47,7 +47,7 @@
             tools:layout_editor_absoluteX="40dp" />
 
         <EditText
-            android:id="@+id/etM"
+            android:id="@+id/et_time_m"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -66,7 +66,7 @@
             tools:layout_editor_absoluteX="85dp" />
 
         <EditText
-            android:id="@+id/etS"
+            android:id="@+id/et_time_s"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -96,7 +96,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView1" />
 
     <EditText
-        android:id="@+id/etKm"
+        android:id="@+id/et_distance"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginTop="1dp"
@@ -115,7 +115,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="5dp"
         android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/etKm"
+        app:layout_constraintBottom_toTopOf="@+id/et_distance"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="@+id/textView4"
         app:srcCompat="@android:drawable/arrow_down_float" />
@@ -124,10 +124,10 @@
         android:id="@+id/textView555"
         style="@style/FontSmall"
         android:text="@string/km"
-        app:layout_constraintEnd_toEndOf="@+id/etKm"
+        app:layout_constraintEnd_toEndOf="@+id/et_distance"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/etKm"
-        app:layout_constraintTop_toBottomOf="@+id/etKm" />
+        app:layout_constraintStart_toStartOf="@+id/et_distance"
+        app:layout_constraintTop_toBottomOf="@+id/et_distance" />
 
     <View
         android:id="@+id/divider5"
@@ -160,7 +160,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
-        android:id="@+id/etSegment"
+        android:id="@+id/et_split"
         style="@style/EditTextFontBig"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -178,10 +178,10 @@
         android:id="@+id/textView77"
         style="@style/FontSmall"
         android:text="@string/km"
-        app:layout_constraintEnd_toEndOf="@+id/etSegment"
+        app:layout_constraintEnd_toEndOf="@+id/et_split"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/etSegment"
-        app:layout_constraintTop_toBottomOf="@+id/etSegment" />
+        app:layout_constraintStart_toStartOf="@+id/et_split"
+        app:layout_constraintTop_toBottomOf="@+id/et_split" />
 
     <View
         android:id="@+id/divider6"
@@ -304,7 +304,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <SeekBar
-        android:id="@+id/sbNegSeg"
+        android:id="@+id/sb_split_negativ"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:indeterminate="false"
@@ -313,19 +313,19 @@
         android:thumbTint="@color/white"
         android:progress="0"
         android:progressTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/etSegment"
+        app:layout_constraintBottom_toBottomOf="@+id/et_split"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
     <TextView
-        android:id="@+id/tvNegSeg"
+        android:id="@+id/tv_slit_strategy"
         style="@style/EditTextFontSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0.0%"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/sbNegSeg"
+        app:layout_constraintBottom_toTopOf="@+id/sb_split_negativ"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
 

@@ -15,10 +15,11 @@ object Pace {
     var distance = 0.0
     var etID = ""
     var activeFunction = ""
-    var calculateDialog = ""
     var isInvalidInput = false
-    var activeGroup = ""
 
+    var splitValue = 1.0
+    var splitStrategy = 0.0
+    var etSplitId = ""
 
     val MINUTE = 60 //60 sec
     val HOUR = 3600.00 // 3600 sec

@@ -1,8 +1,6 @@
 package com.x5bart_soft.paceone
 
 
-import android.content.Context
-import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,40 +9,26 @@ import android.widget.PopupMenu
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.x5bart_soft.paceone.databinding.Fragment2Binding
-import com.x5bart_soft.paceone.segment.NegativSplitDialog
-import com.x5bart_soft.paceone.segment.Segment
-import com.x5bart_soft.paceone.segment.SegmentAdapter
+import com.x5bart_soft.paceone.databinding.FragmentSplitBinding
+import com.x5bart_soft.paceone.split.NegativSplitDialog
+import com.x5bart_soft.paceone.split.SplitAdapter
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
-import java.math.RoundingMode
-import java.util.*
 
 class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
-    private lateinit var preference:MyPreference
-
-    private val segments = arrayListOf<Segment>()
-
-    var seg = 1.0
-    var dist = 0.0
-    var time = 0
-    var h = 0
-    var m = 0
-    var s = 0
-    var etSegId = 0
-    var negSeg = 0.0
-    var tmp = 0
-    lateinit var binding: Fragment2Binding
-
+    private lateinit var preference: MyPreference
+    private lateinit var paceObject: Pace
+    private lateinit var function: SplitFunction
+    private lateinit var binding: FragmentSplitBinding
 
 
     override fun onStart() {
-                clearRv()
+//                clearRv()
 //                when (Config.FLAG_MILE_TO_KM) {
 //                    true -> mileToKm()
 //                    false -> kmToMile()
 //                }
-                rv()
+//                rv()
 
 
         super.onStart()
@@ -54,40 +38,44 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val locale = Locale.getDefault()
-        val configuration = Configuration()
-        configuration.locale = locale
-        activity!!.baseContext.resources.updateConfiguration(configuration, null)
+//        val locale = Locale.getDefault()
+//        val configuration = Configuration()
+//        configuration.locale = locale
+//        activity!!.baseContext.resources.updateConfiguration(configuration, null)
 
-        binding = Fragment2Binding.inflate(layoutInflater)
+        binding = FragmentSplitBinding.inflate(layoutInflater)
 
         return binding.root
-//        inflater.inflate(R.layout.fragment2, container, false)
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        paceObject = Pace
+        function = SplitFunction()
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        paceObject.etSplitId = "all"
+        if (paceObject.timeAll != 0 || paceObject.distance != 0.0) {
+            writeEt()
+            function.createSplitList(binding.recyclerView)
+        }
 
-        binding.sbNegSeg.setOnSeekBarChangeListener(this)
+        binding.sbSplitNegativ.setOnSeekBarChangeListener(this)
         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 
         preference = MyPreference(activity!!.applicationContext)
 
-        when (Config.FLAG_MILE_TO_KM) {
-            false -> {
-                binding.textView77.text = resources.getString(R.string.km)
-                binding.textView555.text = resources.getString(R.string.km)
-                binding.textView11.text = resources.getString(R.string.km_2)
-            }
-            true -> {
-                binding.textView77.text = resources.getString(R.string.mile)
-                binding.textView555.text = resources.getString(R.string.mile)
-                binding.textView11.text = resources.getString(R.string.mile_3)
-            }
-        }
+//        when (Config.FLAG_MILE_TO_KM) {
+//            false -> {
+//                binding.textView77.text = resources.getString(R.string.km)
+//                binding.textView555.text = resources.getString(R.string.km)
+//                binding.textView11.text = resources.getString(R.string.km_2)
+//            }
+//            true -> {
+//                binding.textView77.text = resources.getString(R.string.mile)
+//                binding.textView555.text = resources.getString(R.string.mile)
+//                binding.textView11.text = resources.getString(R.string.mile_3)
+//            }
+//        }
 
 
 //        val BLOCK_ID = "adf-326819/1043357"
@@ -97,36 +85,20 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         val adRequest = AdRequest.builder().build()
         binding.bannerViewSplit.loadAd(adRequest)
 
-        val bundle = this.arguments
-        dist = bundle!!.getDouble("dist")
-        binding.etKm.setText("$dist")
-        h = bundle.getInt("h")
-        m = bundle.getInt("m")
-        s = bundle.getInt("s")
-        binding.etH.setText("$h")
-        binding.etM.setText("$m")
-        binding.etS.setText("$s")
-        rv()
 
-        binding.etH.setOnFocusChangeListener { _, _ ->
-            etSegId = 1
-        }
-        binding.etM.setOnFocusChangeListener { _, _ ->
-            etSegId = 2
-        }
-        binding.etS.setOnFocusChangeListener { _, _ ->
-            etSegId = 3
-        }
-        binding.etKm.setOnFocusChangeListener { _, _ ->
-            etSegId = 4
-        }
-        binding.etSegment.setOnFocusChangeListener { _, _ ->
-            etSegId = 5
-        }
+        binding.etTimeH.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "timeH" }
+        binding.etTimeM.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "timeM" }
+        binding.etTimeS.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "timeS" }
+        binding.etDistance.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "dist" }
+        binding.etSplit.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "split" }
 
-        binding.etH.addTextChangedListener(object : TextWatcher {
+        binding.etTimeH.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (etSegId == 1) autoRv()
+                if (paceObject.etSplitId == "timeH") {
+                    paceObject.timeH = function.readEt(binding.etTimeH).toInt()
+                    function.timeAll()
+                    autoRv()
+                }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -135,9 +107,13 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etM.addTextChangedListener(object : TextWatcher {
+        binding.etTimeM.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (etSegId == 2) autoRv()
+                if (paceObject.etSplitId == "timeM") {
+                    paceObject.timeM = function.readEt(binding.etTimeM).toInt()
+                    function.timeAll()
+                    autoRv()
+                }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -146,9 +122,13 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etS.addTextChangedListener(object : TextWatcher {
+        binding.etTimeS.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (etSegId == 3) autoRv()
+                if (paceObject.etSplitId == "timeS") {
+                    paceObject.timeS = function.readEt(binding.etTimeS).toInt()
+                    function.timeAll()
+                    autoRv()
+                }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -157,9 +137,13 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etKm.addTextChangedListener(object : TextWatcher {
+        binding.etDistance.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (etSegId == 4) autoRv()
+                if (paceObject.etSplitId == "dist") {
+                    paceObject.distance = function.readEt(binding.etDistance).toDouble()
+                    function.speedToTemp()
+                    autoRv()
+                }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -168,9 +152,12 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etSegment.addTextChangedListener(object : TextWatcher {
+        binding.etSplit.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                if (etSegId == 5) autoRv()
+                if (paceObject.etSplitId == "split") {
+                    paceObject.splitValue = function.readEt(binding.etSplit).toDouble()
+                    autoRv()
+                }
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -180,11 +167,11 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
             }
         })
 
-        binding.etH.setOnClickListener { binding.etH.selectAll() }
-        binding.etM.setOnClickListener { binding.etM.selectAll() }
-        binding.etS.setOnClickListener { binding.etS.selectAll() }
-        binding.etKm.setOnClickListener { binding.etKm.selectAll() }
-        binding.etSegment.setOnClickListener { binding.etSegment.selectAll() }
+        binding.etTimeH.setOnClickListener { binding.etTimeH.selectAll() }
+        binding.etTimeM.setOnClickListener { binding.etTimeM.selectAll() }
+        binding.etTimeS.setOnClickListener { binding.etTimeS.selectAll() }
+        binding.etDistance.setOnClickListener { binding.etDistance.selectAll() }
+        binding.etSplit.setOnClickListener { binding.etSplit.selectAll() }
         binding.ivNegativeSplit.setOnClickListener {
             val dialog = NegativSplitDialog()
             dialog.show(fragmentManager!!, "info")
@@ -193,6 +180,60 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 
     }
 
+    private fun writeEt() {
+        when (paceObject.etSplitId) {
+
+            "all" -> {
+                binding.etTimeH.setText(paceObject.timeH.toString())
+                writeTimeM()
+                writeTimeS()
+                binding.etDistance.setText(paceObject.distance.toString())
+                binding.etSplit.setText(paceObject.splitValue.toString())
+            }
+            "timeH" -> {
+                writeTimeM()
+                writeTimeS()
+                binding.etDistance.setText(paceObject.distance.toString())
+                binding.etSplit.setText(paceObject.splitValue.toString())
+            }
+            "timeM" -> {
+                binding.etTimeH.setText(paceObject.timeH.toString())
+                writeTimeS()
+                binding.etDistance.setText(paceObject.distance.toString())
+                binding.etSplit.setText(paceObject.splitValue.toString())
+            }
+            "timeS" -> {
+                binding.etTimeH.setText(paceObject.timeH.toString())
+                writeTimeM()
+                binding.etDistance.setText(paceObject.distance.toString())
+                binding.etSplit.setText(paceObject.splitValue.toString())
+
+            }
+            "dist" -> {
+                binding.etTimeH.setText(paceObject.timeH.toString())
+                writeTimeM()
+                writeTimeS()
+                binding.etSplit.setText(paceObject.splitValue.toString())
+            }
+            "split" -> {
+                binding.etTimeH.setText(paceObject.timeH.toString())
+                writeTimeM()
+                writeTimeS()
+                binding.etDistance.setText(paceObject.distance.toString())
+
+            }
+        }
+    }
+
+    private fun writeTimeM() {
+        if (paceObject.timeM < 10) binding.etTimeM.setText("0${paceObject.timeM}")
+        else binding.etTimeM.setText(paceObject.timeM.toString())
+    }
+
+    private fun writeTimeS() {
+        if (paceObject.timeS < 10) binding.etTimeS.setText("0${paceObject.timeS}")
+        else binding.etTimeS.setText(paceObject.timeS.toString())
+    }
 
     fun showPopupKm(v: View) {
         val popupMenu = PopupMenu(activity, v, Gravity.NO_GRAVITY)
@@ -204,7 +245,7 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         }
 
         popupMenu.setOnMenuItemClickListener { item ->
-            binding.etKm.requestFocus()
+            binding.etDistance.requestFocus()
             var tmp = 0.0
             when (item.itemId) {
                 R.id.km_3 -> tmp = 3.0
@@ -214,11 +255,12 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
                 R.id.km_42 -> tmp = 42.195
             }
 //            if (Config.FLAG_MILE_TO_KM) tmp /= (Pace.MILEKM / Pace.KM)
-            binding.etKm.setText("$tmp")
+            binding.etDistance.setText("$tmp")
             true
         }
         popupMenu.show()
     }
+
 
     override fun onProgressChanged(
         seekBar: SeekBar,
@@ -226,8 +268,8 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         fromUser: Boolean
     ) {
         val pro = progress / 2.toDouble()
-        binding.tvNegSeg!!.text = "$pro%"
-        negSeg = pro
+        binding.tvSlitStrategy!!.text = "$pro%"
+        paceObject.splitStrategy = pro
         autoRv()
 
     }
@@ -238,115 +280,18 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     override fun onStopTrackingTouch(seekBar: SeekBar) {
     }
 
-    fun notNull() {
 
-        h = if (binding.etH.text.toString().isEmpty()) 0 else binding.etH.text.toString().toInt()
-        if (h == 0 && !binding.etH.isFocused) binding.etH.setText("0")
-
-        m = if (binding.etM.text.toString().isEmpty()) 0 else binding.etM.text.toString().toInt()
-        if (m == 0 && !binding.etM.isFocused) binding.etM.setText("00")
-
-        s = if (binding.etS.text.toString().isEmpty()) 0 else binding.etS.text.toString().toInt()
-        if (s == 0 && !binding.etS.isFocused) binding.etS.setText("00")
-
-        dist =
-            if (binding.etKm.text.toString()
-                    .isEmpty() || binding.etKm.text.toString() == "."
-            ) 0.0 else binding.etKm.text.toString().toDouble()
-        if (dist == 0.0 && !binding.etKm.isFocused) binding.etKm.setText("0.0")
-
-        seg =
-            if (binding.etSegment.text.toString()
-                    .isEmpty() || binding.etSegment.text.toString() == "."
-            ) 0.0 else binding.etSegment.text.toString().toDouble()
-        if (seg == 0.0 && !binding.etSegment.isFocused) binding.etSegment.setText("0.0")
-
-        time = (((h * Pace.MINUTE) + m) * Pace.MINUTE) + s
-
-        if (etSegId != 2 && m < 10) binding.etM.setText("0$m")
-        if (etSegId != 3 && s < 10) binding.etS.setText("0$s")
-
+    private fun clearRv() {
+        (binding.recyclerView.adapter as SplitAdapter).segmentsList.clear()
     }
 
-    private fun rv() {
-        notNull()
-        if (time != 0 && dist != 0.0 && seg != 0.0) {
-            val count = (dist / seg).toBigDecimal().setScale(0, RoundingMode.UP).toInt()
-            val pace = time / dist // секунд на км средняя
-            val negativ = (negSeg / 100)
-            val negDelta = ((1 - negativ) - (1 + negativ))
-            var timeNext = 0.0
-
-            var i = 0
-            while (i != count) {
-                i++
-                var sg = (seg * i).toBigDecimal().setScale(2, RoundingMode.HALF_EVEN).toDouble()
-                if (sg > dist) {
-                    seg = dist - (sg - seg)
-                    sg = dist
-                }
-
-                val percentNext = sg / dist
-                val percentPrev = (seg * (i - 1)) / dist
-
-                val coefNext = negDelta * percentNext
-                val coefPrev = negDelta * percentPrev
-                val coefAvg = ((coefPrev) + (coefNext)) / 2
-                val timeSeg = ((pace * seg) * (1 - (negativ + coefAvg)))
-
-                val timeSum = (timeSeg + timeNext)
-                timeNext = timeSum
-                val timeSumPrint =
-                    timeSum.toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
-                val timeSegPrint = timeSeg.toInt()
-
-                val h =
-                    (timeSumPrint / Pace.HOUR.toInt()).toBigDecimal()
-                        .setScale(0, RoundingMode.HALF_UP).toInt()
-                val m = ((timeSumPrint - (h * Pace.HOUR)) / Pace.MINUTE).toInt()
-                val s =
-                    (((timeSumPrint - (h * Pace.HOUR) - (m * Pace.MINUTE)))).toInt()
-                var mPrint = m.toString()
-                var sPrint = s.toString()
-                if (m < 10) mPrint = "0$m"
-                if (s < 10) sPrint = "0$s"
-
-                val pM = (timeSegPrint / Pace.MINUTE)
-                val pS = (timeSegPrint - (pM * Pace.MINUTE))
-                var pSPrint = pS.toString()
-                if (pS < 10) pSPrint = "0$pS"
-
-                val avgPace =
-                    (timeSum / sg).toBigDecimal().setScale(0, RoundingMode.HALF_UP).toInt()
-                val aM = (avgPace / Pace.MINUTE)
-                val aS = (avgPace - (aM * Pace.MINUTE))
-                var aSPrint = aS.toString()
-                if (aS < 10) aSPrint = "0$aS"
-
-
-                segments.add(
-                    Segment(
-                        i,
-                        sg,
-                        "$h:$mPrint:$sPrint",
-                        "$pM:$pSPrint",
-                        "$aM:$aSPrint"
-                    )
-                )
-            }
-            val adapter = SegmentAdapter(segments)
-            binding.recyclerView.adapter = adapter
-        }
-    }
-
-    fun clearRv() {
-        (binding.recyclerView.adapter as SegmentAdapter).segmentsList.clear()
-    }
-
+    //
     fun autoRv() {
         clearRv()
-        rv()
+        function.createSplitList(binding.recyclerView)
+        writeEt()
     }
+}
 
 //    fun kmToMile() {
 //        val res = (dist / (Pace.MILEKM / Pace.KM))
@@ -363,4 +308,4 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 //        etSegId = 4
 //        binding.etKm.setText("$res")
 //    }
-}
+
