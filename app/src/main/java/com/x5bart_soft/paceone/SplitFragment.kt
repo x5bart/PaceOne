@@ -21,19 +21,6 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     private lateinit var function: SplitFunction
     private lateinit var binding: FragmentSplitBinding
 
-
-    override fun onStart() {
-//                clearRv()
-//                when (Config.FLAG_MILE_TO_KM) {
-//                    true -> mileToKm()
-//                    false -> kmToMile()
-//                }
-//                rv()
-
-
-        super.onStart()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +31,6 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 //        activity!!.baseContext.resources.updateConfiguration(configuration, null)
 
         binding = FragmentSplitBinding.inflate(layoutInflater)
-
         return binding.root
     }
 
@@ -52,7 +38,9 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         super.onViewCreated(view, savedInstanceState)
         paceObject = Pace
         function = SplitFunction()
+
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+
         paceObject.etSplitId = "all"
         if (paceObject.timeAll != 0 || paceObject.distance != 0.0) {
             writeEt()
@@ -63,6 +51,8 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 
         preference = MyPreference(activity!!.applicationContext)
+
+        viewBehavior()
 
 //        when (Config.FLAG_MILE_TO_KM) {
 //            false -> {
@@ -86,6 +76,12 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         binding.bannerViewSplit.loadAd(adRequest)
 
 
+
+
+
+    }
+
+    private fun viewBehavior(){
         binding.etTimeH.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "timeH" }
         binding.etTimeM.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "timeM" }
         binding.etTimeS.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "timeS" }
@@ -177,7 +173,6 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
             dialog.show(fragmentManager!!, "info")
         }
         binding.ivInfoKm.setOnClickListener { showPopupKm(binding.ivInfoKm) }
-
     }
 
     private fun writeEt() {
@@ -235,14 +230,14 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         else binding.etTimeS.setText(paceObject.timeS.toString())
     }
 
-    fun showPopupKm(v: View) {
+    private fun showPopupKm(v: View) {
         val popupMenu = PopupMenu(activity, v, Gravity.NO_GRAVITY)
         popupMenu.inflate(R.menu.popup_menu_km)
-        if (Config.FLAG_MILE_TO_KM) {
-            popupMenu.menu.findItem(R.id.km_3).setTitle(R.string._3_km_mile)
-            popupMenu.menu.findItem(R.id.km_5).setTitle(R.string._5_km_mile)
-            popupMenu.menu.findItem(R.id.km_10).setTitle(R.string._10_km_mile)
-        }
+//        if (Config.FLAG_MILE_TO_KM) {
+//            popupMenu.menu.findItem(R.id.km_3).setTitle(R.string._3_km_mile)
+//            popupMenu.menu.findItem(R.id.km_5).setTitle(R.string._5_km_mile)
+//            popupMenu.menu.findItem(R.id.km_10).setTitle(R.string._10_km_mile)
+//        }
 
         popupMenu.setOnMenuItemClickListener { item ->
             binding.etDistance.requestFocus()
@@ -261,14 +256,9 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         popupMenu.show()
     }
 
-
-    override fun onProgressChanged(
-        seekBar: SeekBar,
-        progress: Int,
-        fromUser: Boolean
-    ) {
+    override fun onProgressChanged(seekBar: SeekBar,progress: Int,fromUser: Boolean) {
         val pro = progress / 2.toDouble()
-        binding.tvSlitStrategy!!.text = "$pro%"
+        binding.tvSlitStrategy.text = "$pro%"
         paceObject.splitStrategy = pro
         autoRv()
 
@@ -280,12 +270,10 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     override fun onStopTrackingTouch(seekBar: SeekBar) {
     }
 
-
     private fun clearRv() {
         (binding.recyclerView.adapter as SplitAdapter).segmentsList.clear()
     }
 
-    //
     fun autoRv() {
         clearRv()
         function.createSplitList(binding.recyclerView)
