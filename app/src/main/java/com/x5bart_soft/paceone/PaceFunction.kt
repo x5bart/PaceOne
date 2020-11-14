@@ -156,6 +156,7 @@ class PaceFunction {
         pace.distance = 0.0
         pace.etID = ""
         pace.activeFunction = ""
+        pace.splitIsEmty = true
     }
 
 

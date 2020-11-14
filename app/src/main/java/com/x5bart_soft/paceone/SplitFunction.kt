@@ -11,7 +11,8 @@ class SplitFunction {
     val paceObject = Pace
     private val splits = arrayListOf<Split>()
 
-    fun createSplitList(viev:RecyclerView) {
+    fun createSplitList(viev: RecyclerView) {
+
 
         val timeAll = paceObject.timeAll
         val distance = paceObject.distance
@@ -19,6 +20,7 @@ class SplitFunction {
         val splitStrategy = paceObject.splitStrategy
 
         if (timeAll != 0 && distance != 0.0 && splitValue != 0.0) {
+            paceObject.splitIsEmty = false
             val splitCount = (distance / splitValue)
                 .toBigDecimal()
                 .setScale(0, RoundingMode.UP)
@@ -114,6 +116,7 @@ class SplitFunction {
             return value
         }
     }
+
     fun timeAll() {
         val timeH = paceObject.timeH
         val timeM = paceObject.timeM

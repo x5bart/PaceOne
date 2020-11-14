@@ -5,10 +5,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fragment_rounded"
-    tools:context=".SplitFragment">
+    tools:context=".WingsFragment">
     <!--time-->
+    <SeekBar
+        android:id="@+id/sb_split_negativ2"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:max="10"
+        android:min="-10"
+        android:progress="0"
+        android:progressTint="@color/white"
+        android:thumbTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/et_split"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+
+    <EditText
+        android:id="@+id/etPaceM2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="2"
+        android:theme="@style/EditTextFontSmall"
+        app:layout_constraintBottom_toTopOf="@+id/divider6"
+        app:layout_constraintEnd_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/divider11" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/audiowide"
+        android:text=":"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etPaceS2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+
+    <TextView
+        android:id="@+id/textView15"
+        style="@style/FontSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/min_km"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/etPaceM2" />
+
+    <TextView
+        android:id="@+id/textView19"
+        style="@style/FontTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pace"
+        app:layout_constraintBottom_toTopOf="@+id/etPaceM2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+
+    <EditText
+        android:id="@+id/etPaceS2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="2"
+        android:theme="@style/EditTextFontSmall"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/etPaceM2" />
+
     <View
-        android:id="@+id/divider12"
+        android:id="@+id/divider13"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="30dp"
@@ -31,9 +103,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/divider5"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_distance"
+        app:layout_constraintTop_toBottomOf="@+id/divider13"
         tools:visibility="invisible">
 
         <EditText
@@ -98,10 +171,10 @@
         android:id="@+id/textView4"
         style="@style/FontTitle"
         android:text="@string/distance"
-        app:layout_constraintBottom_toTopOf="@+id/et_distance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/tv_titleTime" />
 
     <EditText
         android:id="@+id/et_distance"
@@ -112,10 +185,9 @@
         android:inputType="numberDecimal"
         android:maxLength="6"
         android:theme="@style/EditTextFontSmall"
-        app:layout_constraintBottom_toTopOf="@+id/divider5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/divider12" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_titleTime" />
 
     <ImageView
         android:id="@+id/ivInfoKm"
@@ -143,9 +215,19 @@
         android:layout_height="1dp"
         android:layout_marginTop="125dp"
         android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/divider12"
+        app:layout_constraintTop_toBottomOf="@+id/divider13"
         tools:layout_editor_absoluteX="1dp" />
     <!--segment-->
+
+    <View
+        android:id="@+id/divider11"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="125dp"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/divider5"
+        tools:layout_editor_absoluteX="0dp" />
+
     <TextView
         android:id="@+id/textView6"
         style="@style/FontTitle"
@@ -175,7 +257,7 @@
         android:inputType="numberDecimal"
         android:text="1.00"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/divider6"
+        app:layout_constraintBottom_toTopOf="@+id/divider11"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -196,7 +278,7 @@
         android:layout_height="2dp"
         android:layout_marginTop="125dp"
         android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/divider5"
+        app:layout_constraintTop_toBottomOf="@+id/divider11"
         tools:layout_editor_absoluteX="1dp" />
 
     <LinearLayout
@@ -323,6 +405,22 @@
         app:layout_constraintBottom_toBottomOf="@+id/et_split"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
+
+    <SeekBar
+        android:id="@+id/sb_split_distance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:min="1"
+        android:progress="15"
+        android:progressTint="@color/white"
+        android:thumbTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/divider6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <TextView
         android:id="@+id/tv_slit_strategy"

@@ -23,12 +23,11 @@
     <TextView
         android:id="@+id/textView6"
         style="@style/FontTitle"
-        android:layout_marginTop="20dp"
         android:text="@string/time"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintTop_toTopOf="@+id/textView77" />
 
     <EditText
         android:id="@+id/etSpeed"
@@ -95,12 +94,11 @@
     <TextView
         android:id="@+id/textView3"
         style="@style/FontTitle"
-        android:layout_marginTop="20dp"
         android:text="@string/pace"
+        app:layout_constraintBottom_toTopOf="@+id/etPaceM"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swKmToMile" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/etPaceM"
@@ -111,8 +109,9 @@
         android:inputType="number"
         android:maxLength="2"
         android:theme="@style/EditTextFontBig"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintEnd_toStartOf="@+id/textView555"
-        app:layout_constraintTop_toBottomOf="@id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/divider7" />
 
     <EditText
         android:id="@+id/etPaceS"
@@ -207,43 +206,45 @@
         android:inputType="numberDecimal"
         android:maxLength="6"
         android:theme="@style/EditTextFontBig"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView77" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="125dp"
         android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/divider7"
         tools:layout_editor_absoluteX="0dp" />
 
     <View
         android:id="@+id/divider7"
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_marginTop="30dp"
         android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/swKmToMile"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="1dp" />
 
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="125dp"
         android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
         tools:layout_editor_absoluteX="-16dp" />
 
     <TextView
         android:id="@+id/textView77"
         style="@style/FontTitle"
         android:text="@string/distance"
+        app:layout_constraintBottom_toTopOf="@+id/etDistance"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
 
     <Button
         android:id="@+id/btClear"

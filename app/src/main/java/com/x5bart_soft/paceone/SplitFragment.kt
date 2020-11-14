@@ -76,12 +76,9 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         binding.bannerViewSplit.loadAd(adRequest)
 
 
-
-
-
     }
 
-    private fun viewBehavior(){
+    private fun viewBehavior() {
         binding.etTimeH.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "timeH" }
         binding.etTimeM.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "timeM" }
         binding.etTimeS.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "timeS" }
@@ -256,7 +253,7 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         popupMenu.show()
     }
 
-    override fun onProgressChanged(seekBar: SeekBar,progress: Int,fromUser: Boolean) {
+    override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
         val pro = progress / 2.toDouble()
         binding.tvSlitStrategy.text = "$pro%"
         paceObject.splitStrategy = pro
@@ -275,7 +272,7 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     }
 
     fun autoRv() {
-        clearRv()
+        if (!paceObject.splitIsEmty) clearRv()
         function.createSplitList(binding.recyclerView)
         writeEt()
     }

@@ -48,6 +48,11 @@ class PaceFragment : Fragment() {
         paceObject = Pace
         function.showVersion(binding.tvVersion, this.activity!!)
 
+        if (paceObject.timeAll != 0 || paceObject.speed != 0.0 || paceObject.distance != 0.0) {
+            paceObject.etID = "all"
+            writeEt()
+        }
+
         val BLOCK_ID = "adf-326819/1042468"
         binding.bannerView.blockId = BLOCK_ID
         binding.bannerView.adSize = AdSize.BANNER_320x50
@@ -68,6 +73,7 @@ class PaceFragment : Fragment() {
     }
 
     fun listeners() {
+
         when (paceObject.etID) {
 
             "paceM" -> {
@@ -287,6 +293,16 @@ class PaceFragment : Fragment() {
 
     private fun writeEt() {
         when (Pace.etID) {
+            "all" -> {
+                binding.etPaceM.setText(paceObject.tempM.toString())
+                writePaceS()
+                binding.etSpeed.setText(paceObject.speed.toString())
+                binding.etTimeH.setText(paceObject.timeH.toString())
+                writeTimeM()
+                writeTimeS()
+                binding.etDistance.setText(paceObject.distance.toString())
+
+            }
             "paceM" -> {
                 writePaceS()
                 binding.etSpeed.setText(paceObject.speed.toString())
