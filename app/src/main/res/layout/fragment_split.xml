@@ -95,7 +95,7 @@
 
     <!--distance-->
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tv_titleDistance"
         style="@style/FontTitle"
         android:text="@string/distance"
         app:layout_constraintBottom_toTopOf="@+id/et_distance"
@@ -124,8 +124,8 @@
         android:layout_marginStart="5dp"
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/et_distance"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/tv_titleDistance"
+        app:layout_constraintTop_toTopOf="@+id/tv_titleDistance"
         android:background="@drawable/ic_round_arrow_drop_down" />
 
     <TextView
@@ -147,7 +147,7 @@
         tools:layout_editor_absoluteX="1dp" />
     <!--segment-->
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tv_titleSplit"
         style="@style/FontTitle"
         android:text="@string/segment"
         app:layout_constraintBottom_toTopOf="@+id/et_split"
@@ -156,14 +156,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/tv_titleStrategy"
         style="@style/FontTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/splitFactor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+        app:layout_constraintTop_toTopOf="@+id/tv_titleSplit" />
 
     <EditText
         android:id="@+id/et_split"
@@ -182,7 +182,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
     <TextView
-        android:id="@+id/textView77"
+        android:id="@+id/tv_signSplit"
         style="@style/FontSmall"
         android:text="@string/km"
         app:layout_constraintEnd_toEndOf="@+id/et_split"
@@ -200,7 +200,7 @@
         tools:layout_editor_absoluteX="1dp" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/header_splits"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -261,11 +261,11 @@
 
     <!--recycleView-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rv_splits"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/divider4"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/header_splits"
         tools:layout_editor_absoluteX="1dp" />
 
     <!--guideline-->
@@ -343,9 +343,9 @@
         android:layout_marginStart="5dp"
         android:clickable="true"
         android:src="@android:drawable/ic_dialog_info"
-        app:layout_constraintBottom_toBottomOf="@+id/textView16"
-        app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="@+id/textView16" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_titleStrategy"
+        app:layout_constraintStart_toEndOf="@+id/tv_titleStrategy"
+        app:layout_constraintTop_toTopOf="@+id/tv_titleStrategy" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.x5bart_soft.paceone
 
+import android.icu.number.NumberFormatter
 import android.util.Log
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
@@ -8,19 +9,21 @@ import com.x5bart_soft.paceone.split.SplitAdapter
 import java.math.RoundingMode
 
 class SplitFunction {
-    val paceObject = Pace
+    private val paceObject = Pace
     private val splits = arrayListOf<Split>()
 
-    fun createSplitList(viev: RecyclerView) {
+    fun createSplitList(
+        view: RecyclerView,
+        timeAll: Int,
+        distance: Double,
+        splitValue: Double,
+        splitStrategy: Double
+    ): Boolean {
 
-
-        val timeAll = paceObject.timeAll
-        val distance = paceObject.distance
-        var splitValue = paceObject.splitValue
-        val splitStrategy = paceObject.splitStrategy
+        var splitIsEmpty = true
 
         if (timeAll != 0 && distance != 0.0 && splitValue != 0.0) {
-            paceObject.splitIsEmty = false
+            splitIsEmpty = false
             val splitCount = (distance / splitValue)
                 .toBigDecimal()
                 .setScale(0, RoundingMode.UP)
@@ -29,20 +32,20 @@ class SplitFunction {
             val splitStrategyPercent = (splitStrategy / 100)
             val splitStrategyDelta = ((1 - splitStrategyPercent) - (1 + splitStrategyPercent))
             var timeNextSplit = 0.0
-            var slitNumber = 0
+            var splitNumber = 0
 
-            while (slitNumber != splitCount) {
+            while (splitNumber != splitCount) {
 
                 // #1 Number
-                slitNumber++
+                splitNumber++
 
                 //#2 km
-                var splitDistance = (splitValue * slitNumber)
+                var splitDistance = (splitValue * splitNumber)
                     .toBigDecimal()
                     .setScale(2, RoundingMode.HALF_EVEN)
                     .toDouble()
                 if (splitDistance > distance) {
-                    splitValue = distance - (splitDistance - splitValue)
+//                    splitValue = distance - (splitDistance - splitValue)
                     splitDistance = distance
                 }
 
@@ -50,7 +53,7 @@ class SplitFunction {
                 //#3 time
                 //negativSplit
                 val percentNext = splitDistance / distance
-                val percentPrev = (splitValue * (slitNumber - 1)) / distance
+                val percentPrev = (splitValue * (splitNumber - 1)) / distance
 
                 val coefNext = splitStrategyDelta * percentNext
                 val coefPrev = splitStrategyDelta * percentPrev
@@ -96,12 +99,12 @@ class SplitFunction {
                 if (avgS < 10) avgSPrint = "0$avgS"
                 val avg = "$avgM:$avgSPrint"
 
-                splits.add(Split(slitNumber, splitDistance, time, temp, avg))
+                splits.add(Split(splitNumber, splitDistance, time, temp, avg))
             }
             val adapter = SplitAdapter(splits)
-            viev.adapter = adapter
-
+            view.adapter = adapter
         }
+        return splitIsEmpty
     }
 
     fun readEt(view: EditText): String {
@@ -139,6 +142,16 @@ class SplitFunction {
         Log.d(TAG, "speedToTemp() : tempAll = ${paceObject.tempAll}")
 
     }
+
+    fun clearRv(recyclerView: RecyclerView) {
+        (recyclerView.adapter as SplitAdapter).segmentsList.clear()
+
+        recyclerView.recycledViewPool.clear()
+        recyclerView.removeAllViews()
+        recyclerView.removeAllViewsInLayout()
+
+    }
+
 
 
 }

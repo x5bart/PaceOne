@@ -20,7 +20,7 @@ object Pace {
     var splitValue = 1.0
     var splitStrategy = 0.0
     var etSplitId = ""
-    var splitIsEmty = true
+    var splitIsEmpty = true
 
     val MINUTE = 60 //60 sec
     val HOUR = 3600.00 // 3600 sec

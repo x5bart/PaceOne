@@ -3,10 +3,8 @@ package com.x5bart_soft.paceone
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
-import androidx.core.text.isDigitsOnly
 import java.math.RoundingMode
 
 class PaceFunction {
@@ -15,7 +13,6 @@ class PaceFunction {
 
     fun readEt(view: EditText): String {
         var value = view.text.toString()
-        Log.d(TAG, "readEt: value = $value")
         if (value.isEmpty() || value == ".") {
             value = "0"
             pace.isInvalidInput = true
@@ -30,7 +27,6 @@ class PaceFunction {
         val tempM = pace.tempM
         val tempS = pace.tempS
         pace.tempAll = tempM * pace.MINUTE + tempS
-        Log.d(TAG, "tempAll(): tempAll = ${pace.tempAll}")
     }
 
     fun timeAll() {
@@ -38,7 +34,6 @@ class PaceFunction {
         val timeM = pace.timeM
         val timeS = pace.timeS
         pace.timeAll = (((timeH * pace.MINUTE) + timeM) * pace.MINUTE) + timeS
-        Log.d(TAG, "timeAll(): timeAll = ${pace.timeAll}")
     }
 
     fun tempToSpeed() {
@@ -49,7 +44,6 @@ class PaceFunction {
                 .toBigDecimal()
                 .setScale(2, RoundingMode.HALF_UP)
                 .toDouble()
-        Log.d(TAG, "tempToSpeed(): speed = ${pace.speed}")
     }
 
     fun speedToTemp() {
@@ -63,7 +57,6 @@ class PaceFunction {
         val tempM = tempAll / pace.MINUTE
         pace.tempM = tempM
         pace.tempS = tempAll - (tempM * pace.MINUTE)
-        Log.d(TAG, "speedToTemp() : tempAll = ${pace.tempAll}")
 
     }
 
@@ -76,18 +69,14 @@ class PaceFunction {
             .toBigDecimal()
             .setScale(2, RoundingMode.HALF_UP)
             .toDouble()
-        Log.d(TAG, "speed() : speed = ${pace.speed}")
         speedToTemp()
 
     }
 
     fun time() {
         val distance = pace.distance
-        val speed = pace.speed
-        val timeAll = (distance / speed * pace.HOUR)
-            .toBigDecimal()
-            .setScale(2, RoundingMode.HALF_UP)
-            .toInt()
+        val tempAll = pace.tempAll
+        val timeAll = (distance * tempAll ).toInt()
         val timeH = timeAll / pace.HOUR.toInt()
         val timeM = ((timeAll - (timeH * pace.HOUR)) / pace.MINUTE).toInt()
         val timeS = (timeAll - (timeH * pace.HOUR) - (timeM * pace.MINUTE)).toInt()
@@ -96,22 +85,16 @@ class PaceFunction {
         pace.timeM = timeM
         pace.timeS = timeS
 
-        Log.d(TAG, "time() : timeAll = ${pace.timeAll}")
     }
 
     fun distance() {
         val time = pace.timeAll.toDouble()
         val temp = pace.tempAll.toDouble()
-        val result = time / temp
         val distance = (time / temp)
             .toBigDecimal()
             .setScale(3, RoundingMode.HALF_UP)
             .toDouble()
         pace.distance = distance
-        Log.d(
-            TAG,
-            "distance()  : distance = ${pace.distance} time  = $time temp = $temp result = $result "
-        )
     }
 
     fun showVersion(view: TextView, context: Context) {
@@ -156,7 +139,7 @@ class PaceFunction {
         pace.distance = 0.0
         pace.etID = ""
         pace.activeFunction = ""
-        pace.splitIsEmty = true
+        pace.splitIsEmpty = true
     }
 
 

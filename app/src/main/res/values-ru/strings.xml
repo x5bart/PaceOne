@@ -49,5 +49,6 @@
     <string name="distanceSetting">Расстояние</string>
     <string name="def">Язык телефона</string>
     <string name="help_to_developer">Помощь разработчику</string>
+    <string name="car_speed">СКОРОСТЬ МАШЫНЫ</string>
 
 </resources>

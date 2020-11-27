@@ -39,12 +39,13 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         paceObject = Pace
         function = SplitFunction()
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+        binding.rvSplits.layoutManager = LinearLayoutManager(activity)
 
         paceObject.etSplitId = "all"
         if (paceObject.timeAll != 0 || paceObject.distance != 0.0) {
             writeEt()
-            function.createSplitList(binding.recyclerView)
+//            function.createSplitList(binding.recyclerView)
+            autoRv()
         }
 
         binding.sbSplitNegativ.setOnSeekBarChangeListener(this)
@@ -79,6 +80,7 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     }
 
     private fun viewBehavior() {
+
         binding.etTimeH.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "timeH" }
         binding.etTimeM.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "timeM" }
         binding.etTimeS.setOnFocusChangeListener { _, _ -> paceObject.etSplitId = "timeS" }
@@ -116,6 +118,7 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
             }
         })
         binding.etTimeS.addTextChangedListener(object : TextWatcher {
+
             override fun afterTextChanged(p0: Editable?) {
                 if (paceObject.etSplitId == "timeS") {
                     paceObject.timeS = function.readEt(binding.etTimeS).toInt()
@@ -267,15 +270,29 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     override fun onStopTrackingTouch(seekBar: SeekBar) {
     }
 
-    private fun clearRv() {
-        (binding.recyclerView.adapter as SplitAdapter).segmentsList.clear()
-    }
+
 
     fun autoRv() {
-        if (!paceObject.splitIsEmty) clearRv()
-        function.createSplitList(binding.recyclerView)
+        val timeAll = paceObject.timeAll
+        val distance = paceObject.distance
+        val splitValue = paceObject.splitValue
+        val splitStrategy = paceObject.splitStrategy
+        if (!paceObject.splitIsEmpty) function.clearRv(binding.rvSplits)
+        paceObject.splitIsEmpty = function.createSplitList(
+            binding.rvSplits,
+            timeAll,
+            distance,
+            splitValue,
+            splitStrategy
+        )
         writeEt()
     }
+
+    override fun onDestroy() {
+        paceObject.splitIsEmpty = true
+        super.onDestroy()
+    }
+
 }
 
 //    fun kmToMile() {

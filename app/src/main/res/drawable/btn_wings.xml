@@ -3,8 +3,8 @@
 
     <item
         android:drawable="@drawable/ic_logo_wings"
-        android:height="22.98dp"
-        android:width="50dp"
+        android:height="24dp"
+        android:width="54dp"
         android:gravity="center"
         />
 

@@ -7,8 +7,30 @@
     android:background="@drawable/fragment_rounded"
     tools:context=".WingsFragment">
     <!--time-->
+    <TextView
+        android:id="@+id/tv_titleCar"
+        style="@style/FontTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/car_speed"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvTitleTemp" />
+
+    <TextView
+        android:id="@+id/tv_carSpeed"
+        style="@style/FontTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:textSize="11dp"
+        android:theme="@style/EditTextFontSmall"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/iv_car" />
+
     <SeekBar
-        android:id="@+id/sb_split_negativ2"
+        android:id="@+id/sb_wings_strategy"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:indeterminate="false"
@@ -17,12 +39,13 @@
         android:progress="0"
         android:progressTint="@color/white"
         android:thumbTint="@color/white"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/et_split"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
     <EditText
-        android:id="@+id/etPaceM2"
+        android:id="@+id/et_temp_m"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="24dp"
@@ -31,9 +54,9 @@
         android:inputType="number"
         android:maxLength="2"
         android:theme="@style/EditTextFontSmall"
-        app:layout_constraintBottom_toTopOf="@+id/divider6"
+        app:layout_constraintBottom_toTopOf="@+id/divider11"
         app:layout_constraintEnd_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/divider11" />
+        app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
     <TextView
         android:id="@+id/textView7"
@@ -43,7 +66,7 @@
         android:text=":"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/etPaceS2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_temp_s"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
@@ -55,20 +78,20 @@
         android:text="@string/min_km"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/etPaceM2" />
+        app:layout_constraintTop_toBottomOf="@+id/et_temp_m" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/tvTitleTemp"
         style="@style/FontTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/pace"
-        app:layout_constraintBottom_toTopOf="@+id/etPaceM2"
+        app:layout_constraintBottom_toTopOf="@+id/et_temp_m"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
     <EditText
-        android:id="@+id/etPaceS2"
+        android:id="@+id/et_temp_s"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:gravity="center"
@@ -77,7 +100,8 @@
         android:maxLength="2"
         android:theme="@style/EditTextFontSmall"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="@+id/etPaceM2" />
+        app:layout_constraintTop_toTopOf="@+id/et_temp_m" />
+
 
     <View
         android:id="@+id/divider13"
@@ -116,7 +140,7 @@
             android:gravity="center"
             android:imeOptions="actionNext"
             android:inputType="number"
-            android:maxLength="3"
+            android:maxLength="2"
             android:theme="@style/EditTextFontSmall" />
 
         <TextView
@@ -168,7 +192,7 @@
 
     <!--distance-->
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tv_titleDistance"
         style="@style/FontTitle"
         android:text="@string/distance"
         app:layout_constraintEnd_toEndOf="parent"
@@ -194,11 +218,11 @@
         android:layout_width="22dp"
         android:layout_height="32dp"
         android:layout_marginStart="5dp"
+        android:background="@drawable/ic_round_arrow_drop_down"
         android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/et_distance"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView4"
-        android:background="@drawable/ic_round_arrow_drop_down" />
+        app:layout_constraintStart_toEndOf="@+id/tv_titleDistance"
+        app:layout_constraintTop_toTopOf="@+id/tv_titleDistance" />
 
     <TextView
         android:id="@+id/textView555"
@@ -229,23 +253,25 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tv_titleSplit"
         style="@style/FontTitle"
         android:text="@string/segment"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/et_split"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/tv_titleStrategy"
         style="@style/FontTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/splitFactor"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/textView6" />
+        app:layout_constraintTop_toTopOf="@+id/tv_titleSplit" />
 
     <EditText
         android:id="@+id/et_split"
@@ -257,20 +283,22 @@
         android:inputType="numberDecimal"
         android:text="1.00"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/divider11"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/tv_signSplit"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider5" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView77"
+        android:id="@+id/tv_signSplit"
         style="@style/FontSmall"
+        android:layout_marginBottom="8dp"
         android:text="@string/km"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/divider6"
         app:layout_constraintEnd_toEndOf="@+id/et_split"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/et_split"
-        app:layout_constraintTop_toBottomOf="@+id/et_split" />
+        app:layout_constraintStart_toStartOf="@+id/et_split" />
 
     <View
         android:id="@+id/divider6"
@@ -278,15 +306,18 @@
         android:layout_height="2dp"
         android:layout_marginTop="125dp"
         android:background="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/divider11"
         tools:layout_editor_absoluteX="1dp" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/header_splits"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/divider6"
         tools:layout_editor_absoluteX="1dp">
 
@@ -343,11 +374,11 @@
 
     <!--recycleView-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rv_wings"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/divider4"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/header_splits"
         tools:layout_editor_absoluteX="1dp" />
 
     <!--guideline-->
@@ -383,7 +414,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.yandex.mobile.ads.AdView
-        android:id="@+id/banner_view_split"
+        android:id="@+id/banner_view_wings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -393,31 +424,19 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <SeekBar
-        android:id="@+id/sb_split_negativ"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:indeterminate="false"
-        android:max="10"
-        android:min="-10"
-        android:thumbTint="@color/white"
-        android:progress="0"
-        android:progressTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/et_split"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
-
-    <SeekBar
-        android:id="@+id/sb_split_distance"
+        android:id="@+id/sb_wings_distance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:indeterminate="false"
+
         android:max="100"
         android:min="1"
         android:progress="15"
         android:progressTint="@color/white"
+        android:thumb="@drawable/ic_round_swap_horizontal_circle_24"
         android:thumbTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/divider6"
+        app:layout_constraintBottom_toTopOf="@+id/divider11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -427,10 +446,11 @@
         style="@style/EditTextFontSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0.0%"
         android:backgroundTint="@color/colorPrimary"
+        android:text="0.0%"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/sb_split_negativ"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/sb_wings_strategy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
@@ -440,10 +460,36 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:clickable="true"
+
         android:src="@android:drawable/ic_dialog_info"
-        app:layout_constraintBottom_toBottomOf="@+id/textView16"
-        app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="@+id/textView16" />
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_titleStrategy"
+        app:layout_constraintStart_toEndOf="@+id/tv_titleStrategy"
+        app:layout_constraintTop_toTopOf="@+id/tv_titleStrategy" />
+
+    <ImageView
+        android:id="@+id/iv_car"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/ic_car"
+        app:layout_constraintBottom_toTopOf="@+id/sb_wings_distance"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider5" />
+
+    <CheckBox
+        android:id="@+id/cb_splits"
+        style="@style/FontTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:buttonTint="#FFFFFF"
+        android:checked="false"
+        android:text="splits"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sb_wings_distance" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

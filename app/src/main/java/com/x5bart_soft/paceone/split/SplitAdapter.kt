@@ -3,7 +3,9 @@ package com.x5bart_soft.paceone.split
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.x5bart_soft.paceone.Pace
 import com.x5bart_soft.paceone.R
+import java.math.RoundingMode
 
 open class SplitAdapter(val segmentsList: ArrayList<Split>) :
     RecyclerView.Adapter<SplitViewHolder>() {
@@ -27,8 +29,10 @@ open class SplitAdapter(val segmentsList: ArrayList<Split>) :
             distance.text = split.distance.toString()
             time.text = split.time
             temp.text = split.temp
-            average.text =split.average
+            average.text = split.average
 
         }
     }
+
+
 }

@@ -2,9 +2,9 @@ package com.x5bart_soft.paceone
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.x5bart_soft.paceone.databinding.ActivityMainBinding
 import java.util.*
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var preference: MyPreference
     private lateinit var binding: ActivityMainBinding
-    private var btnId = "pace"
+    private var btnId = ""
 
 
     companion object {
@@ -51,40 +51,27 @@ class MainActivity : AppCompatActivity() {
 //        configuration.locale = locale
 //        baseContext.resources.updateConfiguration(configuration, null)
 
-        val frg = PaceFragment()
-        val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.frgCont, frg)
-        ft.commit()
+        getFragment("pace", PaceFragment())
         banBehavior()
 
     }
 
     private fun banBehavior() {
-        binding.btnPace.setOnClickListener {
-            btnId = "pace"
+        binding.btnPace.setOnClickListener { getFragment("pace", PaceFragment()) }
+        binding.btnSplit.setOnClickListener { getFragment("split", SplitFragment()) }
+        binding.btnWings.setOnClickListener { getFragment("wings", WingsFragment()) }
+    }
+
+    private fun getFragment(buttonId: String, fragment: Fragment) {
+        if (btnId != buttonId) {
+            btnId = buttonId
             changeColorBtn()
-            val frg = PaceFragment()
-            val ft = supportFragmentManager.beginTransaction()
-            ft.add(R.id.frgCont, frg)
-            ft.commit()
-        }
-        binding.btnSplit.setOnClickListener {
-            btnId = "split"
-            changeColorBtn()
-            val frg = SplitFragment()
-            val ft = supportFragmentManager.beginTransaction()
-            ft.add(R.id.frgCont, frg)
-            ft.commit()
-        }
-        binding.btnWings.setOnClickListener {
-            btnId = "wings"
-            changeColorBtn()
-            val frg = WingsFragment()
-            val ft = supportFragmentManager.beginTransaction()
-            ft.add(R.id.frgCont, frg)
-            ft.commit()
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frgCont, fragment)
+            fragmentTransaction.commit()
         }
     }
+
 
     @SuppressLint("ResourceAsColor")
     private fun changeColorBtn() {
@@ -94,30 +81,35 @@ class MainActivity : AppCompatActivity() {
             "pace" -> {
                 binding.btnPace.backgroundTintList = ColorStateList.valueOf(activeColor)
                 binding.btnSplit.backgroundTintList = ColorStateList.valueOf(inActiveColor)
+                binding.btnWings.backgroundTintList = ColorStateList.valueOf(inActiveColor)
                 binding.btnPerson.backgroundTintList = ColorStateList.valueOf(inActiveColor)
                 binding.btnSetting.backgroundTintList = ColorStateList.valueOf(inActiveColor)
             }
             "split" -> {
                 binding.btnPace.backgroundTintList = ColorStateList.valueOf(inActiveColor)
                 binding.btnSplit.backgroundTintList = ColorStateList.valueOf(activeColor)
+                binding.btnWings.backgroundTintList = ColorStateList.valueOf(inActiveColor)
                 binding.btnPerson.backgroundTintList = ColorStateList.valueOf(inActiveColor)
                 binding.btnSetting.backgroundTintList = ColorStateList.valueOf(inActiveColor)
             }
             "wings" -> {
                 binding.btnPace.backgroundTintList = ColorStateList.valueOf(inActiveColor)
                 binding.btnSplit.backgroundTintList = ColorStateList.valueOf(inActiveColor)
+                binding.btnWings.backgroundTintList = ColorStateList.valueOf(activeColor)
                 binding.btnPerson.backgroundTintList = ColorStateList.valueOf(inActiveColor)
                 binding.btnSetting.backgroundTintList = ColorStateList.valueOf(inActiveColor)
             }
             "person" -> {
                 binding.btnPace.backgroundTintList = ColorStateList.valueOf(inActiveColor)
                 binding.btnSplit.backgroundTintList = ColorStateList.valueOf(inActiveColor)
+                binding.btnWings.backgroundTintList = ColorStateList.valueOf(inActiveColor)
                 binding.btnPerson.backgroundTintList = ColorStateList.valueOf(activeColor)
                 binding.btnSetting.backgroundTintList = ColorStateList.valueOf(inActiveColor)
             }
             "setting" -> {
                 binding.btnPace.backgroundTintList = ColorStateList.valueOf(inActiveColor)
                 binding.btnSplit.backgroundTintList = ColorStateList.valueOf(inActiveColor)
+                binding.btnWings.backgroundTintList = ColorStateList.valueOf(inActiveColor)
                 binding.btnPerson.backgroundTintList = ColorStateList.valueOf(inActiveColor)
                 binding.btnSetting.backgroundTintList = ColorStateList.valueOf(activeColor)
             }
