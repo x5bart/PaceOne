@@ -51,16 +51,7 @@ class WingsFragment : Fragment() {
         if (wingsObjact.distance > 0.0) writeEt()
         if (wingsObjact.splits) {
             binding.cbSplits.isChecked
-            binding.tvTitleSplit.visibility = View.VISIBLE
-            binding.etSplit.visibility = View.VISIBLE
-            binding.tvSignSplit.visibility = View.VISIBLE
-            binding.tvTitleStrategy.visibility = View.VISIBLE
-            binding.ivNegativeSplit.visibility = View.VISIBLE
-            binding.tvSlitStrategy.visibility = View.VISIBLE
-            binding.sbWingsStrategy.visibility = View.VISIBLE
-            binding.headerSplits.visibility = View.VISIBLE
-            binding.divider6.visibility = View.VISIBLE
-            binding.rvWings.visibility = View.VISIBLE
+            visibleView()
             autoRv()
         }
 
@@ -99,32 +90,12 @@ class WingsFragment : Fragment() {
         binding.cbSplits.setOnClickListener {
             if (binding.cbSplits.isChecked) {
                 wingsObjact.splits = true
-                Log.d(TAG, "splits isChecked = ${wingsObjact.splits}")
-                binding.tvTitleSplit.visibility = View.VISIBLE
-                binding.etSplit.visibility = View.VISIBLE
-                binding.tvSignSplit.visibility = View.VISIBLE
-                binding.tvTitleStrategy.visibility = View.VISIBLE
-                binding.ivNegativeSplit.visibility = View.VISIBLE
-                binding.tvSlitStrategy.visibility = View.VISIBLE
-                binding.sbWingsStrategy.visibility = View.VISIBLE
-                binding.headerSplits.visibility = View.VISIBLE
-                binding.divider6.visibility = View.VISIBLE
-                binding.rvWings.visibility = View.VISIBLE
+                visibleView()
                 autoRv()
 
             } else {
                 wingsObjact.splits = false
-                Log.d(TAG, "splits notChecked = ${wingsObjact.splits}")
-                binding.tvTitleSplit.visibility = View.GONE
-                binding.etSplit.visibility = View.GONE
-                binding.tvSignSplit.visibility = View.GONE
-                binding.tvTitleStrategy.visibility = View.GONE
-                binding.ivNegativeSplit.visibility = View.GONE
-                binding.tvSlitStrategy.visibility = View.GONE
-                binding.sbWingsStrategy.visibility = View.GONE
-                binding.headerSplits.visibility = View.GONE
-                binding.divider6.visibility = View.GONE
-                binding.rvWings.visibility = View.GONE
+                hideView()
             }
         }
 
@@ -311,6 +282,31 @@ class WingsFragment : Fragment() {
         }
     }
 
+    private fun visibleView(){
+        binding.tvTitleSplit.visibility = View.VISIBLE
+        binding.etSplit.visibility = View.VISIBLE
+        binding.tvSignSplit.visibility = View.VISIBLE
+        binding.tvTitleStrategy.visibility = View.VISIBLE
+        binding.ivNegativeSplit.visibility = View.VISIBLE
+        binding.tvSlitStrategy.visibility = View.VISIBLE
+        binding.sbWingsStrategy.visibility = View.VISIBLE
+        binding.headerSplits.visibility = View.VISIBLE
+        binding.divider6.visibility = View.VISIBLE
+        binding.rvWings.visibility = View.VISIBLE
+    }
+
+    private fun hideView(){
+        binding.tvTitleSplit.visibility = View.GONE
+        binding.etSplit.visibility = View.GONE
+        binding.tvSignSplit.visibility = View.GONE
+        binding.tvTitleStrategy.visibility = View.GONE
+        binding.ivNegativeSplit.visibility = View.GONE
+        binding.tvSlitStrategy.visibility = View.GONE
+        binding.sbWingsStrategy.visibility = View.GONE
+        binding.headerSplits.visibility = View.GONE
+        binding.divider6.visibility = View.GONE
+        binding.rvWings.visibility = View.GONE
+    }
     private fun writeEt() {
 
         when (wingsObjact.etId) {
