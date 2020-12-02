@@ -16,6 +16,8 @@ import com.x5bart_soft.paceone.databinding.FragmentPaceBinding
 import com.x5bart_soft.paceone.data.Config
 import com.x5bart_soft.paceone.data.Pace
 import com.x5bart_soft.paceone.model.PaceFunction
+import com.x5bart_soft.paceone.utils.AdsUtils
+import com.x5bart_soft.paceone.utils.MyPreference
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
 
@@ -24,6 +26,7 @@ class PaceFragment : Fragment() {
     private lateinit var binding: FragmentPaceBinding
     private lateinit var preference: MyPreference
     private lateinit var function: PaceFunction
+    private lateinit var adsUtils: AdsUtils
     private var hasCalculate = false
     var calculateDialog = ""
 
@@ -32,13 +35,7 @@ class PaceFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-//        val locale = Locale.getDefault()
-//        val configuration = Configuration()
-//        configuration.locale = locale
-//        activity!!.baseContext.resources.updateConfiguration(configuration, null)
-
+    ): View {
         binding = FragmentPaceBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -49,22 +46,18 @@ class PaceFragment : Fragment() {
         preference = MyPreference(activity!!.applicationContext)
         function = PaceFunction()
         paceObject = Pace
+        adsUtils = AdsUtils()
+
         function.showVersion(binding.tvVersion, this.activity!!)
+
+        adsUtils.showAds(binding.bannerView, adsUtils.blockIdPace)
 
         if (paceObject.timeAll != 0 || paceObject.speed != 0.0 || paceObject.distance != 0.0) {
             paceObject.etID = "all"
             writeEt()
         }
 
-        val BLOCK_ID = "adf-326819/1042468"
-        binding.bannerView.blockId = BLOCK_ID
-        binding.bannerView.adSize = AdSize.BANNER_320x50
-        val adRequest = AdRequest.builder().build()
-        binding.bannerView.loadAd(adRequest)
-
         viewBehavior()
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -548,52 +541,3 @@ class PaceFragment : Fragment() {
     }
 }
 
-//    fun saveSw() {
-//        preference.setUnitSw(Config.FLAG_MILE_TO_KM)
-//    }
-//
-
-//        when (Config.FLAG_MILE_TO_KM) {
-//            false -> {
-//                binding.swKmToMile.isChecked = false
-//                binding.textView5.setTextColor(resources.getColor(R.color.textActive))
-//                binding.textView51.setTextColor(resources.getColor(R.color.textNotActive))
-//            }
-//            true -> {
-//                binding.swKmToMile.isChecked = true
-//                binding.textView5.setTextColor(resources.getColor(R.color.textNotActive))
-//                binding.textView51.setTextColor(resources.getColor(R.color.textActive))
-//            }
-//        }
-
-
-//        binding.swKmToMile.setOnCheckedChangeListener { compoundButton, b ->
-//            when (b) {
-//                false -> {
-//                    Config.FLAG_MILE_TO_KM = false
-//                    binding.textView2.text = resources.getString(R.string.min_km)
-//                    binding.textView.text = resources.getString(R.string.km_h)
-//                    binding.textView11.text = resources.getString(R.string.km)
-//                    binding.textView5.setTextColor(resources.getColor(R.color.textActive))
-//                    binding.textView51.setTextColor(resources.getColor(R.color.textNotActive))
-//                    saveSw()
-//                }
-//                true -> {
-//                    Config.FLAG_MILE_TO_KM = true
-//                    binding.textView2.text = resources.getString(R.string.min_mile)
-//                    binding.textView.text = resources.getString(R.string.mile_hour)
-//                    binding.textView11.text = resources.getString(R.string.mile)
-//                    binding.textView5.setTextColor(resources.getColor(R.color.textNotActive))
-//                    binding.textView51.setTextColor(resources.getColor(R.color.textActive))
-//                    saveSw()
-//                }
-//            }
-//        }
-//        binding.swKmToMile.setOnClickListener {
-//            val tmp = etID
-//            etID = 0
-//            kmToMileSw()
-//            notNull()
-//            kmHToMKm()
-//            etID = tmp
-//        }

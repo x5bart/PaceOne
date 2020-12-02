@@ -47,7 +47,7 @@
     <string name="system">Система</string>
     <string name="language">Язык</string>
     <string name="distanceSetting">Расстояние</string>
-    <string name="def">Язык телефона</string>
+    <string name="def">Русский</string>
     <string name="help_to_developer">Помощь разработчику</string>
     <string name="car_speed">СКОРОСТЬ МАШЫНЫ</string>
     <string name="save_calculate_text">Сохранять расчеты после выхода</string>

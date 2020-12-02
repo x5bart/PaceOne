@@ -5,17 +5,16 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.x5bart_soft.paceone.databinding.ActivityMainBinding
 import com.x5bart_soft.paceone.data.Config
 import com.x5bart_soft.paceone.utils.ContextUtils
+import com.x5bart_soft.paceone.utils.MyPreference
 import java.util.*
 
 
-const val BLOCK_ID = "adf-326819/1077574"
 const val TAG = "Mylog"
 
 
@@ -24,18 +23,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var preference: MyPreference
     private lateinit var binding: ActivityMainBinding
+    private lateinit var config: Config
     private var btnId = ""
+    private var changeLanguage = false
+    private var language = ""
 
 
     companion object {
-
-        var locale = Locale("en")
-
-
-        var LANG_ID = 0
         val APP_LANGUAGE = "mysettings"
-        val APP_MILE_TO_KM = "mile"
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,22 +42,32 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         preference = MyPreference(this)
+        config = Config
 
-        changeColorBtn()
-
-//        loaded()
-
-//        val locale = Locale.getDefault()
-//        val configuration = Configuration()
-//        configuration.locale = locale
-//        baseContext.resources.updateConfiguration(configuration, null)
-
-        getFragment("pace", PaceFragment())
-        banBehavior()
+        start()
+        btnBehavior()
 
     }
 
-    private fun banBehavior() {
+    override fun attachBaseContext(newBase: Context?) {
+        language = Config.language
+        if (language.length == 5) language = language.substring(3)
+        val localeToSwitchTo = Locale(language)
+        val localeUpdatedContext: ContextWrapper =
+            ContextUtils(this).updateLocale(newBase!!, localeToSwitchTo)!!
+        super.attachBaseContext(localeUpdatedContext)
+    }
+
+    private fun start() {
+        changeLanguage = config.changeLanguage
+        if (changeLanguage) getFragment("setting", SettingsFragment())
+        else getFragment("pace", PaceFragment())
+        changeLanguage = false
+        config.changeLanguage = changeLanguage
+    }
+
+    private fun btnBehavior() {
+        changeColorBtn()
         binding.btnPace.setOnClickListener { getFragment("pace", PaceFragment()) }
         binding.btnSplit.setOnClickListener { getFragment("split", SplitFragment()) }
         binding.btnWings.setOnClickListener { getFragment("wings", WingsFragment()) }
@@ -78,7 +83,6 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.commit()
         }
     }
-
 
     @SuppressLint("ResourceAsColor")
     private fun changeColorBtn() {
@@ -121,44 +125,6 @@ class MainActivity : AppCompatActivity() {
                 binding.btnSetting.backgroundTintList = ColorStateList.valueOf(activeColor)
             }
         }
-    }
-
-//    fun loaded() {
-//        val sPref = getPreferences(Context.MODE_PRIVATE)
-//        val language = sPref.getString(APP_LANGUAGE, null)
-//        if (language != null) {
-//            locale = Locale(language)
-//            Locale.setDefault(locale)
-//            val configuration = Configuration()
-//            configuration.locale = locale
-//            baseContext.resources.updateConfiguration(configuration, null)
-//            ActivityCompat.invalidateOptionsMenu(this)
-//        }
-//        Config.FLAG_MILE_TO_KM = preference.getUnitSw()
-//    }
-
-//    private fun onInterstitialLoaded() {
-//
-//        val mInterstitialAd = InterstitialAd(this)
-//        mInterstitialAd.blockId = BLOCK_ID
-//        val adRequest = AdRequest.Builder().build()
-//        mInterstitialAd.interstitialEventListener =
-//            object : InterstitialEventListener.SimpleInterstitialEventListener() {
-//                override fun onInterstitialLoaded() {
-//                    mInterstitialAd.show()
-//                    super.onInterstitialLoaded()
-//                }
-//            }
-//        mInterstitialAd.loadAd(adRequest);
-//    }
-
-    override fun attachBaseContext(newBase: Context?) {
-        val language = Config.language
-        Log.d(TAG, "attachBaseContext: Language = $language")
-        val localeToSwitchTo = Locale(language)
-        val localeUpdatedContext: ContextWrapper =
-            ContextUtils(this).updateLocale(newBase!!, localeToSwitchTo)!!
-        super.attachBaseContext(localeUpdatedContext)
     }
 
 }

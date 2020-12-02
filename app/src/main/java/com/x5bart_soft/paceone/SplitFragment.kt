@@ -13,6 +13,8 @@ import com.x5bart_soft.paceone.databinding.FragmentSplitBinding
 import com.x5bart_soft.paceone.data.Pace
 import com.x5bart_soft.paceone.model.SplitFunction
 import com.x5bart_soft.paceone.split.NegativSplitDialog
+import com.x5bart_soft.paceone.utils.AdsUtils
+import com.x5bart_soft.paceone.utils.MyPreference
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
 
@@ -21,16 +23,12 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     private lateinit var paceObject: Pace
     private lateinit var function: SplitFunction
     private lateinit var binding: FragmentSplitBinding
+    private lateinit var adsUtils: AdsUtils
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-//        val locale = Locale.getDefault()
-//        val configuration = Configuration()
-//        configuration.locale = locale
-//        activity!!.baseContext.resources.updateConfiguration(configuration, null)
-
+    ): View {
         binding = FragmentSplitBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -39,44 +37,23 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         super.onViewCreated(view, savedInstanceState)
         paceObject = Pace
         function = SplitFunction()
+        adsUtils = AdsUtils()
+        preference = MyPreference(activity!!.applicationContext)
 
         binding.rvSplits.layoutManager = LinearLayoutManager(activity)
+
+        adsUtils.showAds(binding.bannerViewSplit,adsUtils.blockIdSplits)
 
         paceObject.etSplitId = "all"
         if (paceObject.timeAll != 0 || paceObject.distance != 0.0) {
             writeEt()
-//            function.createSplitList(binding.recyclerView)
             autoRv()
         }
 
         binding.sbSplitNegativ.setOnSeekBarChangeListener(this)
         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 
-        preference = MyPreference(activity!!.applicationContext)
-
         viewBehavior()
-
-//        when (Config.FLAG_MILE_TO_KM) {
-//            false -> {
-//                binding.textView77.text = resources.getString(R.string.km)
-//                binding.textView555.text = resources.getString(R.string.km)
-//                binding.textView11.text = resources.getString(R.string.km_2)
-//            }
-//            true -> {
-//                binding.textView77.text = resources.getString(R.string.mile)
-//                binding.textView555.text = resources.getString(R.string.mile)
-//                binding.textView11.text = resources.getString(R.string.mile_3)
-//            }
-//        }
-
-
-//        val BLOCK_ID = "adf-326819/1043357"
-        val BLOCK_ID = "adf-326819/1146536"
-        binding.bannerViewSplit.blockId = BLOCK_ID
-        binding.bannerViewSplit.adSize = AdSize.BANNER_320x50
-        val adRequest = AdRequest.builder().build()
-        binding.bannerViewSplit.loadAd(adRequest)
-
 
     }
 

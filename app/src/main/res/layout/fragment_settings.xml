@@ -16,17 +16,7 @@
         android:text="@string/save_calculate_text"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/divider11"
-        app:layout_constraintStart_toStartOf="@+id/tvSystem"
-        app:layout_constraintTop_toBottomOf="@+id/divider10" />
-
-    <View
-        android:id="@+id/divider10"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="32dp"
-        android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/divider9"
-        tools:layout_editor_absoluteX="1dp" />
+        app:layout_constraintStart_toStartOf="@+id/tvSystem" />
 
     <View
         android:id="@+id/divider11"
@@ -34,7 +24,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="32dp"
         android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/divider10"
+        app:layout_constraintTop_toBottomOf="@+id/divider9"
         tools:layout_editor_absoluteX="1dp" />
 
 
@@ -79,28 +69,6 @@
         app:layout_constraintTop_toBottomOf="@+id/divider8" />
 
     <TextView
-        android:id="@+id/tvDistance"
-        style="@style/FontTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/distanceSetting"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/divider10"
-        app:layout_constraintStart_toStartOf="@+id/tvSystem"
-        app:layout_constraintTop_toBottomOf="@+id/divider9" />
-
-    <TextView
-        android:id="@+id/tvDistance2"
-        style="@style/FontTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="@string/distanceSetting"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvDistance"
-        app:layout_constraintEnd_toStartOf="@+id/ivDistanse" />
-
-    <TextView
         android:id="@+id/tvLanguage2"
         style="@style/FontTitle"
         android:layout_width="wrap_content"
@@ -121,24 +89,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider8" />
 
-    <ImageView
-        android:id="@+id/ivDistanse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:src="@android:drawable/arrow_down_float"
-        app:layout_constraintBottom_toTopOf="@+id/divider10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider9" />
-
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="1dp"
         app:layout_constraintBottom_toTopOf="@+id/divider11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider10" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btnHelp"
@@ -171,9 +128,10 @@
         style="@style/MyButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
         android:background="@drawable/btn_rounded_corner"
         android:text="@string/about"
-        app:layout_constraintBottom_toTopOf="@+id/banner_view_wings"
+        app:layout_constraintBottom_toBottomOf="@+id/divider3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

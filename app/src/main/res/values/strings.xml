@@ -50,7 +50,7 @@ The strategy of negative splitting has been documented in competitive running si
     <string name="distanceSetting">Distance</string>
     <string name="english" translatable="false">English</string>
     <string name="russian" translatable="false">Русский</string>
-    <string name="def">Default</string>
+    <string name="def">English</string>
     <string name="help_to_developer">Help to Developer</string>
     <string name="car_speed">CAR SPEED</string>
     <string name="save_calculate_text">Save calculations after quit</string>

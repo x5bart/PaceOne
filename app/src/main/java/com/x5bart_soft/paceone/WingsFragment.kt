@@ -17,6 +17,7 @@ import com.x5bart_soft.paceone.databinding.FragmentWingsBinding
 import com.x5bart_soft.paceone.data.Wings
 import com.x5bart_soft.paceone.model.SplitFunction
 import com.x5bart_soft.paceone.model.WingsFunction
+import com.x5bart_soft.paceone.utils.AdsUtils
 import com.x5bart_soft.paceone.utils.MyAnimate
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
@@ -29,6 +30,7 @@ class WingsFragment : Fragment() {
     lateinit var wingsObjact: Wings
     lateinit var animate: MyAnimate
     lateinit var splitFunction: SplitFunction
+    lateinit var adsUtils: AdsUtils
 
 
     override fun onCreateView(
@@ -47,6 +49,7 @@ class WingsFragment : Fragment() {
         wingsObjact = Wings
         animate = MyAnimate()
         splitFunction = SplitFunction()
+        adsUtils = AdsUtils()
 
         binding.rvWings.layoutManager = LinearLayoutManager(activity)
         if (wingsObjact.splits) binding.cbSplits.isChecked = true
@@ -59,28 +62,17 @@ class WingsFragment : Fragment() {
             autoRv()
         }
 
-        val BLOCK_ID = "adf-326819/1146537"
-        val banner = binding.bannerViewWings
-        banner.blockId = BLOCK_ID
-        banner.adSize = AdSize.BANNER_320x50
-        val adRequest = AdRequest.builder().build()
-        banner.loadAd(adRequest)
+        adsUtils.showAds(binding.bannerViewWings, adsUtils.blockIdWings)
 
         viewBehavior()
-
 
         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 
         animate.animate(binding.ivCar)
 
-        binding.tvTitleDistance.setOnClickListener {
-            fragmentManager!!.beginTransaction().remove(this).commit()
-        }
-
     }
 
     private fun viewBehavior() {
-
 
 
         binding.etTimeH.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "timeH" }
@@ -223,7 +215,7 @@ class WingsFragment : Fragment() {
         })
     }
 
-  private  fun listeners() {
+    private fun listeners() {
         val id = wingsObjact.etId
         val splits = wingsObjact.splits
         when (id) {
@@ -286,7 +278,7 @@ class WingsFragment : Fragment() {
         }
     }
 
-    private fun visibleView(){
+    private fun visibleView() {
         binding.tvTitleSplit.visibility = View.VISIBLE
         binding.etSplit.visibility = View.VISIBLE
         binding.tvSignSplit.visibility = View.VISIBLE
@@ -299,7 +291,7 @@ class WingsFragment : Fragment() {
         binding.rvWings.visibility = View.VISIBLE
     }
 
-    private fun hideView(){
+    private fun hideView() {
         binding.tvTitleSplit.visibility = View.GONE
         binding.etSplit.visibility = View.GONE
         binding.tvSignSplit.visibility = View.GONE
@@ -311,6 +303,7 @@ class WingsFragment : Fragment() {
         binding.divider6.visibility = View.GONE
         binding.rvWings.visibility = View.GONE
     }
+
     private fun writeEt() {
 
         when (wingsObjact.etId) {
@@ -424,11 +417,10 @@ class WingsFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        Log.d(TAG,"onDestroy")
+        Log.d(TAG, "onDestroy")
         wingsObjact.splitsIsEmpty = true
         super.onDestroy()
     }
-
 
 
 }
