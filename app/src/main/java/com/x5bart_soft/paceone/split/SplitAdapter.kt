@@ -3,9 +3,7 @@ package com.x5bart_soft.paceone.split
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.x5bart_soft.paceone.Pace
 import com.x5bart_soft.paceone.R
-import java.math.RoundingMode
 
 open class SplitAdapter(val segmentsList: ArrayList<Split>) :
     RecyclerView.Adapter<SplitViewHolder>() {

@@ -1,8 +1,7 @@
-package com.x5bart_soft.paceone
+package com.x5bart_soft.paceone.model
 
-import android.app.Activity
-import android.util.Log
 import android.widget.EditText
+import com.x5bart_soft.paceone.data.Wings
 import java.math.RoundingMode
 
 class WingsFunction {

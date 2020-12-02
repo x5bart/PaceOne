@@ -1,4 +1,4 @@
-package com.x5bart_soft.paceone
+package com.x5bart_soft.paceone.utils
 
 import android.graphics.drawable.Animatable2
 import android.graphics.drawable.Drawable

@@ -14,6 +14,8 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.DialogFragment
 import com.x5bart_soft.paceone.databinding.DialogAlertBinding
+import com.x5bart_soft.paceone.data.Pace
+import com.x5bart_soft.paceone.model.PaceFunction
 
 
 class AlertDialog : DialogFragment() {

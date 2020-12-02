@@ -13,6 +13,9 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import com.x5bart_soft.paceone.databinding.FragmentPaceBinding
+import com.x5bart_soft.paceone.data.Config
+import com.x5bart_soft.paceone.data.Pace
+import com.x5bart_soft.paceone.model.PaceFunction
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
 

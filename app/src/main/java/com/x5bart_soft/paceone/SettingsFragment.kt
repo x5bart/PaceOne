@@ -1,6 +1,7 @@
 package com.x5bart_soft.paceone
 
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Gravity
@@ -11,23 +12,29 @@ import android.widget.PopupMenu
 import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
 import com.x5bart_soft.paceone.databinding.FragmentSettingsBinding
+import com.x5bart_soft.paceone.data.Config
+import com.x5bart_soft.paceone.utils.ContextUtils
+import com.yandex.mobile.ads.AdRequest
+import com.yandex.mobile.ads.AdSize
 import java.util.*
 
 
-class Settings : Fragment() {
+class SettingsFragment : Fragment() {
     private lateinit var preference: MyPreference
 
     lateinit var binding: FragmentSettingsBinding
+    lateinit var utils: ContextUtils
+    lateinit var config: Config
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val locale = Locale.getDefault()
-        val configuration = Configuration()
-        configuration.locale = locale
-        activity!!.baseContext.resources.updateConfiguration(configuration, null)
+//        val locale = Locale.getDefault()
+//        val configuration = Configuration()
+//        configuration.locale = locale
+//        activity!!.baseContext.resources.updateConfiguration(configuration, null)
 
         binding = FragmentSettingsBinding.inflate(layoutInflater)
         return binding.root
@@ -41,8 +48,14 @@ class Settings : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         preference = MyPreference(activity!!.applicationContext)
+        utils = ContextUtils(this.activity)
+        config = Config
 
-
+        val BLOCK_ID = "adf-326819/1146538"
+        binding.bannerViewWings.blockId = BLOCK_ID
+        binding.bannerViewWings.adSize = AdSize.BANNER_320x50
+        val adRequest = AdRequest.builder().build()
+        binding.bannerViewWings.loadAd(adRequest)
 
         val lang = Locale.getDefault().toString()
         when (lang) {
@@ -62,10 +75,10 @@ class Settings : Fragment() {
             showPopupLang(binding.ivLanguage)
         }
         translate()
-        binding.tvDistance2.setOnClickListener{
+        binding.tvDistance2.setOnClickListener {
             showPopupDist(binding.tvDistance2)
         }
-        binding.ivDistanse.setOnClickListener{
+        binding.ivDistanse.setOnClickListener {
             showPopupDist(binding.tvDistance2)
         }
 
@@ -79,13 +92,23 @@ class Settings : Fragment() {
             when (item.itemId) {
                 R.id.en -> {
                     MainActivity.LANG_ID = 1
-                    setApplicationLanguage("en")
-                    translate()
+                    utils.updateLocale(this.activity!!, Locale("en"))
+                    config.language = "en"
+                    val intent = Intent(context, MainActivity::class.java)
+                    context!!.startActivity(intent)
+
+//                    setApplicationLanguage("en")
+//                    translate()
                 }
                 R.id.ru -> {
                     MainActivity.LANG_ID = 2
-                    setApplicationLanguage("ru")
-                    translate()
+                    utils.updateLocale(this.activity!!, Locale("ru"))
+                    config.language = "ru"
+                    val intent = Intent(context, MainActivity::class.java)
+                    context!!.startActivity(intent)
+
+//                    setApplicationLanguage("ru")
+//                    translate()
                 }
             }
             true
@@ -117,6 +140,7 @@ class Settings : Fragment() {
     fun saveSw() {
         preference.setUnitSw(Config.FLAG_MILE_TO_KM)
     }
+
     fun setApplicationLanguage(language: String) {
         when (language) {
             "en" -> binding.tvLanguage2.setText(R.string.english)
@@ -128,6 +152,8 @@ class Settings : Fragment() {
         configuration.locale = locale
         activity!!.baseContext.resources.updateConfiguration(configuration, null)
         invalidateOptionsMenu(activity)
+
+
         val sPref = activity!!.getPreferences(MODE_PRIVATE)
         val ed = sPref.edit()
         ed.putString(MainActivity.APP_LANGUAGE, language)
@@ -137,7 +163,7 @@ class Settings : Fragment() {
     }
 
     fun translate() {
-        binding.interfaceTitle.setText(R.string.system)
+        binding.tvSystem.setText(R.string.system)
         binding.tvLanguage.setText(R.string.language)
         binding.tvDistance.setText(R.string.distanceSetting)
         when (Config.FLAG_MILE_TO_KM) {
@@ -152,6 +178,8 @@ class Settings : Fragment() {
         translate()
         super.onConfigurationChanged(newConfig)
     }
+
+
 
 
 }

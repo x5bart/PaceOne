@@ -1,13 +1,19 @@
 package com.x5bart_soft.paceone
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.x5bart_soft.paceone.databinding.ActivityMainBinding
+import com.x5bart_soft.paceone.data.Config
+import com.x5bart_soft.paceone.utils.ContextUtils
 import java.util.*
+
 
 const val BLOCK_ID = "adf-326819/1077574"
 const val TAG = "Mylog"
@@ -60,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnPace.setOnClickListener { getFragment("pace", PaceFragment()) }
         binding.btnSplit.setOnClickListener { getFragment("split", SplitFragment()) }
         binding.btnWings.setOnClickListener { getFragment("wings", WingsFragment()) }
+        binding.btnSetting.setOnClickListener { getFragment("setting", SettingsFragment()) }
     }
 
     private fun getFragment(buttonId: String, fragment: Fragment) {
@@ -145,5 +152,13 @@ class MainActivity : AppCompatActivity() {
 //        mInterstitialAd.loadAd(adRequest);
 //    }
 
+    override fun attachBaseContext(newBase: Context?) {
+        val language = Config.language
+        Log.d(TAG, "attachBaseContext: Language = $language")
+        val localeToSwitchTo = Locale(language)
+        val localeUpdatedContext: ContextWrapper =
+            ContextUtils(this).updateLocale(newBase!!, localeToSwitchTo)!!
+        super.attachBaseContext(localeUpdatedContext)
+    }
 
 }

@@ -14,6 +14,10 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.x5bart_soft.paceone.databinding.FragmentWingsBinding
+import com.x5bart_soft.paceone.data.Wings
+import com.x5bart_soft.paceone.model.SplitFunction
+import com.x5bart_soft.paceone.model.WingsFunction
+import com.x5bart_soft.paceone.utils.MyAnimate
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
 
@@ -55,7 +59,7 @@ class WingsFragment : Fragment() {
             autoRv()
         }
 
-        val BLOCK_ID = "adf-326819/1042468"
+        val BLOCK_ID = "adf-326819/1146537"
         val banner = binding.bannerViewWings
         banner.blockId = BLOCK_ID
         banner.adSize = AdSize.BANNER_320x50

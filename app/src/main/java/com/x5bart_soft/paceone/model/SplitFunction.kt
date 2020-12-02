@@ -1,9 +1,10 @@
-package com.x5bart_soft.paceone
+package com.x5bart_soft.paceone.model
 
-import android.icu.number.NumberFormatter
 import android.util.Log
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
+import com.x5bart_soft.paceone.TAG
+import com.x5bart_soft.paceone.data.Pace
 import com.x5bart_soft.paceone.split.Split
 import com.x5bart_soft.paceone.split.SplitAdapter
 import java.math.RoundingMode

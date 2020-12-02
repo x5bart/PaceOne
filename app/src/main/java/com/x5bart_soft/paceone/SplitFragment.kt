@@ -10,8 +10,9 @@ import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.x5bart_soft.paceone.databinding.FragmentSplitBinding
+import com.x5bart_soft.paceone.data.Pace
+import com.x5bart_soft.paceone.model.SplitFunction
 import com.x5bart_soft.paceone.split.NegativSplitDialog
-import com.x5bart_soft.paceone.split.SplitAdapter
 import com.yandex.mobile.ads.AdRequest
 import com.yandex.mobile.ads.AdSize
 
@@ -70,7 +71,7 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 
 
 //        val BLOCK_ID = "adf-326819/1043357"
-        val BLOCK_ID = "adf-326819/1042468"
+        val BLOCK_ID = "adf-326819/1146536"
         binding.bannerViewSplit.blockId = BLOCK_ID
         binding.bannerViewSplit.adSize = AdSize.BANNER_320x50
         val adRequest = AdRequest.builder().build()

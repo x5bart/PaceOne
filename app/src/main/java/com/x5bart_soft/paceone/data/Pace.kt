@@ -1,6 +1,7 @@
-package com.x5bart_soft.paceone
+package com.x5bart_soft.paceone.data
 
 import android.util.Log
+import com.x5bart_soft.paceone.TAG
 
 object Pace {
 

@@ -1,10 +1,11 @@
-package com.x5bart_soft.paceone
+package com.x5bart_soft.paceone.model
 
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.widget.EditText
 import android.widget.TextView
+import com.x5bart_soft.paceone.data.Pace
 import java.math.RoundingMode
 
 class PaceFunction {
@@ -13,13 +14,13 @@ class PaceFunction {
 
     fun readEt(view: EditText): String {
         var value = view.text.toString()
-        if (value.isEmpty() || value == ".") {
+        return if (value.isEmpty() || value == ".") {
             value = "0"
             pace.isInvalidInput = true
-            return value
+            value
         } else {
             pace.isInvalidInput = false
-            return value
+            value
         }
     }
 
@@ -64,8 +65,8 @@ class PaceFunction {
         val distance = pace.distance
         val distM = distance * pace.KM
         val timeAll = pace.timeAll
-        val meterPerSocond = distM / timeAll
-        pace.speed = ((meterPerSocond * pace.HOUR) / pace.KM)
+        val meterPerSecond = distM / timeAll
+        pace.speed = ((meterPerSecond * pace.HOUR) / pace.KM)
             .toBigDecimal()
             .setScale(2, RoundingMode.HALF_UP)
             .toDouble()
