@@ -12,6 +12,7 @@ import android.widget.NumberPicker
 import androidx.fragment.app.Fragment
 import com.x5bart_soft.paceone.data.Person
 import com.x5bart_soft.paceone.databinding.FragmentPersonBinding
+import com.x5bart_soft.paceone.utils.AdsUtils
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,6 +22,9 @@ class PersonFragment : Fragment() {
     private lateinit var binding: FragmentPersonBinding
     private lateinit var person: Person
     private lateinit var calendar: Calendar
+    private lateinit var adsUtils :AdsUtils
+
+
 
     private var height = 0
     private var strideLength = 0
@@ -46,7 +50,9 @@ class PersonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         person = Person
+        adsUtils = AdsUtils()
 
+        adsUtils.showAds(binding.bannerViewPerson, adsUtils.blockIdPerson)
         readObject()
         viewBehavior()
 
@@ -163,6 +169,6 @@ class PersonFragment : Fragment() {
         setMaxHr()
         hrZone()
     }
-    
+
 }
 

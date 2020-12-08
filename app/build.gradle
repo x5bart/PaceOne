@@ -20,7 +20,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 12
-        versionName "2.0.0"
+        versionName "2.0.0_beta"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.realese
     }
