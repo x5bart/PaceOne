@@ -52,5 +52,8 @@
     <string name="car_speed">СКОРОСТЬ МАШЫНЫ</string>
     <string name="save_calculate_text">Сохранять расчеты после выхода</string>
     <string name="clear_data">Очистить данные</string>
+    <string name="height">РОСТ</string>
+    <string name="birthday">ДЕНЬ РОЖДЕНИЯ</string>
+    <string name="cm">см</string>
 
 </resources>

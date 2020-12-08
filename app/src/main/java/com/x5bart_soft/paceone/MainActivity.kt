@@ -1,10 +1,12 @@
 package com.x5bart_soft.paceone
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -28,10 +30,6 @@ class MainActivity : AppCompatActivity() {
     private var changeLanguage = false
     private var language = ""
 
-
-    companion object {
-        val APP_LANGUAGE = "mysettings"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnPace.setOnClickListener { getFragment("pace", PaceFragment()) }
         binding.btnSplit.setOnClickListener { getFragment("split", SplitFragment()) }
         binding.btnWings.setOnClickListener { getFragment("wings", WingsFragment()) }
+        binding.btnPerson.setOnClickListener { getFragment("person", PersonFragment()) }
         binding.btnSetting.setOnClickListener { getFragment("setting", SettingsFragment()) }
     }
 
