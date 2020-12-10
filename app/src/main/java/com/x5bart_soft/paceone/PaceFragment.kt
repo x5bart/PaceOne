@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -16,11 +15,10 @@ import androidx.fragment.app.Fragment
 import com.x5bart_soft.paceone.databinding.FragmentPaceBinding
 import com.x5bart_soft.paceone.data.Config
 import com.x5bart_soft.paceone.data.Pace
+import com.x5bart_soft.paceone.dialogs.AlertDialog
 import com.x5bart_soft.paceone.model.PaceFunction
 import com.x5bart_soft.paceone.utils.AdsUtils
 import com.x5bart_soft.paceone.utils.MyPreference
-import com.yandex.mobile.ads.AdRequest
-import com.yandex.mobile.ads.AdSize
 
 
 class PaceFragment : Fragment() {

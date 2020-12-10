@@ -10,7 +10,7 @@ class AdsUtils {
     val blockIdPace = "adf-326819/1042468"
     val blockIdSplits = "adf-326819/1146536"
     val blockIdWings = "adf-326819/1146537"
-    val blockIdPerson = ""
+    val blockIdPerson = "adf-326819/1147595"
     val blockIdSetting = "adf-326819/1146538"
 
     fun showAds(bannerView: AdView, blockId:String){

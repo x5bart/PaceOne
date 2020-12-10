@@ -1,4 +1,4 @@
-package com.x5bart_soft.paceone
+package com.x5bart_soft.paceone.dialogs
 
 
 import android.graphics.Color

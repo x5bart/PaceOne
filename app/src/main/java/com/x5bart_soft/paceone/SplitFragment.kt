@@ -12,11 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.x5bart_soft.paceone.databinding.FragmentSplitBinding
 import com.x5bart_soft.paceone.data.Pace
 import com.x5bart_soft.paceone.model.SplitFunction
-import com.x5bart_soft.paceone.split.NegativSplitDialog
+import com.x5bart_soft.paceone.dialogs.HelpDialog
 import com.x5bart_soft.paceone.utils.AdsUtils
 import com.x5bart_soft.paceone.utils.MyPreference
-import com.yandex.mobile.ads.AdRequest
-import com.yandex.mobile.ads.AdSize
 
 class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     private lateinit var preference: MyPreference
@@ -42,7 +40,7 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 
         binding.rvSplits.layoutManager = LinearLayoutManager(activity)
 
-        adsUtils.showAds(binding.bannerViewSplit,adsUtils.blockIdSplits)
+        adsUtils.showAds(binding.bannerViewSplit, adsUtils.blockIdSplits)
 
         paceObject.etSplitId = "all"
         if (paceObject.timeAll != 0 || paceObject.distance != 0.0) {
@@ -147,7 +145,11 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         binding.etDistance.setOnClickListener { binding.etDistance.selectAll() }
         binding.etSplit.setOnClickListener { binding.etSplit.selectAll() }
         binding.ivNegativeSplit.setOnClickListener {
-            val dialog = NegativSplitDialog()
+            val dialog = HelpDialog(
+                R.string.negative_and_positive_splits,
+                R.string.splitFactory,
+                R.string.null_my
+            )
             dialog.show(fragmentManager!!, "info")
         }
         binding.ivInfoKm.setOnClickListener { showPopupKm(binding.ivInfoKm) }
@@ -247,7 +249,6 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
 
     override fun onStopTrackingTouch(seekBar: SeekBar) {
     }
-
 
 
     fun autoRv() {

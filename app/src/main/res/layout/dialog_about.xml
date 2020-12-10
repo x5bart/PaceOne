@@ -36,7 +36,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_about" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -44,11 +44,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:src="@mipmap/ic_launcher"
-                app:layout_constraintStart_toStartOf="@+id/title"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
+                app:layout_constraintStart_toStartOf="@+id/titleAbout"
+                app:layout_constraintTop_toBottomOf="@+id/titleAbout" />
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/titleAbout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -70,7 +70,7 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/tv_about"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

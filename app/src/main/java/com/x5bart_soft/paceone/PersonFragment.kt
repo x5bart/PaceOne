@@ -1,17 +1,20 @@
 package com.x5bart_soft.paceone
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.app.DatePickerDialog
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.DatePicker
 import android.widget.NumberPicker
 import androidx.fragment.app.Fragment
 import com.x5bart_soft.paceone.data.Person
 import com.x5bart_soft.paceone.databinding.FragmentPersonBinding
+import com.x5bart_soft.paceone.dialogs.HelpDialog
 import com.x5bart_soft.paceone.utils.AdsUtils
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,8 +25,7 @@ class PersonFragment : Fragment() {
     private lateinit var binding: FragmentPersonBinding
     private lateinit var person: Person
     private lateinit var calendar: Calendar
-    private lateinit var adsUtils :AdsUtils
-
+    private lateinit var adsUtils: AdsUtils
 
 
     private var height = 0
@@ -64,29 +66,122 @@ class PersonFragment : Fragment() {
         binding.etBirthday.setOnFocusChangeListener { _, _ -> if (binding.etBirthday.isFocused) datePicker() }
         binding.etHeight.setOnClickListener { numberPicker() }
         binding.etHeight.setOnFocusChangeListener { _, _ -> if (binding.etHeight.isFocused) numberPicker() }
+
+        binding.tvZone1.setOnClickListener {
+            val dialog = HelpDialog(
+                R.string.zone_title_1,
+                R.string.zone_text_1,
+                R.string.copyrate_suunto_com
+            )
+            dialog.show(fragmentManager!!, "zone1")
+        }
+        binding.tvZone2.setOnClickListener {
+            val dialog = HelpDialog(
+                R.string.zone_title_2,
+                R.string.zone_text_2,
+                R.string.copyrate_suunto_com
+            )
+            dialog.show(fragmentManager!!, "zone2")
+        }
+        binding.tvZone3.setOnClickListener {
+            val dialog = HelpDialog(
+                R.string.zone_title_3,
+                R.string.zone_text_3,
+                R.string.copyrate_suunto_com
+            )
+            dialog.show(fragmentManager!!, "zone1")
+        }
+        binding.tvZone4.setOnClickListener {
+            val dialog = HelpDialog(
+                R.string.zone_title_4,
+                R.string.zone_text_4,
+                R.string.copyrate_suunto_com
+            )
+            dialog.show(fragmentManager!!, "zone1")
+        }
+        binding.tvZone5.setOnClickListener {
+            val dialog = HelpDialog(
+                R.string.zone_title_5,
+                R.string.zone_text_5,
+                R.string.copyrate_suunto_com
+            )
+            dialog.show(fragmentManager!!, "zone1")
+        }
     }
 
     private fun datePicker() {
         calendar = Calendar.getInstance()
         getDate()
 
-        val datePickerDialog = DatePickerDialog(
-            this.activity!!, { _: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
-                mYear = year
-                mMonth = month
-                mDay = dayOfMonth
-                birthday()
-            },
-            mYear,
-            mMonth,
-            mDay
-        )
+        val dialog = Dialog(this.activity!!)
+        dialog.setContentView(R.layout.picker_date)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(false)
+
+
+        val datePicker = dialog.findViewById<DatePicker>(R.id.date_picker)
+        datePicker.init(
+            calendar[Calendar.YEAR],
+            calendar[Calendar.MONTH],
+            calendar[Calendar.DAY_OF_MONTH]
+        ) { _, year, month, dayOfMonth ->
+            mYear = year
+            mMonth = month
+            mDay = dayOfMonth
+        }
+//        datePicker.init(mYear, mMonth, mDay)
+//            .setOnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
+//            mYear = year
+//            mMonth = monthOfYear
+//            mDay = dayOfMonth
+//        }
+//        DatePickerDialog(
+//            this.activity!!, { _: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+
+//            },
+//            mYear,
+//            mMonth,
+//            mDay
+//        )
+
+
+        val button = dialog.findViewById<Button>(R.id.btn_dpOk)
+        button.setOnClickListener {
+            birthday()
+            dialog.dismiss()
+        }
+
         calendar.add(Calendar.YEAR, -100)
-        datePickerDialog.datePicker.minDate = calendar.timeInMillis
-        datePickerDialog.datePicker.maxDate = Date().time
+        datePicker.minDate = calendar.timeInMillis
+        datePicker.maxDate = Date().time
+        datePicker.updateDate(mYear, mMonth, mDay)
         person.isBirthday = true
-        datePickerDialog.show()
+        dialog.show()
     }
+
+//    private fun datePicker() {
+//        calendar = Calendar.getInstance()
+//        getDate()
+//
+//        val datePickerDialog = DatePickerDialog(
+//            this.activity!!, { _: DatePicker?, year: Int, month: Int, dayOfMonth: Int ->
+//                mYear = year
+//                mMonth = month
+//                mDay = dayOfMonth
+//                birthday()
+//            },
+//            mYear,
+//            mMonth,
+//            mDay
+//        )
+//        calendar.add(Calendar.YEAR, -100)
+//        datePickerDialog.datePicker.minDate = calendar.timeInMillis
+//        datePickerDialog.datePicker.maxDate = Date().time
+//        datePickerDialog.setContentView(R.layout.date_picker)
+//        person.isBirthday = true
+//        datePickerDialog.show()
+//    }
+
 
     private fun getDate() {
         mDay = person.getDay()
@@ -115,22 +210,30 @@ class PersonFragment : Fragment() {
     }
 
     private fun numberPicker() {
-        val myNumberPicker = NumberPicker(this.activity)
-        myNumberPicker.maxValue = 250
-        myNumberPicker.minValue = 120
-        myNumberPicker.value = height
-        myNumberPicker.setOnValueChangedListener { _, _, newVal ->
-            binding.etHeight.text = newVal.toString()
+
+        val dialog = Dialog(this.activity!!)
+        dialog.setContentView(R.layout.picker_height)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(false)
+
+        val numberPicker = dialog.findViewById<NumberPicker>(R.id.numberPicker)
+        numberPicker.maxValue = 250
+        numberPicker.minValue = 120
+        if (height == 0) height = 160
+        numberPicker.value = height
+        numberPicker.setOnValueChangedListener { _, _, newVal ->
+//            binding.etHeight.text = newVal.toString()
             height = newVal
         }
-        val builder = AlertDialog.Builder(this.activity).setView(myNumberPicker)
-        builder.setPositiveButton("ok") { _, _ ->
-            person.height = height
-            writeStrideLenght()
 
+        val button = dialog.findViewById<Button>(R.id.btn_npOk)
+        button.setOnClickListener {
+            binding.etHeight.text = height.toString()
+            person.setHeight(height)
+            writeStrideLenght()
+            dialog.dismiss()
         }
-        builder.setCancelable(false)
-        builder.show()
+        dialog.show()
     }
 
     private fun writeStrideLenght() {
@@ -139,11 +242,11 @@ class PersonFragment : Fragment() {
     }
 
     private fun readObject() {
-        height = person.height
-        strideLength = person.strideLength
-        mYear = person.mYear
-        mMonth = person.mMonth
-        mDay = person.mDay
+        height = person.getHeight()
+        strideLength = person.getStrideLength()
+        mYear = person.getYear()
+        mMonth = person.getMonth()
+        mDay = person.getDay()
         writeView()
     }
 

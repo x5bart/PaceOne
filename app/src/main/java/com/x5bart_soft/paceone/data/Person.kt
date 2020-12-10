@@ -8,18 +8,25 @@ import java.util.*
 
 object Person {
 
-    var height = 0
-    var strideLength = 0
+    private var height = 0
+    private var strideLength = 0
 
-    var calendar: Calendar = Calendar.getInstance()
-    var mYear = calendar.get(Calendar.YEAR)
-    var mMonth = calendar.get(Calendar.MONTH)
-    var mDay = calendar.get(Calendar.DAY_OF_MONTH)
+    private var calendar: Calendar = Calendar.getInstance()
+    private var mYear = calendar.get(Calendar.YEAR)
+    private var mMonth = calendar.get(Calendar.MONTH)
+    private var mDay = calendar.get(Calendar.DAY_OF_MONTH)
     var isBirthday = false
 
-    var mMaxHr = 0
-    var age = 0
+    private var mMaxHr = 0
+    private var age = 0
 
+    fun getHeight(): Int {
+        return height
+    }
+
+    fun setHeight(height: Int) {
+        this.height = height
+    }
 
     @JvmName("getStrideLength1")
     fun getStrideLength(): Int {

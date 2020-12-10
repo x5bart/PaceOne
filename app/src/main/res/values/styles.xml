@@ -92,5 +92,11 @@
     </style>
 
 
+    <style name="DatePicker" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="colorAccent">@color/colorPrimary</item>                   <!--header background-->
+        <item name="android:windowBackground">@color/colorPrimary</item>     <!--calendar background-->
+        <item name="android:colorControlActivated">@color/colorAccent</item> <!--selected day-->
+    </style>
+
 
 </resources>

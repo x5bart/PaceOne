@@ -59,6 +59,30 @@ The strategy of negative splitting has been documented in competitive running si
     <string name="birthday">BIRTHDAY</string>
     <string name="cm">cm</string>
 
+    <string name="zone_title_1">Zone 1: Easy</string>
+    <string name="zone_title_2">Zone 2: Moderate</string>
+    <string name="zone_title_3">Zone 3: Hard</string>
+    <string name="zone_title_4">Zone 4: Very hard</string>
+    <string name="zone_title_5">Zone 5: Maximal</string>
+    <string name="zone_1">Zone 1</string>
+    <string name="zone_2">Zone 2</string>
+    <string name="zone_3">Zone 3</string>
+    <string name="zone_4">Zone 4</string>
+    <string name="zone_5">Zone 5</string>
+    <string name="zone_text_1">Exercising in zone 1 is relatively easy on your body. When it comes to fitness training, intensity this low is significant mainly in restorative training and improving your basic fitness when you are just beginning to exercise, or after a long break. Everyday exercise – walking, climbing stairs, cycling to work, etc. – is usually performed within this intensity zone.</string>
+    <string name="zone_text_2">Exercising at zone 2 improves your basic fitness level effectively. Exercising at this intensity feels easy, but workouts with a long duration can have a very high training effect. The majority of cardiovascular conditioning training should be performed within this zone. Improving basic fitness builds a foundation for other exercise and prepares your system for more energetic activity. Long duration workouts at this zone consume a lot of energy, especially from your body’s stored fat.</string>
+    <string name="zone_text_3">Exercising at zone 3 begins to be quite energetic and feels like pretty hard going. It will improve your ability to move quickly and economically. In this zone, lactic acid begins to form in your system, but your body is still able to completely flush it out. You should train at this intensity at most a couple of times per week, as it puts your body under a lot of stress.</string>
+    <string name="zone_text_4">Exercising at zone 4 will prepare your system for competition type events and high speeds. Workouts in this zone can be performed either at constant speed or as interval training (combinations of shorter training phases with intermittent breaks). High-intensity training develops your fitness level quickly and effectively, but done too often or at too high intensity may lead to overtraining, which may force you to take a long break from your training program.</string>
+    <string name="zone_text_5">When your heart rate during a workout reaches zone 5, the training will feel extremely hard. Lactic acid will build up in your system much faster than it can be removed, and you will be forced to stop after a few minutes at most. Athletes include these maximum-intensity workouts in their training program in a very controlled manner, fitness enthusiasts do not require them at all.</string>
+    <string name="hearth_rate_zone">HEARTH RATE ZONE</string>
+    <string name="max_heart_rate">MAX HEART RATE</string>
+    <string name="stride_length">STRIDE LENGTH</string>
+    <string name="copyrate_suunto_com">source suunto.com</string>
+    <string name="null_my">""</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
     !-- TODO: Remove or change this placeholder text -->
 
 
