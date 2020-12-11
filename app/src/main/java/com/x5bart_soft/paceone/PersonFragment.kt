@@ -54,7 +54,7 @@ class PersonFragment : Fragment() {
         person = Person
         adsUtils = AdsUtils()
 
-        adsUtils.showAds(binding.bannerViewPerson, adsUtils.blockIdPerson)
+        adsUtils.showAds(binding.personBannerView, adsUtils.blockIdPerson)
         readObject()
         viewBehavior()
 
@@ -62,12 +62,12 @@ class PersonFragment : Fragment() {
     }
 
     private fun viewBehavior() {
-        binding.etBirthday.setOnClickListener { datePicker() }
-        binding.etBirthday.setOnFocusChangeListener { _, _ -> if (binding.etBirthday.isFocused) datePicker() }
-        binding.etHeight.setOnClickListener { numberPicker() }
-        binding.etHeight.setOnFocusChangeListener { _, _ -> if (binding.etHeight.isFocused) numberPicker() }
+        binding.personEtBirthday.setOnClickListener { datePicker() }
+        binding.personEtBirthday.setOnFocusChangeListener { _, _ -> if (binding.personEtBirthday.isFocused) datePicker() }
+        binding.personEtHeight.setOnClickListener { numberPicker() }
+        binding.personEtHeight.setOnFocusChangeListener { _, _ -> if (binding.personEtHeight.isFocused) numberPicker() }
 
-        binding.tvZone1.setOnClickListener {
+        binding.personBtnZone1.setOnClickListener {
             val dialog = HelpDialog(
                 R.string.zone_title_1,
                 R.string.zone_text_1,
@@ -75,7 +75,7 @@ class PersonFragment : Fragment() {
             )
             dialog.show(fragmentManager!!, "zone1")
         }
-        binding.tvZone2.setOnClickListener {
+        binding.personBtnZone2.setOnClickListener {
             val dialog = HelpDialog(
                 R.string.zone_title_2,
                 R.string.zone_text_2,
@@ -83,7 +83,7 @@ class PersonFragment : Fragment() {
             )
             dialog.show(fragmentManager!!, "zone2")
         }
-        binding.tvZone3.setOnClickListener {
+        binding.personBtnZone3.setOnClickListener {
             val dialog = HelpDialog(
                 R.string.zone_title_3,
                 R.string.zone_text_3,
@@ -91,7 +91,7 @@ class PersonFragment : Fragment() {
             )
             dialog.show(fragmentManager!!, "zone1")
         }
-        binding.tvZone4.setOnClickListener {
+        binding.personBtnZone4.setOnClickListener {
             val dialog = HelpDialog(
                 R.string.zone_title_4,
                 R.string.zone_text_4,
@@ -99,7 +99,7 @@ class PersonFragment : Fragment() {
             )
             dialog.show(fragmentManager!!, "zone1")
         }
-        binding.tvZone5.setOnClickListener {
+        binding.personBtnZone5.setOnClickListener {
             val dialog = HelpDialog(
                 R.string.zone_title_5,
                 R.string.zone_text_5,
@@ -198,15 +198,15 @@ class PersonFragment : Fragment() {
 
     private fun setMaxHr() {
         val maxHr = person.getMaxHr()
-        binding.etMaxHeartRate.text = maxHr.toString()
+        binding.personEtMaxHR.text = maxHr.toString()
     }
 
     private fun hrZone() {
-        binding.tvZone5.text = person.getZone(zone5, zone0)
-        binding.tvZone4.text = person.getZone(zone4, zone5)
-        binding.tvZone3.text = person.getZone(zone3, zone4)
-        binding.tvZone2.text = person.getZone(zone2, zone3)
-        binding.tvZone1.text = person.getZone(zone0, zone2)
+        binding.personBtnZone5.text = person.getZone(zone5, zone0)
+        binding.personBtnZone4.text = person.getZone(zone4, zone5)
+        binding.personBtnZone3.text = person.getZone(zone3, zone4)
+        binding.personBtnZone2.text = person.getZone(zone2, zone3)
+        binding.personBtnZone1.text = person.getZone(zone0, zone2)
     }
 
     private fun numberPicker() {
@@ -228,7 +228,7 @@ class PersonFragment : Fragment() {
 
         val button = dialog.findViewById<Button>(R.id.btn_npOk)
         button.setOnClickListener {
-            binding.etHeight.text = height.toString()
+            binding.personEtHeight.text = height.toString()
             person.setHeight(height)
             writeStrideLenght()
             dialog.dismiss()
@@ -238,7 +238,7 @@ class PersonFragment : Fragment() {
 
     private fun writeStrideLenght() {
         strideLength = person.getStrideLength()
-        binding.etStrideLength.text = strideLength.toString()
+        binding.personEtStrideLength.text = strideLength.toString()
     }
 
     private fun readObject() {
@@ -252,7 +252,7 @@ class PersonFragment : Fragment() {
 
     private fun writeView() {
         if (height != 0) {
-            binding.etHeight.text = height.toString()
+            binding.personEtHeight.text = height.toString()
             writeStrideLenght()
         }
         if (person.isBirthday) birthday()
@@ -268,7 +268,7 @@ class PersonFragment : Fragment() {
         selectedDate.set(Calendar.DAY_OF_MONTH, mDay)
         setDate()
         val date = format.format(selectedDate.time)
-        binding.etBirthday.text = date
+        binding.personEtBirthday.text = date
         setMaxHr()
         hrZone()
     }

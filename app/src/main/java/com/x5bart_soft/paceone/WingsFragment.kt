@@ -51,40 +51,40 @@ class WingsFragment : Fragment() {
         splitFunction = SplitFunction()
         adsUtils = AdsUtils()
 
-        binding.rvWings.layoutManager = LinearLayoutManager(activity)
-        if (wingsObjact.splits) binding.cbSplits.isChecked = true
+        binding.wingsRvSplit.layoutManager = LinearLayoutManager(activity)
+        if (wingsObjact.splits) binding.wingsCbSplit.isChecked = true
 
         wingsObjact.etId = "all"
         if (wingsObjact.distance > 0.0) writeEt()
         if (wingsObjact.splits) {
-            binding.cbSplits.isChecked
+            binding.wingsCbSplit.isChecked
             visibleView()
             autoRv()
         }
 
-        adsUtils.showAds(binding.bannerViewWings, adsUtils.blockIdWings)
+        adsUtils.showAds(binding.wingsBannerView, adsUtils.blockIdWings)
 
         viewBehavior()
 
         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
 
-        animate.animate(binding.ivCar)
+        animate.animate(binding.wingsIvCar)
 
     }
 
     private fun viewBehavior() {
 
 
-        binding.etTimeH.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "timeH" }
-        binding.etTimeM.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "timeM" }
-        binding.etTimeS.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "timeS" }
-        binding.etDistance.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "dist" }
-        binding.etTempM.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "tempM" }
-        binding.etTempS.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "tempS" }
-        binding.etSplit.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "split" }
+        binding.wingsEtTimeH.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "timeH" }
+        binding.wingsEtTimeM.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "timeM" }
+        binding.wingsTimeS.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "timeS" }
+        binding.wingsEtDistance.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "dist" }
+        binding.wingsEtPaceM.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "tempM" }
+        binding.wingsEtPaceS.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "tempS" }
+        binding.wingsEtSplit.setOnFocusChangeListener { _, _ -> wingsObjact.etId = "split" }
 
-        binding.cbSplits.setOnClickListener {
-            if (binding.cbSplits.isChecked) {
+        binding.wingsCbSplit.setOnClickListener {
+            if (binding.wingsCbSplit.isChecked) {
                 wingsObjact.splits = true
                 visibleView()
                 autoRv()
@@ -97,7 +97,7 @@ class WingsFragment : Fragment() {
 
 
 
-        binding.etTimeH.addTextChangedListener(object : TextWatcher {
+        binding.wingsEtTimeH.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (wingsObjact.etId == "timeH") listeners()
             }
@@ -108,7 +108,7 @@ class WingsFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etTimeM.addTextChangedListener(object : TextWatcher {
+        binding.wingsEtTimeM.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (wingsObjact.etId == "timeM") listeners()
             }
@@ -119,7 +119,7 @@ class WingsFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etTimeS.addTextChangedListener(object : TextWatcher {
+        binding.wingsTimeS.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (wingsObjact.etId == "timeS") listeners()
             }
@@ -130,7 +130,7 @@ class WingsFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etDistance.addTextChangedListener(object : TextWatcher {
+        binding.wingsEtDistance.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (wingsObjact.etId == "dist") listeners()
             }
@@ -141,7 +141,7 @@ class WingsFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etTempM.addTextChangedListener(object : TextWatcher {
+        binding.wingsEtPaceM.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (wingsObjact.etId == "tempM") listeners()
             }
@@ -152,7 +152,7 @@ class WingsFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etTempS.addTextChangedListener(object : TextWatcher {
+        binding.wingsEtPaceS.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (wingsObjact.etId == "tempS") listeners()
             }
@@ -163,10 +163,10 @@ class WingsFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etSplit.addTextChangedListener(object : TextWatcher {
+        binding.wingsEtSplit.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (wingsObjact.etId == "split") {
-                    wingsObjact.splitValue = function.readEt(binding.etSplit).toDouble()
+                    wingsObjact.splitValue = function.readEt(binding.wingsEtSplit).toDouble()
                     autoRv()
                 }
             }
@@ -178,7 +178,7 @@ class WingsFragment : Fragment() {
             }
         })
 
-        binding.sbWingsDistance.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+        binding.wingsSbDistance.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
                 view!!.clearFocus()
@@ -198,14 +198,14 @@ class WingsFragment : Fragment() {
 
         })
 
-        binding.sbWingsStrategy.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+        binding.wingsSbStrategy.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
 
             }
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 val pro = progress / 2.toDouble()
-                binding.tvSlitStrategy.text = "$pro%"
+                binding.wingsEtStrategy.text = "$pro%"
                 wingsObjact.splitStrategy = pro
                 autoRv()
             }
@@ -220,7 +220,7 @@ class WingsFragment : Fragment() {
         val splits = wingsObjact.splits
         when (id) {
             "timeH" -> {
-                wingsObjact.timeH = function.readEt(binding.etTimeH).toInt()
+                wingsObjact.timeH = function.readEt(binding.wingsEtTimeH).toInt()
                 if (!wingsObjact.isInvalidInput) {
                     function.timeAll()
                     function.timeSeg()
@@ -230,7 +230,7 @@ class WingsFragment : Fragment() {
                 }
             }
             "timeM" -> {
-                wingsObjact.timeM = function.readEt(binding.etTimeM).toInt()
+                wingsObjact.timeM = function.readEt(binding.wingsEtTimeM).toInt()
                 if (!wingsObjact.isInvalidInput) {
                     function.timeAll()
                     function.timeSeg()
@@ -240,7 +240,7 @@ class WingsFragment : Fragment() {
                 }
             }
             "timeS" -> {
-                wingsObjact.timeS = function.readEt(binding.etTimeS).toInt()
+                wingsObjact.timeS = function.readEt(binding.wingsTimeS).toInt()
                 if (!wingsObjact.isInvalidInput) {
                     function.timeAll()
                     function.timeSeg()
@@ -250,7 +250,7 @@ class WingsFragment : Fragment() {
                 }
             }
             "dist" -> {
-                wingsObjact.distance = function.readEt(binding.etDistance).toDouble()
+                wingsObjact.distance = function.readEt(binding.wingsEtDistance).toDouble()
                 if (!wingsObjact.isInvalidInput) {
                     function.time()
                     writeEt()
@@ -258,7 +258,7 @@ class WingsFragment : Fragment() {
                 }
             }
             "tempM" -> {
-                wingsObjact.runnerTempM = function.readEt(binding.etTempM).toInt()
+                wingsObjact.runnerTempM = function.readEt(binding.wingsEtPaceM).toInt()
                 if (!wingsObjact.isInvalidInput) {
                     function.tempRunner()
                     function.tempToDistance()
@@ -267,7 +267,7 @@ class WingsFragment : Fragment() {
                 }
             }
             "tempS" -> {
-                wingsObjact.runnerTempS = function.readEt(binding.etTempS).toInt()
+                wingsObjact.runnerTempS = function.readEt(binding.wingsEtPaceS).toInt()
                 if (!wingsObjact.isInvalidInput) {
                     function.tempRunner()
                     function.tempToDistance()
@@ -279,29 +279,29 @@ class WingsFragment : Fragment() {
     }
 
     private fun visibleView() {
-        binding.tvTitleSplit.visibility = View.VISIBLE
-        binding.etSplit.visibility = View.VISIBLE
-        binding.tvSignSplit.visibility = View.VISIBLE
-        binding.tvTitleStrategy.visibility = View.VISIBLE
-        binding.ivNegativeSplit.visibility = View.VISIBLE
-        binding.tvSlitStrategy.visibility = View.VISIBLE
-        binding.sbWingsStrategy.visibility = View.VISIBLE
-        binding.headerSplits.visibility = View.VISIBLE
-        binding.divider6.visibility = View.VISIBLE
-        binding.rvWings.visibility = View.VISIBLE
+        binding.wingsTvTitleSplit.visibility = View.VISIBLE
+        binding.wingsEtSplit.visibility = View.VISIBLE
+        binding.wingsTvSignSplit.visibility = View.VISIBLE
+        binding.wingsTitleStrategy.visibility = View.VISIBLE
+        binding.wingsIvInfoStrategy.visibility = View.VISIBLE
+        binding.wingsEtStrategy.visibility = View.VISIBLE
+        binding.wingsSbStrategy.visibility = View.VISIBLE
+        binding.wingsLlHeaderRv.visibility = View.VISIBLE
+        binding.wingsDivider4.visibility = View.VISIBLE
+        binding.wingsRvSplit.visibility = View.VISIBLE
     }
 
     private fun hideView() {
-        binding.tvTitleSplit.visibility = View.GONE
-        binding.etSplit.visibility = View.GONE
-        binding.tvSignSplit.visibility = View.GONE
-        binding.tvTitleStrategy.visibility = View.GONE
-        binding.ivNegativeSplit.visibility = View.GONE
-        binding.tvSlitStrategy.visibility = View.GONE
-        binding.sbWingsStrategy.visibility = View.GONE
-        binding.headerSplits.visibility = View.GONE
-        binding.divider6.visibility = View.GONE
-        binding.rvWings.visibility = View.GONE
+        binding.wingsTvTitleSplit.visibility = View.GONE
+        binding.wingsEtSplit.visibility = View.GONE
+        binding.wingsTvSignSplit.visibility = View.GONE
+        binding.wingsTitleStrategy.visibility = View.GONE
+        binding.wingsIvInfoStrategy.visibility = View.GONE
+        binding.wingsEtStrategy.visibility = View.GONE
+        binding.wingsSbStrategy.visibility = View.GONE
+        binding.wingsLlHeaderRv.visibility = View.GONE
+        binding.wingsDivider4.visibility = View.GONE
+        binding.wingsRvSplit.visibility = View.GONE
     }
 
     private fun writeEt() {
@@ -309,81 +309,81 @@ class WingsFragment : Fragment() {
         when (wingsObjact.etId) {
             "all" -> {
                 view!!.clearFocus()
-                binding.etTimeH.setText(wingsObjact.timeH.toString())
-                writeZero(binding.etTimeM, wingsObjact.timeM)
-                writeZero(binding.etTimeS, wingsObjact.timeS)
-                binding.etDistance.setText(wingsObjact.distance.toString())
-                binding.etTempM.setText(wingsObjact.runnerTempM.toString())
-                writeZero(binding.etTempS, wingsObjact.runnerTempS)
+                binding.wingsEtTimeH.setText(wingsObjact.timeH.toString())
+                writeZero(binding.wingsEtTimeM, wingsObjact.timeM)
+                writeZero(binding.wingsTimeS, wingsObjact.timeS)
+                binding.wingsEtDistance.setText(wingsObjact.distance.toString())
+                binding.wingsEtPaceM.setText(wingsObjact.runnerTempM.toString())
+                writeZero(binding.wingsEtPaceS, wingsObjact.runnerTempS)
                 writeProgress()
 
             }
             "timeH" -> {
-                writeZero(binding.etTimeM, wingsObjact.timeM)
-                writeZero(binding.etTimeS, wingsObjact.timeS)
-                binding.etDistance.setText(wingsObjact.distance.toString())
-                binding.etTempM.setText(wingsObjact.runnerTempM.toString())
-                writeZero(binding.etTempS, wingsObjact.runnerTempS)
+                writeZero(binding.wingsEtTimeM, wingsObjact.timeM)
+                writeZero(binding.wingsTimeS, wingsObjact.timeS)
+                binding.wingsEtDistance.setText(wingsObjact.distance.toString())
+                binding.wingsEtPaceM.setText(wingsObjact.runnerTempM.toString())
+                writeZero(binding.wingsEtPaceS, wingsObjact.runnerTempS)
                 writeProgress()
             }
             "timeM" -> {
-                binding.etTimeH.setText(wingsObjact.timeH.toString())
-                writeZero(binding.etTimeS, wingsObjact.timeS)
-                binding.etDistance.setText(wingsObjact.distance.toString())
-                binding.etTempM.setText(wingsObjact.runnerTempM.toString())
-                writeZero(binding.etTempS, wingsObjact.runnerTempS)
+                binding.wingsEtTimeH.setText(wingsObjact.timeH.toString())
+                writeZero(binding.wingsTimeS, wingsObjact.timeS)
+                binding.wingsEtDistance.setText(wingsObjact.distance.toString())
+                binding.wingsEtPaceM.setText(wingsObjact.runnerTempM.toString())
+                writeZero(binding.wingsEtPaceS, wingsObjact.runnerTempS)
                 writeProgress()
             }
             "timeS" -> {
-                binding.etTimeH.setText(wingsObjact.timeH.toString())
-                writeZero(binding.etTimeM, wingsObjact.timeM)
-                binding.etDistance.setText(wingsObjact.distance.toString())
-                binding.etTempM.setText(wingsObjact.runnerTempM.toString())
-                writeZero(binding.etTempS, wingsObjact.runnerTempS)
+                binding.wingsEtTimeH.setText(wingsObjact.timeH.toString())
+                writeZero(binding.wingsEtTimeM, wingsObjact.timeM)
+                binding.wingsEtDistance.setText(wingsObjact.distance.toString())
+                binding.wingsEtPaceM.setText(wingsObjact.runnerTempM.toString())
+                writeZero(binding.wingsEtPaceS, wingsObjact.runnerTempS)
                 writeProgress()
             }
             "dist" -> {
-                binding.etTimeH.setText(wingsObjact.timeH.toString())
-                writeZero(binding.etTimeM, wingsObjact.timeM)
-                writeZero(binding.etTimeS, wingsObjact.timeS)
-                binding.etTempM.setText(wingsObjact.runnerTempM.toString())
-                writeZero(binding.etTempS, wingsObjact.runnerTempS)
+                binding.wingsEtTimeH.setText(wingsObjact.timeH.toString())
+                writeZero(binding.wingsEtTimeM, wingsObjact.timeM)
+                writeZero(binding.wingsTimeS, wingsObjact.timeS)
+                binding.wingsEtPaceM.setText(wingsObjact.runnerTempM.toString())
+                writeZero(binding.wingsEtPaceS, wingsObjact.runnerTempS)
                 writeProgress()
             }
             "tempM" -> {
-                binding.etTimeH.setText(wingsObjact.timeH.toString())
-                writeZero(binding.etTimeM, wingsObjact.timeM)
-                writeZero(binding.etTimeS, wingsObjact.timeS)
-                binding.etDistance.setText(wingsObjact.distance.toString())
-                writeZero(binding.etTempS, wingsObjact.runnerTempS)
+                binding.wingsEtTimeH.setText(wingsObjact.timeH.toString())
+                writeZero(binding.wingsEtTimeM, wingsObjact.timeM)
+                writeZero(binding.wingsTimeS, wingsObjact.timeS)
+                binding.wingsEtDistance.setText(wingsObjact.distance.toString())
+                writeZero(binding.wingsEtPaceS, wingsObjact.runnerTempS)
                 writeProgress()
             }
             "tempS" -> {
-                binding.etTimeH.setText(wingsObjact.timeH.toString())
-                writeZero(binding.etTimeM, wingsObjact.timeM)
-                writeZero(binding.etTimeS, wingsObjact.timeS)
-                binding.etDistance.setText(wingsObjact.distance.toString())
-                binding.etTempM.setText(wingsObjact.runnerTempM.toString())
+                binding.wingsEtTimeH.setText(wingsObjact.timeH.toString())
+                writeZero(binding.wingsEtTimeM, wingsObjact.timeM)
+                writeZero(binding.wingsTimeS, wingsObjact.timeS)
+                binding.wingsEtDistance.setText(wingsObjact.distance.toString())
+                binding.wingsEtPaceM.setText(wingsObjact.runnerTempM.toString())
                 writeProgress()
             }
             "pro" -> {
                 view!!.clearFocus()
-                binding.etTimeH.setText(wingsObjact.timeH.toString())
-                writeZero(binding.etTimeM, wingsObjact.timeM)
-                writeZero(binding.etTimeS, wingsObjact.timeS)
-                binding.etDistance.setText(wingsObjact.distance.toString())
-                binding.etTempM.setText(wingsObjact.runnerTempM.toString())
-                writeZero(binding.etTempS, wingsObjact.runnerTempS)
+                binding.wingsEtTimeH.setText(wingsObjact.timeH.toString())
+                writeZero(binding.wingsEtTimeM, wingsObjact.timeM)
+                writeZero(binding.wingsTimeS, wingsObjact.timeS)
+                binding.wingsEtDistance.setText(wingsObjact.distance.toString())
+                binding.wingsEtPaceM.setText(wingsObjact.runnerTempM.toString())
+                writeZero(binding.wingsEtPaceS, wingsObjact.runnerTempS)
                 writeProgress()
             }
             "split" -> {
                 view!!.clearFocus()
-                binding.etTimeH.setText(wingsObjact.timeH.toString())
-                writeZero(binding.etTimeM, wingsObjact.timeM)
-                writeZero(binding.etTimeS, wingsObjact.timeS)
-                binding.etDistance.setText(wingsObjact.distance.toString())
-                binding.etTempM.setText(wingsObjact.runnerTempM.toString())
-                writeZero(binding.etTempS, wingsObjact.runnerTempS)
+                binding.wingsEtTimeH.setText(wingsObjact.timeH.toString())
+                writeZero(binding.wingsEtTimeM, wingsObjact.timeM)
+                writeZero(binding.wingsTimeS, wingsObjact.timeS)
+                binding.wingsEtDistance.setText(wingsObjact.distance.toString())
+                binding.wingsEtPaceM.setText(wingsObjact.runnerTempM.toString())
+                writeZero(binding.wingsEtPaceS, wingsObjact.runnerTempS)
                 writeProgress()
             }
         }
@@ -395,8 +395,8 @@ class WingsFragment : Fragment() {
     }
 
     private fun writeProgress() {
-        binding.tvCarSpeed.text = "${wingsObjact.carSpeed} ${this.getString(R.string.km_h)}"
-        binding.sbWingsDistance.progress = wingsObjact.distance.toInt()
+        binding.wingsTvCarSpeed.text = "${wingsObjact.carSpeed} ${this.getString(R.string.km_h)}"
+        binding.wingsSbDistance.progress = wingsObjact.distance.toInt()
     }
 
     private fun autoRv() {
@@ -405,9 +405,9 @@ class WingsFragment : Fragment() {
         val splitValue = wingsObjact.splitValue
         val splitStrategy = wingsObjact.splitStrategy
         val splitIsEmpty = wingsObjact.splitsIsEmpty
-        if (!splitIsEmpty) splitFunction.clearRv(binding.rvWings)
+        if (!splitIsEmpty) splitFunction.clearRv(binding.wingsRvSplit)
         wingsObjact.splitsIsEmpty = splitFunction.createSplitList(
-            binding.rvWings,
+            binding.wingsRvSplit,
             timeAll,
             distance,
             splitValue,

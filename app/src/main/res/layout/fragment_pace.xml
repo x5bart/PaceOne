@@ -8,29 +8,88 @@
     android:clickable="true"
     tools:context=".MainActivity">
 
-
-    <ImageView
-        android:id="@+id/ivInfoKm"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/pace_guideline_vert50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/etDistance"
-        app:layout_constraintStart_toEndOf="@+id/tv_signSplit"
-        app:layout_constraintTop_toTopOf="@+id/tv_signSplit"
-        android:background="@drawable/ic_round_arrow_drop_down" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
+    <View
+        android:id="@+id/pace_divider_1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="30dp"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <!--Pace-->
     <TextView
-        android:id="@+id/tv_titleSplit"
+        android:id="@+id/pace_tv_titlePace"
         style="@style/FontTitle"
-        android:text="@string/time"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        android:text="@string/pace"
+        app:layout_constraintBottom_toTopOf="@+id/pace_et_paceM"
+        app:layout_constraintEnd_toStartOf="@+id/pace_guideline_vert50"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_signSplit" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/etSpeed"
+        android:id="@+id/pace_et_paceM"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="2"
+        android:theme="@style/EditTextFontBig"
+        app:layout_constraintBottom_toTopOf="@+id/pace_divider_2"
+        app:layout_constraintEnd_toStartOf="@+id/pace_tv_separatorPace"
+        app:layout_constraintTop_toBottomOf="@+id/pace_divider_1" />
+
+    <TextView
+        android:id="@+id/pace_tv_separatorPace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/audiowide"
+        android:text=":"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/pace_et_paceS"
+        app:layout_constraintEnd_toStartOf="@+id/pace_guideline_vert50"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/pace_et_paceS"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="2"
+        android:theme="@style/EditTextFontBig"
+        app:layout_constraintStart_toEndOf="@+id/pace_tv_separatorPace"
+        app:layout_constraintTop_toTopOf="@+id/pace_et_paceM" />
+
+    <TextView
+        android:id="@+id/pace_tv_signPace"
+        style="@style/FontSmall"
+        android:text="@string/min_km"
+        app:layout_constraintEnd_toStartOf="@+id/pace_guideline_vert50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pace_et_paceM" />
+
+    <!--Speed-->
+    <TextView
+        android:id="@+id/pace_tv_titleSpeed"
+        style="@style/FontTitle"
+        android:text="@string/speed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/pace_guideline_vert50"
+        app:layout_constraintTop_toTopOf="@+id/pace_tv_titlePace" />
+
+    <EditText
+        android:id="@+id/pace_et_speed"
         android:layout_width="150dp"
         android:layout_height="70dp"
         android:gravity="center"
@@ -38,118 +97,51 @@
         android:inputType="numberDecimal"
         android:maxLength="5"
         android:theme="@style/EditTextFontBig"
-        app:layout_constraintBottom_toBottomOf="@+id/etPaceM"
+        app:layout_constraintBottom_toBottomOf="@+id/pace_et_paceM"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="@+id/guideline" />
+        app:layout_constraintStart_toStartOf="@+id/pace_guideline_vert50" />
 
     <TextView
-        android:id="@+id/tv_titleDistance"
-        style="@style/FontTitle"
-        android:text="@string/speed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView"
+        android:id="@+id/pace_tv_signSpeed"
         style="@style/FontSmall"
         android:text="@string/km_h"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintBottom_toBottomOf="@+id/pace_tv_signPace"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline" />
+        app:layout_constraintStart_toStartOf="@+id/pace_guideline_vert50" />
 
+    <View
+        android:id="@+id/pace_divider_2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="125dp"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/pace_divider_1"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <!--Time-->
     <TextView
-        android:id="@+id/textView11"
-        style="@style/FontSmall"
-        android:text="@string/km"
-        app:layout_constraintEnd_toEndOf="@+id/etDistance"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/etDistance"
-        app:layout_constraintTop_toBottomOf="@+id/etDistance" />
-
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/FontSmall"
-        android:text="@string/min_km"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPaceM" />
-
-    <TextView
-        android:id="@+id/textView10"
-        style="@style/FontSmall"
-        android:text="@string/hh_mm_ss"
-        app:layout_constraintEnd_toEndOf="@+id/calc1"
-        app:layout_constraintStart_toStartOf="@+id/calc1"
-        app:layout_constraintTop_toBottomOf="@+id/calc1" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/pace_tv_titleTime"
         style="@style/FontTitle"
-        android:text="@string/pace"
-        app:layout_constraintBottom_toTopOf="@+id/etPaceM"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        android:text="@string/time"
+        app:layout_constraintEnd_toStartOf="@+id/pace_guideline_vert50"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/etPaceM"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:gravity="center"
-        android:imeOptions="actionNext"
-        android:inputType="number"
-        android:maxLength="2"
-        android:theme="@style/EditTextFontBig"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
-        app:layout_constraintEnd_toStartOf="@+id/textView555"
-        app:layout_constraintTop_toBottomOf="@+id/divider7" />
-
-    <EditText
-        android:id="@+id/etPaceS"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:gravity="center"
-        android:imeOptions="actionNext"
-        android:inputType="number"
-        android:maxLength="2"
-        android:theme="@style/EditTextFontBig"
-        app:layout_constraintStart_toEndOf="@+id/textView555"
-        app:layout_constraintTop_toTopOf="@+id/etPaceM" />
-
-    <TextView
-        android:id="@+id/textView555"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/audiowide"
-        android:text=":"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/etPaceS"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pace_tv_titleDistance" />
 
     <LinearLayout
-        android:id="@+id/calc1"
+        android:id="@+id/pace_ll_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/etDistance"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintBottom_toBottomOf="@+id/pace_et_distance"
+        app:layout_constraintEnd_toStartOf="@+id/pace_guideline_vert50"
         app:layout_constraintStart_toStartOf="parent"
         tools:visibility="invisible">
 
         <EditText
-            android:id="@+id/etTimeH"
+            android:id="@+id/pace_et_timeH"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -159,7 +151,7 @@
             android:theme="@style/EditTextFontSmall" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/pace_separatorTime_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=":"
@@ -167,7 +159,7 @@
             tools:layout_editor_absoluteX="40dp" />
 
         <EditText
-            android:id="@+id/etTimeM"
+            android:id="@+id/pace_et_timeM"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -178,7 +170,7 @@
             tools:layout_editor_absoluteX="45dp" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/pace_separatorTime_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=":"
@@ -186,7 +178,7 @@
             tools:layout_editor_absoluteX="85dp" />
 
         <EditText
-            android:id="@+id/etTimeS"
+            android:id="@+id/pace_et_timeS"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -195,82 +187,119 @@
             android:maxLength="2"
             android:theme="@style/EditTextFontSmall"
             tools:layout_editor_absoluteX="91dp" />
-
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/pace_tv_signTime"
+        style="@style/FontSmall"
+        android:text="@string/hh_mm_ss"
+        app:layout_constraintEnd_toEndOf="@+id/pace_ll_time"
+        app:layout_constraintStart_toStartOf="@+id/pace_ll_time"
+        app:layout_constraintTop_toBottomOf="@+id/pace_ll_time" />
+
+    <!--Distance-->
+    <TextView
+        android:id="@+id/pace_tv_titleDistance"
+        style="@style/FontTitle"
+        android:text="@string/distance"
+        app:layout_constraintBottom_toTopOf="@+id/pace_et_distance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/pace_guideline_vert50" />
+
+    <ImageView
+        android:id="@+id/pace_iv_distanceMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/pace_et_distance"
+        app:layout_constraintStart_toEndOf="@+id/pace_tv_titleDistance"
+        app:layout_constraintTop_toTopOf="@+id/pace_tv_titleDistance"
+        android:background="@drawable/ic_round_arrow_drop_down" />
+
     <EditText
-        android:id="@+id/etDistance"
+        android:id="@+id/pace_et_distance"
         android:layout_width="150dp"
         android:layout_height="70dp"
         android:gravity="center"
         android:inputType="numberDecimal"
         android:maxLength="6"
         android:theme="@style/EditTextFontBig"
-        app:layout_constraintBottom_toTopOf="@+id/divider2"
+        app:layout_constraintBottom_toTopOf="@+id/pace_divider_3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="125dp"
-        android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/divider7"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <View
-        android:id="@+id/divider7"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="30dp"
-        android:background="#FFFFFF"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp" />
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="125dp"
-        android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        tools:layout_editor_absoluteX="-16dp" />
+        app:layout_constraintStart_toStartOf="@+id/pace_guideline_vert50"
+        app:layout_constraintTop_toBottomOf="@+id/pace_divider_2" />
 
     <TextView
-        android:id="@+id/tv_signSplit"
-        style="@style/FontTitle"
-        android:text="@string/distance"
-        app:layout_constraintBottom_toTopOf="@+id/etDistance"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline" />
+        android:id="@+id/pace_tv_signDistance"
+        style="@style/FontSmall"
+        android:text="@string/km"
+        app:layout_constraintEnd_toEndOf="@+id/pace_et_distance"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/pace_et_distance"
+        app:layout_constraintTop_toBottomOf="@+id/pace_et_distance" />
+
+    <View
+        android:id="@+id/pace_divider_3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="125dp"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/pace_divider_2"
+        tools:layout_editor_absoluteX="-16dp" />
 
     <Button
-        android:id="@+id/btClear"
+        android:id="@+id/pace_btn_clear"
         style="@style/MyButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_rounded_corner"
         android:text="@string/clear"
-        app:layout_constraintBottom_toBottomOf="@+id/divider4"
+        app:layout_constraintBottom_toBottomOf="@+id/pace_divirer_4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        app:layout_constraintTop_toBottomOf="@+id/pace_divider_3" />
+
+    <View
+        android:id="@+id/pace_divirer_4"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="50dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/pace_divider_5"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <com.yandex.mobile.ads.AdView
+        android:id="@+id/pace_banner_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/pace_divider_5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/pace_divider_5"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/pace_tv_version"
+        tools:layout_editor_absoluteX="1dp" />
 
     <TextView
-        android:id="@+id/tv_version"
+        android:id="@+id/pace_tv_version"
         style="@style/FontSmall"
         android:layout_height="wrap_content"
         android:text="@string/version"
-        app:layout_constraintBottom_toTopOf="@+id/textView14"
+        app:layout_constraintBottom_toTopOf="@+id/pace_tv_copyrate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btClear"
+        app:layout_constraintTop_toBottomOf="@+id/pace_btn_clear"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/pace_tv_copyrate"
         style="@style/FontSmall"
         android:layout_marginBottom="5dp"
         android:text="@string/copyright"
@@ -278,64 +307,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/tv_version"
-        tools:layout_editor_absoluteX="1dp" />
 
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginBottom="50dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/divider3"
-        tools:layout_editor_absoluteX="1dp" />
-
-    <com.yandex.mobile.ads.AdView
-        android:id="@+id/banner_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/divider3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Switch
-        android:id="@+id/swKmToMile"
-        android:theme="@style/MySwitch"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        style="@style/FontTitle"
-        android:text="@string/km"
-        app:layout_constraintBottom_toBottomOf="@+id/swKmToMile"
-        app:layout_constraintEnd_toStartOf="@+id/swKmToMile"
-        app:layout_constraintTop_toTopOf="@+id/swKmToMile" />
-
-    <TextView
-        android:id="@+id/textView5_1"
-        style="@style/FontTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="@string/mile_2"
-        app:layout_constraintBottom_toBottomOf="@+id/swKmToMile"
-        app:layout_constraintStart_toEndOf="@+id/swKmToMile"
-        app:layout_constraintTop_toTopOf="@+id/swKmToMile" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

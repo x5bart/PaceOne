@@ -47,9 +47,9 @@ class PaceFragment : Fragment() {
         paceObject = Pace
         adsUtils = AdsUtils()
 
-        function.showVersion(binding.tvVersion, this.activity!!)
+        function.showVersion(binding.paceTvVersion, this.activity!!)
 
-        adsUtils.showAds(binding.bannerView, adsUtils.blockIdPace)
+        adsUtils.showAds(binding.paceBannerView, adsUtils.blockIdPace)
 
         if (paceObject.timeAll != 0 || paceObject.speed != 0.0 || paceObject.distance != 0.0) {
             paceObject.etID = "all"
@@ -72,7 +72,7 @@ class PaceFragment : Fragment() {
         when (paceObject.etID) {
 
             "paceM" -> {
-                paceObject.tempM = function.readEt(binding.etPaceM).toInt()
+                paceObject.tempM = function.readEt(binding.paceEtPaceM).toInt()
 
                 if (!paceObject.isInvalidInput) {
                     function.tempAll()
@@ -109,7 +109,7 @@ class PaceFragment : Fragment() {
                 }
             }
             "paceS" -> {
-                paceObject.tempS = function.readEt(binding.etPaceS).toInt()
+                paceObject.tempS = function.readEt(binding.paceEtPaceS).toInt()
                 if (!paceObject.isInvalidInput) {
                     function.tempAll()
                     function.tempToSpeed()
@@ -138,7 +138,7 @@ class PaceFragment : Fragment() {
                 }
             }
             "speed" -> {
-                paceObject.speed = function.readEt(binding.etSpeed).toDouble()
+                paceObject.speed = function.readEt(binding.paceEtSpeed).toDouble()
                 if (!paceObject.isInvalidInput) {
                     function.speedToTemp()
                     if (calculateDialog == "speed") hasCalculate = false
@@ -166,7 +166,7 @@ class PaceFragment : Fragment() {
                 }
             }
             "timeH" -> {
-                paceObject.timeH = function.readEt(binding.etTimeH).toInt()
+                paceObject.timeH = function.readEt(binding.paceEtTimeH).toInt()
                 if (!paceObject.isInvalidInput) {
                     function.timeAll()
                     if (calculateDialog == "time") hasCalculate = false
@@ -194,7 +194,7 @@ class PaceFragment : Fragment() {
                 }
             }
             "timeM" -> {
-                paceObject.timeM = function.readEt(binding.etTimeM).toInt()
+                paceObject.timeM = function.readEt(binding.paceEtTimeM).toInt()
                 if (!paceObject.isInvalidInput) {
                     function.timeAll()
                     if (calculateDialog == "time") hasCalculate = false
@@ -222,7 +222,7 @@ class PaceFragment : Fragment() {
                 }
             }
             "timeS" -> {
-                paceObject.timeS = function.readEt(binding.etTimeS).toInt()
+                paceObject.timeS = function.readEt(binding.paceEtTimeS).toInt()
                 if (!paceObject.isInvalidInput) {
                     function.timeAll()
                     if (calculateDialog == "time") hasCalculate = false
@@ -251,7 +251,7 @@ class PaceFragment : Fragment() {
             }
             "dist" -> {
 
-                paceObject.distance = function.readEt(binding.etDistance).toDouble()
+                paceObject.distance = function.readEt(binding.paceEtDistance).toDouble()
                 if (!paceObject.isInvalidInput) {
 
                     if (calculateDialog == "dist") hasCalculate = false
@@ -289,68 +289,68 @@ class PaceFragment : Fragment() {
     private fun writeEt() {
         when (Pace.etID) {
             "all" -> {
-                binding.etPaceM.setText(paceObject.tempM.toString())
+                binding.paceEtPaceM.setText(paceObject.tempM.toString())
                 writePaceS()
-                binding.etSpeed.setText(paceObject.speed.toString())
-                binding.etTimeH.setText(paceObject.timeH.toString())
+                binding.paceEtSpeed.setText(paceObject.speed.toString())
+                binding.paceEtTimeH.setText(paceObject.timeH.toString())
                 writeTimeM()
                 writeTimeS()
-                binding.etDistance.setText(paceObject.distance.toString())
+                binding.paceEtDistance.setText(paceObject.distance.toString())
 
             }
             "paceM" -> {
                 writePaceS()
-                binding.etSpeed.setText(paceObject.speed.toString())
-                binding.etTimeH.setText(paceObject.timeH.toString())
+                binding.paceEtSpeed.setText(paceObject.speed.toString())
+                binding.paceEtTimeH.setText(paceObject.timeH.toString())
                 writeTimeM()
                 writeTimeS()
-                binding.etDistance.setText(paceObject.distance.toString())
+                binding.paceEtDistance.setText(paceObject.distance.toString())
             }
             "paceS" -> {
-                binding.etPaceM.setText(paceObject.tempM.toString())
-                binding.etSpeed.setText(paceObject.speed.toString())
-                binding.etTimeH.setText(paceObject.timeH.toString())
+                binding.paceEtPaceM.setText(paceObject.tempM.toString())
+                binding.paceEtSpeed.setText(paceObject.speed.toString())
+                binding.paceEtTimeH.setText(paceObject.timeH.toString())
                 writeTimeM()
                 writeTimeS()
-                binding.etDistance.setText(paceObject.distance.toString())
+                binding.paceEtDistance.setText(paceObject.distance.toString())
             }
             "speed" -> {
-                binding.etPaceM.setText(paceObject.tempM.toString())
+                binding.paceEtPaceM.setText(paceObject.tempM.toString())
                 writePaceS()
-                binding.etTimeH.setText(paceObject.timeH.toString())
+                binding.paceEtTimeH.setText(paceObject.timeH.toString())
                 writeTimeM()
                 writeTimeS()
-                binding.etDistance.setText(paceObject.distance.toString())
+                binding.paceEtDistance.setText(paceObject.distance.toString())
             }
             "timeH" -> {
-                binding.etPaceM.setText(paceObject.tempM.toString())
+                binding.paceEtPaceM.setText(paceObject.tempM.toString())
                 writePaceS()
-                binding.etSpeed.setText(paceObject.speed.toString())
+                binding.paceEtSpeed.setText(paceObject.speed.toString())
                 writeTimeM()
                 writeTimeS()
-                binding.etDistance.setText(paceObject.distance.toString())
+                binding.paceEtDistance.setText(paceObject.distance.toString())
             }
             "timeM" -> {
-                binding.etPaceM.setText(paceObject.tempM.toString())
+                binding.paceEtPaceM.setText(paceObject.tempM.toString())
                 writePaceS()
-                binding.etSpeed.setText(paceObject.speed.toString())
-                binding.etTimeH.setText(paceObject.timeH.toString())
+                binding.paceEtSpeed.setText(paceObject.speed.toString())
+                binding.paceEtTimeH.setText(paceObject.timeH.toString())
                 writeTimeS()
-                binding.etDistance.setText(paceObject.distance.toString())
+                binding.paceEtDistance.setText(paceObject.distance.toString())
             }
             "timeS" -> {
-                binding.etPaceM.setText(paceObject.tempM.toString())
+                binding.paceEtPaceM.setText(paceObject.tempM.toString())
                 writePaceS()
-                binding.etSpeed.setText(paceObject.speed.toString())
-                binding.etTimeH.setText(paceObject.timeH.toString())
+                binding.paceEtSpeed.setText(paceObject.speed.toString())
+                binding.paceEtTimeH.setText(paceObject.timeH.toString())
                 writeTimeM()
-                binding.etDistance.setText(paceObject.distance.toString())
+                binding.paceEtDistance.setText(paceObject.distance.toString())
             }
             "dist" -> {
-                binding.etPaceM.setText(paceObject.tempM.toString())
+                binding.paceEtPaceM.setText(paceObject.tempM.toString())
                 writePaceS()
-                binding.etSpeed.setText(paceObject.speed.toString())
-                binding.etTimeH.setText(paceObject.timeH.toString())
+                binding.paceEtSpeed.setText(paceObject.speed.toString())
+                binding.paceEtTimeH.setText(paceObject.timeH.toString())
                 writeTimeM()
                 writeTimeS()
             }
@@ -358,18 +358,18 @@ class PaceFragment : Fragment() {
     }
 
     private fun writePaceS() {
-        if (paceObject.tempS < 10) binding.etPaceS.setText("0${paceObject.tempS}")
-        else binding.etPaceS.setText(paceObject.tempS.toString())
+        if (paceObject.tempS < 10) binding.paceEtPaceS.setText("0${paceObject.tempS}")
+        else binding.paceEtPaceS.setText(paceObject.tempS.toString())
     }
 
     private fun writeTimeM() {
-        if (paceObject.timeM < 10) binding.etTimeM.setText("0${paceObject.timeM}")
-        else binding.etTimeM.setText(paceObject.timeM.toString())
+        if (paceObject.timeM < 10) binding.paceEtTimeM.setText("0${paceObject.timeM}")
+        else binding.paceEtTimeM.setText(paceObject.timeM.toString())
     }
 
     private fun writeTimeS() {
-        if (paceObject.timeS < 10) binding.etTimeS.setText("0${paceObject.timeS}")
-        else binding.etTimeS.setText(paceObject.timeS.toString())
+        if (paceObject.timeS < 10) binding.paceEtTimeS.setText("0${paceObject.timeS}")
+        else binding.paceEtTimeS.setText(paceObject.timeS.toString())
     }
 
     private fun showPopupKm(v: View) {
@@ -383,7 +383,7 @@ class PaceFragment : Fragment() {
 
         popupMenu.setOnMenuItemClickListener { item ->
             paceObject.etID = "dist"
-            binding.etDistance.requestFocus()
+            binding.paceEtDistance.requestFocus()
             var tmp = 0.0
             when (item.itemId) {
                 R.id.km_3 -> tmp = 3.00
@@ -393,7 +393,7 @@ class PaceFragment : Fragment() {
                 R.id.km_42 -> tmp = 42.195
             }
             paceObject.distance = tmp
-            binding.etDistance.setText("$tmp")
+            binding.paceEtDistance.setText("$tmp")
             true
         }
         popupMenu.show()
@@ -407,36 +407,36 @@ class PaceFragment : Fragment() {
 
     private fun viewBehavior() {
 
-        binding.etPaceM.setOnFocusChangeListener { _, _ ->
+        binding.paceEtPaceM.setOnFocusChangeListener { _, _ ->
             paceObject.etID = "paceM"
             hasCalculate = true
         }
-        binding.etPaceS.setOnFocusChangeListener { _, _ ->
+        binding.paceEtPaceS.setOnFocusChangeListener { _, _ ->
             paceObject.etID = "paceS"
             hasCalculate = true
         }
-        binding.etSpeed.setOnFocusChangeListener { _, _ ->
+        binding.paceEtSpeed.setOnFocusChangeListener { _, _ ->
             paceObject.etID = "speed"
             hasCalculate = true
         }
-        binding.etTimeH.setOnFocusChangeListener { _, _ ->
+        binding.paceEtTimeM.setOnFocusChangeListener { _, _ ->
             paceObject.etID = "timeH"
             hasCalculate = true
         }
-        binding.etTimeM.setOnFocusChangeListener { _, _ ->
+        binding.paceEtTimeM.setOnFocusChangeListener { _, _ ->
             paceObject.etID = "timeM"
             hasCalculate = true
         }
-        binding.etTimeS.setOnFocusChangeListener { _, _ ->
+        binding.paceEtTimeS.setOnFocusChangeListener { _, _ ->
             paceObject.etID = "timeS"
             hasCalculate = true
         }
-        binding.etDistance.setOnFocusChangeListener { _, _ ->
+        binding.paceEtDistance.setOnFocusChangeListener { _, _ ->
             paceObject.etID = "dist"
             hasCalculate = true
         }
 
-        binding.etPaceM.addTextChangedListener(object : TextWatcher {
+        binding.paceEtPaceM.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (paceObject.etID == "paceM") listeners()
             }
@@ -447,7 +447,7 @@ class PaceFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etPaceS.addTextChangedListener(object : TextWatcher {
+        binding.paceEtPaceS.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (paceObject.etID == "paceS") listeners()
             }
@@ -458,7 +458,7 @@ class PaceFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etSpeed.addTextChangedListener(object : TextWatcher {
+        binding.paceEtSpeed.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (paceObject.etID == "speed") listeners()
             }
@@ -469,7 +469,7 @@ class PaceFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etTimeH.addTextChangedListener(object : TextWatcher {
+        binding.paceEtTimeH.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (paceObject.etID == "timeH") listeners()
             }
@@ -480,7 +480,7 @@ class PaceFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etTimeM.addTextChangedListener(object : TextWatcher {
+        binding.paceEtTimeM.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (paceObject.etID == "timeM") listeners()
             }
@@ -491,7 +491,7 @@ class PaceFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etTimeS.addTextChangedListener(object : TextWatcher {
+        binding.paceEtTimeS.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (paceObject.etID == "timeS") listeners()
             }
@@ -502,7 +502,7 @@ class PaceFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-        binding.etDistance.addTextChangedListener(object : TextWatcher {
+        binding.paceEtDistance.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (paceObject.etID == "dist") listeners()
             }
@@ -514,29 +514,29 @@ class PaceFragment : Fragment() {
             }
         })
 
-        binding.etPaceM.setOnClickListener { binding.etPaceM.selectAll() }
-        binding.etPaceS.setOnClickListener { binding.etPaceS.selectAll() }
-        binding.etSpeed.setOnClickListener { binding.etSpeed.selectAll() }
-        binding.etTimeH.setOnClickListener { binding.etTimeH.selectAll() }
-        binding.etTimeM.setOnClickListener { binding.etTimeM.selectAll() }
-        binding.etTimeS.setOnClickListener { binding.etTimeS.selectAll() }
-        binding.etDistance.setOnClickListener { binding.etDistance.selectAll() }
+        binding.paceEtPaceM.setOnClickListener { binding.paceEtPaceM.selectAll() }
+        binding.paceEtPaceS.setOnClickListener { binding.paceEtPaceS.selectAll() }
+        binding.paceEtSpeed.setOnClickListener { binding.paceEtSpeed.selectAll() }
+        binding.paceEtTimeH.setOnClickListener { binding.paceEtTimeH.selectAll() }
+        binding.paceEtTimeM.setOnClickListener { binding.paceEtTimeM.selectAll() }
+        binding.paceEtTimeS.setOnClickListener { binding.paceEtTimeS.selectAll() }
+        binding.paceEtDistance.setOnClickListener { binding.paceEtDistance.selectAll() }
 
 
-        binding.btClear.setOnClickListener {
+        binding.paceBtnClear.setOnClickListener {
             view!!.clearFocus()
             function.clear()
-            binding.etPaceM.setText("")
-            binding.etPaceS.setText("")
-            binding.etSpeed.setText("")
-            binding.etTimeH.setText("")
-            binding.etTimeM.setText("")
-            binding.etTimeS.setText("")
-            binding.etDistance.setText("")
+            binding.paceEtPaceM.setText("")
+            binding.paceEtPaceS.setText("")
+            binding.paceEtSpeed.setText("")
+            binding.paceEtTimeH.setText("")
+            binding.paceEtTimeM.setText("")
+            binding.paceEtTimeS.setText("")
+            binding.paceEtDistance.setText("")
 
         }
 
-        binding.ivInfoKm.setOnClickListener { showPopupKm(binding.ivInfoKm) }
+        binding.paceIvDistanceMenu.setOnClickListener { showPopupKm(binding.paceIvDistanceMenu) }
     }
 }
 

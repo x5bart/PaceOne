@@ -6,105 +6,16 @@
     android:layout_height="match_parent"
     android:background="@drawable/fragment_rounded"
     tools:context=".WingsFragment">
-    <!--time-->
-    <TextView
-        android:id="@+id/tv_titleCar"
-        style="@style/FontTitle"
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/wings_guideline_vert50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/car_speed"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvTitleTemp" />
-
-    <TextView
-        android:id="@+id/tv_carSpeed"
-        style="@style/FontTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
-        android:textSize="11dp"
-        android:theme="@style/EditTextFontSmall"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/iv_car" />
-
-    <SeekBar
-        android:id="@+id/sb_wings_strategy"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:indeterminate="false"
-        android:max="10"
-        android:min="-10"
-        android:progress="0"
-        android:progressTint="@color/white"
-        android:thumbTint="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/et_split"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
-
-    <EditText
-        android:id="@+id/et_temp_m"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="24dp"
-        android:gravity="center"
-        android:imeOptions="actionNext"
-        android:inputType="number"
-        android:maxLength="2"
-        android:theme="@style/EditTextFontSmall"
-        app:layout_constraintBottom_toTopOf="@+id/divider11"
-        app:layout_constraintEnd_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/divider5" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/audiowide"
-        android:text=":"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/et_temp_s"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
-
-    <TextView
-        android:id="@+id/textView15"
-        style="@style/FontSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/min_km"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/et_temp_m" />
-
-    <TextView
-        android:id="@+id/tvTitleTemp"
-        style="@style/FontTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pace"
-        app:layout_constraintBottom_toTopOf="@+id/et_temp_m"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
-
-    <EditText
-        android:id="@+id/et_temp_s"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:imeOptions="actionNext"
-        android:inputType="number"
-        android:maxLength="2"
-        android:theme="@style/EditTextFontSmall"
-        app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="@+id/et_temp_m" />
-
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
     <View
-        android:id="@+id/divider13"
+        android:id="@+id/wings_divider_1"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="30dp"
@@ -112,29 +23,32 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="1dp" />
 
+
+    <!--time-->
+
     <TextView
-        android:id="@+id/tv_titleTime"
+        android:id="@+id/wings_tv_titleTime"
         style="@style/FontTitle"
         android:text="@string/time"
-        app:layout_constraintBottom_toTopOf="@+id/time"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintBottom_toTopOf="@+id/wings_ll_time"
+        app:layout_constraintEnd_toStartOf="@+id/wings_guideline_vert50"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:id="@+id/time"
+        android:id="@+id/wings_ll_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/divider5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintBottom_toTopOf="@+id/wings_divider_2"
+        app:layout_constraintEnd_toStartOf="@+id/wings_guideline_vert50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider13"
+        app:layout_constraintTop_toBottomOf="@+id/wings_divider_1"
         tools:visibility="invisible">
 
         <EditText
-            android:id="@+id/et_time_h"
+            android:id="@+id/wings_et_timeH"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -144,7 +58,7 @@
             android:theme="@style/EditTextFontSmall" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/wings_separatorTime_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=":"
@@ -152,7 +66,7 @@
             tools:layout_editor_absoluteX="40dp" />
 
         <EditText
-            android:id="@+id/et_time_m"
+            android:id="@+id/wings_et_timeM"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -163,7 +77,7 @@
             tools:layout_editor_absoluteX="45dp" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/wings_separatorTime_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=":"
@@ -171,7 +85,7 @@
             tools:layout_editor_absoluteX="85dp" />
 
         <EditText
-            android:id="@+id/et_time_s"
+            android:id="@+id/wings_timeS"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -183,25 +97,25 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/wings_signTime"
         style="@style/FontSmall"
         android:text="@string/hh_mm_ss"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/wings_guideline_vert50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time" />
+        app:layout_constraintTop_toBottomOf="@+id/wings_ll_time" />
 
     <!--distance-->
     <TextView
-        android:id="@+id/tv_titleDistance"
+        android:id="@+id/wings_tv_titleDistance"
         style="@style/FontTitle"
         android:text="@string/distance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/tv_titleTime" />
+        app:layout_constraintStart_toStartOf="@+id/wings_guideline_vert50"
+        app:layout_constraintTop_toTopOf="@+id/wings_tv_titleTime" />
 
     <EditText
-        android:id="@+id/et_distance"
+        android:id="@+id/wings_et_distance"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:gravity="center"
@@ -210,71 +124,187 @@
         android:maxLength="6"
         android:theme="@style/EditTextFontSmall"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/tv_titleTime" />
-
-    <ImageView
-        android:id="@+id/ivInfoKm"
-        android:layout_width="22dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="5dp"
-        android:background="@drawable/ic_round_arrow_drop_down"
-        android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/et_distance"
-        app:layout_constraintStart_toEndOf="@+id/tv_titleDistance"
-        app:layout_constraintTop_toTopOf="@+id/tv_titleDistance" />
+        app:layout_constraintStart_toStartOf="@+id/wings_guideline_vert50"
+        app:layout_constraintTop_toBottomOf="@+id/wings_tv_titleTime" />
 
     <TextView
-        android:id="@+id/textView555"
+        android:id="@+id/wings_tv_signDistance"
         style="@style/FontSmall"
         android:text="@string/km"
-        app:layout_constraintEnd_toEndOf="@+id/et_distance"
+        app:layout_constraintEnd_toEndOf="@+id/wings_et_distance"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/et_distance"
-        app:layout_constraintTop_toBottomOf="@+id/et_distance" />
+        app:layout_constraintStart_toStartOf="@+id/wings_et_distance"
+        app:layout_constraintTop_toBottomOf="@+id/wings_et_distance" />
 
     <View
-        android:id="@+id/divider5"
+        android:id="@+id/wings_divider_2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="125dp"
         android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/divider13"
+        app:layout_constraintTop_toBottomOf="@+id/wings_divider_1"
         tools:layout_editor_absoluteX="1dp" />
-    <!--segment-->
 
-    <View
-        android:id="@+id/divider11"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="125dp"
-        android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/divider5"
-        tools:layout_editor_absoluteX="0dp" />
+
+    <!--Car-->
 
     <TextView
-        android:id="@+id/tv_titleSplit"
-        style="@style/FontTitle"
-        android:text="@string/segment"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/et_split"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_titleStrategy"
+        android:id="@+id/wings_tv_titleCar"
         style="@style/FontTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/splitFactor"
-        android:visibility="gone"
+        android:text="@string/car_speed"
+        app:layout_constraintEnd_toStartOf="@+id/wings_guideline_vert50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/wings_tv_titlePace" />
+
+    <ImageView
+        android:id="@+id/wings_iv_car"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/ic_car"
+        app:layout_constraintBottom_toTopOf="@+id/wings_sb_distance"
+        app:layout_constraintEnd_toStartOf="@+id/wings_guideline_vert50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wings_divider_2" />
+
+    <TextView
+        android:id="@+id/wings_tv_carSpeed"
+        style="@style/FontTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:textSize="11dp"
+        android:theme="@style/EditTextFontSmall"
+        app:layout_constraintEnd_toStartOf="@+id/wings_guideline_vert50"
+        app:layout_constraintStart_toEndOf="@+id/pace_tv_titlePace"
+        app:layout_constraintTop_toTopOf="@+id/wings_iv_car" />
+
+    <!--Pace-->
+
+    <TextView
+        android:id="@+id/wings_tv_titlePace"
+        style="@style/FontTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pace"
+        app:layout_constraintBottom_toTopOf="@+id/wings_et_paceM"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/tv_titleSplit" />
+        app:layout_constraintStart_toStartOf="@+id/wings_guideline_vert50" />
 
     <EditText
-        android:id="@+id/et_split"
+        android:id="@+id/wings_et_paceM"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="2"
+        android:theme="@style/EditTextFontSmall"
+        app:layout_constraintBottom_toTopOf="@+id/wings_divider_3"
+        app:layout_constraintEnd_toStartOf="@+id/wings_tv_separatorPace"
+        app:layout_constraintTop_toBottomOf="@+id/wings_divider_2" />
+
+    <TextView
+        android:id="@+id/wings_tv_separatorPace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/audiowide"
+        android:text=":"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/wings_et_paceS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/wings_guideline_vert50" />
+
+
+    <EditText
+        android:id="@+id/wings_et_paceS"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="2"
+        android:theme="@style/EditTextFontSmall"
+        app:layout_constraintStart_toEndOf="@+id/wings_tv_separatorPace"
+        app:layout_constraintTop_toTopOf="@+id/wings_et_paceM" />
+
+    <TextView
+        android:id="@+id/wings_tv_signPace"
+        style="@style/FontSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/min_km"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/wings_guideline_vert50"
+        app:layout_constraintTop_toBottomOf="@+id/wings_et_paceM" />
+
+    <SeekBar
+        android:id="@+id/wings_sb_distance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:min="1"
+        android:progress="15"
+        android:progressTint="@color/white"
+        android:thumb="@drawable/ic_round_swap_horizontal_circle_24"
+        android:thumbTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/wings_divider_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/wings_divider_3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="125dp"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/wings_divider_2"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <CheckBox
+        android:id="@+id/wings_cb_split"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:buttonTint="#FFFFFF"
+        android:checked="false"
+        android:text="splits"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wings_sb_distance" />
+
+    <!--Split-->
+    <TextView
+        android:id="@+id/wings_tv_titleSplit"
+        style="@style/FontTitle"
+        android:text="@string/segment"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/wings_et_split"
+        app:layout_constraintEnd_toStartOf="@+id/wings_guideline_vert50"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/wings_iv_infoStrategy"
+        android:layout_width="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_dialog_info"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/wings_titleStrategy"
+        app:layout_constraintStart_toEndOf="@+id/wings_titleStrategy"
+        app:layout_constraintTop_toTopOf="@+id/wings_titleStrategy" />
+
+
+    <EditText
+        android:id="@+id/wings_et_split"
         style="@style/EditTextFontBig"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -283,46 +313,86 @@
         android:inputType="numberDecimal"
         android:text="1.00"
         android:textColor="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/tv_signSplit"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/wings_divider_4"
+        app:layout_constraintEnd_toStartOf="@+id/wings_guideline_vert50"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wings_divider_3" />
 
     <TextView
-        android:id="@+id/tv_signSplit"
+        android:id="@+id/wings_tv_signSplit"
         style="@style/FontSmall"
-        android:layout_marginBottom="8dp"
         android:text="@string/km"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/divider6"
-        app:layout_constraintEnd_toEndOf="@+id/et_split"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/wings_et_split"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/et_split" />
+        app:layout_constraintStart_toStartOf="@+id/wings_et_split"
+        app:layout_constraintTop_toBottomOf="@+id/wings_et_split" />
+
+  <!--Strategy-->
+
+    <TextView
+        android:id="@+id/wings_titleStrategy"
+        style="@style/FontTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/splitFactor"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/wings_guideline_vert50"
+        app:layout_constraintTop_toTopOf="@+id/wings_tv_titleSplit" />
+
+    <TextView
+        android:id="@+id/wings_et_strategy"
+        style="@style/EditTextFontSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="0.0%"
+        android:textColor="@color/white"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/wings_sb_strategy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/wings_guideline_vert50" />
+
+    <SeekBar
+        android:id="@+id/wings_sb_strategy"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:max="10"
+        android:min="-10"
+        android:progress="0"
+        android:progressTint="@color/white"
+        android:thumbTint="@color/white"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/wings_et_split"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/wings_guideline_vert50" />
 
     <View
-        android:id="@+id/divider6"
+        android:id="@+id/wings_divider_4"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="125dp"
         android:background="#FFFFFF"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/divider11"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/wings_divider_3"
         tools:layout_editor_absoluteX="1dp" />
 
     <LinearLayout
-        android:id="@+id/header_splits"
+        android:id="@+id/wings_ll_headerRv"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/divider6"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/wings_divider_4"
         tools:layout_editor_absoluteX="1dp">
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/wings_tv_rvNumber"
             style="@style/ItemList"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -331,7 +401,7 @@
             android:text="№" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/wings_tv_rvDistance"
             style="@style/ItemList"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -341,7 +411,7 @@
             android:text="@string/km" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/wings_tv_rvTime"
             style="@style/ItemList"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -352,7 +422,7 @@
             android:text="@string/time" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/wings_tv_rvPace"
             style="@style/ItemList"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -363,7 +433,7 @@
             android:text="@string/pace" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/wings_tv_copyrate"
             style="@style/ItemList"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -374,122 +444,51 @@
 
     <!--recycleView-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_wings"
+        android:id="@+id/wings_rv_split"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/divider4"
-        app:layout_constraintTop_toBottomOf="@+id/header_splits"
+        app:layout_constraintBottom_toTopOf="@+id/wings_divirer_4"
+        app:layout_constraintTop_toBottomOf="@+id/wings_ll_headerRv"
         tools:layout_editor_absoluteX="1dp" />
 
-    <!--guideline-->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="16dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
 
     <View
-        android:id="@+id/divider3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/divider4"
+        android:id="@+id/wings_divirer_4"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginBottom="50dp"
         android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/divider3"
+        app:layout_constraintBottom_toTopOf="@+id/wings_divider_5"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <View
+        android:id="@+id/wings_divider_5"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="16dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
     <com.yandex.mobile.ads.AdView
-        android:id="@+id/banner_view_wings"
+        android:id="@+id/wings_banner_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/divider3"
+        app:layout_constraintBottom_toTopOf="@+id/wings_divider_5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <SeekBar
-        android:id="@+id/sb_wings_distance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:indeterminate="false"
-
-        android:max="100"
-        android:min="1"
-        android:progress="15"
-        android:progressTint="@color/white"
-        android:thumb="@drawable/ic_round_swap_horizontal_circle_24"
-        android:thumbTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/divider11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
-    <TextView
-        android:id="@+id/tv_slit_strategy"
-        style="@style/EditTextFontSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="0.0%"
-        android:textColor="@color/white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/sb_wings_strategy"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
 
-    <ImageView
-        android:id="@+id/ivNegativeSplit"
-        android:layout_width="15dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:clickable="true"
 
-        android:src="@android:drawable/ic_dialog_info"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_titleStrategy"
-        app:layout_constraintStart_toEndOf="@+id/tv_titleStrategy"
-        app:layout_constraintTop_toTopOf="@+id/tv_titleStrategy" />
 
-    <ImageView
-        android:id="@+id/iv_car"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/ic_car"
-        app:layout_constraintBottom_toTopOf="@+id/sb_wings_distance"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
-    <CheckBox
-        android:id="@+id/cb_splits"
-        style="@style/FontTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:buttonTint="#FFFFFF"
-        android:checked="false"
-        android:text="splits"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sb_wings_distance" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

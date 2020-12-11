@@ -41,10 +41,10 @@ class SettingsFragment : Fragment() {
         config = Config
         adsUtils = AdsUtils()
 
-        adsUtils.showAds(binding.bannerViewWings, adsUtils.blockIdSetting)
+        adsUtils.showAds(binding.settingBannerView, adsUtils.blockIdSetting)
 
-        binding.tvLanguage2.setOnClickListener { showPopupLang(binding.tvLanguage2) }
-        binding.ivLanguage.setOnClickListener { showPopupLang(binding.ivLanguage) }
+        binding.settingsTvLanguage2.setOnClickListener { showPopupLang(binding.settingsTvLanguage2) }
+        binding.settingIvLanguage.setOnClickListener { showPopupLang(binding.settingIvLanguage) }
     }
 
     private fun showPopupLang(v: View) {

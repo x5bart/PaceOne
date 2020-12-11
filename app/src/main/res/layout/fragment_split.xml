@@ -6,9 +6,16 @@
     android:layout_height="match_parent"
     android:background="@drawable/fragment_rounded"
     tools:context=".SplitFragment">
-    <!--time-->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/splits_guideline_vert50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
     <View
-        android:id="@+id/divider12"
+        android:id="@+id/splits_divider_1"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="30dp"
@@ -16,28 +23,29 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="1dp" />
 
+    <!--time-->
     <TextView
-        android:id="@+id/tv_titleTime"
+        android:id="@+id/splits_tv_titleTime"
         style="@style/FontTitle"
         android:text="@string/time"
-        app:layout_constraintBottom_toTopOf="@+id/time"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintBottom_toTopOf="@+id/splits_ll_time"
+        app:layout_constraintEnd_toStartOf="@+id/splits_guideline_vert50"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:id="@+id/time"
+        android:id="@+id/splits_ll_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:visibility="visible"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/splits_guideline_vert50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_distance"
+        app:layout_constraintTop_toTopOf="@+id/splits_et_distance"
         tools:visibility="invisible">
 
         <EditText
-            android:id="@+id/et_time_h"
+            android:id="@+id/splits_et_timeH"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -47,7 +55,7 @@
             android:theme="@style/EditTextFontSmall" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/splits_separatorTime_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=":"
@@ -55,7 +63,7 @@
             tools:layout_editor_absoluteX="40dp" />
 
         <EditText
-            android:id="@+id/et_time_m"
+            android:id="@+id/splits_et_timeM"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -66,7 +74,7 @@
             tools:layout_editor_absoluteX="45dp" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/splits_separatorTime_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=":"
@@ -74,7 +82,7 @@
             tools:layout_editor_absoluteX="85dp" />
 
         <EditText
-            android:id="@+id/et_time_s"
+            android:id="@+id/splits_timeS"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -86,25 +94,25 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/splits_tv_signTime"
         style="@style/FontSmall"
         android:text="@string/hh_mm_ss"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/splits_guideline_vert50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time" />
+        app:layout_constraintTop_toBottomOf="@+id/splits_ll_time" />
 
     <!--distance-->
     <TextView
-        android:id="@+id/tv_titleDistance"
+        android:id="@+id/splits_tv_titleDistance"
         style="@style/FontTitle"
         android:text="@string/distance"
-        app:layout_constraintBottom_toTopOf="@+id/et_distance"
+        app:layout_constraintBottom_toTopOf="@+id/splits_et_distance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
+        app:layout_constraintStart_toStartOf="@+id/splits_guideline_vert50" />
 
     <EditText
-        android:id="@+id/et_distance"
+        android:id="@+id/splits_et_distance"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:gravity="center"
@@ -112,61 +120,52 @@
         android:inputType="numberDecimal"
         android:maxLength="6"
         android:theme="@style/EditTextFontSmall"
-        app:layout_constraintBottom_toTopOf="@+id/divider5"
+        app:layout_constraintBottom_toTopOf="@+id/splits_divider_2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/divider12" />
-
-    <ImageView
-        android:id="@+id/ivInfoKm"
-        android:layout_width="22dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="5dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/et_distance"
-        app:layout_constraintStart_toEndOf="@+id/tv_titleDistance"
-        app:layout_constraintTop_toTopOf="@+id/tv_titleDistance"
-        android:background="@drawable/ic_round_arrow_drop_down" />
+        app:layout_constraintStart_toStartOf="@+id/splits_guideline_vert50"
+        app:layout_constraintTop_toBottomOf="@+id/splits_divider_1" />
 
     <TextView
-        android:id="@+id/textView555"
+        android:id="@+id/splits_tv_signDistance"
         style="@style/FontSmall"
         android:text="@string/km"
-        app:layout_constraintEnd_toEndOf="@+id/et_distance"
+        app:layout_constraintEnd_toEndOf="@+id/splits_et_distance"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/et_distance"
-        app:layout_constraintTop_toBottomOf="@+id/et_distance" />
+        app:layout_constraintStart_toStartOf="@+id/splits_et_distance"
+        app:layout_constraintTop_toBottomOf="@+id/splits_et_distance" />
+
+    <ImageView
+        android:id="@+id/splits_iv_distanceMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/splits_et_distance"
+        app:layout_constraintStart_toEndOf="@+id/splits_tv_titleDistance"
+        app:layout_constraintTop_toTopOf="@+id/splits_tv_titleDistance"
+        android:background="@drawable/ic_round_arrow_drop_down" />
 
     <View
-        android:id="@+id/divider5"
+        android:id="@+id/splits_divider_2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="125dp"
         android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/divider12"
+        app:layout_constraintTop_toBottomOf="@+id/splits_divider_1"
         tools:layout_editor_absoluteX="1dp" />
-    <!--segment-->
+
+    <!--Split-->
     <TextView
-        android:id="@+id/tv_titleSplit"
+        android:id="@+id/splits_tv_titleSplit"
         style="@style/FontTitle"
         android:text="@string/segment"
-        app:layout_constraintBottom_toTopOf="@+id/et_split"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintBottom_toTopOf="@+id/splits_et_split"
+        app:layout_constraintEnd_toStartOf="@+id/splits_guideline_vert50"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_titleStrategy"
-        style="@style/FontTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/splitFactor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/tv_titleSplit" />
-
     <EditText
-        android:id="@+id/et_split"
+        android:id="@+id/splits_et_split"
         style="@style/EditTextFontBig"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -175,41 +174,93 @@
         android:inputType="numberDecimal"
         android:text="1.00"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/divider6"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintBottom_toTopOf="@+id/split_divider_3"
+        app:layout_constraintEnd_toStartOf="@+id/splits_guideline_vert50"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider5" />
+        app:layout_constraintTop_toBottomOf="@+id/splits_divider_2" />
 
     <TextView
-        android:id="@+id/tv_signSplit"
+        android:id="@+id/splits_tv_signSplit"
         style="@style/FontSmall"
         android:text="@string/km"
-        app:layout_constraintEnd_toEndOf="@+id/et_split"
+        app:layout_constraintEnd_toEndOf="@+id/splits_et_split"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/et_split"
-        app:layout_constraintTop_toBottomOf="@+id/et_split" />
+        app:layout_constraintStart_toStartOf="@+id/splits_et_split"
+        app:layout_constraintTop_toBottomOf="@+id/splits_et_split" />
+
+
+    <!--SplitStrategy-->
+
+    <TextView
+        android:id="@+id/splits_titleStrategy"
+        style="@style/FontTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/splitFactor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/splits_guideline_vert50"
+        app:layout_constraintTop_toTopOf="@+id/splits_tv_titleSplit" />
+
+    <ImageView
+        android:id="@+id/splits_iv_infoStrategy"
+        android:layout_width="15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_dialog_info"
+        app:layout_constraintBottom_toBottomOf="@+id/splits_titleStrategy"
+        app:layout_constraintStart_toEndOf="@+id/splits_titleStrategy"
+        app:layout_constraintTop_toTopOf="@+id/splits_titleStrategy" />
+
+    <TextView
+        android:id="@+id/splits_et_strategy"
+        style="@style/EditTextFontSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0%"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/splits_sb_strategy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/splits_guideline_vert50" />
+
+    <SeekBar
+        android:id="@+id/splits_sb_strategy"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:max="10"
+        android:min="-10"
+        android:thumbTint="@color/white"
+        android:progress="0"
+        android:progressTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/splits_et_split"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/splits_guideline_vert50" />
+
 
     <View
-        android:id="@+id/divider6"
+        android:id="@+id/split_divider_3"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="125dp"
         android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/divider5"
+        app:layout_constraintTop_toBottomOf="@+id/splits_divider_2"
         tools:layout_editor_absoluteX="1dp" />
 
+
     <LinearLayout
-        android:id="@+id/header_splits"
+        android:id="@+id/splits_ll_headerRv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/divider6"
+        app:layout_constraintTop_toBottomOf="@+id/split_divider_3"
         tools:layout_editor_absoluteX="1dp">
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/splits_tv_rvNumber"
             style="@style/ItemList"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -218,7 +269,7 @@
             android:text="№" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/splits_tv_rvDistance"
             style="@style/ItemList"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -228,7 +279,7 @@
             android:text="@string/km" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/splits_tv_rvTime"
             style="@style/ItemList"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -239,7 +290,7 @@
             android:text="@string/time" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/splits_tv_rvPace"
             style="@style/ItemList"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -250,7 +301,7 @@
             android:text="@string/pace" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/splits_tv_rvAvg"
             style="@style/ItemList"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -261,91 +312,39 @@
 
     <!--recycleView-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_splits"
+        android:id="@+id/splits_rv_splits"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/divider4"
-        app:layout_constraintTop_toBottomOf="@+id/header_splits"
+        app:layout_constraintBottom_toTopOf="@+id/splits_divider_4"
+        app:layout_constraintTop_toBottomOf="@+id/splits_ll_headerRv"
         tools:layout_editor_absoluteX="1dp" />
 
-    <!--guideline-->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="16dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
     <View
-        android:id="@+id/divider3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/divider4"
+        android:id="@+id/splits_divider_4"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginBottom="50dp"
         android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/divider3"
+        app:layout_constraintBottom_toTopOf="@+id/splits_divider_5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/splits_divider_5"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="16dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.yandex.mobile.ads.AdView
-        android:id="@+id/banner_view_split"
+        android:id="@+id/splits_banner_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/divider3"
+        app:layout_constraintBottom_toTopOf="@+id/splits_divider_5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <SeekBar
-        android:id="@+id/sb_split_negativ"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:indeterminate="false"
-        android:max="10"
-        android:min="-10"
-        android:thumbTint="@color/white"
-        android:progress="0"
-        android:progressTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/et_split"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
-
-    <TextView
-        android:id="@+id/tv_slit_strategy"
-        style="@style/EditTextFontSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0.0%"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/sb_split_negativ"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4" />
-
-    <ImageView
-        android:id="@+id/ivNegativeSplit"
-        android:layout_width="15dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:clickable="true"
-        android:src="@android:drawable/ic_dialog_info"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_titleStrategy"
-        app:layout_constraintStart_toEndOf="@+id/tv_titleStrategy"
-        app:layout_constraintTop_toTopOf="@+id/tv_titleStrategy" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
