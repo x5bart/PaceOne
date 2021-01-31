@@ -95,46 +95,6 @@
         app:layout_constraintTop_toBottomOf="@+id/settings_divider_2"
         tools:layout_editor_absoluteX="1dp" />
 
-    <Button
-        android:id="@+id/settings_btn_help"
-        style="@style/MyButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_rounded_corner"
-        android:text="@string/help_to_developer"
-        app:layout_constraintBottom_toTopOf="@+id/settings_btn_clearData"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_divider_3" />
-
-    <Button
-        android:id="@+id/settings_btn_clearData"
-        style="@style/MyButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_rounded_corner"
-        android:text="@string/clear_data"
-        app:layout_constraintBottom_toTopOf="@+id/settings_btn_about"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_btn_help" />
-
-    <Button
-        android:id="@+id/settings_btn_about"
-        style="@style/MyButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
-        android:background="@drawable/btn_rounded_corner"
-        android:text="@string/about"
-        app:layout_constraintBottom_toBottomOf="@+id/settings_divider_5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_btn_clearData" />
-
     <View
         android:id="@+id/settings_divirer_4"
         android:layout_width="match_parent"

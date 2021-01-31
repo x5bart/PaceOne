@@ -4,15 +4,18 @@ package com.x5bart_soft.paceone
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.PopupMenu
 import android.widget.SeekBar
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.x5bart_soft.paceone.databinding.FragmentSplitBinding
 import com.x5bart_soft.paceone.data.Pace
 import com.x5bart_soft.paceone.model.SplitFunction
 import com.x5bart_soft.paceone.dialogs.HelpDialog
+import com.x5bart_soft.paceone.split.SplitAdapter
 import com.x5bart_soft.paceone.utils.AdsUtils
 import com.x5bart_soft.paceone.utils.MyPreference
 
@@ -251,7 +254,7 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         val distance = paceObject.distance
         val splitValue = paceObject.splitValue
         val splitStrategy = paceObject.splitStrategy
-        if (!paceObject.splitIsEmpty) function.clearRv(binding.splitsRvSplits)
+        if (binding.splitsRvSplits.size>0) function.clearRv(binding.splitsRvSplits)
         paceObject.splitIsEmpty = function.createSplitList(
             binding.splitsRvSplits,
             timeAll,
@@ -263,7 +266,7 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
     }
 
     override fun onDestroy() {
-        paceObject.splitIsEmpty = true
+        Log.d(TAG,"onDestroy()")
         super.onDestroy()
     }
 

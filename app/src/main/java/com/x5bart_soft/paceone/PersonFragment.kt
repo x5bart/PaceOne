@@ -62,10 +62,11 @@ class PersonFragment : Fragment() {
     }
 
     private fun viewBehavior() {
+        binding.personEtBirthday.requestFocus()
         binding.personEtBirthday.setOnClickListener { datePicker() }
         binding.personEtBirthday.setOnFocusChangeListener { _, _ -> if (binding.personEtBirthday.isFocused) datePicker() }
-        binding.personEtHeight.setOnClickListener { numberPicker() }
         binding.personEtHeight.setOnFocusChangeListener { _, _ -> if (binding.personEtHeight.isFocused) numberPicker() }
+        binding.personEtHeight.setOnClickListener { numberPicker() }
 
         binding.personBtnZone1.setOnClickListener {
             val dialog = HelpDialog(
@@ -73,7 +74,7 @@ class PersonFragment : Fragment() {
                 R.string.zone_text_1,
                 R.string.copyrate_suunto_com
             )
-            dialog.show(fragmentManager!!, "zone1")
+            dialog.show(childFragmentManager, "zone1")
         }
         binding.personBtnZone2.setOnClickListener {
             val dialog = HelpDialog(
@@ -81,7 +82,7 @@ class PersonFragment : Fragment() {
                 R.string.zone_text_2,
                 R.string.copyrate_suunto_com
             )
-            dialog.show(fragmentManager!!, "zone2")
+            dialog.show(childFragmentManager, "zone2")
         }
         binding.personBtnZone3.setOnClickListener {
             val dialog = HelpDialog(
@@ -89,7 +90,7 @@ class PersonFragment : Fragment() {
                 R.string.zone_text_3,
                 R.string.copyrate_suunto_com
             )
-            dialog.show(fragmentManager!!, "zone1")
+            dialog.show(childFragmentManager, "zone1")
         }
         binding.personBtnZone4.setOnClickListener {
             val dialog = HelpDialog(
@@ -97,7 +98,7 @@ class PersonFragment : Fragment() {
                 R.string.zone_text_4,
                 R.string.copyrate_suunto_com
             )
-            dialog.show(fragmentManager!!, "zone1")
+            dialog.show(childFragmentManager, "zone1")
         }
         binding.personBtnZone5.setOnClickListener {
             val dialog = HelpDialog(
@@ -105,7 +106,7 @@ class PersonFragment : Fragment() {
                 R.string.zone_text_5,
                 R.string.copyrate_suunto_com
             )
-            dialog.show(fragmentManager!!, "zone1")
+            dialog.show(childFragmentManager, "zone1")
         }
     }
 
@@ -113,7 +114,7 @@ class PersonFragment : Fragment() {
         calendar = Calendar.getInstance()
         getDate()
 
-        val dialog = Dialog(this.activity!!)
+        val dialog = Dialog(this.requireActivity())
         dialog.setContentView(R.layout.picker_date)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCancelable(false)
@@ -211,7 +212,7 @@ class PersonFragment : Fragment() {
 
     private fun numberPicker() {
 
-        val dialog = Dialog(this.activity!!)
+        val dialog = Dialog(this.requireActivity())
         dialog.setContentView(R.layout.picker_height)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCancelable(false)

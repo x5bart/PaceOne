@@ -11,6 +11,7 @@ import android.view.WindowManager
 import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.x5bart_soft.paceone.databinding.FragmentWingsBinding
@@ -404,8 +405,7 @@ class WingsFragment : Fragment() {
         val distance = wingsObjact.distance
         val splitValue = wingsObjact.splitValue
         val splitStrategy = wingsObjact.splitStrategy
-        val splitIsEmpty = wingsObjact.splitsIsEmpty
-        if (!splitIsEmpty) splitFunction.clearRv(binding.wingsRvSplit)
+        if (binding.wingsRvSplit.size>0) splitFunction.clearRv(binding.wingsRvSplit)
         wingsObjact.splitsIsEmpty = splitFunction.createSplitList(
             binding.wingsRvSplit,
             timeAll,
@@ -418,7 +418,6 @@ class WingsFragment : Fragment() {
 
     override fun onDestroy() {
         Log.d(TAG, "onDestroy")
-        wingsObjact.splitsIsEmpty = true
         super.onDestroy()
     }
 
