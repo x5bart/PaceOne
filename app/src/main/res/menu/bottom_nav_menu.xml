@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/paceFragment"
+        android:icon="@drawable/btn_pace"
+        android:title="@string/pace_title"
+        />
+    <item
+        android:id="@+id/splitFragment"
+        android:icon="@drawable/btn_split"
+        android:title="@string/split"/>
+    <item
+        android:id="@+id/wingsFragment"
+        android:icon="@drawable/btn_wings"
+        android:title="@string/world_run" />
+    <item
+        android:id="@+id/personFragment"
+        android:icon="@drawable/btn_person"
+        android:title="@string/person" />
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/btn_settings"
+        android:title="@string/settings_tittle" />
+</menu>

@@ -80,7 +80,11 @@ The strategy of negative splitting has been documented in competitive running si
     <string name="copyrate_suunto_com">source suunto.com</string>
     <string name="null_my">""</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="world_run" translatable="false">WORLD RUN</string>
+    <string name="person" translatable="false">PERSON</string>
+    <string name="pace_title" translatable="false">PACE</string>
+    <string name="split" translatable="false">SPLIT</string>
+    <string name="settings_tittle">SETTINGS</string>
 
 
     !-- TODO: Remove or change this placeholder text -->

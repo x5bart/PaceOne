@@ -1,14 +1,14 @@
 package com.x5bart_soft.paceone
 
-import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.content.Context
 import android.content.ContextWrapper
-import android.content.res.ColorStateList
 import android.os.Bundle
-import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.x5bart_soft.paceone.databinding.ActivityMainBinding
 import com.x5bart_soft.paceone.data.Config
@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var preference: MyPreference
     private lateinit var binding: ActivityMainBinding
     private lateinit var config: Config
+    private lateinit var navController: NavController
     private var btnId = ""
     private var changeLanguage = false
     private var language = ""
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+//        setContentView(R.layout.activity_main)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -42,9 +43,24 @@ class MainActivity : AppCompatActivity() {
         preference = MyPreference(this)
         config = Config
 
-        start()
-        btnBehavior()
+        navController = findNavController(R.id.navHostFragment)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.paceFragment,
+                R.id.splitFragment,
+                R.id.wingsFragment,
+                R.id.personFragment,
+                R.id.settingsFragment
+            )
+        )
+        binding.bottomNavigationView.setupWithNavController(navController)
+//        setupActionBarWithNavController(navController, appBarConfiguration)
 
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     override fun attachBaseContext(newBase: Context?) {
@@ -56,74 +72,5 @@ class MainActivity : AppCompatActivity() {
         super.attachBaseContext(localeUpdatedContext)
     }
 
-    private fun start() {
-        changeLanguage = config.changeLanguage
-        if (changeLanguage) getFragment("setting", SettingsFragment())
-        else getFragment("pace", PaceFragment())
-        changeLanguage = false
-        config.changeLanguage = changeLanguage
-    }
-
-    private fun btnBehavior() {
-        changeColorBtn()
-        binding.btnPace.setOnClickListener { getFragment("pace", PaceFragment()) }
-        binding.btnSplit.setOnClickListener { getFragment("split", SplitFragment()) }
-        binding.btnWings.setOnClickListener { getFragment("wings", WingsFragment()) }
-        binding.btnPerson.setOnClickListener { getFragment("person", PersonFragment()) }
-        binding.btnSetting.setOnClickListener { getFragment("setting", SettingsFragment()) }
-    }
-
-    private fun getFragment(buttonId: String, fragment: Fragment) {
-        if (btnId != buttonId) {
-            btnId = buttonId
-            changeColorBtn()
-            val fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.frgCont, fragment)
-            fragmentTransaction.commit()
-        }
-    }
-
-    @SuppressLint("ResourceAsColor")
-    private fun changeColorBtn() {
-        val activeColor = this.resources.getColor(R.color.colorPrimary)
-        val inActiveColor = this.resources.getColor(R.color.textActive)
-        when (btnId) {
-            "pace" -> {
-                binding.btnPace.backgroundTintList = ColorStateList.valueOf(activeColor)
-                binding.btnSplit.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnWings.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnPerson.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnSetting.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-            }
-            "split" -> {
-                binding.btnPace.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnSplit.backgroundTintList = ColorStateList.valueOf(activeColor)
-                binding.btnWings.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnPerson.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnSetting.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-            }
-            "wings" -> {
-                binding.btnPace.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnSplit.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnWings.backgroundTintList = ColorStateList.valueOf(activeColor)
-                binding.btnPerson.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnSetting.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-            }
-            "person" -> {
-                binding.btnPace.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnSplit.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnWings.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnPerson.backgroundTintList = ColorStateList.valueOf(activeColor)
-                binding.btnSetting.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-            }
-            "setting" -> {
-                binding.btnPace.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnSplit.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnWings.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnPerson.backgroundTintList = ColorStateList.valueOf(inActiveColor)
-                binding.btnSetting.backgroundTintList = ColorStateList.valueOf(activeColor)
-            }
-        }
-    }
 
 }

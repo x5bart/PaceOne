@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_navigation"
+    app:startDestination="@id/paceFragment">
+
+    <fragment
+        android:id="@+id/paceFragment"
+        android:name="com.x5bart_soft.paceone.PaceFragment"
+        tools:layout="@layout/fragment_pace"/>
+    <fragment
+        android:id="@+id/splitFragment"
+        android:name="com.x5bart_soft.paceone.SplitFragment"
+        android:label="fragment_split"/>
+    <fragment
+        android:id="@+id/wingsFragment"
+        android:name="com.x5bart_soft.paceone.WingsFragment"
+        android:label="fragment_wings" />
+    <fragment
+        android:id="@+id/personFragment"
+        android:name="com.x5bart_soft.paceone.PersonFragment"
+        android:label="fragment_person" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.x5bart_soft.paceone.SettingsFragment"
+        android:label="fragment_settings"/>
+</navigation>

@@ -8,84 +8,26 @@
     tools:context=".MainActivity">
 
 
-    <FrameLayout
-        android:id="@+id/frgCont"
+    <fragment
+        android:id="@+id/navHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_pace"
+        app:navGraph="@navigation/my_navigation"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_pace"
-        android:layout_width="50dp"
-        android:layout_height="60dp"
-        android:background="@drawable/btn_pace"
-        android:gravity="bottom|center_horizontal"
-        android:text="PACE"
-        android:textColor="@color/colorPrimary"
-        android:textSize="10dp"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_nav_menu"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_split"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btn_split"
-        android:layout_width="50dp"
-        android:layout_height="60dp"
-        android:background="@drawable/btn_split"
-        android:gravity="bottom|center_horizontal"
-        android:text="SPLIT"
-        android:textColor="@color/colorPrimary"
-        android:textSize="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_wings"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_pace"
-        app:layout_constraintTop_toTopOf="@+id/btn_pace" />
-
-    <Button
-        android:id="@+id/btn_wings"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/btn_wings"
-        android:gravity="bottom|center_horizontal"
-        android:text="WORLD RUN"
-        android:textColor="@color/colorPrimary"
-        android:textSize="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_person"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_split"
-        app:layout_constraintTop_toTopOf="@+id/btn_split" />
-
-    <Button
-        android:id="@+id/btn_person"
-        android:layout_width="50dp"
-        android:layout_height="60dp"
-        android:background="@drawable/btn_person"
-        android:gravity="bottom|center_horizontal"
-        android:text="PERSON"
-        android:textColor="@color/colorPrimary"
-        android:textSize="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_setting"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_wings"
-        app:layout_constraintTop_toBottomOf="@+id/frgCont" />
-
-    <Button
-        android:id="@+id/btn_setting"
-        android:layout_width="50dp"
-        android:layout_height="60dp"
-        android:background="@drawable/btn_settings"
-        android:gravity="bottom|center_horizontal"
-        android:text="Settings"
-        android:textColor="@color/colorPrimary"
-        android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_person"
-        app:layout_constraintTop_toTopOf="@+id/btn_person" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
