@@ -156,7 +156,7 @@ class PersonFragment : Fragment() {
         datePicker.minDate = calendar.timeInMillis
         datePicker.maxDate = Date().time
         datePicker.updateDate(mYear, mMonth, mDay)
-        person.isBirthday = true
+        person.setIsBirthday(true)
         dialog.show()
     }
 
@@ -256,8 +256,7 @@ class PersonFragment : Fragment() {
             binding.personEtHeight.text = height.toString()
             writeStrideLenght()
         }
-        if (person.isBirthday) birthday()
-
+        if (person.getIsBirthday()) birthday()
     }
 
     @SuppressLint("SimpleDateFormat", "WeekBasedYear")

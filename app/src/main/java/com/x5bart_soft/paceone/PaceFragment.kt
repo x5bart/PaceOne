@@ -42,7 +42,7 @@ class PaceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        preference = MyPreference(activity!!.applicationContext)
+        preference = MyPreference()
         function = PaceFunction()
         paceObject = Pace
         adsUtils = AdsUtils()

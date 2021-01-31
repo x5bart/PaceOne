@@ -12,7 +12,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        val language = MyPreference(this).getLanguage()
+        val language = MyPreference().getLanguage()
         if (language != "notSave") Config.language = language!!
 
         val intent = Intent(this, MainActivity::class.java)

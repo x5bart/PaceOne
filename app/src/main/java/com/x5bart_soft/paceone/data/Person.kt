@@ -1,8 +1,10 @@
 package com.x5bart_soft.paceone.data
 
+import android.app.Activity
 import android.util.Log
 import android.widget.EditText
 import com.x5bart_soft.paceone.TAG
+import com.x5bart_soft.paceone.utils.MyPreference
 import java.math.RoundingMode
 import java.util.*
 
@@ -11,20 +13,27 @@ object Person {
     private var height = 0
     private var strideLength = 0
 
+    private var preference = MyPreference()
+
     private var calendar: Calendar = Calendar.getInstance()
     private var mYear = calendar.get(Calendar.YEAR)
     private var mMonth = calendar.get(Calendar.MONTH)
     private var mDay = calendar.get(Calendar.DAY_OF_MONTH)
-    var isBirthday = false
+    private var isBirthday = false
 
     private var mMaxHr = 0
     private var age = 0
+    private val DAY = "day"
+    private val MONTH = "month"
+    private val YEAR = "year"
 
     fun getHeight(): Int {
+        height = preference.getHeight()
         return height
     }
 
     fun setHeight(height: Int) {
+        preference.setHeight(height)
         this.height = height
     }
 
@@ -37,27 +46,43 @@ object Person {
     }
 
     fun getDay(): Int {
+        if (preference.getDate(DAY) > 0) mDay = preference.getDate(DAY)
         return mDay
     }
 
     fun getMonth(): Int {
+        if (preference.getDate(MONTH) > 0) mMonth = preference.getDate(MONTH)
         return mMonth
     }
 
     fun getYear(): Int {
+        if (preference.getDate(YEAR) > 0) mYear = preference.getDate(YEAR)
         return mYear
     }
 
     fun setDay(day: Int) {
+        preference.setDate(DAY, day)
         mDay = day
     }
 
     fun setMonth(month: Int) {
+        preference.setDate(MONTH, month)
         mMonth = month
     }
 
     fun setYear(year: Int) {
+        preference.setDate(YEAR, year)
         mYear = year
+    }
+
+    fun setIsBirthday(isBirthday: Boolean) {
+        preference.setBoolean("isBirthday", isBirthday)
+        this.isBirthday = isBirthday
+    }
+
+    fun getIsBirthday(): Boolean {
+        isBirthday = preference.getBoolean("isBirthday")
+        return isBirthday
     }
 
     private fun maxHr() {

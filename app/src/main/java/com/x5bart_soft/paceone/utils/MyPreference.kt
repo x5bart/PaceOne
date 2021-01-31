@@ -1,14 +1,15 @@
 package com.x5bart_soft.paceone.utils
 
 import android.content.Context
-import org.intellij.lang.annotations.Language
 
 private const val PREFERENCE_NAME = "SharedPreference"
 private const val PREFERENCE_UNIT_SW = "UnitSw"
 private const val LANGUAGE = "language"
+private const val HEIGHT = "height"
 
-class MyPreference(context: Context) {
 
+class MyPreference() {
+    private val context = App.context
     private val preference = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
     private val editor = preference.edit()
 
@@ -34,4 +35,33 @@ class MyPreference(context: Context) {
         editor.putString(LANGUAGE, language)
         editor.apply()
     }
+
+    fun setHeight(height: Int) {
+        editor.putInt(HEIGHT, height)
+        editor.apply()
+    }
+
+    fun getHeight(): Int {
+        return preference.getInt(HEIGHT, 0)
+    }
+
+    fun setDate(calendar: String, value: Int) {
+        editor.putInt(calendar, value)
+        editor.apply()
+    }
+
+    fun getDate(calendar: String): Int {
+        return preference.getInt(calendar, 0)
+
+    }
+
+    fun setBoolean(key: String, boolean: Boolean) {
+        editor.putBoolean(key, boolean)
+        editor.apply()
+    }
+
+    fun getBoolean(key: String): Boolean {
+        return preference.getBoolean(key, false)
+    }
 }
+

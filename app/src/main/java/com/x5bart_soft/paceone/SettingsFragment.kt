@@ -36,7 +36,7 @@ class SettingsFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        preference = MyPreference(activity!!.applicationContext)
+        preference = MyPreference()
         utils = ContextUtils(this.activity)
         config = Config
         adsUtils = AdsUtils()
@@ -69,7 +69,8 @@ class SettingsFragment : Fragment() {
         config.changeLanguage = true
         preference.setLanguage(language)
         val intent = Intent(context, MainActivity::class.java)
-        context!!.startActivity(intent)
+        requireActivity().finish()
+        requireContext().startActivity(intent)
     }
 
 

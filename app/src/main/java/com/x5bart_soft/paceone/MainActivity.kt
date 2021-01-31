@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
-        preference = MyPreference(this)
+        preference = MyPreference()
         config = Config
 
         navController = findNavController(R.id.navHostFragment)

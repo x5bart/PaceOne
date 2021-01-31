@@ -39,7 +39,7 @@ class SplitFragment : Fragment(), SeekBar.OnSeekBarChangeListener {
         paceObject = Pace
         function = SplitFunction()
         adsUtils = AdsUtils()
-        preference = MyPreference(activity!!.applicationContext)
+        preference = MyPreference()
 
         binding.splitsRvSplits.layoutManager = LinearLayoutManager(activity)
 
