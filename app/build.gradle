@@ -7,20 +7,20 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         realese {
-            storeFile file('D:\\Android project\\key\\key1.jks')
+            storeFile file('/Users/pavelkovalcuk/AndroidStudioProjects/key/key1.jks')
             storePassword 'Ik9kpppP'
             keyAlias = 'x5bart'
             keyPassword 'Ik9kpppP'
         }
     }
-    compileSdkVersion 29
+    compileSdkVersion 33
     buildToolsVersion '29.0.0'
     defaultConfig {
         applicationId "com.x5bart_soft.paceone"
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 12
-        versionName "1.7.1"
+        targetSdkVersion 33
+        versionCode 14
+        versionName "1.7.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.realese
     }
@@ -34,18 +34,19 @@ android {
 
 dependencies {
     implementation 'com.yandex.android:mobileads:2.113'
-    implementation 'com.yandex.android:mobmetricalib:3.8.0'
+    //noinspection AppMetricaSdkVersion
+    implementation 'com.yandex.android:mobmetricalib:5.2.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation 'com.google.firebase:firebase-analytics:17.2.3'
+    implementation 'androidx.recyclerview:recyclerview:1.3.0-rc01'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.google.firebase:firebase-analytics:21.2.0'
 }
